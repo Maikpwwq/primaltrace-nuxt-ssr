@@ -1,0 +1,36 @@
+{
+  "name": "primaltrace",
+  "version": "0.0.1",
+  "description": "La esencia auténtica de tus productos, trazada con seguridad en la blockchain.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrimalTrace/web3-nuxt-ssr.git"
+  },
+  "author": "NexaSoft SAS",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "nuxi": "nuxi upgrade --force",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.2.96",
+    "@nuxtjs/vuetify": "^1.12.3",
+    "@pinia/nuxt": "0.4.11",
+    "nuxi": "^3.6.2",
+    "pinia": "^2.1.4",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "vue": "3.3.4",
+    "vue-router": "^4.2.3",
+    "vue-tabler-icons": "2.21.0",
+    "vue3-perfect-scrollbar": "1.6.1",
+    "vuetify": "3.3.7"
+  },
+  "devDependencies": {
+    "nuxt": "3.6.2"
+  }
+}
