@@ -6,6 +6,9 @@
             Start Banner1
         ----------------------------------------------- -->
         <v-row justify="center">
+          <v-col cols="12" sm="5" lg="5">
+            <img src="/images/banner/blocks.png" class="img-fluid" alt="banner" />
+          </v-col>
           <v-col cols="12" sm="7" lg="6" class="d-flex align-center">
             <div class="text-sm-left text-center pr-sm-6 pr-0">
               <v-chip size="small" class="bg-dark" text-color="white">
@@ -35,9 +38,6 @@
                 </v-btn>
               </div>
             </div>
-          </v-col>
-          <v-col cols="12" sm="5" lg="5">
-            <img src="/images/banner/blocks.png" class="img-fluid" alt="banner" />
           </v-col>
         </v-row>
         <!-- -----------------------------------------------

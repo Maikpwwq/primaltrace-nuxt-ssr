@@ -37,7 +37,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="5" lg="6" class="ml-auto">
-            <img src="/images/form-banner/form-banner1.png" alt="banner" class="img-fluid"/>
+            <img src="/images/form-banner/Sensor-to-Block.png" alt="banner" class="img-fluid"/>
           </v-col>
         </v-row>
 

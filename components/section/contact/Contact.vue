@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import WhiteTLogo from '/images/logos/white-text.png';
+</script>
+
 <template>
   <div id="form-contacto">
     <div class="mini-spacer">
@@ -55,7 +59,8 @@
           <v-col cols="12" md="4">
             <div class="bg-primary contact-detail-card">
               <h2 class="detail-title font-weight-medium text-white">
-                Sede PrimalTrace
+                Sede 
+                <img :src="WhiteTLogo" class="logo-white-text" alt="logo PrimalTrace"/>
               </h2>
               <p class="mt-7 op-8 mb-0 text-white">+57 3196138057</p>
               <p class="op-8 mb-8 text-white">primaltrace@outlook.com</p>
@@ -72,3 +77,8 @@
   </div>
 </template>
 
+<style>
+.logo-white-text{
+    height: 133px;
+}
+</style>
