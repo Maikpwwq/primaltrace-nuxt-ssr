@@ -7,7 +7,7 @@
         ----------------------------------------------- -->
         <v-row>
           <v-col cols="12" md="10">
-            <img src="/images/features/3/smart contract.png"
+            <img src="/images/features/3/smart_contract.png"
               alt="feature"
               class="rounded img-fluid"
             />
