@@ -39,7 +39,7 @@
         </v-col>
         <v-col cols="12" sm="5" lg="6">
           <img
-            src="/images/landingpage/blocks.png"
+            src="/images/landingpage/blockchain.png"
             alt="banner" class="img-fluid"
           />
         </v-col>

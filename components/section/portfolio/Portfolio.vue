@@ -3,7 +3,7 @@ import { ref } from "vue";
 import {portfolio} from '@/data/CustomComponents'
 </script>
 <template>
-  <div>
+  <div id="casos-uso">
     <div class="portfolio-component mini-spacer">
       <v-container>
         <!-- -----------------------------------------------

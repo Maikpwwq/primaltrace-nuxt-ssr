@@ -32,7 +32,7 @@ import ContactForm from './contact/Contact.vue';
     <!----Header Text----->
     <!-- <HeaderText /> -->
     <!----Navigation 1----->
-    <Navigation1 />
+    <!-- <Navigation1 /> -->
     <!----Navigation 2----->
     <Navigation2 />
     <!----Banner Text----->

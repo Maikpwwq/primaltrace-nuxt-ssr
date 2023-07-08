@@ -5,16 +5,20 @@ const headerMenu = [
     href: "#nosotros",
   },
   {
-    title: "Portafolio",
+    title: "Productos",
     href: "#trackwise",
+  },
+  {
+    title: "Soluciones",
+    href: "#casos-uso",
+  },
+  {
+    title: "Precios",
+    href: "#tarifas",
   },
   {
     title: "Contacto",
     href: "#form-contacto",
-  },
-  {
-    title: "Tarifas",
-    href: "#tarifas",
   },
 ];
 

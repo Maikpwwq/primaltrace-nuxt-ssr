@@ -26,7 +26,7 @@ const drawer = ref(null);
                 <!-- login-regiter -->
                 <v-btn class="btn bg-white" flat>
                   <!-- https://www.primaltrace.com/ -->
-                  <NuxtLink to="https://primaltrace-nuxt-ssr-f3ko.vercel.app/" target="_blank"
+                  <NuxtLink to="https://primaltrace-nuxt-ssr.vercel.app/" target="_blank"
                     class="text-decoration-none text-dark">Prueba Gratuita</NuxtLink>
                 </v-btn>
               </li>
@@ -54,7 +54,7 @@ const drawer = ref(null);
         <!-- login-regiter -->
         <v-btn color="error" block flat>
           <!-- https://www.primaltrace.com/ -->
-          <NuxtLink to="https://primaltrace-nuxt-ssr-f3ko.vercel.app/" class="text-decoration-none text-white">Prueba
+          <NuxtLink to="https://primaltrace-nuxt-ssr.vercel.app/" class="text-decoration-none text-white">Prueba
             Gratuita</NuxtLink>
         </v-btn>
       </li>

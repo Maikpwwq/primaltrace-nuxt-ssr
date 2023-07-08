@@ -5,12 +5,12 @@ import WhiteTLogo from '/images/logos/white-text.png';
 
 <template>
     <NuxtLink to="/" class="d-flex">
-        <img :src="WhiteTLogo" class="logo-height" alt="logo"/>
+        <img :src="WhiteTLogo" class="logo-white-text" alt="logo"/>
     </NuxtLink>
 </template>
 
 <style>
-.logo-height{
-    height: 48px;
+.logo-white-text{
+    height: 133px;
 }
 </style>
