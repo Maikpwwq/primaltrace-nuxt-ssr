@@ -5,6 +5,12 @@ import PurpleLogo from '/images/logos/purple-logo.png';
 
 <template>
     <NuxtLink to="/" class="d-flex">
-        <img :src="PurpleLogo" alt="logo"/>
+        <img :src="PurpleLogo" class="logo-height" alt="logo"/>
     </NuxtLink>
 </template>
+
+<style>
+.logo-height{
+    height: 33px;
+}
+</style>

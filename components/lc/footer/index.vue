@@ -30,7 +30,8 @@
           </p>
           <p>
             <span class="text-muted">Sitio web : </span>
-            <a class="dark-link" href="https://www.primaltrace.com/"
+            <!-- https://www.primaltrace.com/ -->
+            <a class="dark-link" href="https://primaltrace-nuxt-ssr-f3ko.vercel.app/"
               >primaltrace.com</a
             >
           </p>
@@ -66,7 +67,8 @@
         <div class="d-block d-sm-flex align-center">
           <p class="text-muted mb-sm-0 mb-3">
             Todos los derechos reservados por
-            <a href="https://www.primaltrace.com/" class="link">primaltrace.com</a>
+            <!-- https://www.primaltrace.com/ -->
+            <a href="https://primaltrace-nuxt-ssr-f3ko.vercel.app/" class="link">primaltrace.com</a>
           </p>
           <div class="ml-auto">
             <div class="d-sm-flex align-center">

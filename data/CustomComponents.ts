@@ -65,17 +65,17 @@ const feature2 =[
 /*--Portfolio--*/
 const portfolio =[
   {
-    img: "img1.jpg",
+    img: "BTC_bull.jpg",
     title: "Verificar la procedencia y calidad de los productos",
     subtext: "Información detallada del origen, ingredientes y prácticas de producción.",
   },
   {
-    img: "img3.jpg",
+    img: "BTC_crypto.jpg",
     title: "Garantizar la trazabilidad",
     subtext: "Registrar cada etapa de la cadena de producción.",
   },
   {
-    img: "img4.jpg",
+    img: "ether.jpg",
     title: "Asegurar la transparencia",
     subtext: "Información verificada para gestión de procesos críticos.",
   },
@@ -109,7 +109,7 @@ const pricePlan =[
 /*--Team--*/
 const team =[
   {
-    img: "t1.jpg",
+    img: "l3mik3l.png",
     title: "Michael Arias Fajardo",
     subtitle: "Product Manager Specialist",
     desc: "WEB & MOBILE APP DEVELOPER | PROJECT MANAGER | IT ENGINEER | GROWTH HACKER.",
@@ -133,7 +133,7 @@ const team =[
     ],
   },
   {
-    img: "t2.jpg",
+    img: "l3mik3l.png",
     title: "Michael Arias Fajardo",
     subtitle: "Product Manager Specialist",
     desc: "WEB & MOBILE APP DEVELOPER | PROJECT MANAGER | IT ENGINEER | GROWTH HACKER.",
@@ -204,21 +204,21 @@ const Testimonials =[
 /*--Blogs--*/
 const Blog =[
   {
-    img: "img1.jpg",
+    img: "esencia auténtica.jpg",
     title: "Verificar la procedencia y calidad de los productos",
     desc: "Información detallada del origen, ingredientes y prácticas de producción.",
     month: "Oct",
     date: "23",
   },
   {
-    img: "img2.jpg",
+    img: "Seguimiento seguro.jpg",
     title: "Garantizar la trazabilidad",
     desc: "Registrar cada etapa de la cadena de producción.",
     month: "Oct",
     date: "23",
   },
   {
-    img: "img3.jpg",
+    img: "crypto market.jpg",
     title: "Asegurar la transparencia.",
     desc: "Información verificada para gestión de procesos críticos.",
     month: "Oct",

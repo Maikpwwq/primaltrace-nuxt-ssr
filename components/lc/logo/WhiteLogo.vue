@@ -5,6 +5,12 @@ import WhiteLogo from '/images/logos/white-logo.png';
 
 <template>
     <NuxtLink to="/" class="d-flex">
-        <img :src="WhiteLogo" alt="logo"/>
+        <img :src="WhiteLogo" class="logo-height" alt="logo"/>
     </NuxtLink>
 </template>
+
+<style>
+.logo-height{
+    height: 33px;
+}
+</style>

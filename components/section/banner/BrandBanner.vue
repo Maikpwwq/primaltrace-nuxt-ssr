@@ -37,7 +37,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="5" lg="5">
-            <img src="/images/banner/banner1.jpg" class="img-fluid" alt="banner" />
+            <img src="/images/banner/blockchain.png" class="img-fluid" alt="banner" />
           </v-col>
         </v-row>
         <!-- -----------------------------------------------
