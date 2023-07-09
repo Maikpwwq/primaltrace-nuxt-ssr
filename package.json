@@ -18,14 +18,17 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "@metamask/detect-provider": "^2.0.0",
+    "@metamask/sdk": "^0.4.2",
     "@nuxtjs/vuetify": "^1.12.3",
     "@pinia/nuxt": "0.4.11",
+    "eth-rpc-errors": "^4.0.3",
     "nuxi": "^3.6.2",
     "pinia": "^2.1.4",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "vue": "3.3.4",
-    "vue-router": "^4.2.3",
+    "vue-router": "^4.2.4",
     "vue-tabler-icons": "2.21.0",
     "vue3-perfect-scrollbar": "1.6.1",
     "vuetify": "3.3.7"
