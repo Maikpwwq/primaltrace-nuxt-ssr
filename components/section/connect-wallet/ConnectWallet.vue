@@ -97,27 +97,48 @@ const disableConnect = wallet && isConnecting.value ? true : false
 </script>
 
 <template>
-    <div className="App">
+    <div class="connect-wallet">
         <div>Injected Provider {{ hasProvider ? 'DOES' : 'DOES NOT' }} Exist</div>
-
-        <button 
-            v-if="provider?.isMetaMask && wallet.accounts.length < 1" 
-            @click="handleConnect"
-            @disabled="disableConnect"
-            >
+        <v-btn class="connect-button btn bg-white text-decoration-none text-dark" flat
+            v-if="provider?.isMetaMask && wallet.accounts.length < 1" @click="handleConnect" @disabled="disableConnect">
             Connect MetaMask
-        </button>
-
-        <div>
-            <div v-if="wallet.accounts.length > 0">
-                Wallet Accounts: {{ wallet.accounts[0] }}</div>
+        </v-btn>
+        <!-- v-if="wallet.accounts.length > 0" -->
+        <div class="wallet-info">
+            <div>Wallet Accounts: {{ wallet.accounts[0] }}</div>
             <div>Wallet Balance: {{ wallet.balance }}</div>
             <div>Hex ChainId: {{ wallet.chainId }}</div>
             <div>Numeric ChainId: {{ formatChainAsNum(wallet.chainId) }}</div>
         </div>
 
         <div v-if="error" @click="error = false">
-            <strong> Error: </strong> {{errorMessage}}
+            <strong> Error: </strong> {{ errorMessage }}
         </div>
     </div>
 </template>
+
+<style>
+.connect-wallet {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    position: relative;
+    top: 30px;
+}
+
+.connect-wallet:hover .wallet-info {
+    visibility: visible !important;
+}
+
+.connect-button {
+    margin-top: 0.5em;
+}
+
+.wallet-info {
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: fit-content;
+}
+</style>

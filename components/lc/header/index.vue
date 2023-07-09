@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue"
 const drawer = ref(null);
 </script>
 <template>
@@ -24,11 +25,12 @@ const drawer = ref(null);
               </li>
               <li class="nav-item d-md-flex d-sm-none">
                 <!-- login-regiter -->
-                <v-btn class="btn bg-white" flat>
-                  <!-- https://www.primaltrace.com/ -->
+                <!-- https://www.primaltrace.com/ -->
+                <!-- <v-btn class="btn bg-white" flat>
                   <NuxtLink to="https://primaltrace-nuxt-ssr.vercel.app/" target="_blank"
                     class="text-decoration-none text-dark">Prueba Gratuita</NuxtLink>
-                </v-btn>
+                </v-btn> -->
+                <ConnectWallet />
               </li>
             </ul>
           </div>

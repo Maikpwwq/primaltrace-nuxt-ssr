@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ConnectWallet from './connect-wallet/ConnectWallet.vue'
+// import ConnectWallet from './connect-wallet/ConnectWallet.vue'
 import HeaderText from './header/HeaderText.vue';
 import Navigation1 from './header/Header1.vue';
 import Navigation2 from './header/Header2.vue';
@@ -30,7 +30,7 @@ import ContactForm from './contact/Contact.vue';
 </script>
 
 <template>
-    <ConnectWallet />
+    <!-- <ConnectWallet /> -->
     <!----Header Text----->
     <!-- <HeaderText /> -->
     <!----Navigation 1----->

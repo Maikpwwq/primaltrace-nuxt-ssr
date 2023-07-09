@@ -26,14 +26,13 @@ const handleCLick = () => {start()};
             </ul>
           </div>
           <!-- login-regiter -->
-          <v-btn class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
-            Registrarse
+          <v-btn @click="handleCLick" class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
+            Conecta Wallet
           </v-btn>
           <!-- Todo: Metamask btn connect -->
           <!-- Display a connect button and the current account -->
-          <button class="enableEthereumButton"> Conecta MetaMask</button>
-          <button @click="handleCLick"> Conecta MetaMask 2</button>
-          <h2>Account: <span class="showAccount"></span></h2>
+          <!-- <button class="enableEthereumButton"> Conecta MetaMask</button> -->
+          <!-- <h2>Account: <span class="showAccount"></span></h2> -->
           <v-app-bar-nav-icon width="30" class="d-md-none d-sm-flex drawer-icon text-white ml-auto  mr-0"
             @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </v-toolbar>
@@ -54,8 +53,8 @@ const handleCLick = () => {start()};
             }}</NuxtLink>
           </li>
           <li class="nav-item mx-3 mt-4 ">
-            <v-btn class="btn bg-primary-light " flat block variant="outlined" color="primary">
-              Registrarse
+            <v-btn @click="handleCLick" class="btn bg-primary-light " flat block variant="outlined" color="primary">
+              Conecta Wallet
             </v-btn>
           </li>
         </ul>
