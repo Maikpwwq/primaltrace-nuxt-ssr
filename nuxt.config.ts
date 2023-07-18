@@ -19,6 +19,13 @@ export default defineNuxtConfig({
   },
   devServerHandlers: [],
   hooks: {},
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      apiKeyTatum: process.env.NUXT_API_KEY_TATUM || ''
+    }
+  },
   app: {
     head: {
       // meta: [
