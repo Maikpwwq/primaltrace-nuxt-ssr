@@ -1,0 +1,57 @@
+# Filename: subgraph.yaml
+
+specVersion: 0.0.2
+schema:
+  file: subgraph.graphql
+dataSources:
+  - kind: ethereum/contract # file/ipfs
+    name: Products
+    network: polygon # mainnet o la red que corresponda a tu contrato
+    source:
+      address: "0x...dirección-de-tu-contrato-inteligente" # Replace with the actual address of your deployed Products.sol on Polygon
+      abi: Products # Replace with the name of the ABIs file containing the ABI of Products.sol
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6 # 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Product
+        - TraceabilityInfo
+      abis:
+        - name: Products
+          file: Products.json # Nombre de tu ABI
+      eventHandlers:
+        - event: AddProduct(uint256,string,string,string,uint256,string,string,string)
+          handler: handleAddProduct
+        - event: AddTraceabilityInfo(uint256,string,uint256,address,uint8,string,string,uint256)
+          handler: handleAddTraceabilityInfo
+        - event: updateProductStock(string,uint256,uint256,uint256)
+          handler: handleAddTraceabilityInfo
+      file: subgraph.ts
+templates:
+  Product:
+    kind: entity
+    dataSource: Products
+    properties:
+      productId: id
+      productName: productName
+      productDescription: productDescription
+      manufacturer: manufacturer
+      manufacturingDate: manufacturingDate
+      batchNumber: batchNumber
+      productionLocation: productionLocation
+      metadataProducto: metadataProducto
+      traceabilityInfo: traceabilityInfo
+  TraceabilityInfo:
+    kind: entity
+    dataSource: Products
+    properties:
+      id: id
+      action: action
+      timestamp: timestamp
+      actor: actor
+      actorType: actorType
+      actorId: actorId
+      metadataAction: metadataAction
+      product: product

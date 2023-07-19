@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-contract ProductContract {
+contract Products {
     enum ActorType {
         Fabricante,
         Distribuidor,
@@ -24,12 +24,14 @@ contract ProductContract {
 
     // Teazabilidad
     struct TraceabilityInfo {
+        uint256 id;
         string action;
         uint256 timestamp;
         address actor;
         ActorType actorType;
-        uint256 actorId;
+        string actorId;
         string metadataAction;
+        uint256 productId;
     }
 
     // Stock
@@ -68,27 +70,50 @@ contract ProductContract {
         string memory _productionLocation,
         string memory _metadataProducto
     ) public {
-        products[productCounter] = Product(
-            productCounter,
-            _productName,
-            _productDescription,
-            _manufacturer,
-            _manufacturingDate,
-            _batchNumber,
-            _productionLocation,
-            _metadataProducto,
-            new TraceabilityInfo[](0)
+        // products[productCounter] = Product(
+        //     productCounter,
+        //     _productName,
+        //     _productDescription,
+        //     _manufacturer,
+        //     _manufacturingDate,
+        //     _batchNumber,
+        //     _productionLocation,
+        //     _metadataProducto // new TraceabilityInfo[](0) Error: Copying of type struct Products.TraceabilityInfo memory[] memory to storage not yet supported.
+        // );
+        productCounter++;
+        products[productCounter].productId = productCounter;
+        products[productCounter].productName = _productName;
+        products[productCounter].productDescription = _productDescription;
+        products[productCounter].manufacturer = _manufacturer;
+        products[productCounter].manufacturingDate = _manufacturingDate;
+        products[productCounter].batchNumber = _batchNumber;
+        products[productCounter].productionLocation = _productionLocation;
+        products[productCounter].metadataProducto = _metadataProducto;
+        // Agregar una instancia de TraceabilityInfo con valores por defecto
+        products[productCounter].traceabilityInfo.push(
+            TraceabilityInfo(
+                products[productCounter].traceabilityInfo.length + 1,
+                "", // action: valor por defecto, puedes poner el valor que necesites
+                block.timestamp, // timestamp: usa el timestamp actual
+                address(0), // actor: dirección vacía
+                ActorType.Fabricante, // actorType: ActorType.Fabricante como valor por defecto, puedes cambiarlo según tus necesidades
+                "", // actorId: cadena vacía
+                "", // metadataAction: cadena vacía
+                productCounter // productId: usa el id del producto actual
+            )
         );
 
         productStock[productCounter] = StockInfo(0, 0, 0); // Stock
 
-        productCounter++;
     }
 
     function addTraceabilityInfo(
         uint256 _productId,
-        string memory _action,
-        uint256 _actorId,
+        string memory _action, //
+        uint256 _timestamp,
+        address _actor,
+        ActorType _actorType,
+        string memory _actorId,
         string memory _metadataAction
     ) public {
         require(_productId < productCounter, "Product does not exist");
@@ -99,25 +124,34 @@ contract ProductContract {
         // Validar que el tipo de actor sea válido para esta operación
         require(
             senderActorType == ActorType.Fabricante ||
-            senderActorType == ActorType.Distribuidor ||
-            senderActorType == ActorType.Proveedor,
+                senderActorType == ActorType.Distribuidor ||
+                senderActorType == ActorType.Proveedor,
             "Tipo de actor no valido para esta accion"
         );
+
+        // Obtener el índice del array de trazabilidad
+        uint256 traceabilityIndex = products[_productId]
+            .traceabilityInfo
+            .length;
 
         // Agregar la información de trazabilidad con el tipo de actor
         products[_productId].traceabilityInfo.push(
             TraceabilityInfo(
+                traceabilityIndex,
                 _action,
-                block.timestamp,
-                msg.sender,
-                senderActorType,
+                _timestamp, // block.timestamp,
+                _actor, // msg.sender,
+                _actorType, // senderActorType,
                 _actorId,
-                _metadataAction
+                _metadataAction,
+                _productId
             )
         );
     }
 
-    function getProduct(uint256 _productId)
+    function getProduct(
+        uint256 _productId
+    )
         public
         view
         returns (
@@ -147,11 +181,9 @@ contract ProductContract {
         );
     }
 
-    function getProductStock(uint256 _productId)
-        public
-        view
-        returns (uint256, uint256, uint256)
-    {
+    function getProductStock(
+        uint256 _productId
+    ) public view returns (uint256, uint256, uint256) {
         require(_productId < productCounter, "El producto no existe");
 
         StockInfo memory stock = productStock[_productId];
@@ -163,11 +195,9 @@ contract ProductContract {
         );
     }
 
-    function getProductTraceabilityInfo(uint256 _productId)
-        public
-        view
-        returns (TraceabilityInfo[] memory)
-    {
+    function getProductTraceabilityInfo(
+        uint256 _productId
+    ) public view returns (TraceabilityInfo[] memory) {
         require(_productId < productCounter, "Product does not exist");
 
         return products[_productId].traceabilityInfo;

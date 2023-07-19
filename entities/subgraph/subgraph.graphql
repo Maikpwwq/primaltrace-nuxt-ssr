@@ -1,0 +1,41 @@
+# Filename: subgraph.graphql
+
+schema {
+  query: Query
+}
+
+type Query {
+  products: [Product!]!
+  product(id: ID!): Product
+  traceabilityInfo(productId: ID!): [TraceabilityInfo!]!
+  getProductStock(productId: ID!): ProductStock!
+}
+
+type Product @entity {
+  productId: ID!
+  productName: String!
+  productDescription: String!
+  manufacturer: String!
+  manufacturingDate: BigInt!
+  batchNumber: String!
+  productionLocation: String!
+  metadataProducto: String!
+  traceabilityInfo: [TraceabilityInfo!]!
+}
+
+type TraceabilityInfo @entity {
+  id: ID!
+  action: String!
+  timestamp: BigInt!
+  actor: Bytes!
+  actorType: String!
+  actorId: String!
+  metadataAction: String!
+  product: Product!
+}
+
+type ProductStock {
+  availableQuantity: BigInt!
+  reservedQuantity: BigInt!
+  totalQuantity: BigInt!
+}

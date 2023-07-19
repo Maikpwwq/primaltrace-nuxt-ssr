@@ -18,6 +18,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@arcblock/forge-sdk": "^1.7.1",
+    "@graphprotocol/graph-ts": "^0.31.0",
     "@mdi/font": "^7.2.96",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/sdk": "^0.4.2",
@@ -25,7 +27,7 @@
     "@pinia/nuxt": "0.4.11",
     "@tatumio/polygon": "^2.2.18",
     "eth-rpc-errors": "^4.0.3",
-    "nuxi": "^3.6.2",
+    "nuxi": "^3.6.3",
     "pinia": "^2.1.4",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
@@ -36,6 +38,7 @@
     "vuetify": "3.3.7"
   },
   "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.52.0",
     "nuxt": "3.6.2",
     "prettier": "3.0.0"
   }
