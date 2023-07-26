@@ -24,7 +24,6 @@
     </div>
     <div>
       <v-container>
-        
         <div class="text-center">
           <v-chip class="ma-2"> Default </v-chip>
           <v-chip class="ma-2" color="primary"> primary </v-chip>
@@ -60,4 +59,3 @@
     </div>
   </div>
 </template>
-

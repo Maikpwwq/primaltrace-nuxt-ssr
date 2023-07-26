@@ -1,21 +1,22 @@
-
 .app-header {
-    background-color: transparent !important;
-    height: 85px !important;
+  background-color: transparent !important;
+  height: 85px !important;
   .navbar-nav {
     align-items: center;
   }
-  .v-toolbar{
+  .v-toolbar {
     background-color: transparent;
   }
-  &.header1, &.header2{
-    top:0 !important;
+  &.header1,
+  &.header2 {
+    top: 0 !important;
     height: auto !important;
-    .v-toolbar__content{
+    .v-toolbar__content {
       height: 85px !important;
     }
   }
-  .v-btn__overlay,.v-btn--variant-text .v-btn__overlay {
+  .v-btn__overlay,
+  .v-btn--variant-text .v-btn__overlay {
     background-color: transparent !important;
   }
 }
@@ -24,12 +25,12 @@
   height: 100vh !important;
   z-index: 2000 !important;
 }
-.nav1{
+.nav1 {
   .v-navigation-drawer {
     margin-top: -128px !important;
   }
 }
-.nav2{
+.nav2 {
   .v-navigation-drawer {
     margin-top: -192px !important;
   }

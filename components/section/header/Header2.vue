@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { start } from "@/ethers/QRCode/index";
+// import { start } from "@/ethers/QRCode/index";
 import { headerMenu } from "@/data/CustomComponents";
 const drawer = ref(null);
-const handleCLick = () => {start()};
+const handleCLick = () => {
+  // start();
+
+};
 </script>
 <template>
-  <div>
+  <div class="navigation-sticky">
     <!-- -----------------------------------------------
           Start Header
     ----------------------------------------------- -->
@@ -26,14 +29,14 @@ const handleCLick = () => {start()};
             </ul>
           </div>
           <!-- login-regiter -->
-          <v-btn @click="handleCLick" class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
-            Conecta Wallet
+          <v-btn to="/dashboard" @click="handleCLick" class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
+            DashBoard
           </v-btn>
           <!-- Todo: Metamask btn connect -->
           <!-- Display a connect button and the current account -->
           <!-- <button class="enableEthereumButton"> Conecta MetaMask</button> -->
           <!-- <h2>Account: <span class="showAccount"></span></h2> -->
-          <v-app-bar-nav-icon width="30" class="d-md-none d-sm-flex drawer-icon text-white ml-auto  mr-0"
+          <v-app-bar-nav-icon width="30" class="d-md-none d-sm-flex drawer-icon text-white ml-auto mr-0"
             @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </v-toolbar>
       </v-container>
@@ -43,18 +46,16 @@ const handleCLick = () => {start()};
           End Header
     ----------------------------------------------- -->
   <!----sidebar menu drawer start----->
-  <div class="nav2">
+  <div class="navigation-sticky nav2">
     <v-navigation-drawer color="white" v-model="drawer" temporary>
       <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
         <ul class="navbar-nav py-4" min-height="auto">
-          <li class="nav-item  mb-3" v-for="nav in headerMenu" :key="nav.title" text>
-            <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link text-dark">{{
-              nav.title
-            }}</NuxtLink>
+          <li class="nav-item mb-3" v-for="nav in headerMenu" :key="nav.title" text>
+            <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link text-dark">{{ nav.title }}</NuxtLink>
           </li>
-          <li class="nav-item mx-3 mt-4 ">
-            <v-btn @click="handleCLick" class="btn bg-primary-light " flat block variant="outlined" color="primary">
-              Conecta Wallet
+          <li class="nav-item mx-3 mt-4">
+            <v-btn to="/dashboard" @click="handleCLick" class="btn bg-primary-light" flat block variant="outlined" color="primary">
+              DashBoard
             </v-btn>
           </li>
         </ul>
@@ -62,5 +63,10 @@ const handleCLick = () => {start()};
     </v-navigation-drawer>
   </div>
 </template>
-
- 
+<style>
+.navigation-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 13;
+}
+</style>

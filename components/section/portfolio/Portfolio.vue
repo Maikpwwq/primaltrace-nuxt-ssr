@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {portfolio} from '@/data/CustomComponents'
+import { portfolio } from "@/data/CustomComponents";
 </script>
 <template>
   <div id="casos-uso">
@@ -12,11 +12,11 @@ import {portfolio} from '@/data/CustomComponents'
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
             <div class="text-center">
-              <h2 class="section-title font-weight-medium">
-                Casos de uso
-              </h2>
+              <h2 class="section-title font-weight-medium">Casos de uso</h2>
               <p class="text-muted">
-                El Blockchain puede ser implementado para garantizar la autenticidad de los productos y la transparencia en las transacciones.
+                El Blockchain puede ser implementado para garantizar la
+                autenticidad de los productos y la transparencia en las
+                transacciones.
               </p>
             </div>
           </v-col>
@@ -38,7 +38,11 @@ import {portfolio} from '@/data/CustomComponents'
           >
             <v-card class="portfolio-card overflow-hidden card-shadow">
               <div class="portfolio-img">
-                <img :src="`/images/portfolio/${card.img}`" class="img-fluid" :alt="card.img" />
+                <img
+                  :src="`/images/portfolio/${card.img}`"
+                  class="img-fluid"
+                  :alt="card.img"
+                />
               </div>
               <v-card-text class="pa-5">
                 <h5 class="font-weight-medium font-18">{{ card.title }}</h5>

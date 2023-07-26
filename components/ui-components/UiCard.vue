@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UiCard} from '@/data/BasicComponents';
+import { UiCard } from "@/data/BasicComponents";
 </script>
 
 <template>
@@ -29,7 +29,13 @@ import {UiCard} from '@/data/BasicComponents';
     <div>
       <v-container>
         <v-row justify="center">
-          <v-col cols="12" sm="6" lg="4" v-for="card in UiCard" :key="card.title">
+          <v-col
+            cols="12"
+            sm="6"
+            lg="4"
+            v-for="card in UiCard"
+            :key="card.title"
+          >
             <v-card class="mx-auto card-shadow" max-width="400">
               <v-img
                 class="align-end text-white"
@@ -37,15 +43,15 @@ import {UiCard} from '@/data/BasicComponents';
                 :src="`/images/card/${card.img}`"
                 cover
               >
-                <v-card-title>{{card.title}}</v-card-title>
+                <v-card-title>{{ card.title }}</v-card-title>
               </v-img>
 
               <v-card-subtitle class="pt-4 font-weight-medium">
-                {{card.subtitle}}
+                {{ card.subtitle }}
               </v-card-subtitle>
 
               <v-card-text class="pt-1">
-                <div>{{card.desc}}</div>
+                <div>{{ card.desc }}</div>
               </v-card-text>
 
               <v-card-actions class="pl-4 pb-4">

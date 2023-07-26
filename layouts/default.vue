@@ -1,22 +1,24 @@
 <script setup lang="ts">
-const title = ref("PrimalTrace - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.");
+const title = ref(
+  "PrimalTrace - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.",
+);
 // useHead({
-  // title: "PrimalTrace",
-  // meta: [{ name: 'title', content: title }],
-  // titleTemplate: (titleChunk?: string) => {
-  //   return titleChunk
-  //     ? `${titleChunk} - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.`
-  //     : "PrimalTrace - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.";
-  // },
+// title: "PrimalTrace",
+// meta: [{ name: 'title', content: title }],
+// titleTemplate: (titleChunk?: string) => {
+//   return titleChunk
+//     ? `${titleChunk} - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.`
+//     : "PrimalTrace - La esencia auténtica de tus productos, trazada con seguridad en la blockchain.";
+// },
 // });
 </script>
 
 <template>
   <v-app dark>
-    <LcHeader/>
+    <LcHeader />
     <v-main>
-      <slot />  
+      <slot />
     </v-main>
-    <LcFooter/>
+    <LcFooter />
   </v-app>
 </template>

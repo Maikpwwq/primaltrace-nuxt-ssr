@@ -52,19 +52,19 @@ const drawer = ref(null);
           </v-btn>
           <v-app-bar-nav-icon
             width="30"
-            class="d-md-none d-sm-flex drawer-icon ml-auto  mr-0"
+            class="d-md-none d-sm-flex drawer-icon ml-auto mr-0"
             @click.stop="drawer = !drawer"
           ></v-app-bar-nav-icon>
         </v-toolbar>
       </v-container>
     </v-app-bar>
-      </div>
-    <!-- -----------------------------------------------
+  </div>
+  <!-- -----------------------------------------------
           End Header
     ----------------------------------------------- -->
 
-    <!----sidebar menu drawer start----->
-    <div class="nav1">
+  <!----sidebar menu drawer start----->
+  <div class="nav1">
     <v-navigation-drawer color="white" v-model="drawer" temporary>
       <div
         class="navigation"
@@ -72,23 +72,32 @@ const drawer = ref(null);
         @click="isActive = !isActive"
       >
         <ul class="navbar-nav py-4" min-height="auto">
-          <li class="nav-item  mb-3" v-for="nav in headerMenu" :key="nav.title" text>
-            <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link text-dark">{{
-              nav.title
-            }}</NuxtLink>
+          <li
+            class="nav-item mb-3"
+            v-for="nav in headerMenu"
+            :key="nav.title"
+            text
+          >
+            <NuxtLink
+              :to="nav.href"
+              v-scroll-to="nav.href"
+              class="nav-link text-dark"
+              >{{ nav.title }}</NuxtLink
+            >
           </li>
-          <li class="nav-item mx-3 mt-4 ">
+          <li class="nav-item mx-3 mt-4">
             <v-btn
-              class="btn bg-primary-light "
-              flat block
+              class="btn bg-primary-light"
+              flat
+              block
               variant="outlined"
               color="primary"
             >
               Registrarse
             </v-btn>
-          </li>  
+          </li>
         </ul>
       </div>
     </v-navigation-drawer>
-    </div>
+  </div>
 </template>

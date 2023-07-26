@@ -37,48 +37,50 @@ const show3 = ref(true);
             <v-card class="card-shadow">
               <v-card-text>
                 <v-text-field
-                v-model="first"
-                color="primary"
-                label="User Name"
-                variant="underlined"
-              ></v-text-field>
+                  v-model="first"
+                  color="primary"
+                  label="User Name"
+                  variant="underlined"
+                ></v-text-field>
 
-              <v-text-field
-                v-model="last"
-                color="primary"
-                type="email"
-                label="Email"
-                variant="underlined"
-              ></v-text-field>
+                <v-text-field
+                  v-model="last"
+                  color="primary"
+                  type="email"
+                  label="Email"
+                  variant="underlined"
+                ></v-text-field>
 
-              <v-text-field
-                    color="primary"
-                     variant="underlined"
-                    :type="show2 ? 'text' : 'password'"
-                    label="Password"
-                    :append-inner-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append-inner="show2 = !show2"
+                <v-text-field
+                  color="primary"
+                  variant="underlined"
+                  :type="show2 ? 'text' : 'password'"
+                  label="Password"
+                  :append-inner-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="show2 = !show2"
                 >
                 </v-text-field>
 
                 <v-text-field
-                    color="primary"
-                     variant="underlined"
-                    :type="show3 ? 'text' : 'password'"
-                    label="Confirm Password"
-                    :append-inner-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append-inner="show3 = !show3"
+                  color="primary"
+                  variant="underlined"
+                  :type="show3 ? 'text' : 'password'"
+                  label="Confirm Password"
+                  :append-inner-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="show3 = !show3"
                 >
                 </v-text-field>
                 <v-checkbox
                   v-model="checkbox2"
-                  class="ml-n2 mt-n2 "
+                  class="ml-n2 mt-n2"
                   color="primary"
                   label="Remember me"
                   hide-details
                 ></v-checkbox>
                 <div class="mt-1">
-                  <v-btn class="bg-success mr-3 text-white" elevation="0" >Save</v-btn>
+                  <v-btn class="bg-success mr-3 text-white" elevation="0"
+                    >Save</v-btn
+                  >
                   <v-btn class="bg-dark" elevation="0" dark>Cancel</v-btn>
                 </div>
               </v-card-text>
@@ -89,4 +91,3 @@ const show3 = ref(true);
     </div>
   </div>
 </template>
-

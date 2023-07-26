@@ -23,8 +23,8 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiKeyTatum: process.env.NUXT_API_KEY_TATUM || ''
-    }
+      apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
+    },
   },
   app: {
     head: {
@@ -51,9 +51,7 @@ export default defineNuxtConfig({
         },
         { rel: "manifest", href: "/site.webmanifest" },
       ],
-      script: [        
-        { src: '@/ethers/index.js' }
-      ],
+      script: [{ src: "@/ethers/index.js" }],
     },
   },
 });

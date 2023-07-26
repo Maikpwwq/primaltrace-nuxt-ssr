@@ -11,10 +11,10 @@ async function run() {
   //       "Content-Type": "application/json",
   //       "x-api-key": APIKEY,
   //     },
-      // body: JSON.stringify({
-      //   currency: "MATIC",
-      //   xpub: "xpub6Doh6NHQB7Vie2BKWoFi15uQD8mwuvLam6fEgK9ig9QzMm7DEMh82jqYrAmhtSt7RJ45P1x7r5qbq77G8fwH4Gyzsnzx2b63iDa2GytYYk7",
-      // }),
+  // body: JSON.stringify({
+  //   currency: "MATIC",
+  //   xpub: "xpub6Doh6NHQB7Vie2BKWoFi15uQD8mwuvLam6fEgK9ig9QzMm7DEMh82jqYrAmhtSt7RJ45P1x7r5qbq77G8fwH4Gyzsnzx2b63iDa2GytYYk7",
+  // }),
   //   });
 
   //   const data = await resp.json();

@@ -39,7 +39,7 @@ const classes = ref([
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
             <div v-for="[name, cls] in classes" :key="name">
-              <div :class="[cls,'mb-2 text-gray-600']">{{ name }}</div>
+              <div :class="[cls, 'mb-2 text-gray-600']">{{ name }}</div>
             </div>
           </v-col>
         </v-row>
@@ -47,4 +47,3 @@ const classes = ref([
     </div>
   </div>
 </template>
-

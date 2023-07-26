@@ -10,7 +10,8 @@
             <div class="text-center">
               <h2 class="ui-title font-weight-bold">Portafolio</h2>
               <p class="text-muted">
-                Sistemas de administración y seguimiento inteligente de primera calidad.
+                Sistemas de administración y seguimiento inteligente de primera
+                calidad.
               </p>
             </div>
           </v-col>

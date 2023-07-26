@@ -37,13 +37,7 @@ const items = ref([
           <div class="btn-groups">
             <v-menu>
               <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props"
-                  flat
-                >
-                  Dropdown
-                </v-btn>
+                <v-btn color="primary" v-bind="props" flat> Dropdown </v-btn>
               </template>
               <v-list>
                 <v-list-item
@@ -57,13 +51,7 @@ const items = ref([
             </v-menu>
             <v-menu>
               <template v-slot:activator="{ props }">
-                <v-btn
-                  color="error"
-                  v-bind="props"
-                  flat
-                >
-                  Dropdown
-                </v-btn>
+                <v-btn color="error" v-bind="props" flat> Dropdown </v-btn>
               </template>
               <v-list>
                 <v-list-item
@@ -77,13 +65,7 @@ const items = ref([
             </v-menu>
             <v-menu>
               <template v-slot:activator="{ props }">
-                <v-btn
-                  color="warning"
-                  v-bind="props"
-                  flat
-                >
-                  Dropdown
-                </v-btn>
+                <v-btn color="warning" v-bind="props" flat> Dropdown </v-btn>
               </template>
               <v-list>
                 <v-list-item
@@ -97,13 +79,7 @@ const items = ref([
             </v-menu>
             <v-menu>
               <template v-slot:activator="{ props }">
-                <v-btn
-                  color="success"
-                  v-bind="props"
-                  flat
-                >
-                  Dropdown
-                </v-btn>
+                <v-btn color="success" v-bind="props" flat> Dropdown </v-btn>
               </template>
               <v-list>
                 <v-list-item
@@ -115,101 +91,64 @@ const items = ref([
                 </v-list-item>
               </v-list>
             </v-menu>
-          
+          </div>
+        </div>
+        <div class="text-center mt-6">
+          <div class="btn-groups">
+            <v-menu open-on-hover>
+              <template v-slot:activator="{ props }">
+                <v-btn color="primary" v-bind="props" variant="outlined">
+                  Dropdown
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item v-for="(item, index) in items" :key="index">
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-menu open-on-hover>
+              <template v-slot:activator="{ props }">
+                <v-btn color="error" v-bind="props" variant="outlined">
+                  Dropdown
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item v-for="(item, index) in items" :key="index">
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-menu open-on-hover>
+              <template v-slot:activator="{ props }">
+                <v-btn color="warning" v-bind="props" variant="outlined">
+                  Dropdown
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item v-for="(item, index) in items" :key="index">
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-menu open-on-hover>
+              <template v-slot:activator="{ props }">
+                <v-btn color="success" v-bind="props" variant="outlined">
+                  Dropdown
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item v-for="(item, index) in items" :key="index">
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </div>
         </div>
-         <div class="text-center mt-6">
-          <div class="btn-groups">
-            <v-menu
-              open-on-hover
-            >
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props"
-                  variant="outlined"
-                >
-                  Dropdown
-                </v-btn>
-              </template>
-
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in items"
-                  :key="index"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-            <v-menu
-              open-on-hover
-            >
-            <template v-slot:activator="{ props }">
-                <v-btn
-                  color="error"
-                  v-bind="props"
-                  variant="outlined"
-                >
-                  Dropdown
-                </v-btn>
-              </template>
-
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in items"
-                  :key="index"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-            <v-menu
-              open-on-hover
-            >
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="warning"
-                  v-bind="props"
-                  variant="outlined"
-                >
-                  Dropdown
-                </v-btn>
-              </template>
-
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in items"
-                  :key="index"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-            <v-menu
-              open-on-hover
-            >
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="success"
-                  v-bind="props"
-                  variant="outlined"
-                >
-                  Dropdown
-                </v-btn>
-              </template>
-
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in items"
-                  :key="index"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-          </div>
-        </div> 
       </v-container>
     </div>
   </div>

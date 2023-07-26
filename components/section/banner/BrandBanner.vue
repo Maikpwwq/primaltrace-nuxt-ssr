@@ -7,7 +7,11 @@
         ----------------------------------------------- -->
         <v-row justify="center">
           <v-col cols="12" sm="5" lg="5">
-            <img src="/images/banner/blocks.png" class="img-fluid" alt="banner" />
+            <img
+              src="/images/banner/blocks.png"
+              class="img-fluid"
+              alt="banner"
+            />
           </v-col>
           <v-col cols="12" sm="7" lg="6" class="d-flex align-center">
             <div class="text-sm-left text-center pr-sm-6 pr-0">
@@ -15,17 +19,13 @@
                 Blockchain
               </v-chip>
               <h2
-                class="
-                  banner1-title
-                  font-weight-bold
-                  text-uppercase
-                  text-white
-                "
+                class="banner1-title font-weight-bold text-uppercase text-white"
               >
                 SEGUIMIENTO SEGURO Y VERIFICACIÓN
               </h2>
               <p class="text-white op-8 font-weight-regular">
-                Experiencia en el ciclo de vida del producto y atención al cliente respaldada por blockchain.
+                Experiencia en el ciclo de vida del producto y atención al
+                cliente respaldada por blockchain.
               </p>
               <div class="mt-8">
                 <v-btn
@@ -47,4 +47,3 @@
     </div>
   </div>
 </template>
-

@@ -2,7 +2,7 @@
 .theme--light.v-sheet,
 .theme--light.v-card > .v-card__text,
 .theme--light.v-card .v-card__subtitle {
-  color:var(--v-theme-muted) !important;
+  color: var(--v-theme-muted) !important;
 }
 
 h1,
@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-   color: $heading-color;
+  color: $heading-color;
 }
 
 .border-right {
@@ -130,7 +130,7 @@ h6 {
   text-decoration: none;
   color: $heading-color !important;
   &:hover {
-    color: rgb(var(--v-theme-primary))!important;
+    color: rgb(var(--v-theme-primary)) !important;
   }
 }
 .mini-spacer {
@@ -173,11 +173,11 @@ h6 {
 }
 
 .text-themecolor {
-  color: rgb(var(--v-theme-accent))!important;
+  color: rgb(var(--v-theme-accent)) !important;
 }
 
 .text-white {
-  color: rgb(var(--v-theme-white))!important;
+  color: rgb(var(--v-theme-white)) !important;
 }
 
 .bg-info-grediant {
@@ -194,8 +194,16 @@ h6 {
     from(rgb(var(--v-theme-primary))),
     to(rgb(var(--v-theme-accent)))
   );
-  background: -webkit-linear-gradient(left, rgb(var(--v-theme-primary)), rgb(var(--v-theme-accent)));
-  background: linear-gradient(90deg, rgb(var(--v-theme-primary))0, rgb(var(--v-theme-accent)));
+  background: -webkit-linear-gradient(
+    left,
+    rgb(var(--v-theme-primary)),
+    rgb(var(--v-theme-accent))
+  );
+  background: linear-gradient(
+    90deg,
+    rgb(var(--v-theme-primary)) 0,
+    rgb(var(--v-theme-accent))
+  );
 }
 
 .bg-danger-grediant {
@@ -212,29 +220,37 @@ h6 {
     from(rgb(var(--v-theme-error))),
     to(rgb(var(--v-theme-orange)))
   );
-  background: -webkit-linear-gradient(left, rgb(var(--v-theme-error)), rgb(var(--v-theme-orange)));
-  background: linear-gradient(90deg, rgb(var(--v-theme-error)) 0, rgb(var(--v-theme-orange)));
+  background: -webkit-linear-gradient(
+    left,
+    rgb(var(--v-theme-error)),
+    rgb(var(--v-theme-orange))
+  );
+  background: linear-gradient(
+    90deg,
+    rgb(var(--v-theme-error)) 0,
+    rgb(var(--v-theme-orange))
+  );
 }
 .c2a-title {
   font-size: 26px;
-} 
-@media (min-width: 1600px){
+}
+@media (min-width: 1600px) {
   .v-container {
-      max-width: 1170px;
+    max-width: 1170px;
   }
 }
-@media (max-width: 1024px){
+@media (max-width: 1024px) {
   .v-container {
-      max-width: 100%;
-      padding: 0 30px;
+    max-width: 100%;
+    padding: 0 30px;
   }
 }
-@media (max-width: 576px){
+@media (max-width: 576px) {
   .v-container {
-      max-width: 100%;
-      padding: 0 15px;
+    max-width: 100%;
+    padding: 0 15px;
   }
-  .btn-100{
+  .btn-100 {
     width: 100%;
   }
 }

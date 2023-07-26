@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UiTable} from '@/data/BasicComponents';
+import { UiTable } from "@/data/BasicComponents";
 </script>
 
 <template>

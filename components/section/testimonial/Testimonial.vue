@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {Testimonials} from '@/data/CustomComponents';
+import { Testimonials } from "@/data/CustomComponents";
 </script>
 <template>
   <div>
@@ -31,14 +31,26 @@ import {Testimonials} from '@/data/CustomComponents';
             Start Testimonial
         ----------------------------------------------- -->
         <v-row class="mt-13" justify="center">
-          <v-col cols="12" md="4" sm="6" v-for="card in Testimonials" :key="card.name">
+          <v-col
+            cols="12"
+            md="4"
+            sm="6"
+            v-for="card in Testimonials"
+            :key="card.name"
+          >
             <v-card class="card-shadow">
               <v-card-text class="pa-sm-10 pa-5">
-                <p class="text-body-1 mb-8 text-dark">“{{ card.testimonial }}”</p>
+                <p class="text-body-1 mb-8 text-dark">
+                  “{{ card.testimonial }}”
+                </p>
                 <div class="d-flex align-center">
                   <v-avatar size="60">
-                    <img :src="`/images/testimonial/${card.img}`" :alt="card.img" height="60"/>    
-                  </v-avatar>         
+                    <img
+                      :src="`/images/testimonial/${card.img}`"
+                      :alt="card.img"
+                      height="60"
+                    />
+                  </v-avatar>
                   <div class="ml-5">
                     <h6 class="text-uppercase font-weight-medium font-14">
                       {{ card.name }}
@@ -47,7 +59,7 @@ import {Testimonials} from '@/data/CustomComponents';
                       <a
                         class="error--text"
                         v-for="social in card.socialicon"
-                        :key="social.icon"  
+                        :key="social.icon"
                       >
                         <i :class="social.icon"></i>
                       </a>

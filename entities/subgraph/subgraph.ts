@@ -3,7 +3,6 @@
 import { dataSource, ethereum, json, Bytes } from "@graphprotocol/graph-ts";
 import { Product, TraceabilityInfo } from "./types/schema"; // schema
 
-
 export function handleAddProduct(event: Product): void {
   let productId = event.params.productId.toString();
   let product = new Product(productId);
@@ -36,7 +35,12 @@ export function handleAddTraceabilityInfo(event: TraceabilityInfo): void {
   traceabilityInfo.save();
 }
 
-export function handleProductStockUpdated(productId: BigInt, availableQuantity: BigInt, reservedQuantity: BigInt, totalQuantity: BigInt): void {
+export function handleProductStockUpdated(
+  productId: BigInt,
+  availableQuantity: BigInt,
+  reservedQuantity: BigInt,
+  totalQuantity: BigInt,
+): void {
   let product = Product.load(productId);
   if (!product) {
     return;

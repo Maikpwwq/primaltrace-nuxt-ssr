@@ -18,10 +18,10 @@
               </p>
               <div>
                 <a href="#">
-                  <img src="/images/c2a/app-store.png"/>
+                  <img src="/images/c2a/app-store.png" />
                 </a>
                 <a href="#">
-                  <img src="/images/c2a/play-store.png"/>
+                  <img src="/images/c2a/play-store.png" />
                 </a>
               </div>
             </div>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue"
 const drawer = ref(null);
 </script>
 <template>
@@ -18,19 +17,16 @@ const drawer = ref(null);
             @click="isActive = !isActive">
             <ul class="d-flex navbar-nav">
               <li class="nav-item">
-                <NuxtLink class="nav-link " to="/"> Inicio </NuxtLink>
+                <NuxtLink class="nav-link" to="/"> Inicio </NuxtLink>
               </li>
               <li class="nav-item">
                 <NuxtLink class="nav-link" to="/blog">Blog</NuxtLink>
               </li>
               <li class="nav-item d-md-flex d-sm-none">
-                <!-- login-regiter -->
-                <!-- https://www.primaltrace.com/ -->
-                <!-- <v-btn class="btn bg-white" flat>
-                  <NuxtLink to="https://primaltrace-nuxt-ssr.vercel.app/" target="_blank"
-                    class="text-decoration-none text-dark">Prueba Gratuita</NuxtLink>
-                </v-btn> -->
-                <ConnectWallet />
+                <!-- DashBoard -->
+                <v-btn class="btn bg-white" flat>
+                  <NuxtLink to="/dashboard" class="text-decoration-none text-dark">DashBoard</NuxtLink>
+                </v-btn>
               </li>
             </ul>
           </div>
@@ -45,7 +41,7 @@ const drawer = ref(null);
   </div>
   <!----sidebar menu drawer start----->
   <v-navigation-drawer v-model="drawer" temporary>
-    <ul class="navbar-nav py-4 ">
+    <ul class="navbar-nav py-4">
       <li class="nav-item mb-3">
         <NuxtLink class="nav-link text-dark py-0" to="/"> Inicio </NuxtLink>
       </li>
@@ -53,11 +49,9 @@ const drawer = ref(null);
         <NuxtLink class="nav-link text-dark py-0" to="/blog">Blog</NuxtLink>
       </li>
       <li class="nav-item ml-3 mr-3">
-        <!-- login-regiter -->
+        <!-- DashBoard -->
         <v-btn color="error" block flat>
-          <!-- https://www.primaltrace.com/ -->
-          <NuxtLink to="https://primaltrace-nuxt-ssr.vercel.app/" class="text-decoration-none text-white">Prueba
-            Gratuita</NuxtLink>
+          <NuxtLink to="/dashboard" class="text-decoration-none text-white">DashBoard</NuxtLink>
         </v-btn>
       </li>
     </ul>

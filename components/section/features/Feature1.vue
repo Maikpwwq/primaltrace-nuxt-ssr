@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {feature1} from '@/data/CustomComponents'
+import { feature1 } from "@/data/CustomComponents";
 </script>
 <template>
   <div id="trackwise">
@@ -15,9 +15,7 @@ import {feature1} from '@/data/CustomComponents'
               <v-chip size="small" class="bg-error" text-color="white">
                 Productos/Servicios
               </v-chip>
-              <h2 class="section-title font-weight-medium">
-                TrackWise
-              </h2>
+              <h2 class="section-title font-weight-medium">TrackWise</h2>
               <p class="text-muted">
                 Trazabilidad confiable apalancada por Blockchain.
               </p>

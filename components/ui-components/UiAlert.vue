@@ -26,19 +26,34 @@
       <v-container>
         <v-row justify="center">
           <v-col cols="12" sm="10" md="9" lg="7">
-            <v-alert border="top" density="default" color="primary" class="mb-4">
+            <v-alert
+              border="top"
+              density="default"
+              color="primary"
+              class="mb-4"
+            >
               I'm an alert with a top border and primary color
             </v-alert>
-            <v-alert border="start" density="default" color="accent" class="mb-4">
+            <v-alert
+              border="start"
+              density="default"
+              color="accent"
+              class="mb-4"
+            >
               I'm an alert with a border left type accent
             </v-alert>
-            <v-alert border="end" density="default" color="error" class="mb-4" >
+            <v-alert border="end" density="default" color="error" class="mb-4">
               I'm an alert with a right border and error color
             </v-alert>
-            <v-alert border="bottom" density="default" color="warning" class="mb-4">
+            <v-alert
+              border="bottom"
+              density="default"
+              color="warning"
+              class="mb-4"
+            >
               I'm an alert with a bottom border and warning color
             </v-alert>
-            <v-alert border="start" density="default" color="success" >
+            <v-alert border="start" density="default" color="success">
               I'm an alert with a border left type success
             </v-alert>
           </v-col>

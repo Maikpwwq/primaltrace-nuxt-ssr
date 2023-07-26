@@ -1,5 +1,5 @@
 <template>
-  <div class="banner-wrapper bg-green">
+  <div class="banner-wrapper bg-deep-purple-lighten-1">
     <v-container>
       <!-- -----------------------------------------------
             Start Banner
@@ -13,14 +13,13 @@
           class="d-flex align-center justify-center"
         >
           <div class="text-center">
-            <h1 class="banner-title font-weight-bold text-white">Blockchain</h1>
+            <h1 class="banner-title font-weight-bold text-white">DashBoard</h1>
             <h4 class="banner-subtitle mr-0 text-white font-weight-regular">
-              Consenso, dominio, legítimo, genuino, acreditado, autorizado,
-              fidedigno
+              Registra un contrato de productos sobre los que agregar y consultar información de trazabilidad.
             </h4>
             <div class="mt-8">
-              <v-btn to="/blog" size="large" class="bg-success text-white" flat>
-                Novedades
+              <v-btn to="#conectar-wallet" size="large" style="background-color:#00B0FF" class="text-white" flat>
+                Conectar Wallet
               </v-btn>
             </div>
           </div>

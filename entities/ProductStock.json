@@ -1,7 +1,6 @@
 {
-    "productId": "12345",
-    "availableQuantity": 100,
-    "reservedQuantity": 20,
-    "totalQuantity": 120
+  "productId": "12345",
+  "availableQuantity": 100,
+  "reservedQuantity": 20,
+  "totalQuantity": 120
 }
-  

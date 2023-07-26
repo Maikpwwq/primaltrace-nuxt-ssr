@@ -35,4 +35,3 @@
     </v-container>
   </div>
 </template>
-

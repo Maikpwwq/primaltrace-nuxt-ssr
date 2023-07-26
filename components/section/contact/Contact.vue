@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WhiteTLogo from '/images/logos/white-text.png';
+import WhiteTLogo from "/images/logos/white-text.png";
 </script>
 
 <template>
@@ -48,8 +48,8 @@ import WhiteTLogo from '/images/logos/white-text.png';
                   to="/"
                   class="btn-danger-gradient mt-7 px-8 py-2"
                   variant="outlined"
-                  flat color="white"
-
+                  flat
+                  color="white"
                 >
                   Enviar
                 </v-btn>
@@ -59,12 +59,16 @@ import WhiteTLogo from '/images/logos/white-text.png';
           <v-col cols="12" md="4">
             <div class="bg-primary contact-detail-card">
               <h2 class="detail-title font-weight-medium text-white">
-                Sede 
-                <img :src="WhiteTLogo" class="logo-white-text" alt="logo PrimalTrace"/>
+                Sede
+                <img
+                  :src="WhiteTLogo"
+                  class="logo-white-text"
+                  alt="logo PrimalTrace"
+                />
               </h2>
               <p class="mt-7 op-8 mb-0 text-white">+57 3196138057</p>
               <p class="op-8 mb-8 text-white">primaltrace@outlook.com</p>
-              <p class="mt-7 op-8 mb-0 text-white">Bogotá, </p>
+              <p class="mt-7 op-8 mb-0 text-white">Bogotá,</p>
               <p class="op-8 mb-0 text-white">Colombia</p>
             </div>
           </v-col>
@@ -78,7 +82,7 @@ import WhiteTLogo from '/images/logos/white-text.png';
 </template>
 
 <style>
-.logo-white-text{
-    height: 133px;
+.logo-white-text {
+  height: 133px;
 }
 </style>

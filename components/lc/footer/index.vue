@@ -68,7 +68,9 @@
           <p class="text-muted mb-sm-0 mb-3">
             Todos los derechos reservados por
             <!-- https://www.primaltrace.com/ -->
-            <a href="https://primaltrace-nuxt-ssr.vercel.app/" class="link">primaltrace.com</a>
+            <a href="https://primaltrace-nuxt-ssr.vercel.app/" class="link"
+              >primaltrace.com</a
+            >
           </p>
           <div class="ml-auto">
             <div class="d-sm-flex align-center">

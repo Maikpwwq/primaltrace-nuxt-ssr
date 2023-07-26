@@ -28,11 +28,15 @@
           <div class="btn-groups">
             <v-btn class="bg-accent" flat>
               Start
-              <v-tooltip activator="parent" location="start">Left Tooltip</v-tooltip>
+              <v-tooltip activator="parent" location="start"
+                >Left Tooltip</v-tooltip
+              >
             </v-btn>
             <v-btn class="bg-accent" flat>
               Top
-              <v-tooltip activator="parent" location="top">Top Tooltip</v-tooltip>
+              <v-tooltip activator="parent" location="top"
+                >Top Tooltip</v-tooltip
+              >
             </v-btn>
             <v-btn class="bg-accent" flat>
               Bottom
@@ -42,7 +46,9 @@
             </v-btn>
             <v-btn class="bg-accent" flat>
               End
-              <v-tooltip activator="parent" location="end">Right Tooltip</v-tooltip>
+              <v-tooltip activator="parent" location="end"
+                >Right Tooltip</v-tooltip
+              >
             </v-btn>
           </div>
         </div>

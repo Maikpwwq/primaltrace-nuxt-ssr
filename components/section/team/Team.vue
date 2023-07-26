@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {team} from '@/data/CustomComponents';
+import { team } from "@/data/CustomComponents";
 </script>
 <template>
   <div>
@@ -16,7 +16,8 @@ import {team} from '@/data/CustomComponents';
                 Un equipo Experimentado & Profesional
               </h2>
               <p class="text-muted">
-                Experiencia en el ciclo de vida del producto y atención al cliente respaldada por blockchain.
+                Experiencia en el ciclo de vida del producto y atención al
+                cliente respaldada por blockchain.
               </p>
             </div>
           </v-col>
@@ -30,9 +31,13 @@ import {team} from '@/data/CustomComponents';
         ----------------------------------------------- -->
         <v-row class="mt-13 justify-center">
           <v-col cols="12" md="3" sm="6" v-for="card in team" :key="card.title">
-            <v-card elevation="0" class="team-card  mb-7">
+            <v-card elevation="0" class="team-card mb-7">
               <div class="social-overlay overflow-hidden">
-                <img :src="`/images/team/${card.img}`" :alt="card.img" class="img-fluid"/>
+                <img
+                  :src="`/images/team/${card.img}`"
+                  :alt="card.img"
+                  class="img-fluid"
+                />
                 <div class="img-overlay">
                   <ul>
                     <li v-for="social in card.socialicon" :key="social.icon">

@@ -23,7 +23,7 @@ const headerMenu = [
 ];
 
 /*--Feature 1--*/
-const feature1 =[
+const feature1 = [
   {
     title: "Reducir desperdicio de productos",
     icon: "mdi mdi-star",
@@ -47,7 +47,7 @@ const feature1 =[
 ];
 
 /*--Feature 2--*/
-const feature2 =[
+const feature2 = [
   {
     title: "Identifique productos fraudulentos.",
     img: "img1.jpg",
@@ -67,11 +67,12 @@ const feature2 =[
 ];
 
 /*--Portfolio--*/
-const portfolio =[
+const portfolio = [
   {
     img: "BTC_bull.jpg",
     title: "Verificar la procedencia y calidad de los productos",
-    subtext: "Información detallada del origen, ingredientes y prácticas de producción.",
+    subtext:
+      "Información detallada del origen, ingredientes y prácticas de producción.",
   },
   {
     img: "BTC_crypto.jpg",
@@ -86,32 +87,32 @@ const portfolio =[
 ];
 
 /*--Pricing Plan--*/
-const pricePlan =[
+const pricePlan = [
   {
     title: "Plan Regular",
     price: "3M",
     plan: "ANUAL",
-    desc:"El Plan Regular le permite personalizar contratos inteligentes utilizando su cuenta.",
-    buttoncolor:"primary"
+    desc: "El Plan Regular le permite personalizar contratos inteligentes utilizando su cuenta.",
+    buttoncolor: "primary",
   },
   {
     title: "Plan Master",
     price: "7M",
     plan: "ANUAL",
-    desc:"El Plan Master le permite personalizar contratos inteligentes utilizando su cuenta.",
-    buttoncolor:"error"
+    desc: "El Plan Master le permite personalizar contratos inteligentes utilizando su cuenta.",
+    buttoncolor: "error",
   },
   {
     title: "Plan Premium",
     price: "15M",
     plan: "YEARLY",
-    desc:"El Plan Premium le permite personalizar contratos inteligentes utilizando su cuenta.",
-    buttoncolor:"primary"
+    desc: "El Plan Premium le permite personalizar contratos inteligentes utilizando su cuenta.",
+    buttoncolor: "primary",
   },
 ];
 
 /*--Team--*/
-const team =[
+const team = [
   {
     img: "l3mik3l.png",
     title: "Michael Arias Fajardo",
@@ -163,7 +164,7 @@ const team =[
 ];
 
 /*--Testimonials--*/
-const Testimonials =[
+const Testimonials = [
   {
     img: "1.jpg",
     testimonial:
@@ -206,7 +207,7 @@ const Testimonials =[
 ];
 
 /*--Blogs--*/
-const Blog =[
+const Blog = [
   {
     img: "esencia auténtica.jpg",
     title: "Verificar la procedencia y calidad de los productos",
@@ -230,4 +231,13 @@ const Blog =[
   },
 ];
 
-export { headerMenu,feature1,feature2,portfolio,pricePlan,team,Testimonials,Blog};
+export {
+  headerMenu,
+  feature1,
+  feature2,
+  portfolio,
+  pricePlan,
+  team,
+  Testimonials,
+  Blog,
+};

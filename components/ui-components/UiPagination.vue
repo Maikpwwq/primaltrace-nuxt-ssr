@@ -34,11 +34,11 @@ const page = ref(1);
             <v-col cols="6">
               <h4 class="font-weight-regular font-18">Basic Pagination</h4>
               <v-pagination
-                  class="mt-5"
-                  v-model="page"
-                  :length="9"
-                  rounded="circle"
-                ></v-pagination>
+                class="mt-5"
+                v-model="page"
+                :length="9"
+                rounded="circle"
+              ></v-pagination>
             </v-col>
             <v-col cols="6">
               <h4 class="font-weight-regular font-18">Length Pagination</h4>
@@ -51,7 +51,7 @@ const page = ref(1);
             </v-col>
             <v-col cols="6">
               <h4 class="font-weight-regular font-18">Disabled Pagination</h4>
-              <v-pagination  :length="9" class="mt-5" disabled></v-pagination>
+              <v-pagination :length="9" class="mt-5" disabled></v-pagination>
             </v-col>
           </v-row>
         </div>

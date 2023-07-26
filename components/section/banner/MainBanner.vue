@@ -8,10 +8,14 @@
         <v-col cols="12" sm="7" lg="6" class="d-flex align-center">
           <div class="text-sm-left text-center">
             <h1 class="banner-title font-weight-bold text-white mt-5">
-              La esencia auténtica de tus productos, trazada con seguridad en la blockchain.
+              La esencia auténtica de tus productos, trazada con seguridad en la
+              blockchain.
             </h1>
-            <h4 class="banner-subtitle white--text font-weight-regular text-white">
-              Sistemas de administración y seguimiento inteligente de primera calidad
+            <h4
+              class="banner-subtitle white--text font-weight-regular text-white"
+            >
+              Sistemas de administración y seguimiento inteligente de primera
+              calidad
             </h4>
             <div class="mt-md-16 mt-10 d-sm-flex d-block">
               <v-btn
@@ -20,9 +24,12 @@
                 size="large"
                 flat
               >
-                 <NuxtLink to="#trackwise" class="text-decoration-none  text-white">
+                <NuxtLink
+                  to="#trackwise"
+                  class="text-decoration-none text-white"
+                >
                   TrackWise
-                 </NuxtLink>
+                </NuxtLink>
               </v-btn>
               <v-btn
                 size="large"
@@ -40,7 +47,8 @@
         <v-col cols="12" sm="5" lg="6">
           <img
             src="/images/landingpage/blockchain.png"
-            alt="banner" class="img-fluid"
+            alt="banner"
+            class="img-fluid"
           />
         </v-col>
       </v-row>
@@ -51,4 +59,3 @@
     </v-container>
   </div>
 </template>
-

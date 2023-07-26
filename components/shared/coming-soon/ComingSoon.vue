@@ -16,10 +16,10 @@
             </h4>
             <div class="mt-8">
               <v-btn
-                  class="btn bg-white btn-custom-md"
-                  to="/"
-                  flat
-                  size="large"
+                class="btn bg-white btn-custom-md"
+                to="/"
+                flat
+                size="large"
               >
                 Coming Soon
               </v-btn>
