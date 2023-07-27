@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Polygon from "/images/polygon-zkevm/main.svg";
+</script>
 <template>
   <div class="blog-component mini-spacer">
     <v-container>
       <v-row justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
           <div class="text-center">
-            <h2 class="section-title font-weight-medium">Agregar Productos</h2>
+            <h2 class="section-title font-weight-medium">
+              <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
+              Agregar Productos</h2>
             <p class="text-muted">
               Agrega las características más sorprendentes de tu producto a la
               blockchain en poco tiempo.

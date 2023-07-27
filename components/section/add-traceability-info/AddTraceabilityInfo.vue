@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Polygon from "/images/polygon-zkevm/main.svg";
+</script>
 <template>
   <div class="blog-component mini-spacer">
     <v-container>
@@ -6,6 +8,7 @@
         <v-col cols="12" sm="10" md="9" lg="7">
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
+              <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
               Agregar Información de trazabilidad
             </h2>
             <p class="text-muted">

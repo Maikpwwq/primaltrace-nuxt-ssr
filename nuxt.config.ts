@@ -26,6 +26,7 @@ export default defineNuxtConfig({
       apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
     },
   },
+  // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.
   app: {
     head: {
       // meta: [

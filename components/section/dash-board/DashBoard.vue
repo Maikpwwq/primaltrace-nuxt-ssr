@@ -18,7 +18,7 @@ import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue
                         <AddProduct />
                     </v-col>
                     <v-col cols="12" md="4">
-                        <div class="bg-primary contact-detail-card">
+                        <div class="bg-primary">
                             <ConnectWallet />
                         </div>
                     </v-col>
