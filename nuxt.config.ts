@@ -24,6 +24,8 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
+      apiKeyThirdWeb: process.env.NUXT_THIRDWEB_PRIVATE_KEY || "",
+      clientIdThirdWeb: process.env.VITE_THIRDWEB_CLIENT_ID || "",
     },
   },
   // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.

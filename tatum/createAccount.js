@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 async function run() {
-  const APIKEY2 = `${import.meta.env.VITE_API_KEY_TATUM}`;
+  const APIKEY2 = `${import.meta.env.VITE_API_KEY_TATUM}`; 
   const config = useRuntimeConfig();
   const APIKEY = config.public.apiKeyTatum;
   console.log("VITE_API_KEY_TATUM", APIKEY, APIKEY2);
