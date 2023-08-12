@@ -25,10 +25,10 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
-      apiKeyThirdWeb: process.env.NUXT_THIRDWEB_PRIVATE_KEY || "",
-      clientIdThirdWeb: process.env.VITE_THIRDWEB_CLIENT_ID || "",
-      web3AuthClientID: process.env.NUXT_WEB3AUTH_CLIENT_ID || "",
+      apiKeyTatum: `${process.env.VITE_API_KEY_TATUM}` || "",
+      apiKeyThirdWeb: `${process.env.VITE_THIRDWEB_PRIVATE_KEY}` || "",
+      clientIdThirdWeb: `${process.env.VITE_THIRDWEB_CLIENT_ID}` || "",
+      web3AuthClientID: `${process.env.VITE_WEB3AUTH_CLIENT_ID}` || "",
     },
   },
   // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.
