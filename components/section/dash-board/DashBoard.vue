@@ -16,6 +16,7 @@ import { headerDashBoard } from "@/data/CustomComponents";
 // const THIRDWEB_PRIVATE_KEY_2 = `${import.meta.env.NUXT_THIRDWEB_PRIVATE_KEY}` ; //works
 // const THIRDWEB_CLIENT_ID_2 = `${import.meta.env.VITE_THIRDWEB_CLIENT_ID}`; 
 // console.log("dev variables 2", THIRDWEB_PRIVATE_KEY_2, THIRDWEB_CLIENT_ID_2);
+// const isActive = true;
 </script>
 
 <template>
@@ -27,22 +28,23 @@ import { headerDashBoard } from "@/data/CustomComponents";
                 -------------------------------------------------->
                 <v-row justify="center">
                     <v-col cols="12" md="8">
-                        <v-app-bar app class="app-header position-relative bg-dark header2" flat>
+                        <!-- DashBoard basic view Navigation -->
+                        <!-- <v-app-bar class="app-header position-relative bg-dark header2" flat>
                             <v-container class="py-0 fill-height">
                                 <v-toolbar>
-                                    <!-- DashBoard basic view Navigation -->
                                     <div class="navigation ml-auto" v-bind:class="[isActive ? 'd-block' : '']"
                                         @click="isActive = !isActive">
                                         <ul class="navbar-nav d-flex" min-height="auto">
                                             <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
-                                                <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link">{{
-                                                    nav.title }}</NuxtLink>
+                                                <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link">
+                                                    {{ nav.title }}
+                                                </NuxtLink>
                                             </li>
                                         </ul>
                                     </div>
                                 </v-toolbar>
                             </v-container>
-                        </v-app-bar>
+                        </v-app-bar> -->
                         <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
                         <v-col cols="12" class="">
                             <SelectSmartContract />
