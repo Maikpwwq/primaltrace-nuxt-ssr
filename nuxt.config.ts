@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     define: {
       // "process.env.DEBUG": false,
       // "global": {},
-      "process.env": env,
+      // "process.env": env,
     },
   },
   nitro: {
