@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   vite: {
     define: {
       "process.env.DEBUG": false,
+      "global": {},
     },
   },
   nitro: {
@@ -26,6 +27,7 @@ export default defineNuxtConfig({
       apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
       apiKeyThirdWeb: process.env.NUXT_THIRDWEB_PRIVATE_KEY || "",
       clientIdThirdWeb: process.env.VITE_THIRDWEB_CLIENT_ID || "",
+      web3AuthClientID: process.env.NUXT_WEB3AUTH_CLIENT_ID || "",
     },
   },
   // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.

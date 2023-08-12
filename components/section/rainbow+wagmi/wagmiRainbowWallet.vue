@@ -5,6 +5,7 @@ import { apiProvider, getDefaultWallets, RainbowKitProvider, lightTheme, darkThe
 import { createConfig, configureChains, Config } from "@wagmi/core";
 import { polygonZkEvmTestnet, polygonZkEvm, mainnet } from '@wagmi/core/chains'
 // import { alchemyProvider } from "@wagmi/core/providers/alchemy";
+// import { alchemyProvider } from "@wagmi/core/providers/alchemy";
 import { publicProvider } from "@wagmi/core/providers/public";
 // import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 

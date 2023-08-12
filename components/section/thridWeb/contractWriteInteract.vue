@@ -33,7 +33,7 @@ const contract = async () => { await sdk.getContract(CONTRACT_ADDRESS); }
 
 </script>
 <template>
-    <button :Click="contract">
+    <button @click="contract">
         conectar-wallet
     </button>
 </template>

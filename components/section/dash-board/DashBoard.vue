@@ -3,6 +3,7 @@
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
+import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue"
 
 // const THIRDWEB = process.env.NUXT_THIRDWEB_PRIVATE_KEY; // don't work
 // const config = useRuntimeConfig();
@@ -29,6 +30,7 @@ import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue
                     <v-col cols="12" md="4">
                         <div class="bg-primary">
                             <ConnectWallet />
+                            <Web3Auth />
                         </div>
                     </v-col>
                 </v-row>
