@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
   vite: {
     define: {
-      "process.env.DEBUG": false,
+      // "process.env.DEBUG": false,
       // "global": {},
     },
   },

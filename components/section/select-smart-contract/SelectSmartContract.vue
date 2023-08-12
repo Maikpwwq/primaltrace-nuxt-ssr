@@ -25,11 +25,11 @@ const data = "";
                 <v-col cols="12" sm="10" md="9" lg="7">
                     <v-card class="card-shadow mb-4">
                         <v-card-text>
-                            <v-text-field v-model="catalogName" color="primary" label="Nombre del catálogo:"
+                            <v-text-field color="primary" label="Nombre del catálogo:"
                                 variant="underlined"></v-text-field>
-                            <v-text-field v-model="catalogID" color="primary" label="Catálogo ID:"
+                            <v-text-field color="primary" label="Catálogo ID:"
                                 variant="underlined"></v-text-field>
-                            <v-text-field v-model="metadataURL" color="primary" label="metadata URL:"
+                            <v-text-field color="primary" label="metadata URL:"
                                 variant="underlined"></v-text-field>
                             <div class="mt-1">
                                 <v-btn class="bg-success mr-3 text-white" elevation="0"> Definir catálogo

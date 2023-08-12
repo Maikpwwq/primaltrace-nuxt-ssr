@@ -23,19 +23,19 @@ const data = "";
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
-              <v-text-field v-model="productoID" color="primary" label="Producto ID:" variant="underlined"></v-text-field>
-              <v-text-field v-model="productName" color="primary" label="Nombre del producto:"
+              <v-text-field color="primary" label="Producto ID:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Nombre del producto:"
                 variant="underlined"></v-text-field>
-              <v-text-field v-model="descripción" color="primary" label="Descripción:"
+              <v-text-field color="primary" label="Descripción:"
                 variant="underlined"></v-text-field>
-              <v-text-field v-model="fabricante" color="primary" label="Fabricante:" variant="underlined"></v-text-field>
-              <v-text-field v-model="datefabricación" color="primary" label="Fecha de fabricación:"
+              <v-text-field color="primary" label="Fabricante:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Fecha de fabricación:"
                 variant="underlined"></v-text-field>
-              <v-text-field v-model="numberLote" color="primary" label="Número de lote:"
+              <v-text-field color="primary" label="Número de lote:"
                 variant="underlined"></v-text-field>
-              <v-text-field v-model="ubicaciónProducción" color="primary" label="Ubicación de producción:"
+              <v-text-field color="primary" label="Ubicación de producción:"
                 variant="underlined"></v-text-field>
-              <v-text-field v-model="metadataProducto" color="primary" label="metadataProducto:"
+              <v-text-field color="primary" label="metadataProducto:"
                 variant="underlined"></v-text-field>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0"> Agregar producto </v-btn>

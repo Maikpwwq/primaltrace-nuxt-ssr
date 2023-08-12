@@ -23,9 +23,9 @@ const data = "";
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
-              <v-text-field v-model="acción" color="primary" label="Acción:" variant="underlined"></v-text-field>
-              <v-text-field v-model="actorID" color="primary" label="Actor ID:" variant="underlined"></v-text-field>
-              <v-text-field v-model="metadataURL" color="primary" label="Metadata URL *opcional:"
+              <v-text-field color="primary" label="Acción:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Actor ID:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Metadata URL *opcional:"
                 variant="underlined"></v-text-field>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0"> Agregar trazabilidad </v-btn>
