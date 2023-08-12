@@ -22,6 +22,21 @@ const headerMenu = [
   },
 ];
 
+const headerDashBoard = [
+  {
+    title: "Catálogo",
+    href: "#trackCatalog",
+  },
+  {
+    title: "Productos",
+    href: "#trackProduct",
+  },
+  {
+    title: "Información de trazabilidad",
+    href: "#trackInfo",
+  },
+];
+
 /*--Feature 1--*/
 const feature1 = [
   {
@@ -233,6 +248,7 @@ const Blog = [
 
 export {
   headerMenu,
+  headerDashBoard,
   feature1,
   feature2,
   portfolio,

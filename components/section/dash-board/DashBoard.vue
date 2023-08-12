@@ -4,6 +4,9 @@ import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddT
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
 import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue"
+import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue"
+
+import { headerDashBoard } from "@/data/CustomComponents";
 
 // const THIRDWEB = process.env.NUXT_THIRDWEB_PRIVATE_KEY; // don't work
 // const config = useRuntimeConfig();
@@ -24,8 +27,28 @@ import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue"
                 -------------------------------------------------->
                 <v-row justify="center">
                     <v-col cols="12" md="8">
-                        <AddTraceabilityInfo />
-                        <AddProduct />
+                        <v-app-bar app class="app-header position-relative bg-dark header2" flat>
+                            <v-container class="py-0 fill-height">
+                                <v-toolbar>
+                                    <!-- DashBoard basic view Navigation -->
+                                    <div class="navigation ml-auto" v-bind:class="[isActive ? 'd-block' : '']"
+                                        @click="isActive = !isActive">
+                                        <ul class="navbar-nav d-flex" min-height="auto">
+                                            <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
+                                                <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link">{{
+                                                    nav.title }}</NuxtLink>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </v-toolbar>
+                            </v-container>
+                        </v-app-bar>
+                        <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
+                        <v-col cols="12" class="">
+                            <SelectSmartContract />
+                            <AddProduct />
+                            <AddTraceabilityInfo />
+                        </v-col>
                     </v-col>
                     <v-col cols="12" md="4">
                         <div class="bg-primary">
