@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     define: {
       // "process.env.DEBUG": false,
       // "global": {},
-      // "process.env": env,
+      "process.env": env,
     },
   },
   nitro: {
@@ -25,9 +25,9 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiKeyTatum: `${process.env.VITE_API_KEY_TATUM}` || "",
-      apiKeyThirdWeb: `${process.env.VITE_THIRDWEB_PRIVATE_KEY}` || "",
-      clientIdThirdWeb: `${process.env.VITE_THIRDWEB_CLIENT_ID}` || "",
+      // apiKeyTatum: `${process.env.VITE_API_KEY_TATUM}` || "",
+      // apiKeyThirdWeb: `${process.env.VITE_THIRDWEB_PRIVATE_KEY}` || "",
+      // clientIdThirdWeb: `${process.env.VITE_THIRDWEB_CLIENT_ID}` || "",
       web3AuthClientID: "BPeTrfVgPsmhRzxk4Js7mMwdQuCm2nrpu0It9HoZ5-f8e-6Y6Nx6qBINcN45q8lzrvTVt2vIKpclcE8OFld8BWU", // `${import.meta.env..VITE_WEB3AUTH_CLIENT_ID}` || `${process.env.VITE_WEB3AUTH_CLIENT_ID}` ||
     },
   },
