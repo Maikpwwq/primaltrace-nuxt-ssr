@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+require('dotenv').config()
 export default defineNuxtConfig({
   ssr: false,
   typescript: {
@@ -12,7 +13,7 @@ export default defineNuxtConfig({
   vite: {
     define: {
       // "process.env.DEBUG": false,
-      // "global": {},
+      "global": {},
       // "process.env": env,
     },
   },
