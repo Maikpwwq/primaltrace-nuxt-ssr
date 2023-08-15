@@ -3,8 +3,8 @@
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
-import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue"
-import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue"
+import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
+import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue";
 
 import { headerDashBoard } from "@/data/CustomComponents";
 

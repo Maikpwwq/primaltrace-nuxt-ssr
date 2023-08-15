@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-require("dotenv").config();
+// require("dotenv").config();
 export default defineNuxtConfig({
   ssr: false,
   typescript: {
@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     //   extractCSS: false,
     transpile: ["vuetify"],
   },
-  modules: ["@nuxtjs/dotenv", "@pinia/nuxt"],
+  modules: ["@pinia/nuxt"],
   vite: {
     define: {
       // "process.env.DEBUG": false,
@@ -24,12 +24,15 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available within server-side
     // Keys within public, will be also exposed to the client-side
+    // https://nuxt.com/docs/guide/going-further/runtime-config#environment-variables
     public: {
-      // apiKeyTatum: `${process.env.VITE_API_KEY_TATUM}` || "",
-      // apiKeyThirdWeb: `${process.env.VITE_THIRDWEB_PRIVATE_KEY}` || "",
-      // clientIdThirdWeb: `${process.env.VITE_THIRDWEB_CLIENT_ID}` || "",
+      apiKeyTatum: `${process.env.NUXT_API_KEY_TATUM}` || "",
+      apiKeyThirdWeb: `${process.env.NUXT_THIRDWEB_PRIVATE_KEY}` || "",
+      clientIdThirdWeb: `${process.env.NUXT_THIRDWEB_CLIENT_ID}` || "",
       web3AuthClientID:
-        "BPeTrfVgPsmhRzxk4Js7mMwdQuCm2nrpu0It9HoZ5-f8e-6Y6Nx6qBINcN45q8lzrvTVt2vIKpclcE8OFld8BWU", // `${import.meta.env..VITE_WEB3AUTH_CLIENT_ID}` || `${process.env.VITE_WEB3AUTH_CLIENT_ID}` ||
+        process.env.NUXT_WEB3AUTH_CLIENT_ID || // `${}`
+        "BPeTrfVgPsmhRzxk4Js7mMwdQuCm2nrpu0It9HoZ5-f8e-6Y6Nx6qBINcN45q8lzrvTVt2vIKpclcE8OFld8BWU", // `${import.meta.env..VITE_WEB3AUTH_CLIENT_ID}`
+      personalAccountPrivateKey: process.env.NUXT_PERSONAL_ACCOUNT_PRIVATE_KEY || "",
     },
   },
   // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.

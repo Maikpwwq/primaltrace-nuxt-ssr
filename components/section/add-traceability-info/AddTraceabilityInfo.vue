@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-const data = "";
+import GetTraceabilityInfo from "./GetTraceabilityInfo.vue";
+import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
+import { TRACEABILITY_INFO } from '@/data/contractVariables';
+const selectProduct = () => { };
 </script>
 <template>
   <div id="trackInfo" class="blog-component mini-spacer">
@@ -16,41 +19,37 @@ const data = "";
               Selecciona un producto específico de la lista desplegable o
               mediante un campo de búsqueda.
             </p>
+            <v-row class="mt-7">
+              <v-col cols="12" class="py-0">
+                <v-text-field label="Product" variant="outlined" color="primary"
+                  placeholder="Elige un producto"></v-text-field>
+                <v-btn @click="selectProduct">Seleccionar producto</v-btn>
+              </v-col>
+            </v-row>
           </div>
         </v-col>
       </v-row>
       <v-row class="mt-9" justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4">
+          <v-card class="card-shadow mb-4"> 
             <v-card-text>
+              <v-text-field color="primary" label="ID:" variant="underlined"></v-text-field>
               <v-text-field color="primary" label="Acción:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Timestamp:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Actor address:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Actor Type:" variant="underlined"></v-text-field>
               <v-text-field color="primary" label="Actor ID:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Metadata URL *opcional:"
-                variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Metadata URL *opcional:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Product ID:" variant="underlined"></v-text-field>
               <div class="mt-1">
-                <v-btn class="bg-success mr-3 text-white" elevation="0"> Agregar trazabilidad </v-btn>
+                <v-btn class="bg-success mr-3 text-white" elevation="0" @click="addTraceabilityInfo(TRACEABILITY_INFO)">
+                  Agregar trazabilidad </v-btn>
               </div>
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
-      <v-row class="mt-9" justify="center">
-        <v-col cols="12" md="4" sm="6">
-          <v-row class="mt-7">
-            <v-col cols="12" class="py-0">
-              <v-text-field label="Product" variant="outlined" color="primary"
-                placeholder="Elige un producto"></v-text-field>
-            </v-col>
-          </v-row>
-          <ul>
-            <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
-            <li>Acción: {{ data }}</li>
-            <li>Actor ID: </li>
-            <li>Metadata URL * opcional: </li>
-          </ul>
-          <v-btn> Agregar trazabilidad </v-btn>
-        </v-col>
-      </v-row>
+      <GetTraceabilityInfo />
 
     </v-container>
   </div>

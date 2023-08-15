@@ -12,7 +12,7 @@ const Lighttheme: ThemeDefinition = {
     white: "#FFFFFF",
     blue: "#0164d3",
     info: "#0164d3",
-    success: "#2cdd9b",
+    success: "#00B0FF",
     warning: "#fec500",
     primary: "#316ce8",
     accent: "#607df9",

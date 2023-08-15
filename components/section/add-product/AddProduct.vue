@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-const data = "";
+import GetProduct from "./GetProduct.vue";
+import { addProduct } from "@/services/thridWeb/contractWriteInteract";
+import { PRODUCT } from '@/data/contractVariables';
 </script>
 <template>
   <div id="trackProduct" class="blog-component mini-spacer">
@@ -24,42 +26,23 @@ const data = "";
           <v-card class="card-shadow mb-4">
             <v-card-text>
               <v-text-field color="primary" label="Producto ID:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Nombre del producto:"
-                variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Descripción:"
-                variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Nombre del producto:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Descripción:" variant="underlined"></v-text-field>
               <v-text-field color="primary" label="Fabricante:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Fecha de fabricación:"
-                variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Número de lote:"
-                variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Ubicación de producción:"
-                variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="metadataProducto:"
-                variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Fecha de fabricación:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Número de lote:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="Ubicación de producción:" variant="underlined"></v-text-field>
+              <v-text-field color="primary" label="metadataProducto:" variant="underlined"></v-text-field>
               <div class="mt-1">
-                <v-btn class="bg-success mr-3 text-white" elevation="0"> Agregar producto </v-btn>
+                <v-btn class="bg-success mr-3 text-white" elevation="0" @click="addProduct(PRODUCT)"> 
+                  Agregar producto
+                </v-btn>
               </div>
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
-      <v-row class="mt-9" justify="center">
-        <v-col cols="12" md="4" sm="6">
-          <ul>
-            <li>Producto ID: {{ data }}</li>
-            <li>Nombre del producto: </li>
-            <li>Descripción: </li>
-            <li>Fabricante: </li>
-            <li>Fecha de fabricación: </li>
-            <li>Número de lote: </li>
-            <li>Ubicación de producción: </li>
-            <li>MetadataProducto: </li>
-          </ul>
-          <v-btn> Agregar producto </v-btn>
-        </v-col>
-      </v-row>
-
+      <GetProduct />
     </v-container>
   </div>
 </template>
