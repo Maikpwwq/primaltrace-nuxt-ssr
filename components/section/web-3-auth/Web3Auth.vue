@@ -30,7 +30,7 @@ const WEB3AUTH_CLIENT_ID = config.public.web3AuthClientID; // `${import.meta.env
 
 const polygonzkEVMConfig: CustomChainConfig = {
     chainNamespace: CHAIN_NAMESPACES.EIP155, // .OTHER - "eip155" Polygon ZkEvm Mainnet: eip155:1101
-    chainId: "05A2", // 0x89 hex of 137, polygon mainnet. 
+    chainId: "0x5A2", // 0x89 hex of 137, polygon mainnet. 
     // 044D hex of 1101 Polygon zkEVM Network. 
     // 0x13881 hex of 80001 for Mumbai Testnet. 
     // 05A2 hex of 1442 for zkEVM Testnet

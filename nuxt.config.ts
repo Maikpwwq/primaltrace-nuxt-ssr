@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     //   extractCSS: false,
     transpile: ["vuetify"],
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", '@nuxtjs/dotenv'],
   vite: {
     define: {
       // "process.env.DEBUG": false,
@@ -61,7 +61,7 @@ export default defineNuxtConfig({
         },
         { rel: "manifest", href: "/site.webmanifest" },
       ],
-      script: [{ src: "@/ethers/index.js" }],
+      // script: [{ src: "@/ethers/index.js" }],
     },
   },
 });
