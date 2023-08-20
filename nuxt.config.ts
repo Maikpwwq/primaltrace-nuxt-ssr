@@ -26,9 +26,9 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     // https://nuxt.com/docs/guide/going-further/runtime-config#environment-variables
     public: {
-      apiKeyTatum: `${process.env.NUXT_API_KEY_TATUM}` || "",
-      apiKeyThirdWeb: `${process.env.NUXT_THIRDWEB_PRIVATE_KEY}` || "",
-      clientIdThirdWeb: `${process.env.NUXT_THIRDWEB_CLIENT_ID}` || "",
+      apiKeyTatum: process.env.NUXT_API_KEY_TATUM || "",
+      apiKeyThirdWeb: process.env.NUXT_THIRDWEB_PRIVATE_KEY || "",
+      clientIdThirdWeb: process.env.NUXT_THIRDWEB_CLIENT_ID || "",
       web3AuthClientID:
         process.env.NUXT_WEB3AUTH_CLIENT_ID || // `${}`
         "BPeTrfVgPsmhRzxk4Js7mMwdQuCm2nrpu0It9HoZ5-f8e-6Y6Nx6qBINcN45q8lzrvTVt2vIKpclcE8OFld8BWU", // `${import.meta.env..VITE_WEB3AUTH_CLIENT_ID}`
