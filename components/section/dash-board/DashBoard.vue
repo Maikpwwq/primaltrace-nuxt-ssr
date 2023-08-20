@@ -54,8 +54,8 @@ import { headerDashBoard } from "@/data/CustomComponents";
                     </v-col>
                     <v-col cols="12" md="4">
                         <div class="bg-primary">
-                            <!-- <ConnectWallet /> -->
-                            <Web3Auth />
+                            <ConnectWallet />
+                            <!-- <Web3Auth /> -->
                         </div>
                     </v-col>
                 </v-row>
