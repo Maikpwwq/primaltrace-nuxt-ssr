@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-import GetProduct from "./GetProduct.vue";
-import { addProduct } from "@/services/thridWeb/contractWriteInteract";
-import { PRODUCT } from '@/data/contractVariables';
+// import GetProduct from "./GetProduct.vue";
+// import { addProduct } from "@/services/thridWeb/contractWriteInteract";
+// import { PRODUCT } from '@/data/contractVariables';
 
 const handleProduct = () => {
   // addProduct(PRODUCT).then((data)=>{
@@ -49,7 +49,7 @@ const handleProduct = () => {
           </v-card>
         </v-col>
       </v-row>
-      <GetProduct />
+      <!-- <GetProduct /> -->
     </v-container>
   </div>
 </template>

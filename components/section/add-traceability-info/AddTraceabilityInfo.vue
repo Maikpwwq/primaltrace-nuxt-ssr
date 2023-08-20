@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-import GetTraceabilityInfo from "./GetTraceabilityInfo.vue";
-import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
-import { TRACEABILITY_INFO } from '@/data/contractVariables';
+// import GetTraceabilityInfo from "./GetTraceabilityInfo.vue";
+// import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
+// import { TRACEABILITY_INFO } from '@/data/contractVariables';
 const selectProduct = () => { };
 const traceabilityInfo = () => {
   // addTraceabilityInfo(TRACEABILITY_INFO).then((data)=>{
@@ -54,7 +54,7 @@ const traceabilityInfo = () => {
           </v-card>
         </v-col>
       </v-row>
-      <GetTraceabilityInfo />
+      <!-- <GetTraceabilityInfo /> -->
 
     </v-container>
   </div>
