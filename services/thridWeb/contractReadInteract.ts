@@ -21,9 +21,9 @@ const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
 
 // Call a function on your smart contract using the function name
 // const name = async () => { contract.call("myFunctionName") };
-const getProduct = async (_productId: number) => { contract.call("getProduct", [_productId]) };
-const getProductStock = async (_productId: number) => { contract.call("getProductStock", [_productId]) };
-const getProductTraceabilityInfo = async (_productId: number) => { contract.call("getProductTraceabilityInfo", [_productId]) };
+const getProduct = async (_productId: number) => { await contract.call("getProduct", [_productId]) };
+const getProductStock = async (_productId: number) => { await contract.call("getProductStock", [_productId]) };
+const getProductTraceabilityInfo = async (_productId: number) => { await contract.call("getProductTraceabilityInfo", [_productId]) };
 // const getTraceabilityInfo = async (_productId: number) => { contract.call("getTraceabilityInfo", [_productId]) };
 // const actorTypes = async (args: any) => { contract.call("actorTypes", [{ args }])};
 // const productCounter = async () => { contract.call("productCounter", [])};

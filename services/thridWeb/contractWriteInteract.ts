@@ -21,10 +21,10 @@ const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
 // const name = async () => { contract.call("myFunctionName")};
 
 
-const addProduct = async (product: any) => { contract.call("addProduct", product) };
-const addTraceabilityInfo = async (traceabilityInfo: any) => { contract.call("addTraceabilityInfo", traceabilityInfo) };
-const setActorType = async (actorType: any) => { contract.call("setActorType", actorType) };
-const updateProductStock = async (productStock: any) => { contract.call("updateProductStock", productStock) };
+const addProduct = async (product: any) => { await contract.call("addProduct", product) };
+const addTraceabilityInfo = async (traceabilityInfo: any) => { await contract.call("addTraceabilityInfo", traceabilityInfo) };
+const setActorType = async (actorType: any) => { await contract.call("setActorType", actorType) };
+const updateProductStock = async (productStock: any) => { await contract.call("updateProductStock", productStock) };
 // const product = [_productName, _productDescription, _manufacturer, _manufacturingDate, _batchNumber, _productionLocation, _metadataProducto]
 // const traceabilityInfo = [_productId, _action, _timestamp, _actor, _actorType, _actorId, _metadataAction]
 // const actorType = [_actorType]
