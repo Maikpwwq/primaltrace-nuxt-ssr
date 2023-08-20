@@ -44,6 +44,7 @@ const polygonzkEVMConfig: CustomChainConfig = {
     ticker: "MATIC",
     tickerName: "Matic",
     blockExplorer: "https://testnet-zkevm.polygonscan.com",
+    testnet: true,
 };
 
 // const openloginAdapter = new OpenloginAdapter({
@@ -119,6 +120,12 @@ const updateWallet = async (accounts?: any) => {
     console.log("WEB3AUTH", accounts, balance, chainId)
     setWallet({ accounts, balance, chainId })
 };
+
+const getPrivateKey = async () => {
+    const privateKey = await sharedProvider.request({
+        method: "private_key"
+    });
+}
 
 const web3AuthModal = async () => {
     try {

@@ -13,6 +13,15 @@ const title = ref(
 // });
 </script>
 
+<script type="module" lang="ts">
+// Global node polyfill.
+import { Buffer } from "buffer";
+import process from "process";
+window.global = window;
+window.Buffer = Buffer;
+window.process = process;
+</script>
+
 <template>
   <v-app dark>
     <LcHeader />

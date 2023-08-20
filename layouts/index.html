@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="module">
+      // Global node polyfill.
+      import { Buffer } from "buffer";
+      import process from "process";
+      window.Buffer = Buffer;
+      window.process = process;
+      window.global = window;
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PrimalTrace</title>
@@ -9,10 +17,5 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
   </head>
-  <body>
-    <script>
-      // Global node polyfill.
-      window.global = window;
-    </script>
-  </body>
+  <body></body>
 </html>
