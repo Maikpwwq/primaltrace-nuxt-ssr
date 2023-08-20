@@ -10,8 +10,8 @@ import { headerDashBoard } from "@/data/CustomComponents";
 
 // const THIRDWEB = process.env.NUXT_THIRDWEB_PRIVATE_KEY; // don't work
 // const config = useRuntimeConfig();
-// const THIRDWEB_PRIVATE_KEY = config.public.apiKeyThirdWeb; //works
-// const THIRDWEB_CLIENT_ID = config.public.clientIdThirdWeb;
+// const THIRDWEB_PRIVATE_KEY = config.public.thirdwebPrivateKey; //works 
+// const THIRDWEB_CLIENT_ID = config.public.thirdwebClientId;
 // console.log("dev variables 1", THIRDWEB_PRIVATE_KEY, THIRDWEB_CLIENT_ID);
 // const THIRDWEB_PRIVATE_KEY_2 = `${import.meta.env.NUXT_THIRDWEB_PRIVATE_KEY}` ; //works
 // const THIRDWEB_CLIENT_ID_2 = `${import.meta.env.VITE_THIRDWEB_CLIENT_ID}`; 

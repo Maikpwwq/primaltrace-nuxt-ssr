@@ -26,7 +26,7 @@ const user = reactive({
 
 const config = useRuntimeConfig();
 // Get your Client ID from Web3Auth Dashboard
-const WEB3AUTH_CLIENT_ID = config.public.web3AuthClientID; // `${import.meta.env.NUXT_WEB3AUTH_CLIENT_ID}`;
+const WEB3AUTH_CLIENT_ID = config.public.web3authClientID; // `${import.meta.env.NUXT_WEB3AUTH_CLIENT_ID}`;
 
 const polygonzkEVMConfig: CustomChainConfig = {
     chainNamespace: CHAIN_NAMESPACES.EIP155, // .OTHER - "eip155" Polygon ZkEvm Mainnet: eip155:1101

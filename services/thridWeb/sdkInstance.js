@@ -2,7 +2,7 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { PolygonZkevmTestnet } from "@thirdweb-dev/chains";
 
 const config = useRuntimeConfig();
-const THIRDWEB_CLIENT_ID = config.public.clientIdThirdWeb;
+const THIRDWEB_CLIENT_ID = config.public.thirdwebClientId;
 // const YOUR_SECRET_KEY = 
 
 const sdk = new ThirdwebSDK(
