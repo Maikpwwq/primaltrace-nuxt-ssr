@@ -9,11 +9,11 @@ export default defineNuxtConfig({
     //   extractCSS: false,
     transpile: ["vuetify"],
   },
-  modules: ["@pinia/nuxt", '@nuxtjs/dotenv'],
+  modules: ["@pinia/nuxt"],
   vite: {
     define: {
       // "process.env.DEBUG": false,
-      // global: {},
+      global: {},
     },
   },
   nitro: {

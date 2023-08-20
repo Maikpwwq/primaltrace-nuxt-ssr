@@ -3,8 +3,8 @@ import { IMPLEMENTATION_CONTRACT_ADDRESS, TRACEABILITY_INFO, PRODUCT, ACTOR_TYPE
 
 // import sdk from "./sdkInstance"
 // const config = useRuntimeConfig();
-let contract: any;
-contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
+// let contract: any;
+const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
 // const init = ( async () => {
 //     try {
 //         contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);

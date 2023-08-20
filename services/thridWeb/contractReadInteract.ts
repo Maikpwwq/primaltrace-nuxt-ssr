@@ -2,8 +2,8 @@ import sdk from "@/services/thridWeb/sdkInstance.js"
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from '@/data/contractVariables';
 
 // const config = useRuntimeConfig();
-let contract: any;
-contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
+// let contract: any;
+const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
 
 // const init = (async () => {
 //     try {
