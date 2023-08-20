@@ -1,10 +1,19 @@
-import sdk from "@/services/thridWeb/sdkPrivateInstance.js"
-import { IMPLEMENTATION_CONTRACT_ADDRESS, TRACEABILITY_INFO, PRODUCT, ACTOR_TYPE, PRODUCT_STOCK } from '@/data/contractVariables'; 
+import sdk from "@/services/thridWeb/sdkPrivateInstance.js";
+import {
+  IMPLEMENTATION_CONTRACT_ADDRESS,
+  TRACEABILITY_INFO,
+  PRODUCT,
+  ACTOR_TYPE,
+  PRODUCT_STOCK,
+} from "@/data/contractVariables";
 
 // import sdk from "./sdkInstance"
 // const config = useRuntimeConfig();
 // let contract: any;
-const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
+const contract = await sdk.getContract(
+  IMPLEMENTATION_CONTRACT_ADDRESS
+  // The ABI of your smart contract
+);
 // const init = ( async () => {
 //     try {
 //         contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
@@ -20,11 +29,18 @@ const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
 // Call a function on your smart contract using the function name
 // const name = async () => { contract.call("myFunctionName")};
 
-
-const addProduct = async (product: any) => { await contract.call("addProduct", product) };
-const addTraceabilityInfo = async (traceabilityInfo: any) => { await contract.call("addTraceabilityInfo", traceabilityInfo) };
-const setActorType = async (actorType: any) => { await contract.call("setActorType", actorType) };
-const updateProductStock = async (productStock: any) => { await contract.call("updateProductStock", productStock) };
+const addProduct = async (product: any) => {
+  return await contract.call("addProduct", product);
+};
+const addTraceabilityInfo = async (traceabilityInfo: any) => {
+  return await contract.call("addTraceabilityInfo", traceabilityInfo);
+};
+const setActorType = async (actorType: any) => {
+  return await contract.call("setActorType", actorType);
+};
+const updateProductStock = async (productStock: any) => {
+  return await contract.call("updateProductStock", productStock);
+};
 // const product = [_productName, _productDescription, _manufacturer, _manufacturingDate, _batchNumber, _productionLocation, _metadataProducto]
 // const traceabilityInfo = [_productId, _action, _timestamp, _actor, _actorType, _actorId, _metadataAction]
 // const actorType = [_actorType]
@@ -34,6 +50,4 @@ const updateProductStock = async (productStock: any) => { await contract.call("u
 // const allNFTs = async () => { await contract.erc721.getAll()};
 // const tokenSupply = async () => { await contract.erc20.totalSupply()};
 
-export {
-    addProduct, addTraceabilityInfo, setActorType, updateProductStock
-}
+export { addProduct, addTraceabilityInfo, setActorType, updateProductStock };

@@ -5,7 +5,7 @@ const PRODUCT_ID = 1;
 let data: any;
 watchEffect(async () => {
   if (!data) {
-    data = await getProduct(PRODUCT_ID)
+    // data = getProduct(PRODUCT_ID)
     console.log('data', data)
   }
 });

@@ -3,6 +3,13 @@ import Polygon from "/images/polygon-zkevm/main.svg";
 import GetProduct from "./GetProduct.vue";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
 import { PRODUCT } from '@/data/contractVariables';
+
+const handleProduct = () => {
+  // addProduct(PRODUCT).then((data)=>{
+  //   console.log('handleProduct',data)
+  // })
+}
+
 </script>
 <template>
   <div id="trackProduct" class="blog-component mini-spacer">
@@ -34,7 +41,7 @@ import { PRODUCT } from '@/data/contractVariables';
               <v-text-field color="primary" label="Ubicación de producción:" variant="underlined"></v-text-field>
               <v-text-field color="primary" label="metadataProducto:" variant="underlined"></v-text-field>
               <div class="mt-1">
-                <v-btn class="bg-success mr-3 text-white" elevation="0" @click="addProduct(PRODUCT)"> 
+                <v-btn class="bg-success mr-3 text-white" elevation="0" @click="handleProduct">
                   Agregar producto
                 </v-btn>
               </div>
