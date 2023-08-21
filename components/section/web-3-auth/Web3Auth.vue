@@ -70,7 +70,7 @@ watchEffect(async () => {
             //     chainConfig: polygonzkEVMConfig,
             // });
             await web3auth.initModal();
-            console.log("VITE_WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID);
+            // console.log("VITE_WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID);
             sharedProvider = web3auth.provider;
             setHasProvider(Boolean(sharedProvider))
             if (web3auth.connected) {

@@ -2,12 +2,43 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { getProduct } from "@/services/thridWeb/contractReadInteract";
 const PRODUCT_ID = 1;
-let data: any;
+
+interface Product {
+  productId: string;
+  productName: string;
+  productDescription: string;
+  manufacturer: string;
+  manufacturingDate: string;
+  batchNumber: string;
+  productionLocation: string;
+  metadataProducto: string;
+}
+
+const data: Product = reactive({
+  productId: "",
+  productName: "",
+  productDescription: "",
+  manufacturer: "",
+  manufacturingDate: "",
+  batchNumber: "",
+  productionLocation: "",
+  metadataProducto: "",
+});
+
 watchEffect(async () => {
-  if (!data) {
-    // data = getProduct(PRODUCT_ID)
-    console.log('data', data)
-  }
+  // if (!data) {}
+  getProduct(PRODUCT_ID).then((resp) => {
+    // TODO: Puede obtener multiples registros de productos
+    console.log('getProduct', resp[1])
+    data.productId = resp[0]._hex;
+    data.productName = resp[1];
+    data.productDescription = resp[2];
+    data.manufacturer = resp[3];
+    data.manufacturingDate = resp[4]._hex;
+    data.batchNumber = resp[5];
+    data.productionLocation = resp[6];
+    data.metadataProducto = resp[7];
+  })
 });
 
 </script>
@@ -21,7 +52,8 @@ watchEffect(async () => {
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
               Confirma para agregar este producto al contrato
             </h2>
-            <ul v-if="data">
+            <ul v-if="data && data?.productId">
+              <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
               <li>Producto Id: {{ data.productId }}</li>
               <li>Nombre del producto: {{ data.productName }}</li>
               <li>Descripción: {{ data.productDescription }}</li>

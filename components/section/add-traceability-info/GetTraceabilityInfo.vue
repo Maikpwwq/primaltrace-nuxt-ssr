@@ -2,12 +2,43 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { getProductTraceabilityInfo } from "@/services/thridWeb/contractReadInteract";
 const PRODUCT_ID = 1;
-let data: any;
+
+interface TraceabilityInfo {
+  trazabilityId: string;
+  productId: string;
+  action: string;
+  timestamp: string;
+  actor: string;
+  actorType: string;
+  actorId: string;
+  metadataAction?: string;
+}
+
+const data: TraceabilityInfo = reactive({
+  trazabilityId: "",
+  productId: "",
+  action: "",
+  timestamp: "",
+  actor: "",
+  actorType: "",
+  actorId: "",
+  metadataAction: ""
+});
+
 watchEffect(async () => {
-  if (!data) {
-    // data = getProductTraceabilityInfo(PRODUCT_ID)
-    console.log('data', data)
-  }
+  // if (!data) {}
+  getProductTraceabilityInfo(PRODUCT_ID).then((resp) => {
+    // TODO: Puede obtener multiples registros de trazabilidad
+    console.log('getProductTraceabilityInfo', resp[1])
+    data.trazabilityId = resp[1].id;
+    data.productId = resp[1].productId;
+    data.action = resp[1].action;
+    data.timestamp = resp[1].timestamp;
+    data.actor = resp[1].actor;
+    data.actorType = resp[1].actorType;
+    data.actorId = resp[1].actorId;
+    data.metadataAction = resp[1].metadataAction
+  })
 });
 </script>
 <template>
@@ -22,14 +53,15 @@ watchEffect(async () => {
             </h2>
 
             <ul v-if="data">
-              <li>Id: {{ data._productId }}</li>
-              <li>Acción: {{ data._action }}</li>
-              <li>timestamp: {{ data._timestamp }}</li>
-              <li>Actor address: {{ data._actor }}</li>
-              <li>ActorType: {{ data._actorType }}</li>
-              <li>Actor ID: {{ data._actorId }}</li>
-              <li>Acción Metadata URL *opcional: {{ data._metadataAction }}</li>
-              <li>Product ID: {{ data._productId }}</li>
+              <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
+              <li>Id: {{ data.trazabilityId }}</li>
+              <li>Acción: {{ data.action }}</li>
+              <li>timestamp: {{ data.timestamp }}</li>
+              <li>Actor address: {{ data.actor }}</li>
+              <li>ActorType: {{ data.actorType }}</li>
+              <li>Actor ID: {{ data.actorId }}</li>
+              <li>Acción Metadata URL *opcional: {{ data.metadataAction }}</li>
+              <li>Product ID: {{ data.productId }}</li>
             </ul>
             <v-btn> Firmar trazabilidad </v-btn>
           </div>

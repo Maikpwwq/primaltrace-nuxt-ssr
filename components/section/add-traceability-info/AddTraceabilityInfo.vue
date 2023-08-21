@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-// import GetTraceabilityInfo from "./GetTraceabilityInfo.vue";
+import GetTraceabilityInfo from "./GetTraceabilityInfo.vue";
 // import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
 // import { TRACEABILITY_INFO } from '@/data/contractVariables';
 const selectProduct = () => { };
 const traceabilityInfo = () => {
+  console.log('traceabilityInfo', obj)
   // addTraceabilityInfo(TRACEABILITY_INFO).then((data)=>{
   //   console.log('traceabilityInfo',data)
   // })
 };
+const obj = reactive({
+  trazabilityId: "",
+  productId: "",
+  action: "",
+  timestamp: "",
+  actor: "",
+  actorType: "",
+  actorId: "",
+  metadataAction: ""
+})
+
 </script>
 <template>
   <div id="trackInfo" class="blog-component mini-spacer">
@@ -38,14 +50,19 @@ const traceabilityInfo = () => {
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
-              <v-text-field color="primary" label="ID:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Acción:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Timestamp:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Actor address:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Actor Type:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Actor ID:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Metadata URL *opcional:" variant="underlined"></v-text-field>
-              <v-text-field color="primary" label="Product ID:" variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.trazabilityId" color="primary" label="ID:" variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.action" color="primary" label="Acción:" variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.timestamp" color="primary" label="Timestamp:"
+                variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.actor" color="primary" label="Actor address:"
+                variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.actorType" color="primary" label="Actor Type:"
+                variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.actorId" color="primary" label="Actor ID:" variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.metadataAction" color="primary" label="Metadata URL *opcional:"
+                variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.productId" color="primary" label="Product ID:"
+                variant="underlined"></v-text-field>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0" @click="traceabilityInfo">
                   Agregar trazabilidad </v-btn>
@@ -54,7 +71,7 @@ const traceabilityInfo = () => {
           </v-card>
         </v-col>
       </v-row>
-      <!-- <GetTraceabilityInfo /> -->
+      <GetTraceabilityInfo />
 
     </v-container>
   </div>
