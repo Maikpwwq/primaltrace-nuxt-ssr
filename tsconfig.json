@@ -2,6 +2,8 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "jsxImportSource": "vue"
+    "jsxImportSource": "vue",
+    "target": "ES2020",
+    "module": "ESNext"
   }
 }

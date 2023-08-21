@@ -15,6 +15,14 @@ export default defineNuxtConfig({
       // "process.env.DEBUG": false,
       // global: { "window" },
     },
+    build: {
+      target: "ES2020" // esnext
+    },
+    // esbuild: {
+    //   supported: {
+    //     'top-level-await': true //browsers can handle top-level-await features
+    //   },
+    // }
   },
   nitro: {
     serveStatic: true,
