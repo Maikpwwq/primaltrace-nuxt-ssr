@@ -44,27 +44,34 @@ watchEffect(async () => {
 <template>
   <div id="" class="blog-component mini-spacer">
     <v-container>
-      <v-row class="mt-9" justify="center">
-        <v-col cols="12" md="4" sm="6">
+      <v-row justify="center">
+        <v-col cols="12" sm="10" md="9" lg="7">
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
               Confirma para agregar esta Información de trazabilidad del producto al contrato
             </h2>
-
-            <ul v-if="data">
-              <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
-              <li>Id: {{ data.trazabilityId }}</li>
-              <li>Acción: {{ data.action }}</li>
-              <li>timestamp: {{ data.timestamp }}</li>
-              <li>Actor address: {{ data.actor }}</li>
-              <li>ActorType: {{ data.actorType }}</li>
-              <li>Actor ID: {{ data.actorId }}</li>
-              <li>Acción Metadata URL *opcional: {{ data.metadataAction }}</li>
-              <li>Product ID: {{ data.productId }}</li>
-            </ul>
-            <v-btn> Firmar trazabilidad </v-btn>
           </div>
+        </v-col>
+      </v-row>
+      <v-row class="mt-9" justify="center">
+        <v-col cols="12" sm="10" md="9" lg="7">
+          <v-card class="card-shadow mb-4 text-center">
+            <v-card-text>
+              <ul v-if="data">
+                <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
+                <li>Id: {{ data.trazabilityId }}</li>
+                <li>Acción: {{ data.action }}</li>
+                <li>timestamp: {{ data.timestamp }}</li>
+                <li>Actor address: {{ data.actor }}</li>
+                <li>ActorType: {{ data.actorType }}</li>
+                <li>Actor ID: {{ data.actorId }}</li>
+                <li>Acción Metadata URL *opcional: {{ data.metadataAction }}</li>
+                <li>Product ID: {{ data.productId }}</li>
+              </ul>
+              <v-btn> Firmar trazabilidad </v-btn>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

@@ -45,26 +45,34 @@ watchEffect(async () => {
 <template>
   <div id="" class="blog-component mini-spacer">
     <v-container>
-      <v-row class="mt-9" justify="center">
-        <v-col cols="12" md="4" sm="6">
+      <v-row justify="center">
+        <v-col cols="12" sm="10" md="9" lg="7">
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
               Confirma para agregar este producto al contrato
             </h2>
-            <ul v-if="data && data?.productId">
-              <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
-              <li>Producto Id: {{ data.productId }}</li>
-              <li>Nombre del producto: {{ data.productName }}</li>
-              <li>Descripción: {{ data.productDescription }}</li>
-              <li>Fabricante: {{ data.manufacturer }}</li>
-              <li>Fecha de fabricación: {{ data.manufacturingDate }}</li>
-              <li>Número de lote: {{ data.batchNumber }}</li>
-              <li>Ubicación de producción: {{ data.productionLocation }}</li>
-              <li>MetadataProducto: {{ data.metadataProducto }}</li>
-            </ul>
-            <v-btn> Firmar producto </v-btn>
           </div>
+        </v-col>
+      </v-row>
+      <v-row class="mt-9" justify="center">
+        <v-col cols="12" sm="10" md="9" lg="7">
+          <v-card class="card-shadow mb-4 text-center">
+            <v-card-text>
+              <ul v-if="data && data?.productId">
+                <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
+                <li>Producto Id: {{ data.productId }}</li>
+                <li>Nombre del producto: {{ data.productName }}</li>
+                <li>Descripción: {{ data.productDescription }}</li>
+                <li>Fabricante: {{ data.manufacturer }}</li>
+                <li>Fecha de fabricación: {{ data.manufacturingDate }}</li>
+                <li>Número de lote: {{ data.batchNumber }}</li>
+                <li>Ubicación de producción: {{ data.productionLocation }}</li>
+                <li>MetadataProducto: {{ data.metadataProducto }}</li>
+              </ul>
+              <v-btn> Firmar producto </v-btn>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
