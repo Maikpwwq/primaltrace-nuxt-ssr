@@ -1,9 +1,13 @@
 import sdk from "@/services/thridWeb/sdkInstance.js";
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
+import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 
 // const config = useRuntimeConfig();
 // let contract: any;
-const contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
+const contract = await sdk.getContract(
+  IMPLEMENTATION_CONTRACT_ADDRESS, 
+  ABI_CATALOG// The ABI of your smart contract
+);
 
 // const init = (async () => {
 //     try {

@@ -6,13 +6,14 @@ import {
   ACTOR_TYPE,
   PRODUCT_STOCK,
 } from "@/data/contractVariables";
+import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 
 // import sdk from "./sdkInstance"
 // const config = useRuntimeConfig();
 // let contract: any;
 const contract = await sdk.getContract(
-  IMPLEMENTATION_CONTRACT_ADDRESS
-  // The ABI of your smart contract
+  IMPLEMENTATION_CONTRACT_ADDRESS,
+  ABI_CATALOG// The ABI of your smart contract
 );
 // const init = ( async () => {
 //     try {
