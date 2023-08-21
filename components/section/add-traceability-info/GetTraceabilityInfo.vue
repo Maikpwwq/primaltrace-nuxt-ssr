@@ -27,7 +27,7 @@ const data: TraceabilityInfo = reactive({
 
 watchEffect(async () => {
   // if (!data) {}
-  getProductTraceabilityInfo(PRODUCT_ID).then((resp) => {
+  await getProductTraceabilityInfo(PRODUCT_ID).then((resp) => {
     // TODO: Puede obtener multiples registros de trazabilidad
     console.log('getProductTraceabilityInfo', resp[1])
     data.trazabilityId = resp[1].id;

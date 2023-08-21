@@ -27,7 +27,7 @@ const data: Product = reactive({
 
 watchEffect(async () => {
   // if (!data) {}
-  getProduct(PRODUCT_ID).then((resp) => {
+  await getProduct(PRODUCT_ID).then((resp) => {
     // TODO: Puede obtener multiples registros de productos
     console.log('getProduct', resp[1])
     data.productId = resp[0]._hex;
