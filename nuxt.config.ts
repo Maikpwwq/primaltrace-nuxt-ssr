@@ -16,7 +16,7 @@ export default defineNuxtConfig({
       // global: { "window" },
     },
     build: {
-      target: "ES2020" // esnext
+      target: "ESNext" // esnext
     },
     // esbuild: {
     //   supported: {
