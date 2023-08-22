@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { getProduct } from "@/services/thridWeb/contractReadInteract";
-const PRODUCT_ID = 1;
+import { useSmartContract } from '@/store/smart-contract'
+import { storeToRefs } from 'pinia'
+import type { Product } from "@/schemas/index"
 
-interface Product {
-  productId: string;
-  productName: string;
-  productDescription: string;
-  manufacturer: string;
-  manufacturingDate: string;
-  batchNumber: string;
-  productionLocation: string;
-  metadataProducto: string;
-}
+const store = useSmartContract()
+// but skip any action or non reactive (non ref/reactive) property
+const { contract, contractInfo, hasContract, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
+// actions can just be destructured
+const { setContract, setContractInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
+
+const PRODUCT_ID = ref(1);
 
 const data: Product = reactive({
   productId: "",
@@ -23,11 +22,12 @@ const data: Product = reactive({
   batchNumber: "",
   productionLocation: "",
   metadataProducto: "",
+  traceabilityInfo: [],
 });
 
 watchEffect(async () => {
   // if (!data) {}
-  await getProduct(PRODUCT_ID).then((resp) => {
+  await getProduct(PRODUCT_ID.value).then((resp) => {
     // TODO: Puede obtener multiples registros de productos
     console.log('getProduct', resp[1])
     data.productId = resp[0]._hex;
@@ -59,6 +59,8 @@ watchEffect(async () => {
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4 text-center">
             <v-card-text>
+              <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
+                placeholder="Id del producto"></v-text-field>
               <ul v-if="data && data?.productId">
                 <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
                 <li>Producto Id: {{ data.productId }}</li>

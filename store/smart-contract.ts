@@ -1,30 +1,29 @@
 import { defineStore } from "pinia";
+import type {
+  SmartContract,
+  CatalogContract,
+  ContractInfo,
+  Catalog,
+  Product,
+  TraceabilityInfo,
+} from "@/schemas/index";
 
-interface WalletState {
-  accounts: any[];
-  balance: string;
-  chainId: string;
-}
-
-interface MetaMaskContextData {
-  wallet: WalletState;
-  hasProvider: boolean | null;
-  error: boolean;
-  errorMessage: string;
-  isConnecting: boolean;
-  // clearError: () => void;
-}
-
-const disconnectedState: WalletState = {
-  accounts: [],
-  balance: "",
-  chainId: "",
+const emptyState: CatalogContract = {
+  contractAddress: "",
+  catalogsId: [],
 };
 
-export const useSmartContract = defineStore("smartcontract", {
-  state: (): MetaMaskContextData => ({
-    wallet: disconnectedState,
-    hasProvider: null,
+const emptyContractInfo: ContractInfo = {
+  catalog: [],
+  products: [],
+  traceabilityInfo: [],
+};
+
+export const useSmartContract = defineStore("contract", {
+  state: (): SmartContract => ({
+    contract: emptyState,
+    contractInfo: emptyContractInfo,
+    hasContract: null,
     error: false,
     errorMessage: "",
     isConnecting: false,
@@ -32,11 +31,14 @@ export const useSmartContract = defineStore("smartcontract", {
   getters: {},
   actions: {
     // `this` is the store instance
-    setWallet(providedAccounts: WalletState) {
-      this.wallet = providedAccounts;
+    setContract(providedContract: CatalogContract) {
+      this.contract = providedContract;
     },
-    setHasProvider(hasProvider: boolean | null) {
-      this.hasProvider = hasProvider;
+    setContractInfo(providedInfo: ContractInfo) {
+      this.contractInfo = providedInfo;
+    },
+    setHasContract(hasContract: boolean | null) {
+      this.hasContract = hasContract;
     },
     setError(error: boolean) {
       this.error = error;
@@ -50,8 +52,8 @@ export const useSmartContract = defineStore("smartcontract", {
     clearError() {
       this.errorMessage = "";
     },
-    clearWallet() {
-      this.wallet = disconnectedState;
+    clearContract() {
+      this.contract = emptyState;
     },
   },
 });

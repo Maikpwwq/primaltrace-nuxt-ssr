@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { getProductTraceabilityInfo } from "@/services/thridWeb/contractReadInteract";
-const PRODUCT_ID = 1;
+import { useSmartContract } from '@/store/smart-contract'
+import { storeToRefs } from 'pinia'
+import type { TraceabilityInfo } from "@/schemas/index"
 
-interface TraceabilityInfo {
-  trazabilityId: string;
-  productId: string;
-  action: string;
-  timestamp: string;
-  actor: string;
-  actorType: string;
-  actorId: string;
-  metadataAction?: string;
-}
+const store = useSmartContract()
+// but skip any action or non reactive (non ref/reactive) property
+const { contract, contractInfo, hasContract, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
+// actions can just be destructured
+const { setContract, setContractInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
+
+const PRODUCT_ID = ref(1);
 
 const data: TraceabilityInfo = reactive({
   trazabilityId: "",
@@ -27,17 +26,19 @@ const data: TraceabilityInfo = reactive({
 
 watchEffect(async () => {
   // if (!data) {}
-  await getProductTraceabilityInfo(PRODUCT_ID).then((resp) => {
+  await getProductTraceabilityInfo(PRODUCT_ID.value).then((resp) => {
     // TODO: Puede obtener multiples registros de trazabilidad
-    console.log('getProductTraceabilityInfo', resp[1])
-    data.trazabilityId = resp[1].id;
-    data.productId = resp[1].productId;
-    data.action = resp[1].action;
-    data.timestamp = resp[1].timestamp;
-    data.actor = resp[1].actor;
-    data.actorType = resp[1].actorType;
-    data.actorId = resp[1].actorId;
-    data.metadataAction = resp[1].metadataAction
+    setContractInfo({ traceabilityInfo: resp, catalog: [], products: [] })
+    const trace = contractInfo.value.traceabilityInfo[1];
+    console.log('getProductTraceabilityInfo', resp[1], trace)
+    data.trazabilityId = trace.id;
+    data.productId = trace.productId;
+    data.action = trace.action;
+    data.timestamp = trace.timestamp;
+    data.actor = trace.actor;
+    data.actorType = trace.actorType;
+    data.actorId = trace.actorId;
+    data.metadataAction = trace.metadataAction
   })
 });
 </script>
@@ -58,6 +59,8 @@ watchEffect(async () => {
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4 text-center">
             <v-card-text>
+              <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
+                placeholder="Id del producto"></v-text-field>
               <ul v-if="data">
                 <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
                 <li>Id: {{ data.trazabilityId }}</li>

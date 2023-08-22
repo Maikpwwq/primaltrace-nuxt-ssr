@@ -13,7 +13,7 @@ import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 // let contract: any;
 const contract = await sdk.getContract(
   IMPLEMENTATION_CONTRACT_ADDRESS,
-  ABI_CATALOG// The ABI of your smart contract
+  ABI_CATALOG // The ABI of your smart contract
 );
 // const init = ( async () => {
 //     try {
@@ -31,7 +31,28 @@ const contract = await sdk.getContract(
 // const name = async () => { contract.call("myFunctionName")};
 
 const addProduct = async (product: any) => {
-  return await contract.call("addProduct", product);
+  const {
+    catalogId,
+    productName,
+    productDescription,
+    manufacturer,
+    manufacturingDate,
+    batchNumber,
+    productionLocation,
+    metadataProducto,
+  } = product;
+  const sendProduct = [
+    catalogId,
+    productName,
+    productDescription,
+    manufacturer,
+    manufacturingDate,
+    batchNumber,
+    productionLocation,
+    metadataProducto,
+  ];
+  console.log("contractWriteInteract", product, sendProduct);
+  return await contract.call("addProduct", sendProduct);
 };
 const addTraceabilityInfo = async (traceabilityInfo: any) => {
   return await contract.call("addTraceabilityInfo", traceabilityInfo);

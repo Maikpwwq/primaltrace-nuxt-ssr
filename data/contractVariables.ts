@@ -14,7 +14,7 @@ const TRACEABILITY_INFO = {
 };
 
 const PRODUCT = {
-  productId: 1,
+  catalogId: 1,
   productName: "Producto 1 Prueba 2",
   productDescription: "productDescription",
   manufacturer: "detalleFabricante",
@@ -22,7 +22,7 @@ const PRODUCT = {
   batchNumber: 148,
   productionLocation: "Bogota",
   metadataProducto: "Contiene evidencias de referencia del producto",
-  traceabilityInfo: TRACEABILITY_INFO,
+  // traceabilityInfo: TRACEABILITY_INFO,
 };
 
 const ACTOR_TYPE = "Distribuidor"; // Fabricante, Distribuidor, Proveedor, Transportista, UsuarioFinal

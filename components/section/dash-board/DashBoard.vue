@@ -2,6 +2,8 @@
 // import WhiteTLogo from '/images/logos/white-text.png';
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
+import GetProduct from "@/components/section/add-product/GetProduct.vue";
+import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
 import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue";
@@ -29,7 +31,7 @@ import { headerDashBoard } from "@/data/CustomComponents";
                 <v-row justify="center">
                     <v-col cols="12" md="8">
                         <!-- DashBoard basic view Navigation -->
-                        <!-- <v-app-bar class="app-header position-relative bg-dark header2" flat>
+                        <v-app-bar class="app-header position-relative bg-dark header2" flat>
                             <v-container class="py-0 fill-height">
                                 <v-toolbar>
                                     <div class="navigation ml-auto" v-bind:class="[isActive ? 'd-block' : '']"
@@ -44,12 +46,16 @@ import { headerDashBoard } from "@/data/CustomComponents";
                                     </div>
                                 </v-toolbar>
                             </v-container>
-                        </v-app-bar> -->
+                        </v-app-bar>
                         <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
                         <v-col cols="12" class="">
                             <SelectSmartContract />
                             <AddProduct />
                             <AddTraceabilityInfo />
+                        </v-col>
+                        <v-col cols="12" class="">
+                            <GetProduct />
+                            <GetTraceabilityInfo />
                         </v-col>
                     </v-col>
                     <v-col cols="12" md="4">

@@ -1,25 +1,25 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-import GetProduct from "./GetProduct.vue";
-// import { addProduct } from "@/services/thridWeb/contractWriteInteract";
-// import { PRODUCT } from '@/data/contractVariables';
+import { addProduct } from "@/services/thridWeb/contractWriteInteract";
+import { PRODUCT } from '@/data/contractVariables';
 
-const handleProduct = () => {
-  console.log('handleProduct', obj)
-  // addProduct(PRODUCT).then((data)=>{
-  //   console.log('handleProduct',data)
-  // })
+const handleProduct = async () => {
+  console.log('handleProduct', obj, PRODUCT)
+  await addProduct(PRODUCT).then((data) => {
+    console.log('handleProduct', data)
+  })
 }
 
 const obj = reactive({
-  productId: "",
+  catalogId: "",
   productName: "",
   productDescription: "",
   manufacturer: "",
   manufacturingDate: "",
   batchNumber: "",
   productionLocation: "",
-  metadataProducto: ""
+  metadataProducto: "",
+  // traceabilityInfo: []
 })
 
 </script>
@@ -44,7 +44,7 @@ const obj = reactive({
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
-              <v-text-field v-model="obj.productId" color="primary" label="Producto ID:"
+              <v-text-field v-model="obj.catalogId" color="primary" label="Catalogo ID:"
                 variant="underlined"></v-text-field>
               <v-text-field v-model="obj.productName" color="primary" label="Nombre del producto:"
                 variant="underlined"></v-text-field>
@@ -69,7 +69,6 @@ const obj = reactive({
           </v-card>
         </v-col>
       </v-row>
-      <GetProduct />
     </v-container>
   </div>
 </template>
