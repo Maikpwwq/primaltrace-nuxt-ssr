@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia'
 import Display from "./Display.vue"
 import WalletError from "./WalletError.vue"
 import { formatBalance, formatAddress } from "@/utils";
-
+import IsoLogoZkevm from "/images/polygon-zkevm/IsoLogo.svg";
 
 const store = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
@@ -234,6 +234,7 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
 
 <template>
     <div className="d-flex flex-column align-center justify-center pt-6 mt-6 mb-6">
+        <img :src="IsoLogoZkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
         <v-btn v-if="wallet.accounts.length < 1" class="btn bg-white text-decoration-none text-dark" @click="web3AuthModal"
             @disabled="disableConnect">
             Conecta Web3 Wallet

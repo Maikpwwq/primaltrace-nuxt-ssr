@@ -6,7 +6,7 @@ const TRACEABILITY_INFO = {
   id: 0,
   action: "Entregado a bodega",
   timestamp: 130823,
-  actor: ACTOR,
+  actor: ACTOR.toString(),
   actorType: "Distribuidor",
   actorId: "0",
   metadataAction: "Contiene referencia a evidencias",

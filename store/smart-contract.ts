@@ -34,8 +34,14 @@ export const useSmartContract = defineStore("contract", {
     setContract(providedContract: CatalogContract) {
       this.contract = providedContract;
     },
-    setContractInfo(providedInfo: ContractInfo) {
-      this.contractInfo = providedInfo;
+    setCatalogsInfo(providedInfo: any[]) {
+      this.contractInfo.catalog = providedInfo;
+    },
+    setProductsInfo(providedInfo: any[]) {
+      this.contractInfo.products = providedInfo;
+    },
+    setTraceabilityInfo(providedInfo: any[]) {
+      this.contractInfo.traceabilityInfo = providedInfo;
     },
     setHasContract(hasContract: boolean | null) {
       this.hasContract = hasContract;

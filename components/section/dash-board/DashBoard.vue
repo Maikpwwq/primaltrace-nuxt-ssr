@@ -2,9 +2,8 @@
 // import WhiteTLogo from '/images/logos/white-text.png';
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
-import GetProduct from "@/components/section/add-product/GetProduct.vue";
-import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
+import ReadSmartContract from "@/components/section/read-contract/ReadSmartContract.vue";
 import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue";
 
@@ -48,14 +47,16 @@ import { headerDashBoard } from "@/data/CustomComponents";
                             </v-container>
                         </v-app-bar>
                         <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
+                        <!-- <slot name="read-contract"></slot>
+                        <slot name="write-contract"></slot> -->
+
                         <v-col cols="12" class="">
                             <SelectSmartContract />
                             <AddProduct />
                             <AddTraceabilityInfo />
                         </v-col>
                         <v-col cols="12" class="">
-                            <GetProduct />
-                            <GetTraceabilityInfo />
+                            <ReadSmartContract />
                         </v-col>
                     </v-col>
                     <v-col cols="12" md="4">

@@ -35,6 +35,10 @@ const headerDashBoard = [
     title: "Información de trazabilidad",
     href: "#trackInfo",
   },
+  {
+    title: "Leer contrato",
+    href: "#readContract",
+  },
 ];
 
 /*--Feature 1--*/

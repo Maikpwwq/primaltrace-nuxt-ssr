@@ -32,6 +32,9 @@ const getProductStock = async (_productId: number) => {
 const getProductTraceabilityInfo = async (_productId: number) => {
   return contract.call("getProductTraceabilityInfo", [_productId]);
 };
+const getCatalog = async (_catalogId: number) => {
+  return contract.call("getCatalog", [_catalogId]);
+};
 // const getTraceabilityInfo = async (_productId: number) => { contract.call("getTraceabilityInfo", [_productId]) };
 // const actorTypes = async (args: any) => { contract.call("actorTypes", [{ args }])};
 // const productCounter = async () => { contract.call("productCounter", [])};
@@ -42,7 +45,7 @@ const getProductTraceabilityInfo = async (_productId: number) => {
 // const allNFTs = async () => { await contract.erc721.getAll()};
 // const tokenSupply = async () => { await contract.erc20.totalSupply()};
 
-export { getProduct, getProductStock, getProductTraceabilityInfo };
+export { getProduct, getProductStock, getProductTraceabilityInfo, getCatalog };
 
 // use
 // import { getProduct, getProductStock, getProductTraceabilityInfo, getTraceabilityInfo } from "@/services/thridWeb/contractReadInteract"

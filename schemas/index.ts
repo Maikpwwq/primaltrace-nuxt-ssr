@@ -36,32 +36,33 @@ export interface ContractInfo {
 }
 
 export interface Catalog {
-  catalogId: string;
+  catalogId?: number;
   catalogName: string;
   catalogDescription: string;
-  metadataCatalog: string;
-  products: any[];
+  catalogMetadata: string;
+  products?: any[];
 }
 
 export interface Product {
-  productId: string;
+  productId?: number;
+  catalogId?: number;
   productName: string;
   productDescription: string;
   manufacturer: string;
-  manufacturingDate: string;
-  batchNumber: string;
+  manufacturingDate: number;
+  batchNumber: number;
   productionLocation: string;
   metadataProducto: string;
-  traceabilityInfo: any[];
+  traceabilityInfo?: any[];
 }
 
 export interface TraceabilityInfo {
-  trazabilityId: string;
-  productId: string;
+  trazabilityId?: string;
+  productId: number;
   action: string;
-  timestamp: string;
+  timestamp: number;
   actor: string;
-  actorType: string;
+  actorType: number;
   actorId: string;
   metadataAction?: string;
 }

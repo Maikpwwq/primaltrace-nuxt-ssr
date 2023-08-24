@@ -2,25 +2,33 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
 import { PRODUCT } from '@/data/contractVariables';
+import type { Product } from "@/schemas/index"
 
-const handleProduct = async () => {
-  console.log('handleProduct', obj, PRODUCT)
-  await addProduct(PRODUCT).then((data) => {
-    console.log('handleProduct', data)
-  })
-}
+const CATALOG_ID = ref(1);
+var currentDate = new Date();
+const TIMESTAMP = ref(currentDate.getTime());
 
-const obj = reactive({
-  catalogId: "",
+const obj: Product = reactive({
+  catalogId: CATALOG_ID.value,
   productName: "",
   productDescription: "",
   manufacturer: "",
-  manufacturingDate: "",
-  batchNumber: "",
+  manufacturingDate: TIMESTAMP.value,
+  batchNumber: 0,
   productionLocation: "",
   metadataProducto: "",
   // traceabilityInfo: []
 })
+
+const selectCatalog = () => { };
+
+const handleProduct = async () => {
+  console.log('handleProduct', obj, PRODUCT)
+  await addProduct(obj).then((data) => {
+    console.log('handleProduct', data)
+    // const { to, from, blockHash, blockNumber, confirmations, contractAddress, status, transactionHash } = data.receipt;
+  })
+}
 
 </script>
 <template>
@@ -37,6 +45,11 @@ const obj = reactive({
               Agrega las características más sorprendentes de tu producto a la
               blockchain en poco tiempo.
             </p>
+            <v-row class="mt-7">
+              <v-text-field v-model="CATALOG_ID" label="Catalogo" variant="outlined" color="primary"
+                placeholder="Elige un catalogo" :disabled="true"></v-text-field>
+              <v-btn class="ms-4" style="max-height: 56px;" @click="selectCatalog">Seleccionar catalogo</v-btn>
+            </v-row>
           </div>
         </v-col>
       </v-row>
@@ -44,15 +57,15 @@ const obj = reactive({
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
-              <v-text-field v-model="obj.catalogId" color="primary" label="Catalogo ID:"
-                variant="underlined"></v-text-field>
+              <v-text-field v-model="obj.catalogId" color="primary" label="Catalogo ID:" variant="underlined"
+                :disabled="true"></v-text-field>
+              <v-text-field v-model="obj.manufacturingDate" color="primary" label="Fecha de fabricación:"
+                variant="underlined" :disabled="true"></v-text-field>
               <v-text-field v-model="obj.productName" color="primary" label="Nombre del producto:"
                 variant="underlined"></v-text-field>
               <v-text-field v-model="obj.productDescription" color="primary" label="Descripción:"
                 variant="underlined"></v-text-field>
               <v-text-field v-model="obj.manufacturer" color="primary" label="Fabricante:"
-                variant="underlined"></v-text-field>
-              <v-text-field v-model="obj.manufacturingDate" color="primary" label="Fecha de fabricación:"
                 variant="underlined"></v-text-field>
               <v-text-field v-model="obj.batchNumber" color="primary" label="Número de lote:"
                 variant="underlined"></v-text-field>

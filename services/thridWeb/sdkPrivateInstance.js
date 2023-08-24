@@ -7,7 +7,7 @@ const THIRDWEB_CLIENT_ID = config.public.thirdwebClientId;
 const PRIVATE_KEY = config.public.personalAccountPrivateKey;
 
 const sdk = ThirdwebSDK.fromPrivateKey(
-  PRIVATE_KEY, // THIRDWEB_PRIVATE_KEY ? Your wallet's private key (only required for write operations)
+  PRIVATE_KEY, // Your wallet's private key (only required for write operations)
   PolygonZkevmTestnet, // "ethereum",
   {
     clientId: THIRDWEB_CLIENT_ID, // Use client id if using on the client side, get it from dashboard settings

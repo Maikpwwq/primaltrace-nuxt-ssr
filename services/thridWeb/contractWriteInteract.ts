@@ -32,7 +32,7 @@ const contract = await sdk.getContract(
 
 const addProduct = async (product: any) => {
   const {
-    catalogId,
+    // catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -40,9 +40,9 @@ const addProduct = async (product: any) => {
     batchNumber,
     productionLocation,
     metadataProducto,
-  } = product;
+  } = product; 
   const sendProduct = [
-    catalogId,
+    // catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -51,11 +51,44 @@ const addProduct = async (product: any) => {
     productionLocation,
     metadataProducto,
   ];
-  console.log("contractWriteInteract", product, sendProduct);
+  console.log("addProduct", product, sendProduct);
   return await contract.call("addProduct", sendProduct);
 };
 const addTraceabilityInfo = async (traceabilityInfo: any) => {
-  return await contract.call("addTraceabilityInfo", traceabilityInfo);
+  const {
+    productId,
+    action,
+    timestamp,
+    actor,
+    actorType,
+    actorId,
+    metadataAction,
+  } = traceabilityInfo;
+  const sendTraceabilityInfo = [
+    productId,
+    action,
+    timestamp,
+    actor,
+    actorType,
+    actorId,
+    metadataAction,
+  ];
+  console.log("addTraceabilityInfo", traceabilityInfo, sendTraceabilityInfo);
+  return await contract.call("addTraceabilityInfo", sendTraceabilityInfo);
+};
+const createCatalog = async (catalogInfo: any) => {
+  const {
+    catalogName,  
+    catalogMetadata,
+    catalogDescription,
+  } = catalogInfo;
+  const sendCatalog = [
+    catalogName,  
+    catalogMetadata,
+    catalogDescription,
+  ];
+  console.log("addTraceabilityInfo", catalogInfo, sendCatalog);
+  return await contract.call("createCatalog", sendCatalog);
 };
 const setActorType = async (actorType: any) => {
   return await contract.call("setActorType", actorType);
@@ -72,4 +105,10 @@ const updateProductStock = async (productStock: any) => {
 // const allNFTs = async () => { await contract.erc721.getAll()};
 // const tokenSupply = async () => { await contract.erc20.totalSupply()};
 
-export { addProduct, addTraceabilityInfo, setActorType, updateProductStock };
+export {
+  createCatalog,
+  addProduct,
+  addTraceabilityInfo,
+  setActorType,
+  updateProductStock,
+};

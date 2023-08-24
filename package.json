@@ -25,6 +25,7 @@
     "@metamask/sdk": "^0.5.6",
     "@nuxtjs/vuetify": "^1.12.3",
     "@pinia/nuxt": "0.4.11",
+    "@supabase/supabase-js": "^2.33.1",
     "@tatumio/polygon": "^2.2.24",
     "@thirdweb-dev/chains": "^0.1.45",
     "@thirdweb-dev/sdk": "^3.10.53",

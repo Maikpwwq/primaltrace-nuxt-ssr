@@ -9,38 +9,47 @@ const store = useSmartContract()
 // but skip any action or non reactive (non ref/reactive) property
 const { contract, contractInfo, hasContract, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
 // actions can just be destructured
-const { setContract, setContractInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
+const { setContract, setProductsInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
 
 const PRODUCT_ID = ref(1);
+let LOAD = ref(false);
 
 const data: Product = reactive({
-  productId: "",
+  // catalogId: "",
+  productId: PRODUCT_ID.value,
   productName: "",
   productDescription: "",
   manufacturer: "",
-  manufacturingDate: "",
-  batchNumber: "",
+  manufacturingDate: 0,
+  batchNumber: 0,
   productionLocation: "",
   metadataProducto: "",
   traceabilityInfo: [],
 });
 
 watchEffect(async () => {
-  // if (!data) {}
-  await getProduct(PRODUCT_ID.value).then((resp) => {
-    // TODO: Puede obtener multiples registros de productos
-    console.log('getProduct', resp[1])
-    data.productId = resp[0]._hex;
-    data.productName = resp[1];
-    data.productDescription = resp[2];
-    data.manufacturer = resp[3];
-    data.manufacturingDate = resp[4]._hex;
-    data.batchNumber = resp[5];
-    data.productionLocation = resp[6];
-    data.metadataProducto = resp[7];
-  })
+  if (!LOAD) {
+    await getProduct(PRODUCT_ID.value).then((resp) => {
+      // TODO: Puede obtener multiples registros de productos
+      setProductsInfo(resp)
+      const trace = contractInfo.value.products;
+      console.log('getProduct', resp[1])
+      data.productId = trace[0]._hex;
+      data.productName = trace[1];
+      data.productDescription = trace[2];
+      data.manufacturer = trace[3];
+      data.manufacturingDate = trace[4]._hex;
+      data.batchNumber = trace[5];
+      data.productionLocation = trace[6];
+      data.metadataProducto = trace[7];
+      LOAD.value = false
+    })
+  }
 });
 
+const handleClick = () => {
+  console.log("get")
+}
 </script>
 <template>
   <div id="" class="blog-component mini-spacer">
@@ -72,7 +81,7 @@ watchEffect(async () => {
                 <li>Ubicación de producción: {{ data.productionLocation }}</li>
                 <li>MetadataProducto: {{ data.metadataProducto }}</li>
               </ul>
-              <v-btn> Firmar producto </v-btn>
+              <v-btn @click="handleClick"> Firmar producto </v-btn>
             </v-card-text>
           </v-card>
         </v-col>
