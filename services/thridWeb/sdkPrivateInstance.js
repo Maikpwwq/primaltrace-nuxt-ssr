@@ -3,7 +3,7 @@ import { PolygonZkevmTestnet } from "@thirdweb-dev/chains";
 
 const config = useRuntimeConfig();
 const THIRDWEB_PRIVATE_KEY = config.public.thirdwebPrivateKey;
-// const THIRDWEB_CLIENT_ID = config.public.thirdwebClientId;
+const THIRDWEB_CLIENT_ID = config.public.thirdwebClientId;
 const PRIVATE_KEY = config.public.personalAccountPrivateKey;
 
 const sdk = ThirdwebSDK.fromPrivateKey(
