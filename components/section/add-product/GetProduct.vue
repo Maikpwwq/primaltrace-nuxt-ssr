@@ -28,7 +28,7 @@ const data: Product = reactive({
 });
 
 watchEffect(async () => {
-  if (!LOAD) {
+  if (!LOAD && !hasContract) {
     await getProduct(PRODUCT_ID.value).then((resp) => {
       // TODO: Puede obtener multiples registros de productos
       setProductsInfo(resp)

@@ -22,7 +22,7 @@ const obj: Catalog = reactive({
 })
 
 watchEffect(async () => {
-    if (!LOAD) {
+    if (!LOAD && !hasContract) {
         await getCatalog(CATALOG_ID.value).then((resp) => {
             // TODO: Puede obtener multiples registros de productos
             setCatalogsInfo(resp)
