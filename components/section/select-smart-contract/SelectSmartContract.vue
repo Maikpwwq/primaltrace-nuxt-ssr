@@ -20,6 +20,7 @@ const obj = reactive({
     catalogDescription: "",
 })
 
+const handleClick = () => {}
 
 const selected = ref([])
 </script>
@@ -50,7 +51,7 @@ const selected = ref([])
                                     <option :value="{ number: 123 }">123</option>
                                 </select> -->
                             </v-text-field>
-                            <v-btn class="ms-4" style="max-height: 56px;" @click="handleCatalog"> Definir catálogo
+                            <v-btn class="ms-4" style="max-height: 56px;" @click="handleClick"> Definir catálogo
                             </v-btn>
                         </v-row>
                     </div>
