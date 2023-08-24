@@ -26,7 +26,7 @@ const data: TraceabilityInfo = reactive({
 });
 
 watchEffect(async () => {
-  if (!LOAD && !hasContract) {
+  if (!LOAD && hasContract) {
     await getProductTraceabilityInfo(PRODUCT_ID.value).then((resp) => {
       // TODO: Puede obtener multiples registros de trazabilidad
       setTraceabilityInfo(resp)
@@ -40,7 +40,7 @@ watchEffect(async () => {
       data.actorType = trace.actorType;
       data.actorId = trace.actorId;
       data.metadataAction = trace.metadataAction
-      LOAD.value = false
+      LOAD.value = true
     })
   }
 });

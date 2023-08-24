@@ -28,7 +28,7 @@ const data: Product = reactive({
 });
 
 watchEffect(async () => {
-  if (!LOAD && !hasContract) {
+  if (!LOAD && hasContract) {
     await getProduct(PRODUCT_ID.value).then((resp) => {
       // TODO: Puede obtener multiples registros de productos
       setProductsInfo(resp)
@@ -42,7 +42,7 @@ watchEffect(async () => {
       data.batchNumber = trace[5];
       data.productionLocation = trace[6];
       data.metadataProducto = trace[7];
-      LOAD.value = false
+      LOAD.value = true
     })
   }
 });
