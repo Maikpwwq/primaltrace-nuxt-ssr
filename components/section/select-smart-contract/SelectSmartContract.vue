@@ -3,11 +3,6 @@ import Polygon from "/images/polygon-zkevm/main.svg";
 // import { deployContract } from "@/services/thridWeb/deployContract";
 import { createCatalog } from "@/services/thridWeb/contractWriteInteract";
 
-const handleProduct = async () => {
-    console.log('handleProduct', obj)
-
-}
-
 const handleCatalog = async () => {
     console.log('handleCatalog', obj)
     await createCatalog(obj).then((data) => {

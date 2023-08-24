@@ -6,7 +6,7 @@ import {
   ACTOR_TYPE,
   PRODUCT_STOCK,
 } from "@/data/contractVariables";
-import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
+import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json"; // TODO update ABI_CATALOG
 
 // import sdk from "./sdkInstance"
 // const config = useRuntimeConfig();
@@ -88,7 +88,8 @@ const createCatalog = async (catalogInfo: any) => {
     catalogDescription,
   ];
   console.log("addTraceabilityInfo", catalogInfo, sendCatalog);
-  return await contract.call("createCatalog", sendCatalog);
+  // await contract.call("createCatalog", sendCatalog);
+  return sendCatalog
 };
 const setActorType = async (actorType: any) => {
   return await contract.call("setActorType", actorType);
