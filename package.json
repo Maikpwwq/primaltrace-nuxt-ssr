@@ -26,14 +26,14 @@
     "@nuxtjs/vuetify": "^1.12.3",
     "@pinia/nuxt": "0.4.11",
     "@supabase/supabase-js": "^2.33.1",
-    "@tatumio/polygon": "^2.2.24",
-    "@thirdweb-dev/chains": "^0.1.45",
-    "@thirdweb-dev/sdk": "^3.10.53",
+    "@tatumio/polygon": "^2.2.28",
+    "@thirdweb-dev/chains": "^0.1.49",
+    "@thirdweb-dev/sdk": "^3.10.57",
     "@web3auth/base": "^6.1.7",
-    "@web3auth/modal": "^6.1.7",
+    "@web3auth/modal": "^6.1.8",
     "eth-rpc-errors": "^4.0.3",
     "ethers": "^5.7.2",
-    "nuxi": "^3.6.5",
+    "nuxi": "^3.7.2",
     "pinia": "^2.1.6",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
@@ -41,7 +41,7 @@
     "vue-router": "^4.2.4",
     "vue-tabler-icons": "2.21.0",
     "vue3-perfect-scrollbar": "1.6.1",
-    "vuetify": "^3.3.13"
+    "vuetify": "^3.3.14"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.55.0",

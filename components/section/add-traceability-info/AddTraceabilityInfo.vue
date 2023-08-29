@@ -90,3 +90,8 @@ const obj: TraceabilityInfo = reactive({
     </v-container>
   </div>
 </template>
+<style>
+.logo-height {
+  height: 33px;
+}
+</style>

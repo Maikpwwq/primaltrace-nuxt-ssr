@@ -4,7 +4,7 @@ import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddT
 import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
 import ReadSmartContract from "@/components/section/read-contract/ReadSmartContract.vue";
-import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
+import SmartContractRegister from "@/components/section/register-smart-contract/SmartContractRegister.vue";
 import SelectSmartContract from "@/components/section/select-smart-contract/SelectSmartContract.vue";
 
 import { headerDashBoard } from "@/data/CustomComponents";
@@ -61,8 +61,7 @@ import { headerDashBoard } from "@/data/CustomComponents";
                     </v-col>
                     <v-col cols="12" md="4">
                         <div class="bg-primary">
-                            <!-- <ConnectWallet /> -->
-                            <Web3Auth />
+                            <SmartContractRegister />
                         </div>
                     </v-col>
                 </v-row>

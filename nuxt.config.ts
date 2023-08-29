@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   nitro: {
     serveStatic: true,
   },
+
   devServerHandlers: [],
   hooks: {},
   runtimeConfig: {

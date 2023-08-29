@@ -1,11 +1,17 @@
 import sdk from "@/services/thridWeb/sdkInstance.js";
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
+// import { useSmartContract } from '@/store/smart-contract'
+// import { storeToRefs } from 'pinia'
+
+// const storeContract = useSmartContract()
+// // but skip any action or non reactive (non ref/reactive) property
+// const { contract } = storeToRefs(storeContract) // Destructuring from a Store 
 
 // const config = useRuntimeConfig();
 // let contract: any;
-const contract = await sdk.getContract(
-  IMPLEMENTATION_CONTRACT_ADDRESS, 
+const readContract = await sdk.getContract(
+  IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress, 
   ABI_CATALOG// The ABI of your smart contract
 );
 
@@ -24,16 +30,16 @@ const contract = await sdk.getContract(
 // Call a function on your smart contract using the function name
 // const name = async () => { contract.call("myFunctionName") };
 const getProduct = async (_productId: number) => {
-  return contract.call("getProduct", [_productId]);
+  return readContract.call("getProduct", [_productId]);
 };
 const getProductStock = async (_productId: number) => {
-  return contract.call("getProductStock", [_productId]);
+  return readContract.call("getProductStock", [_productId]);
 };
 const getProductTraceabilityInfo = async (_productId: number) => {
-  return contract.call("getProductTraceabilityInfo", [_productId]);
+  return readContract.call("getProductTraceabilityInfo", [_productId]);
 };
 const getCatalog = async (_catalogId: number) => {
-  return contract.call("getCatalog", [_catalogId]);
+  return readContract.call("getCatalog", [_catalogId]);
 };
 // const getTraceabilityInfo = async (_productId: number) => { contract.call("getTraceabilityInfo", [_productId]) };
 // const actorTypes = async (args: any) => { contract.call("actorTypes", [{ args }])};

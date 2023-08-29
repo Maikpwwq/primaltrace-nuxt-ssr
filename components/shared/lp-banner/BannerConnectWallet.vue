@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Polygonzkevm from "/images/polygon-zkevm/polygonzkevm.png";
+import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 </script>
 <template>
   <div class="banner-wrapper bg-deep-purple-lighten-1">
@@ -12,13 +12,11 @@ import Polygonzkevm from "/images/polygon-zkevm/polygonzkevm.png";
           <div class="text-center">
             <h1 class="banner-title font-weight-bold text-white">DashBoard</h1>
             <h4 class="banner-subtitle mr-0 text-white font-weight-regular">
-              Registra un contrato inteligente de productos sobre los que agregar y consultar información de trazabilidad.
+              Conecta tu Wallet para registrar o seleccionar un contrato inteligente donde se almacenan tus catálagos de productos, con ellos podrás agregar y consultar tu información desde cualquier lugar.
             </h4>
             <div class="mt-8">
-              <v-btn to="#conectar-wallet" size="large" style="background-color:#00B0FF" class="text-white" flat>
-                <img :src="Polygonzkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
-                 Registrar SmartContract
-              </v-btn>
+              <!-- <ConnectWallet /> -->
+              <Web3Auth />
             </div>
           </div>
         </v-col>

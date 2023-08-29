@@ -85,3 +85,8 @@ const handleProduct = async () => {
     </v-container>
   </div>
 </template>
+<style>
+.logo-height {
+  height: 33px;
+}
+</style>

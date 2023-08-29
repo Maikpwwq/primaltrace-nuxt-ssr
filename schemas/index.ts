@@ -3,10 +3,12 @@ export interface WalletState {
   accounts: any[];
   balance: string;
   chainId: string;
+  privateKey: string;
 }
 
 export interface MetaMaskContextData {
   wallet: WalletState;
+  ethersProvider: any | null;
   hasProvider: boolean | null;
   error: boolean;
   errorMessage: string;

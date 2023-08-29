@@ -152,4 +152,8 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
     gap: 0em;
     row-gap: 0em;
 }
+.logo-height {
+  height: 33px;
+}
+
 </style>

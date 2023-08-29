@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { watchEffect } from "vue";
+import { watchEffect, markRaw } from "vue";
 import { Web3Auth } from "@web3auth/modal";
 import { CHAIN_NAMESPACES, CustomChainConfig, SafeEventEmitterProvider } from "@web3auth/base";
 import { ethers } from "ethers";
 import { useWalletStore } from '@/store'
+import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'
 import Display from "./Display.vue"
 import WalletError from "./WalletError.vue"
@@ -14,7 +15,13 @@ const store = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
 const { wallet, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
 // actions can just be destructured
-const { setWallet, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet } = store
+const { setWallet, setEthersProvider, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet } = store
+
+const storeContract = useSmartContract()
+// but skip any action or non reactive (non ref/reactive) property
+// const { contract } = storeToRefs(storeContract) // Destructuring from a Store 
+// actions can just be destructured
+const { clearContract } = storeContract
 
 const userInfo = ref({})
 // const loggedIn = ref(false)
@@ -41,10 +48,10 @@ const polygonzkEVMConfig: CustomChainConfig = {
     // Avoid using public rpcTarget in production.
     // Use services like Infura, Quicknode etc
     displayName: "Polygon zkEVM Testnet",
-    ticker: "MATIC",
-    tickerName: "Matic",
+    ticker: "ETH", // MATIC
+    tickerName: "Ethereum",
     blockExplorer: "https://testnet-zkevm.polygonscan.com",
-    testnet: true,
+    // testnet: true,
 };
 
 // const openloginAdapter = new OpenloginAdapter({
@@ -117,15 +124,20 @@ const updateWallet = async (accounts?: any) => {
         method: "eth_chainId",
     });
 
+    const privateKey = ""
+    // const privateKey = await sharedProvider.request({
+    //     method: "private_key"
+    // });
+
     console.log("WEB3AUTH", accounts, balance, chainId)
-    setWallet({ accounts, balance, chainId })
+    setWallet({ accounts, balance, chainId, privateKey })
 };
 
-const getPrivateKey = async () => {
-    const privateKey = await sharedProvider.request({
-        method: "private_key"
-    });
-}
+// const getPrivateKey = async () => {
+//     const privateKey = await sharedProvider.request({
+//         method: "private_key"
+//     });
+// }
 
 const web3AuthModal = async () => {
     try {
@@ -135,8 +147,10 @@ const web3AuthModal = async () => {
         const web3authProvider: SafeEventEmitterProvider = await web3auth.connect()
         console.log("WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID, web3authProvider);
         // Earlier in v5 provider = new ethers.providers.Web3Provider(window.ethereum)
-        // const ethersProvider = new ethers.providers.Web3Provider(web3authProvider); // web3auth.provider
+        const ethersProvider = new ethers.providers.Web3Provider(web3authProvider); // web3auth.provider
         // const ethersProvider = new ethers.BrowserProvider(web3authProvider)
+        // ethersProvider.getSigner()
+        setEthersProvider(markRaw(ethersProvider))
         sharedProvider = web3authProvider
         setHasProvider(Boolean(sharedProvider))
         const accounts = await sharedProvider.request({
@@ -179,6 +193,8 @@ const logout = async () => {
     try {
         await web3auth.logout();
         setIsConnecting(false);
+        clearWallet()
+        clearContract()
         sharedProvider = null;
         console.log('logout');
     } catch (error: any) {
@@ -235,50 +251,50 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
 <template>
     <div className="d-flex flex-column align-center justify-center pt-6 mt-6 mb-6">
         <img :src="IsoLogoZkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
-        <v-btn v-if="wallet.accounts.length < 1" class="btn bg-white text-decoration-none text-dark" @click="web3AuthModal"
+        <v-btn v-if="wallet.accounts.length < 1" size="large" style="background-color:#00B0FF" flat
+            class="btn text-decoration-none text-white" @click="web3AuthModal"
             @disabled="disableConnect">
             Conecta Web3 Wallet
         </v-btn>
         <div v-if="hasProvider && wallet.accounts.length > 0">
-            <!-- <p>{{address}}{{balance}}</p> -->
             <div>
-                <button @click="getUserInfo" className="card">
+                <p>¡Ha iniciado sesión correctamente!</p>
+  
+            <!-- <p>{{address}}{{balance}}</p> -->
+            <!-- <div>
+                <button @click="getUserInfo" >
                     Obtener información de usuario
                 </button>
-            </div>
-            <div>
-                <button @click="authenticateUser" className="card">
+                <button @click="authenticateUser" >
                     Obtener Token ID
                 </button>
-            </div>
+            </div> -->
             <!-- <div>
-                <button @click="onGetPolygonKeypair" className="card">
+                <button @click="onGetPolygonKeypair" >
                     Obtener Polygon Keypair
                 </button>
             </div>
             <div>
-                <button @click="getAccounts" className="card">
+                <button @click="getAccounts" >
                     Obtener cuentas
                 </button>
             </div>
             <div>
-                <button @click="getBalance" className="card">
+                <button @click="getBalance" >
                     Obtener Saldo
                 </button>
             </div>
             <div>
-                <button @click="signAndSendTransaction" className="card">
+                <button @click="signAndSendTransaction" >
                     Enviar transacción
                 </button>
             </div> -->
-            <div>
-                <button @click="logout" className="card">
+    
+                <v-btn @click="logout" class="btn text-decoration-none text-white" size="large" style="background-color:#00B0FF" flat>
                     Cerrar sesión
-                </button>
+                </v-btn>
             </div>
-            <div>
-                <p>¡Ha iniciado sesión correctamente!</p>
-            </div>
+            
         </div>
         <div class="connect-wallet" v-if="hasProvider && wallet.accounts.length > 0">
             <div class="flexContainer-wallet">
@@ -325,5 +341,9 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
     flex-direction: column;
     position: relative;
     min-height: fit-content;
+}
+
+.logo-height {
+  height: 33px;
 }
 </style>

@@ -5,11 +5,13 @@ const disconnectedState: WalletState = {
   accounts: [],
   balance: "",
   chainId: "",
+  privateKey: "",
 };
 
 export const useWalletStore = defineStore("wallet", {
   state: (): MetaMaskContextData => ({
     wallet: disconnectedState,
+    ethersProvider: null,
     hasProvider: null,
     error: false,
     errorMessage: "",
@@ -20,6 +22,9 @@ export const useWalletStore = defineStore("wallet", {
     // `this` is the store instance
     setWallet(providedAccounts: WalletState) {
       this.wallet = providedAccounts;
+    },
+    setEthersProvider(provider: any) {
+      this.ethersProvider = provider;
     },
     setHasProvider(hasProvider: boolean | null) {
       this.hasProvider = hasProvider;

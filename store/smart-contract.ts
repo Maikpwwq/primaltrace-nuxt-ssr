@@ -31,6 +31,9 @@ export const useSmartContract = defineStore("contract", {
   getters: {},
   actions: {
     // `this` is the store instance
+    setContractAddress(providedAddress: string) {
+      this.contract.contractAddress = providedAddress;
+    },
     setContract(providedContract: CatalogContract) {
       this.contract = providedContract;
     },

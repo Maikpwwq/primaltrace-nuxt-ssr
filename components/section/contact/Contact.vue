@@ -21,11 +21,11 @@ const handleClick = async () => {
   const { name, email, message } = obj
   const { data: contact_form, error } = await supabase
     .from('contact_form')
-    .insert([{ id: 1, created_at: new Date(), name, email, message }])
+    .insert([{ name, email, message }]) // alreay auth loads id: 1, created_at: new Date(),
     .select('*')
   console.log("supabase contact form", contact_form, error)
   if (contact_form){
-    console.log("Success supabase contact form", contact_form[0].id)
+    console.log("Success supabase contact form", contact_form[contact_form.length - 1].id)
   } else if (error){
     console.log("Error supabase contact form", error)
   }
