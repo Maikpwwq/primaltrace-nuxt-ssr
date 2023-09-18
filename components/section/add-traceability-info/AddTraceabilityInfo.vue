@@ -37,6 +37,9 @@ const obj: TraceabilityInfo = reactive({
   metadataAction: ""
 })
 
+const handleClick = () => {
+  console.log("get")
+}
 </script>
 <template>
   <div id="trackInfo" class="blog-component mini-spacer">
@@ -49,15 +52,15 @@ const obj: TraceabilityInfo = reactive({
               Agregar Información de trazabilidad
             </h2>
             <p class="text-muted">
-              Selecciona un producto específico de la lista desplegable o
-              mediante un campo de búsqueda.
+              Registra acontecimientos importantes desde las cadenas de suministro, producción y distribución, tales como
+              pruebas, certificaciones, resultados, entre otros.
+              Antes de poder agregar nueva Información de trazabilidad primero selecciona un producto específico de la
+              lista desplegable.
             </p>
             <v-row class="mt-7">
               <v-text-field v-model="PRODUCT_ID" label="Product" variant="outlined" color="primary"
                 placeholder="Elige un producto" :disabled="true"></v-text-field>
-              <v-btn
-                class="ms-4" style="max-height: 56px;"
-                @click="selectProduct">Seleccionar producto</v-btn>
+              <v-btn class="ms-4" style="max-height: 56px;" @click="selectProduct">Seleccionar producto</v-btn>
             </v-row>
           </div>
         </v-col>
@@ -66,6 +69,7 @@ const obj: TraceabilityInfo = reactive({
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
+              <p class="my-3">Completa los campos para registrar nueva Información de trazabilidad del producto</p>
               <!-- <v-text-field v-model="obj.trazabilityId" color="primary" label="ID:" variant="underlined"></v-text-field> -->
               <v-text-field v-model="obj.productId" color="primary" label="Product ID:" variant="underlined"
                 :disabled="true"></v-text-field>
@@ -84,6 +88,20 @@ const obj: TraceabilityInfo = reactive({
                   Agregar trazabilidad </v-btn>
               </div>
             </v-card-text>
+            <v-card-text>
+              <p>Confirma para agregar esta Información de trazabilidad del producto al contrato</p>
+              <ul class="pa-4">
+                  <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
+                  <li>Product ID: {{ obj.productId }}</li>
+                <li>Acción: {{ obj.action }}</li>
+                <li>Fecha Registro: {{ obj.timestamp }}</li>
+                <li>Actor address: {{ obj.actor }}</li>
+                <li>Tipo de Actor: {{ obj.actorType }}</li>
+                <li>Actor ID: {{ obj.actorId }}</li>
+                <li>Acción Metadata URL *opcional: {{ obj.metadataAction }}</li>
+              </ul>
+              <v-btn @click="handleClick"> Firmar trazabilidad </v-btn>
+          </v-card-text>
           </v-card>
         </v-col>
       </v-row>

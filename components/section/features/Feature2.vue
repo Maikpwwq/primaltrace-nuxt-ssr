@@ -13,11 +13,12 @@ import { feature2 } from "@/data/CustomComponents";
           <v-col cols="12" md="10" lg="7">
             <div class="text-center">
               <v-chip size="small" class="bg-primary" text-color="white">
-                Productos/Servicios
+                <!-- Productos/Servicios -->
+                Autenticidad de origen respaldado por Blockchain.
               </v-chip>
               <h2 class="section-title font-weight-medium">TrustBlock</h2>
               <p class="text-muted">
-                Autenticidad de origen respaldado por Blockchain.
+                Con TrustBlock conoce los aspectos más relevantes de tus productos en la cadena de suministro y en la cadena de producción. 
               </p>
             </div>
           </v-col>

@@ -13,11 +13,12 @@ import { feature1 } from "@/data/CustomComponents";
           <v-col cols="12" md="10" lg="7">
             <div class="text-center">
               <v-chip size="small" class="bg-error" text-color="white">
-                Productos/Servicios
+                <!-- Productos/Servicios -->
+                Seguimiento confiable apalancado por Blockchain.
               </v-chip>
               <h2 class="section-title font-weight-medium">TrackWise</h2>
               <p class="text-muted">
-                Trazabilidad confiable apalancada por Blockchain.
+                Descubre como usar TrackWise al registrar información confiable para la supervisión de tus productos.
               </p>
             </div>
           </v-col>

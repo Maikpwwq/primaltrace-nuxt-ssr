@@ -30,6 +30,10 @@ const handleProduct = async () => {
   })
 }
 
+const handleClick = () => {
+  console.log("get")
+}
+
 </script>
 <template>
   <div id="trackProduct" class="blog-component mini-spacer">
@@ -44,11 +48,12 @@ const handleProduct = async () => {
             <p class="text-muted">
               Agrega las características más sorprendentes de tu producto a la
               blockchain en poco tiempo.
+              Para comenzar elige un catálogo específico de la lista desplegable.
             </p>
             <v-row class="mt-7">
               <v-text-field v-model="CATALOG_ID" label="Catalogo" variant="outlined" color="primary"
                 placeholder="Elige un catalogo" :disabled="true"></v-text-field>
-              <v-btn class="ms-4" style="max-height: 56px;" @click="selectCatalog">Seleccionar catalogo</v-btn>
+              <v-btn class="ms-4" style="max-height: 56px;" @click="selectCatalog">Seleccionar catálogo</v-btn>
             </v-row>
           </div>
         </v-col>
@@ -57,6 +62,7 @@ const handleProduct = async () => {
         <v-col cols="12" sm="10" md="9" lg="7">
           <v-card class="card-shadow mb-4">
             <v-card-text>
+              <p class="my-3">Completa los campos para definir un nuevo producto en el catálogo</p>
               <v-text-field v-model="obj.catalogId" color="primary" label="Catalogo ID:" variant="underlined"
                 :disabled="true"></v-text-field>
               <v-text-field v-model="obj.manufacturingDate" color="primary" label="Fecha de fabricación:"
@@ -78,6 +84,21 @@ const handleProduct = async () => {
                   Agregar producto
                 </v-btn>
               </div>
+            </v-card-text>
+            <v-card-text>
+              <p> Confirma para agregar este producto al contrato</p>
+              <ul class="pa-4">
+                <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
+                <li>Catálogo ID: {{ obj.catalogId }}</li>
+                <li>Nombre: {{ obj.productName }}</li>
+                <li>Lote: {{ obj.batchNumber }}</li>
+                <li>Fabricante: {{ obj.manufacturer }}</li>
+                <li>Fecha fabricación: {{ obj.manufacturingDate }}</li>
+                <li>Descripcion: {{ obj.productDescription }}</li>
+                <li>Ubicación: {{ obj.productionLocation }}</li>
+                <li>Producto metadata URL *opcional: {{ obj.metadataProducto }}</li>
+              </ul>
+              <v-btn @click="handleClick"> Firmar producto </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

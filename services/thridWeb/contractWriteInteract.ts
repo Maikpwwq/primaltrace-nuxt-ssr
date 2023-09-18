@@ -1,20 +1,26 @@
 import sdk from "@/services/thridWeb/sdkPrivateInstance.js";
-import {
-  IMPLEMENTATION_CONTRACT_ADDRESS,
-  TRACEABILITY_INFO,
-  PRODUCT,
-  ACTOR_TYPE,
-  PRODUCT_STOCK,
-} from "@/data/contractVariables";
+// import {
+//   IMPLEMENTATION_CONTRACT_ADDRESS,
+//   TRACEABILITY_INFO,
+//   PRODUCT,
+//   ACTOR_TYPE,
+//   PRODUCT_STOCK,
+// } from "@/data/contractVariables";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
+
+import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
 
 // import sdk from "./sdkInstance"
 // const config = useRuntimeConfig();
 // let contract: any;
+
+console.log("contractReadInteract", deployAddress.value);
+
 const contract = await sdk.getContract(
-  IMPLEMENTATION_CONTRACT_ADDRESS,
+  deployAddress.value, // IMPLEMENTATION_CONTRACT_ADDRESS,
   ABI_CATALOG // The ABI of your smart contract
 );
+
 // const init = ( async () => {
 //     try {
 //         contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
@@ -40,7 +46,7 @@ const addProduct = async (product: any) => {
     batchNumber,
     productionLocation,
     metadataProducto,
-  } = product; 
+  } = product;
   const sendProduct = [
     // catalogId,
     productName,
@@ -77,17 +83,9 @@ const addTraceabilityInfo = async (traceabilityInfo: any) => {
   return await contract.call("addTraceabilityInfo", sendTraceabilityInfo);
 };
 const createCatalog = async (catalogInfo: any) => {
-  const {
-    catalogName,  
-    catalogMetadata,
-    catalogDescription,
-  } = catalogInfo;
-  const sendCatalog = [
-    catalogName,  
-    catalogMetadata,
-    catalogDescription,
-  ];
-  console.log("addTraceabilityInfo", catalogInfo, sendCatalog); 
+  const { catalogName, catalogMetadata, catalogDescription } = catalogInfo;
+  const sendCatalog = [catalogName, catalogMetadata, catalogDescription];
+  console.log("addTraceabilityInfo", catalogInfo, sendCatalog);
   return await contract.call("createCatalog", sendCatalog);
 };
 const setActorType = async (actorType: any) => {

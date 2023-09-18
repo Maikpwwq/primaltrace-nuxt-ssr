@@ -13,6 +13,7 @@ export const useWalletStore = defineStore("wallet", {
     wallet: disconnectedState,
     ethersProvider: null,
     hasProvider: null,
+    web3Auth: null,
     error: false,
     errorMessage: "",
     isConnecting: false,
@@ -25,6 +26,9 @@ export const useWalletStore = defineStore("wallet", {
     },
     setEthersProvider(provider: any) {
       this.ethersProvider = provider;
+    },
+    setWeb3Auth(web3Auth: any) {
+      this.web3Auth = web3Auth;
     },
     setHasProvider(hasProvider: boolean | null) {
       this.hasProvider = hasProvider;
@@ -43,6 +47,10 @@ export const useWalletStore = defineStore("wallet", {
     },
     clearWallet() {
       this.wallet = disconnectedState;
+      this.ethersProvider = null;
+      this.hasProvider = null;
+      this.error = false;
+      this.errorMessage = "";
     },
   },
 });

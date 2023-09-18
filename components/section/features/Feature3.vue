@@ -18,7 +18,7 @@
               <div>
                 <div class="pa-10 text-center">
                   <v-chip size="small" class="bg-primary">
-                    Productos/Servicios 3
+                    Productos/Servicios
                   </v-chip>
                   <h3 class="feature3-title font-weight-medium">
                     Soluciones Blockchain a medida

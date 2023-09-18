@@ -12,7 +12,7 @@ const { contract, contractInfo, hasContract, error, errorMessage, isConnecting }
 const { setContract, setCatalogsInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
 
 const CATALOG_ID = ref(1);
-let LOAD = ref(false);
+let LOAD_CATALOG = ref(true);
 
 const obj: Catalog = reactive({
     catalogName: "",
@@ -22,7 +22,7 @@ const obj: Catalog = reactive({
 })
 
 watchEffect(async () => {
-    if (!LOAD && hasContract) {
+    if (LOAD_CATALOG.value && hasContract.value) {
         await getCatalog(CATALOG_ID.value).then((resp) => {
             // TODO: Puede obtener multiples registros de productos
             setCatalogsInfo(resp)
@@ -32,15 +32,15 @@ watchEffect(async () => {
             obj.catalogName = trace[1];
             obj.catalogDescription = trace[2];
             obj.catalogMetadata = trace[3];
-            LOAD.value = true
+            LOAD_CATALOG.value = false
         })
     }
 });
 
-const handleClick = () => {
-    console.log("get")
+const handleChange = () => {
+  console.log("change", LOAD_CATALOG.value, hasContract.value)
+  LOAD_CATALOG.value = true
 }
-
 
 </script>
 <template>
@@ -51,7 +51,7 @@ const handleClick = () => {
                     <div class="text-center">
                         <h2 class="section-title font-weight-medium">
                             <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
-                            Confirma para agregar este catalogo al contrato
+                            Consulta detalles de un catálogo del contrato
                         </h2>
                     </div>
                 </v-col>
@@ -60,8 +60,22 @@ const handleClick = () => {
                 <v-col cols="12" sm="10" md="9" lg="7">
                     <v-card class="card-shadow mb-4 text-center">
                         <v-card-text>
-                            <v-text-field v-model="CATALOG_ID" label="Catalogo" variant="outlined" color="primary"
-                                placeholder="Id del catalogo"></v-text-field>
+                            <v-text-field v-model="CATALOG_ID" label="Catálogo" variant="outlined" color="primary"
+                                placeholder="Id del catálogo" @change="handleChange"></v-text-field>
+                            <!-- <v-row class="mt-7">
+                                <v-text-field label="Catálogo" variant="outlined" color="primary"
+                                    placeholder="Elige un catálogo">
+                                </v-text-field>
+                                <select  v-model="showCatalogs">
+                                        <option disabled value="">Por favor, seleccione uno</option>
+                                        <option v-for="catalog in showCatalogs" :value={catalog} :key="catalog">{{catalog}}</option>
+                                        v-model="selected.catalog"
+                                    </select> 
+                                <v-btn class="ms-4" style="max-height: 56px;" @click="handleClick"> Elegir catálogo
+                                </v-btn>
+                                <v-btn class="ms-4" style="max-height: 56px;" @click="handleReadQR"> Leer código QR
+                                    </v-btn>
+                            </v-row>-->
                             <ul v-if="obj">
                                 <ul class="mt-1">
                                     <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
@@ -71,7 +85,6 @@ const handleClick = () => {
                                     <li>metadata URL *opcional: {{ obj.catalogMetadata }}</li>
                                 </ul>
                             </ul>
-                            <v-btn @click="handleClick"> Firmar catalogo </v-btn>
                         </v-card-text>
                     </v-card>
                 </v-col>
@@ -81,6 +94,6 @@ const handleClick = () => {
 </template>
 <style>
 .logo-height {
-  height: 33px;
+    height: 33px;
 }
 </style>

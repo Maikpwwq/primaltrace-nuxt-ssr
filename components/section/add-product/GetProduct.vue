@@ -12,7 +12,7 @@ const { contract, contractInfo, hasContract, error, errorMessage, isConnecting }
 const { setContract, setProductsInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = store
 
 const PRODUCT_ID = ref(1);
-let LOAD = ref(false);
+let LOAD_PRODUCT = ref(true);
 
 const data: Product = reactive({
   // catalogId: "",
@@ -28,12 +28,12 @@ const data: Product = reactive({
 });
 
 watchEffect(async () => {
-  if (!LOAD && hasContract) {
+  if (LOAD_PRODUCT.value && hasContract.value) {
     await getProduct(PRODUCT_ID.value).then((resp) => {
       // TODO: Puede obtener multiples registros de productos
       setProductsInfo(resp)
+      console.log('getProduct', resp)
       const trace = contractInfo.value.products;
-      console.log('getProduct', resp[1])
       data.productId = trace[0]._hex;
       data.productName = trace[1];
       data.productDescription = trace[2];
@@ -42,14 +42,16 @@ watchEffect(async () => {
       data.batchNumber = trace[5];
       data.productionLocation = trace[6];
       data.metadataProducto = trace[7];
-      LOAD.value = true
+      LOAD_PRODUCT.value = false
     })
   }
 });
 
-const handleClick = () => {
-  console.log("get")
+const handleChange = () => {
+  console.log("change", LOAD_PRODUCT.value, hasContract.value)
+  LOAD_PRODUCT.value = true
 }
+
 </script>
 <template>
   <div id="" class="blog-component mini-spacer">
@@ -59,7 +61,7 @@ const handleClick = () => {
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
-              Confirma para agregar este producto al contrato
+              Consulta detalles de un producto del contrato
             </h2>
           </div>
         </v-col>
@@ -69,7 +71,7 @@ const handleClick = () => {
           <v-card class="card-shadow mb-4 text-center">
             <v-card-text>
               <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
-                placeholder="Id del producto"></v-text-field>
+                placeholder="Id del producto" @change="handleChange"></v-text-field>
               <ul v-if="data && data?.productId">
                 <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
                 <li>Producto Id: {{ data.productId }}</li>
@@ -81,7 +83,7 @@ const handleClick = () => {
                 <li>Ubicación de producción: {{ data.productionLocation }}</li>
                 <li>MetadataProducto: {{ data.metadataProducto }}</li>
               </ul>
-              <v-btn @click="handleClick"> Firmar producto </v-btn>
+
             </v-card-text>
           </v-card>
         </v-col>

@@ -17,8 +17,8 @@
       ----------------------------------------------- -->
         <v-col cols="12" md="3" sm="6" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Telefono</h4>
-          <p class="mt-5 text-muted">Celular : +57 3196138057</p>
-          <p class="text-muted">Celular : +57 3196138057</p>
+          <p class="mt-5 text-muted">Celular : +57 319 613 8057</p>
+          <!-- <p class="text-muted">Celular : +57 3196138057</p> -->
         </v-col>
         <!-- -----------------------------------------------
         Third Column

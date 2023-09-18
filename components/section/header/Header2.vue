@@ -2,6 +2,8 @@
 import { ref } from "vue";
 // import { start } from "@/ethers/QRCode/index";
 import { headerMenu } from "@/data/CustomComponents";
+import { IconLayoutDashboard } from '@tabler/icons-vue';
+
 const drawer = ref(null);
 const handleCLick = () => {
   // start();
@@ -30,7 +32,7 @@ const handleCLick = () => {
           </div>
           <!-- login-regiter -->
           <v-btn to="/dashboard" @click="handleCLick" class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
-            DashBoard
+            <IconLayoutDashboard color="black" :size="33" stroke-width="1" /> Web3 DashBoard
           </v-btn>
           <!-- Todo: Metamask btn connect -->
           <!-- Display a connect button and the current account -->
@@ -47,7 +49,7 @@ const handleCLick = () => {
     ----------------------------------------------- -->
   <!----sidebar menu drawer start----->
   <div class="navigation-sticky nav2">
-    <v-navigation-drawer color="white" v-model="drawer" temporary>
+    <v-navigation-drawer style="top: 193px;" color="white" v-model="drawer" temporary>
       <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
         <ul class="navbar-nav py-4" min-height="auto">
           <li class="nav-item mb-3" v-for="nav in headerMenu" :key="nav.title" text>
@@ -55,7 +57,7 @@ const handleCLick = () => {
           </li>
           <li class="nav-item mx-3 mt-4">
             <v-btn to="/dashboard" @click="handleCLick" class="btn bg-primary-light" flat block variant="outlined" color="primary">
-              DashBoard
+              <IconLayoutDashboard color="black" :size="33" stroke-width="1" /> Web3 DashBoard
             </v-btn>
           </li>
         </ul>

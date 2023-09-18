@@ -2,7 +2,7 @@
 import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 </script>
 <template>
-  <div class="banner-wrapper bg-deep-purple-lighten-1">
+  <div class="banner-wrapper bg-deep-purple-lighten-1" style="min-height: auto;">
     <v-container>
       <!-- -----------------------------------------------
             Start Banner

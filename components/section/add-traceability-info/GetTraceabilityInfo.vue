@@ -12,7 +12,7 @@ const { contract, contractInfo, hasContract, error, errorMessage, isConnecting }
 const { setContract, setTraceabilityInfo, setHasContract, setError, setErrorMessage, setIsConnecting, clearError, clearContract } = storeContract
 
 const PRODUCT_ID = ref(1);
-let LOAD = ref(false);
+let LOAD_TRACEABILITY = ref(true);
 
 const data: TraceabilityInfo = reactive({
   // trazabilityId: "",
@@ -26,7 +26,7 @@ const data: TraceabilityInfo = reactive({
 });
 
 watchEffect(async () => {
-  if (!LOAD && hasContract) {
+  if (LOAD_TRACEABILITY.value && hasContract.value) {
     await getProductTraceabilityInfo(PRODUCT_ID.value).then((resp) => {
       // TODO: Puede obtener multiples registros de trazabilidad
       setTraceabilityInfo(resp)
@@ -40,14 +40,16 @@ watchEffect(async () => {
       data.actorType = trace.actorType;
       data.actorId = trace.actorId;
       data.metadataAction = trace.metadataAction
-      LOAD.value = true
+      LOAD_TRACEABILITY.value = false
     })
   }
 });
 
-const handleClick = () => {
-  console.log("get")
+const handleChange = () => {
+  console.log("change", LOAD_TRACEABILITY.value, hasContract.value)
+  LOAD_TRACEABILITY.value = true
 }
+
 </script>
 <template>
   <div id="" class="blog-component mini-spacer">
@@ -57,7 +59,7 @@ const handleClick = () => {
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
-              Confirma para agregar esta Información de trazabilidad del producto al contrato
+              Consulta detalles acerca de Información de trazabilidad asociada con un producto del contrato
             </h2>
           </div>
         </v-col>
@@ -67,19 +69,18 @@ const handleClick = () => {
           <v-card class="card-shadow mb-4 text-center">
             <v-card-text>
               <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
-                placeholder="Id del producto"></v-text-field>
+                placeholder="Id del producto" @change="handleChange"></v-text-field>
               <ul v-if="data">
                 <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
                 <li>Product ID: {{ data.productId }}</li>
                 <li>Id: {{ data.trazabilityId }}</li>
                 <li>Acción: {{ data.action }}</li>
-                <li>timestamp: {{ data.timestamp }}</li>
-                <li>Actor address: {{ data.actor }}</li>
-                <li>ActorType: {{ data.actorType }}</li>
+                <li>Fecha creación: {{ data.timestamp }}</li>
                 <li>Actor ID: {{ data.actorId }}</li>
+                <li>Dirección del Actor: {{ data.actor }}</li>
+                <li>Tipo de Actor: {{ data.actorType }}</li>
                 <li>Acción Metadata URL *opcional: {{ data.metadataAction }}</li>
               </ul>
-              <v-btn @click="handleClick"> Firmar trazabilidad </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

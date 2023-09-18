@@ -1,18 +1,24 @@
 import sdk from "@/services/thridWeb/sdkInstance.js";
-import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
+// import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
-// import { useSmartContract } from '@/store/smart-contract'
-// import { storeToRefs } from 'pinia'
-
-// const storeContract = useSmartContract()
-// // but skip any action or non reactive (non ref/reactive) property
-// const { contract } = storeToRefs(storeContract) // Destructuring from a Store 
 
 // const config = useRuntimeConfig();
 // let contract: any;
+
+// This has not access to Store
+// import { useSmartContract } from '@/store/smart-contract'
+// import { storeToRefs } from 'pinia'
+// const storeContract = useSmartContract()
+// // but skip any action or non reactive (non ref/reactive) property
+// const { contract } = storeToRefs(storeContract) // Destructuring from a Store
+
+import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
+
+console.log("contractReadInteract", deployAddress.value);
+
 const readContract = await sdk.getContract(
-  IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress, 
-  ABI_CATALOG// The ABI of your smart contract
+  deployAddress.value, // IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress,
+  ABI_CATALOG // The ABI of your smart contract
 );
 
 // const init = (async () => {
@@ -41,6 +47,10 @@ const getProductTraceabilityInfo = async (_productId: number) => {
 const getCatalog = async (_catalogId: number) => {
   return readContract.call("getCatalog", [_catalogId]);
 };
+const getContractCatalogs = async () => {
+  return readContract.call("getContractCatalogs");
+};
+
 // const getTraceabilityInfo = async (_productId: number) => { contract.call("getTraceabilityInfo", [_productId]) };
 // const actorTypes = async (args: any) => { contract.call("actorTypes", [{ args }])};
 // const productCounter = async () => { contract.call("productCounter", [])};
@@ -51,7 +61,13 @@ const getCatalog = async (_catalogId: number) => {
 // const allNFTs = async () => { await contract.erc721.getAll()};
 // const tokenSupply = async () => { await contract.erc20.totalSupply()};
 
-export { getProduct, getProductStock, getProductTraceabilityInfo, getCatalog };
+export {
+  getProduct,
+  getProductStock,
+  getProductTraceabilityInfo,
+  getCatalog,
+  getContractCatalogs,
+};
 
 // use
 // import { getProduct, getProductStock, getProductTraceabilityInfo, getTraceabilityInfo } from "@/services/thridWeb/contractReadInteract"

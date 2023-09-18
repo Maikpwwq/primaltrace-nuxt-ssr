@@ -26,18 +26,22 @@ const headerDashBoard = [
   {
     title: "Catálogo",
     href: "#trackCatalog",
+    index: 1
   },
   {
     title: "Productos",
     href: "#trackProduct",
+    index: 2
   },
   {
     title: "Información de trazabilidad",
     href: "#trackInfo",
+    index: 3
   },
   {
     title: "Leer contrato",
     href: "#readContract",
+    index: 4
   },
 ];
 

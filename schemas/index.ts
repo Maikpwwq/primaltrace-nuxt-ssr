@@ -9,6 +9,7 @@ export interface WalletState {
 export interface MetaMaskContextData {
   wallet: WalletState;
   ethersProvider: any | null;
+  web3Auth: any | null;
   hasProvider: boolean | null;
   error: boolean;
   errorMessage: string;
