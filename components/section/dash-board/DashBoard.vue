@@ -54,7 +54,12 @@ const slides = reactive({
                 <!-- -----------------------------------------------
                 Start DashBoard
                 -------------------------------------------------->
-                <v-row justify="center" class="flex-md-row flex-sm-column-reverse ma-0 w-auto">
+                <v-row justify="center" class="flex-md-row-reverse flex-sm-column ma-0 w-auto">
+                    <v-col cols="12" lg="5" md="5" sm="12" class="d-flex pa-0" style="height: fit-content;">
+                        <div class="bg-primary w-100">
+                            <SmartContractRegister />
+                        </div>
+                    </v-col>
                     <!-- style="width: min-content;" -->
                     <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
                         <!-- DashBoard basic view Navigation -->
@@ -121,11 +126,6 @@ const slides = reactive({
                         <v-col v-if="slides.number === 4 || slides.number === 0" cols="12" class="">
                             <ReadSmartContract />
                         </v-col>
-                    </v-col>
-                    <v-col cols="12" lg="5" md="5" sm="12" class="d-flex pa-0" style="height: fit-content;">
-                        <div class="bg-primary w-100">
-                            <SmartContractRegister />
-                        </div>
                     </v-col>
                 </v-row>
                 <!-- -----------------------------------------------

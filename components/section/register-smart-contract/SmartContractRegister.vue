@@ -140,7 +140,7 @@ export { deployAddress }
                     Estos son los detalles del contrato inteligente seleccionado.
                 </p>
                 <h5 class="font-weight-medium font-18 text-white">Dirección del contrato: </h5>
-                <p class="text-white">{{ contract.contractAddress }} </p>
+                <p class="text-white" style="overflow: scroll;">{{ contract.contractAddress }} </p>
                 <div v-if="deployTransaction.hash !== ''">
                     <h5 class="font-weight-medium font-18 text-white">Especificaciones del contrato: </h5>
                     <p class="text-white">{{ deployTransaction }}</p>
