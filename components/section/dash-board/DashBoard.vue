@@ -50,10 +50,62 @@ const slides = reactive({
 <template>
     <div id="dash-board">
         <div class="" v-if="hasProvider && wallet.accounts.length > 0">
-            <v-container class="pa-0">
-                <!-- -----------------------------------------------
+            <!-- -----------------------------------------------
                 Start DashBoard
                 -------------------------------------------------->
+            <v-app-bar class="app-header position-relative bg-dark header2 d-flex" flat
+                style="height: max-content !important;">
+                <v-container class="pa-0 fill-height">
+                    <v-toolbar class="pe-5">
+                        <!-- Logo -->
+                        <LcLogoWhiteTextLogo class="" />
+                        <div class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none w-100 justify-end"
+                            v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
+                            <ul class="d-flex flex-row" min-height="auto" style="list-style: none; ">
+                                <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
+                                    <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
+                                        class="btn px-4 bg-primary ml-2 d-flex " flat>
+                                        <!-- d-none -->
+                                        {{ nav.title }}
+                                    </v-btn>
+                                    <!-- <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link"
+                                                    @click="handleCLick(nav.index)">
+                                                    {{ nav.title }}
+                                                </NuxtLink> -->
+                                </li>
+                            </ul>
+                        </div>
+                        <v-app-bar-nav-icon width="30" class="d-md-none d-sm-flex drawer-icon text-white ml-auto mr-0"
+                            @click.stop="drawer = !drawer">
+                            <IconTransfer color="white" :size="33" stroke-width="1" />
+                        </v-app-bar-nav-icon>
+                    </v-toolbar>
+                </v-container>
+            </v-app-bar>
+            <!-- -----------------------------------------------
+                                End Header
+                            ----------------------------------------------- -->
+            <!----sidebar menu drawer start----->
+            <div class="nav2">
+                <v-navigation-drawer style="top: 193px;" color="white" v-model="drawer" temporary>
+                    <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
+                        <ul class="navbar-nav px-3 py-5 mt-5" min-height="auto">
+                            <li class="nav-item mb-3" v-for="nav in headerDashBoard" :key="nav.title" text>
+                                <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
+                                    class="btn px-4 bg-primary ml-2 d-flex" flat>
+                                    <!-- d-none -->
+                                    {{ nav.title }}
+                                </v-btn>
+                                <!-- <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link"
+                                                @click="handleCLick(nav.index)">
+                                                {{ nav.title }}
+                                            </NuxtLink> -->
+                            </li>
+                        </ul>
+                    </div>
+                </v-navigation-drawer>
+            </div>
+            <v-container class="pa-0">
                 <v-row justify="center" class="flex-md-row-reverse flex-sm-column ma-0 w-auto">
                     <v-col cols="12" lg="5" md="5" sm="12" class="d-flex pa-0" style="height: fit-content;">
                         <div class="bg-primary w-100">
@@ -61,62 +113,11 @@ const slides = reactive({
                         </div>
                     </v-col>
                     <!-- style="width: min-content;" -->
-                    <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
+                    <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12"
+                        class="pa-0">
                         <!-- DashBoard basic view Navigation -->
-                        <v-app-bar class="app-header position-relative bg-dark header2 d-flex" flat style="height: max-content !important;">
-                            <v-container class="pa-0 fill-height">
-                                <v-toolbar class="px-5" >
-                                    <div class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none" v-bind:class="[isActive ? 'd-block' : '']"
-                                        @click="isActive = !isActive">
-                                        <ul class="d-flex flex-row" min-height="auto" style="list-style: none;">
-                                            <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
-                                                <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
-                                                    class="btn px-4 bg-primary ml-2 d-flex " flat>
-                                                    <!-- d-none -->
-                                                    {{ nav.title }}
-                                                </v-btn>
-                                                <!-- <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link"
-                                                    @click="handleCLick(nav.index)">
-                                                    {{ nav.title }}
-                                                </NuxtLink> -->
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <v-app-bar-nav-icon width="30"
-                                        class="d-md-none d-sm-flex drawer-icon text-white ml-auto mr-0"
-                                        @click.stop="drawer = !drawer">
-                                        <IconTransfer  color="white" :size="33" stroke-width="1" />
-                                    </v-app-bar-nav-icon>
-                                </v-toolbar>
-                            </v-container>
-                        </v-app-bar>
-                        <!-- -----------------------------------------------
-                                End Header
-                            ----------------------------------------------- -->
-                        <!----sidebar menu drawer start----->
-                        <div class="nav2">
-                            <v-navigation-drawer style="top: 193px;" color="white" v-model="drawer" temporary>
-                                <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']"
-                                    @click="isActive = !isActive">
-                                    <ul class="navbar-nav px-3 py-5 mt-5" min-height="auto">
-                                        <li class="nav-item mb-3" v-for="nav in headerDashBoard" :key="nav.title" text>
-                                            <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
-                                                class="btn px-4 bg-primary ml-2 d-flex" flat>
-                                                <!-- d-none -->
-                                                {{ nav.title }}
-                                            </v-btn>
-                                            <!-- <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link"
-                                                @click="handleCLick(nav.index)">
-                                                {{ nav.title }}
-                                            </NuxtLink> -->
-                                        </li>
-                                    </ul>
-                                </div>
-                            </v-navigation-drawer>
-                        </div>
+
                         <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
-                        <!-- <slot name="read-contract"></slot>
-                        <slot name="write-contract"></slot> -->
 
                         <v-col cols="12" class="pa-0">
                             <AddCatalog v-if="slides.number === 1" />
