@@ -46,17 +46,17 @@ const slides = reactive({
 
 <template>
     <div id="dash-board">
-        <div class="mini-spacer" v-if="hasProvider && wallet.accounts.length > 0">
+        <div class="" v-if="hasProvider && wallet.accounts.length > 0">
             <v-container class="pa-0">
                 <!-- -----------------------------------------------
                 Start DashBoard
                 -------------------------------------------------->
-                <v-row justify="center" class="flex-md-row flex-sm-column-reverse">
+                <v-row justify="center" class="flex-md-row flex-sm-column-reverse" style="width: min-content;">
                     <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
                         <!-- DashBoard basic view Navigation -->
                         <v-app-bar class="app-header position-relative bg-dark header2" flat>
                             <v-container class="pa-0 fill-height">
-                                <v-toolbar>
+                                <v-toolbar class="px-5" >
                                     <div class="navigation mx-auto mx-sm-0" v-bind:class="[isActive ? 'd-block' : '']"
                                         @click="isActive = !isActive">
                                         <ul class="navbar-nav d-flex" min-height="auto">
@@ -87,8 +87,7 @@ const slides = reactive({
                             <v-navigation-drawer style="top: 193px;" color="white" v-model="drawer" temporary>
                                 <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']"
                                     @click="isActive = !isActive">
-                                    <ul class="navbar-nav py-4 mt-5" min-height="auto">
-                                        <li>..</li>
+                                    <ul class="navbar-nav px-3 py-5 mt-5" min-height="auto">
                                         <li class="nav-item mb-3" v-for="nav in headerDashBoard" :key="nav.title" text>
                                             <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
                                                 class="btn px-4 bg-primary ml-2 d-flex" flat>
@@ -109,11 +108,11 @@ const slides = reactive({
                         <slot name="write-contract"></slot> -->
 
                         <v-col cols="12" class="">
-                            <AddCatalog v-if="slides.number === 1 || slides.number === 0" />
+                            <AddCatalog v-if="slides.number === 1" />
                             <AddProduct v-if="slides.number === 2" />
                             <AddTraceabilityInfo v-if="slides.number === 3" />
                         </v-col>
-                        <v-col v-if="slides.number === 4" cols="12" class="">
+                        <v-col v-if="slides.number === 4 || slides.number === 0" cols="12" class="">
                             <ReadSmartContract />
                         </v-col>
                     </v-col>

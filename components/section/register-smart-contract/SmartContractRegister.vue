@@ -82,7 +82,7 @@ export { deployAddress }
 <template>
     <div className="d-flex flex-column align-center justify-center pa-5 mx-5">
         <!-- to="#conectar-wallet"    -->
-        <div v-if="hasProvider && wallet.accounts.length > 0">
+        <div class="pb-4" v-if="hasProvider && wallet.accounts.length > 0">
             <div v-if="contract.contractAddress === ''">
                 <h2 class="section-title font-weight-medium text-white">
                     Seleccionar Smart Contract
@@ -116,7 +116,7 @@ export { deployAddress }
                     <h5 class="font-weight-medium font-18">Especificaciones del contrato: </h5>
                     <p>{{ deployTransaction }}</p>
                 </div>
-                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="text-white" flat>
+                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white" flat>
                     <img :src="Polygonzkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
                     Cambiar selección de SmartContract
                 </v-btn>

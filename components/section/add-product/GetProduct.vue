@@ -68,14 +68,14 @@ const handleChange = () => {
       </v-row>
       <v-row class="mt-9" justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4 text-center">
+          <v-card class="card-shadow mb-4 text-center border rounded-sm">
             <v-card-text>
               <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
                 placeholder="Id del producto" @change="handleChange"></v-text-field>
-              <ul v-if="data && data?.productId">
+              <ul v-if="data && data?.productId" class="mt-1" style="list-style: none;">
                 <!-- productId, productName, productDescription, manufacturer, manufacturingDate, batchNumber, productionLocation, metadataProducto  -->
                 <li>Producto Id: {{ data.productId }}</li>
-                <li>Nombre del producto: {{ data.productName }}</li>
+                <li>Nombre: {{ data.productName }}</li>
                 <li>Descripción: {{ data.productDescription }}</li>
                 <li>Fabricante: {{ data.manufacturer }}</li>
                 <li>Fecha de fabricación: {{ data.manufacturingDate }}</li>

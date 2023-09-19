@@ -58,7 +58,7 @@ const handleChange = () => {
             </v-row>
             <v-row class="mt-9" justify="center">
                 <v-col cols="12" sm="10" md="9" lg="7">
-                    <v-card class="card-shadow mb-4 text-center">
+                    <v-card class="card-shadow mb-4 text-center border rounded-sm">
                         <v-card-text>
                             <v-text-field v-model="CATALOG_ID" label="Catálogo" variant="outlined" color="primary"
                                 placeholder="Id del catálogo" @change="handleChange"></v-text-field>
@@ -77,12 +77,12 @@ const handleChange = () => {
                                     </v-btn>
                             </v-row>-->
                             <ul v-if="obj">
-                                <ul class="mt-1">
+                                <ul class="mt-1" style="list-style: none;">
                                     <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
-                                    <li>Nombre del catálogo: {{ obj.catalogName }}</li>
+                                    <li>Nombre: {{ obj.catalogName }}</li>
                                     <!-- <li>Catálogo ID: {{ obj.catalogId }}</li> -->
-                                    <li>Descripcion del catálogo: {{ obj.catalogDescription }}</li>
-                                    <li>metadata URL *opcional: {{ obj.catalogMetadata }}</li>
+                                    <li>Descripción: {{ obj.catalogDescription }}</li>
+                                    <li>Catálogo metadata URL *opcional: {{ obj.catalogMetadata }}</li>
                                 </ul>
                             </ul>
                         </v-card-text>

@@ -66,11 +66,11 @@ const handleChange = () => {
       </v-row>
       <v-row class="mt-9" justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4 text-center">
+          <v-card class="card-shadow mb-4 text-center border rounded-sm">
             <v-card-text>
               <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
                 placeholder="Id del producto" @change="handleChange"></v-text-field>
-              <ul v-if="data">
+              <ul v-if="data" class="mt-1" style="list-style: none;">
                 <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
                 <li>Product ID: {{ data.productId }}</li>
                 <li>Id: {{ data.trazabilityId }}</li>

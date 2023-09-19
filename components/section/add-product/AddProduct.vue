@@ -60,7 +60,7 @@ const handleClick = () => {
       </v-row>
       <v-row justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4">
+          <v-card class="card-shadow mb-4 border rounded-sm">
             <v-card-text>
               <p class="my-3">Completa los campos para definir un nuevo producto en el catálogo</p>
               <v-text-field v-model="obj.catalogId" color="primary" label="Catalogo ID:" variant="underlined"
@@ -98,7 +98,7 @@ const handleClick = () => {
                 <li>Ubicación: {{ obj.productionLocation }}</li>
                 <li>Producto metadata URL *opcional: {{ obj.metadataProducto }}</li>
               </ul>
-              <v-btn @click="handleClick"> Firmar producto </v-btn>
+              <v-btn @click="handleClick" class="pb-3"> Firmar producto </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

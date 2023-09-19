@@ -67,7 +67,7 @@ const handleClick = () => {
       </v-row>
       <v-row class="mt-9" justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4">
+          <v-card class="card-shadow mb-4 border rounded-sm">
             <v-card-text>
               <p class="my-3">Completa los campos para registrar nueva Información de trazabilidad del producto</p>
               <!-- <v-text-field v-model="obj.trazabilityId" color="primary" label="ID:" variant="underlined"></v-text-field> -->
@@ -91,8 +91,8 @@ const handleClick = () => {
             <v-card-text>
               <p>Confirma para agregar esta Información de trazabilidad del producto al contrato</p>
               <ul class="pa-4">
-                  <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
-                  <li>Product ID: {{ obj.productId }}</li>
+                <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
+                <li>Product ID: {{ obj.productId }}</li>
                 <li>Acción: {{ obj.action }}</li>
                 <li>Fecha Registro: {{ obj.timestamp }}</li>
                 <li>Actor address: {{ obj.actor }}</li>
@@ -100,8 +100,8 @@ const handleClick = () => {
                 <li>Actor ID: {{ obj.actorId }}</li>
                 <li>Acción Metadata URL *opcional: {{ obj.metadataAction }}</li>
               </ul>
-              <v-btn @click="handleClick"> Firmar trazabilidad </v-btn>
-          </v-card-text>
+              <v-btn @click="handleClick" class="pb-3"> Firmar trazabilidad </v-btn>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>

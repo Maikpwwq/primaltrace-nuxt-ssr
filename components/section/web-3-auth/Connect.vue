@@ -36,7 +36,7 @@ const logout = async () => {
 </script>
 
 <template>
-    <div class="connect-wallet" v-if="hasProvider && wallet.accounts.length > 0">
+    <div class="connect-wallet mx-3 flex-sm-column-reverse" v-if="hasProvider && wallet.accounts.length > 0">
         <li class="nav-item">
             <div class="flexContainer-wallet nav-link">
                 <IconCurrencyEthereum />
@@ -44,7 +44,7 @@ const logout = async () => {
         </li>
 
         <li class="nav-item d-flex align-center">
-            <v-btn class="btn text-decoration-none text-white p-3" @click="logout" size="large" style="background-color:#00B0FF"
+            <v-btn class="btn v-btn--block text-decoration-none text-white p-3" @click="logout" size="large" style="background-color:#00B0FF"
                 flat>
                 <IconOutbound /> Cerrar sesión
             </v-btn>
