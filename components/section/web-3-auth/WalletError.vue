@@ -7,16 +7,14 @@ const store = useWalletStore()
 const { error, errorMessage } = storeToRefs(store) // Destructuring from a Store 
 </script>
 <template>
-    <div id="wallet-connect-error">
+    <div id="wallet-connect-error" v-if="error" @click="error = false">
         <v-container>
             <!-- -----------------------------------------------
             Start WalletError
         ----------------------------------------------- -->
             <v-row class="mt-8 metaMaskError" justify="center">
                 <v-col cols="12" md="4" sm="6">
-                    <div v-if="error" @click="error = false">
-                        <strong> Error: </strong> {{ errorMessage }}
-                    </div>
+                    <strong> Error: </strong> {{ errorMessage }}
                 </v-col>
             </v-row>
             <!-- -----------------------------------------------

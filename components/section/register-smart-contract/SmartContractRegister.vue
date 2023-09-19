@@ -6,7 +6,10 @@ import { storeToRefs } from 'pinia'
 import Polygonzkevm from "/images/polygon-zkevm/polygonzkevm.png";
 import { ethers } from "ethers";
 import { IconQrcode } from '@tabler/icons-vue';
+import { IconReplaceFilled } from '@tabler/icons-vue';
+
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
+import QRCode from "@/components/section/qr-code/QRCode.vue";
 
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 import { contractByteCode } from "@/services/thridWeb/implementationByteCode.ts";
@@ -72,11 +75,13 @@ const handleChangeQR = async () => {
     setHasContract(null);
 }
 
-const readQR = ref(false)
+let readQR = ref(false)
 
 const onDecode = (result: any) => {
     console.log("onDecode", result)
     alert(result)
+    setContractAddress(result)
+    setHasContract(true);
     readQR.value = false
 }
 
@@ -112,8 +117,10 @@ export { deployAddress }
                     <IconQrcode :size="39" />
                     Leer código QR del SmartContract
                 </v-btn>
-                <StreamBarcodeReader class="h-screen" v-if="readQR" no-front-cameras @decode="onDecode"
+                <div v-if="readQR" class="h-screen" id="decode-qr">
+                    <StreamBarcodeReader no-front-cameras @decode="onDecode"
                     @loaded="onLoaded" />
+                </div>
                 <!-- torch -->
                 <!-- <ImageBarcodeReader @decode="onDecode" @error="onError" /> -->
                 <p class="pt-2 pb-2 text-white">
@@ -138,12 +145,14 @@ export { deployAddress }
                     <h5 class="font-weight-medium font-18 text-white">Especificaciones del contrato: </h5>
                     <p class="text-white">{{ deployTransaction }}</p>
                 </div>
+                <h5 class="font-weight-medium font-18 text-white mt-3 mb-2">Código QR del contrato: </h5>
+                <QRCode />
                 <p class="text-white mt-5">
                     Aquí puedes cambiar de contrato inteligente seleccionado.
                 </p>
                 <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white p-3"
                     flat>
-                    <img :src="Polygonzkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
+                    <IconReplaceFilled color="white" :size="33" class="pe-1" />
                     Cambiar de SmartContract
                 </v-btn>
             </div>

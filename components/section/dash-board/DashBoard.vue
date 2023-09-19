@@ -60,7 +60,7 @@ const slides = reactive({
                         <!-- DashBoard basic view Navigation -->
                         <v-app-bar class="app-header position-relative bg-dark header2 d-flex" flat style="height: max-content !important;">
                             <v-container class="pa-0 fill-height">
-                                <v-toolbar class="pe-5" >
+                                <v-toolbar class="px-5" >
                                     <div class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none" v-bind:class="[isActive ? 'd-block' : '']"
                                         @click="isActive = !isActive">
                                         <ul class="d-flex flex-row" min-height="auto" style="list-style: none;">

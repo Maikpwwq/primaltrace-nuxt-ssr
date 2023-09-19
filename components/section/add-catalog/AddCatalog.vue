@@ -59,7 +59,7 @@ const handleClick = (e: any) => {
                                 variant="underlined"></v-text-field>
                             <div class="mt-1">
                                 <v-btn class="bg-success mr-3 text-white" elevation="0" @click="handleNewCatalog">
-                                    <IconFilePlus color="white" :size="33" stroke-width="1"  /> Definir nuevo catálogo
+                                    <IconFilePlus color="white" :size="33" stroke-width="1" /> Definir nuevo catálogo
                                 </v-btn>
                             </div>
                         </v-card-text>
@@ -72,7 +72,9 @@ const handleClick = (e: any) => {
                                 <li>Descripción: {{ obj.catalogDescription }}</li>
                                 <li>Catálogo metadata URL *opcional: {{ obj.catalogMetadata }}</li>
                             </ul>
-                            <v-btn @click="handleClick" class="mb-3"> <IconWriting color="black" :size="33" stroke-width="1" /> Firmar catálogo </v-btn>
+                            <v-btn @click="handleClick" class="mb-3">
+                                <IconWriting color="black" :size="33" stroke-width="1" /> Firmar catálogo
+                            </v-btn>
                         </v-card-text>
                     </v-card>
                 </v-col>

@@ -245,7 +245,7 @@ const disableConnect = wallet && isConnecting.value ? true : false;
         </v-btn>
         <div v-if="hasProvider && wallet.accounts.length > 0">
             <div>
-                <p>¡Has iniciado sesión correctamente!</p>
+                <p class="mt-3 text-white">¡Has iniciado sesión correctamente!</p>
   
             <!-- <p>{{address}}{{balance}}</p> -->
             <!-- <div>
