@@ -60,6 +60,7 @@ const handleClick = async () => {
 
 const handleReadQR = async () => {
     //  TODO: abrir camara con permisos y leer QR
+    readQR.value = true
     const address = IMPLEMENTATION_CONTRACT_ADDRESS;
     deployAddress.value = address;
     setContractAddress(address);
@@ -71,8 +72,12 @@ const handleChangeQR = async () => {
     setHasContract(null);
 }
 
+const readQR = ref(false)
+
 const onDecode = (result: any) => {
     console.log("onDecode", result)
+    alert(result)
+    readQR.value = false
 }
 
 const onLoaded = (result: any) => {
@@ -107,7 +112,8 @@ export { deployAddress }
                     <IconQrcode :size="39" />
                     Leer código QR del SmartContract
                 </v-btn>
-                <StreamBarcodeReader no-front-cameras @decode="onDecode" @loaded="onLoaded" />
+                <StreamBarcodeReader class="h-screen" v-if="readQR" no-front-cameras @decode="onDecode"
+                    @loaded="onLoaded" />
                 <!-- torch -->
                 <!-- <ImageBarcodeReader @decode="onDecode" @error="onError" /> -->
                 <p class="pt-2 pb-2 text-white">
@@ -130,12 +136,13 @@ export { deployAddress }
                 <p class="text-white">{{ contract.contractAddress }} </p>
                 <div v-if="deployTransaction.hash !== ''">
                     <h5 class="font-weight-medium font-18 text-white">Especificaciones del contrato: </h5>
-                    <p>{{ deployTransaction }}</p>
+                    <p class="text-white">{{ deployTransaction }}</p>
                 </div>
-                <p class="text-white mb-3">
+                <p class="text-white mt-5">
                     Aquí puedes cambiar de contrato inteligente seleccionado.
                 </p>
-                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white p-3" flat>
+                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white p-3"
+                    flat>
                     <img :src="Polygonzkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
                     Cambiar de SmartContract
                 </v-btn>
