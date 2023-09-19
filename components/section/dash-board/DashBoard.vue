@@ -8,11 +8,14 @@ import ReadSmartContract from "@/components/section/read-contract/ReadSmartContr
 import SmartContractRegister from "@/components/section/register-smart-contract/SmartContractRegister.vue";
 import AddCatalog from "@/components/section/add-catalog/AddCatalog.vue";
 
+import { IconTransfer } from "@tabler/icons-vue";
+
 import { headerDashBoard } from "@/data/CustomComponents";
 
 import { storeToRefs } from 'pinia'
 import { useWalletStore } from '@/store'
 import { useSmartContract } from '@/store/smart-contract'
+
 
 const storeWallet = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
@@ -51,15 +54,16 @@ const slides = reactive({
                 <!-- -----------------------------------------------
                 Start DashBoard
                 -------------------------------------------------->
-                <v-row justify="center" class="flex-md-row flex-sm-column-reverse ma-0" style="width: min-content;">
+                <v-row justify="center" class="flex-md-row flex-sm-column-reverse ma-0 w-auto">
+                    <!-- style="width: min-content;" -->
                     <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
                         <!-- DashBoard basic view Navigation -->
-                        <v-app-bar class="app-header position-relative bg-dark header2" flat>
+                        <v-app-bar class="app-header position-relative bg-dark header2 d-flex" flat style="height: max-content !important;">
                             <v-container class="pa-0 fill-height">
-                                <v-toolbar class="px-5" >
-                                    <div class="navigation mx-auto mx-sm-0" v-bind:class="[isActive ? 'd-block' : '']"
+                                <v-toolbar class="pe-5" >
+                                    <div class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none" v-bind:class="[isActive ? 'd-block' : '']"
                                         @click="isActive = !isActive">
-                                        <ul class="navbar-nav d-flex" min-height="auto">
+                                        <ul class="d-flex flex-row" min-height="auto" style="list-style: none;">
                                             <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
                                                 <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
                                                     class="btn px-4 bg-primary ml-2 d-flex " flat>
@@ -75,7 +79,9 @@ const slides = reactive({
                                     </div>
                                     <v-app-bar-nav-icon width="30"
                                         class="d-md-none d-sm-flex drawer-icon text-white ml-auto mr-0"
-                                        @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+                                        @click.stop="drawer = !drawer">
+                                        <IconTransfer  color="white" :size="33" stroke-width="1" />
+                                    </v-app-bar-nav-icon>
                                 </v-toolbar>
                             </v-container>
                         </v-app-bar>
@@ -116,8 +122,8 @@ const slides = reactive({
                             <ReadSmartContract />
                         </v-col>
                     </v-col>
-                    <v-col cols="12" lg="5" md="5" sm="12" class="pa-0">
-                        <div class="bg-primary">
+                    <v-col cols="12" lg="5" md="5" sm="12" class="d-flex pa-0" style="height: fit-content;">
+                        <div class="bg-primary w-100">
                             <SmartContractRegister />
                         </div>
                     </v-col>

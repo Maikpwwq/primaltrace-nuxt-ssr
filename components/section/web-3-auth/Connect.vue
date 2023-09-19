@@ -36,7 +36,7 @@ const logout = async () => {
 </script>
 
 <template>
-    <div class="connect-wallet mx-3 flex-sm-column-reverse" v-if="hasProvider && wallet.accounts.length > 0">
+    <div class="connect-wallet mx-3 flex-md-row flex-sm-column-reverse" v-if="hasProvider && wallet.accounts.length > 0">
         <li class="nav-item">
             <div class="flexContainer-wallet nav-link">
                 <IconCurrencyEthereum />

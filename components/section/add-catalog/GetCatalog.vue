@@ -47,7 +47,7 @@ const handleChange = () => {
     <div id="" class="blog-component mini-spacer">
         <v-container>
             <v-row justify="center">
-                <v-col class="pa-0" cols="12" sm="10" md="9" lg="7">
+                <v-col class="pa-0" cols="10">
                     <div class="text-center mx-3">
                         <h2 class="section-title font-weight-medium">
                             <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
@@ -57,7 +57,7 @@ const handleChange = () => {
                 </v-col>
             </v-row>
             <v-row class="mt-9" justify="center">
-                <v-col cols="12" sm="10" md="9" lg="7">
+                <v-col cols="10">
                     <v-card class="py-4 card-shadow mb-4 text-center border rounded-sm">
                         <v-card-text>
                             <v-text-field v-model="CATALOG_ID" label="Catálogo" variant="outlined" color="primary"

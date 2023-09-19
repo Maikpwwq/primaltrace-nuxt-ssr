@@ -6,6 +6,8 @@ import { storeToRefs } from 'pinia'
 import { TRACEABILITY_INFO } from '@/data/contractVariables';
 import type { TraceabilityInfo } from "@/schemas/index"
 import { formatAddress } from "@/utils";
+import { IconWriting } from '@tabler/icons-vue';
+import { IconFilePlus } from '@tabler/icons-vue';
 
 const storeWallet = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
@@ -45,7 +47,7 @@ const handleClick = () => {
   <div id="trackInfo" class="blog-component mini-spacer">
     <v-container>
       <v-row justify="center">
-        <v-col cols="12" sm="10" md="9" lg="7">
+        <v-col cols="10">
           <div class="text-center">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
@@ -66,7 +68,7 @@ const handleClick = () => {
         </v-col>
       </v-row>
       <v-row class="mt-9" justify="center">
-        <v-col cols="12" sm="10" md="9" lg="7">
+        <v-col cols="10">
           <v-card class="card-shadow mb-4 border rounded-sm">
             <v-card-text>
               <p class="my-3">Completa los campos para registrar nueva Información de trazabilidad del producto</p>
@@ -85,7 +87,7 @@ const handleClick = () => {
                 variant="underlined"></v-text-field>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0" @click="traceabilityInfo">
-                  Agregar trazabilidad </v-btn>
+                  <IconFilePlus color="white" :size="33" stroke-width="1"  /> Agregar trazabilidad </v-btn>
               </div>
             </v-card-text>
             <v-card-text>
@@ -100,7 +102,7 @@ const handleClick = () => {
                 <li>Actor ID: {{ obj.actorId }}</li>
                 <li>Acción Metadata URL *opcional: {{ obj.metadataAction }}</li>
               </ul>
-              <v-btn @click="handleClick" class="mb-3"> Firmar trazabilidad </v-btn>
+              <v-btn @click="handleClick" class="mb-3"> <IconWriting color="black" :size="33" stroke-width="1" /> Firmar trazabilidad </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

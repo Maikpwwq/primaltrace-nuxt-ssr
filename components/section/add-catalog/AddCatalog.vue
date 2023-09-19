@@ -2,6 +2,8 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 // import { deployContract } from "@/services/thridWeb/deployContract";
 import { createCatalog } from "@/services/thridWeb/contractWriteInteract";
+import { IconWriting } from '@tabler/icons-vue';
+import { IconFilePlus } from '@tabler/icons-vue';
 
 const handleNewCatalog = async () => {
     console.log('handleCatalog', obj)
@@ -30,7 +32,7 @@ const handleClick = (e: any) => {
         <v-container>
 
             <v-row justify="center">
-                <v-col cols="12" sm="10" md="9" lg="7">
+                <v-col cols="10">
                     <div class="text-center">
                         <h2 class="section-title font-weight-medium">
                             <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
@@ -45,7 +47,7 @@ const handleClick = (e: any) => {
             </v-row>
 
             <v-row justify="center">
-                <v-col cols="12" sm="10" md="9" lg="7">
+                <v-col cols="10">
                     <v-card class="card-shadow mb-4 border rounded-sm">
                         <v-card-text>
                             <p class="my-3">Completa los campos para definir un nuevo catálogo</p>
@@ -57,7 +59,7 @@ const handleClick = (e: any) => {
                                 variant="underlined"></v-text-field>
                             <div class="mt-1">
                                 <v-btn class="bg-success mr-3 text-white" elevation="0" @click="handleNewCatalog">
-                                    Definir nuevo catálogo
+                                    <IconFilePlus color="white" :size="33" stroke-width="1"  /> Definir nuevo catálogo
                                 </v-btn>
                             </div>
                         </v-card-text>
@@ -70,7 +72,7 @@ const handleClick = (e: any) => {
                                 <li>Descripción: {{ obj.catalogDescription }}</li>
                                 <li>Catálogo metadata URL *opcional: {{ obj.catalogMetadata }}</li>
                             </ul>
-                            <v-btn @click="handleClick" class="mb-3"> Firmar catálogo </v-btn>
+                            <v-btn @click="handleClick" class="mb-3"> <IconWriting color="black" :size="33" stroke-width="1" /> Firmar catálogo </v-btn>
                         </v-card-text>
                     </v-card>
                 </v-col>

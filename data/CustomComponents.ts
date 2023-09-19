@@ -1,3 +1,6 @@
+import { IconArrowsTransferDown } from "@tabler/icons-vue";
+import { IconArrowsTransferUp } from "@tabler/icons-vue";
+
 /*--Navigation Links---*/
 const headerMenu = [
   {
@@ -24,23 +27,27 @@ const headerMenu = [
 
 const headerDashBoard = [
   {
-    title: "Catálogo",
+    title: "Catálogos",
     href: "#trackCatalog",
+    logo: IconArrowsTransferUp,
     index: 1
   },
   {
     title: "Productos",
     href: "#trackProduct",
+    logo: IconArrowsTransferUp,
     index: 2
   },
   {
-    title: "Información de trazabilidad",
+    title: "Rastros",
     href: "#trackInfo",
+    logo: IconArrowsTransferUp,
     index: 3
   },
   {
     title: "Leer contrato",
     href: "#readContract",
+    logo: IconArrowsTransferDown,
     index: 4
   },
 ];

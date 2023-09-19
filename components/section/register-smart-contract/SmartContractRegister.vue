@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { StreamBarcodeReader, ImageBarcodeReader } from "@teckel/vue-barcode-reader";
 import { useWalletStore } from '@/store'
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'
@@ -70,6 +71,18 @@ const handleChangeQR = async () => {
     setHasContract(null);
 }
 
+const onDecode = (result: any) => {
+    console.log("onDecode", result)
+}
+
+const onLoaded = (result: any) => {
+    console.log("onLoaded", result)
+}
+
+const onError = (err: any) => {
+    console.log("onError", err)
+}
+
 </script>
 
 <script lang="ts">
@@ -80,9 +93,9 @@ export { deployAddress }
 </script>
 
 <template>
-    <div className="d-flex flex-column align-center justify-center pa-5 mx-5">
+    <div className="pa-5 mx-5">
         <!-- to="#conectar-wallet"    -->
-        <div class="pb-4" v-if="hasProvider && wallet.accounts.length > 0">
+        <div class="pb-4" style="height: max-content;" v-if="hasProvider && wallet.accounts.length > 0">
             <div v-if="contract.contractAddress === ''">
                 <h2 class="section-title font-weight-medium text-white">
                     Seleccionar Smart Contract
@@ -94,6 +107,9 @@ export { deployAddress }
                     <IconQrcode :size="39" />
                     Leer código QR del SmartContract
                 </v-btn>
+                <StreamBarcodeReader no-front-cameras @decode="onDecode" @loaded="onLoaded" />
+                <!-- torch -->
+                <!-- <ImageBarcodeReader @decode="onDecode" @error="onError" /> -->
                 <p class="pt-2 pb-2 text-white">
                     o intenta
                 </p>
@@ -116,9 +132,12 @@ export { deployAddress }
                     <h5 class="font-weight-medium font-18 text-white">Especificaciones del contrato: </h5>
                     <p>{{ deployTransaction }}</p>
                 </div>
-                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white" flat>
+                <p class="text-white mb-3">
+                    Aquí puedes cambiar de contrato inteligente seleccionado.
+                </p>
+                <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white p-3" flat>
                     <img :src="Polygonzkevm" class="logo-height" alt="logo smartChain polygon Zkevm" />
-                    Cambiar selección de SmartContract
+                    Cambiar de SmartContract
                 </v-btn>
             </div>
         </div>
