@@ -104,16 +104,16 @@ export { deployAddress }
             </div>
 
             <div v-if="contract && contract.contractAddress">
-                <h2 class="section-title font-weight-medium">
+                <h2 class="section-title font-weight-medium text-white">
                     Detalles del SmartContract
                 </h2>
-                <p class="text-muted">
+                <p class="text-white mb-3">
                     Estos son los detalles del contrato inteligente seleccionado.
                 </p>
-                <h5 class="font-weight-medium font-18">Dirección del contrato: </h5>
-                <p>{{ contract.contractAddress }} </p>
+                <h5 class="font-weight-medium font-18 text-white">Dirección del contrato: </h5>
+                <p class="text-white">{{ contract.contractAddress }} </p>
                 <div v-if="deployTransaction.hash !== ''">
-                    <h5 class="font-weight-medium font-18">Especificaciones del contrato: </h5>
+                    <h5 class="font-weight-medium font-18 text-white">Especificaciones del contrato: </h5>
                     <p>{{ deployTransaction }}</p>
                 </div>
                 <v-btn @click="handleChangeQR" size="large" style="background-color:#00B0FF" class="my-5 text-white" flat>

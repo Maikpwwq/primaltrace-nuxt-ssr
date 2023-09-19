@@ -70,7 +70,7 @@ const handleClick = (e: any) => {
                                 <li>Descripción: {{ obj.catalogDescription }}</li>
                                 <li>Catálogo metadata URL *opcional: {{ obj.catalogMetadata }}</li>
                             </ul>
-                            <v-btn @click="handleClick" class="pb-3"> Firmar catálogo </v-btn>
+                            <v-btn @click="handleClick" class="mb-3"> Firmar catálogo </v-btn>
                         </v-card-text>
                     </v-card>
                 </v-col>

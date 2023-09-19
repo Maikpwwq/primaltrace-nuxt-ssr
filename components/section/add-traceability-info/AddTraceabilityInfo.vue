@@ -100,7 +100,7 @@ const handleClick = () => {
                 <li>Actor ID: {{ obj.actorId }}</li>
                 <li>Acción Metadata URL *opcional: {{ obj.metadataAction }}</li>
               </ul>
-              <v-btn @click="handleClick" class="pb-3"> Firmar trazabilidad </v-btn>
+              <v-btn @click="handleClick" class="mb-3"> Firmar trazabilidad </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

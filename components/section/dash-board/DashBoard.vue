@@ -51,7 +51,7 @@ const slides = reactive({
                 <!-- -----------------------------------------------
                 Start DashBoard
                 -------------------------------------------------->
-                <v-row justify="center" class="flex-md-row flex-sm-column-reverse" style="width: min-content;">
+                <v-row justify="center" class="flex-md-row flex-sm-column-reverse ma-0" style="width: min-content;">
                     <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
                         <!-- DashBoard basic view Navigation -->
                         <v-app-bar class="app-header position-relative bg-dark header2" flat>
@@ -107,7 +107,7 @@ const slides = reactive({
                         <!-- <slot name="read-contract"></slot>
                         <slot name="write-contract"></slot> -->
 
-                        <v-col cols="12" class="">
+                        <v-col cols="12" class="pa-0">
                             <AddCatalog v-if="slides.number === 1" />
                             <AddProduct v-if="slides.number === 2" />
                             <AddTraceabilityInfo v-if="slides.number === 3" />

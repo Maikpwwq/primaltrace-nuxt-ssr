@@ -98,7 +98,7 @@ const handleClick = () => {
                 <li>Ubicación: {{ obj.productionLocation }}</li>
                 <li>Producto metadata URL *opcional: {{ obj.metadataProducto }}</li>
               </ul>
-              <v-btn @click="handleClick" class="pb-3"> Firmar producto </v-btn>
+              <v-btn @click="handleClick" class="mb-3"> Firmar producto </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

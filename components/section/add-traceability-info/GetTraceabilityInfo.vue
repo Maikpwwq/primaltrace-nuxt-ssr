@@ -55,8 +55,8 @@ const handleChange = () => {
   <div id="" class="blog-component mini-spacer">
     <v-container>
       <v-row justify="center">
-        <v-col cols="12" sm="10" md="9" lg="7">
-          <div class="text-center">
+        <v-col class="pa-0" cols="12" sm="10" md="9" lg="7">
+          <div class="text-center mx-3">
             <h2 class="section-title font-weight-medium">
               <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
               Consulta detalles acerca de Información de trazabilidad asociada con un producto del contrato
@@ -66,11 +66,11 @@ const handleChange = () => {
       </v-row>
       <v-row class="mt-9" justify="center">
         <v-col cols="12" sm="10" md="9" lg="7">
-          <v-card class="card-shadow mb-4 text-center border rounded-sm">
+          <v-card class="py-4 card-shadow mb-4 text-center border rounded-sm">
             <v-card-text>
               <v-text-field v-model="PRODUCT_ID" label="Producto" variant="outlined" color="primary"
                 placeholder="Id del producto" @change="handleChange"></v-text-field>
-              <ul v-if="data" class="mt-1" style="list-style: none;">
+              <ul v-if="data" class="mt-1 text-start" style="list-style: none;">
                 <!-- trazabilityId, productId, action, timestamp, actor, actorType, actorId, metadataAction -->
                 <li>Product ID: {{ data.productId }}</li>
                 <li>Id: {{ data.trazabilityId }}</li>
