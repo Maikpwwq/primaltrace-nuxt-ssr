@@ -20,7 +20,7 @@ import WalletError from "./WalletError.vue"
   flex-direction: column;
   min-height: fit-content;
   position: relative;
-  top: 30px;
+  align-items: center;
 }
 
 .connect-wallet:hover .wallet-info {
@@ -31,7 +31,7 @@ import WalletError from "./WalletError.vue"
   visibility: hidden;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
   min-height: fit-content;
 }
 </style>

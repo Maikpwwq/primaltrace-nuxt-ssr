@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import QrcodeVue, { Level, RenderAs } from 'qrcode.vue'
+import QrcodeVue from 'qrcode.vue'
+import type { Level, RenderAs } from 'qrcode.vue'
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'
 

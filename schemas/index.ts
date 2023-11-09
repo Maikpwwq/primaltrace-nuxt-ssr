@@ -3,7 +3,7 @@ export interface WalletState {
   accounts: any[];
   balance: string;
   chainId: string;
-  privateKey: string;
+  privateKey?: string;
 }
 
 export interface MetaMaskContextData {

@@ -20,7 +20,7 @@ const etherScan = `https://etherscan.io/address/${wallet.value.accounts[0]}`;
                         <v-card elevation="0" class="pa-5 mt-3">
                             <div v-if="wallet.accounts.length > 0">
                                 <h5 class="font-weight-medium font-18">Wallet Account: </h5>
-                                <p class="my-3 text-muted pr-sm-10">
+                                <p class="my-3 text-muted"> 
                                     <a class="text_link tooltip-bottom m-4" :href="etherScan" target="_blank"
                                         data-tooltip="Abrir en el Explorador de bloques" rel="noreferrer">
                                         {{ formatAddress(wallet.accounts[0]) }}
@@ -28,11 +28,11 @@ const etherScan = `https://etherscan.io/address/${wallet.value.accounts[0]}`;
                                     <!-- {{ wallet.accounts[0] }} -->
                                 </p>
                                 <h5 class="font-weight-medium font-18">Wallet Balance: </h5>
-                                <p class="my-3 text-muted pr-sm-10">{{ wallet.balance }}</p>
+                                <p class="my-3 text-muted">{{ wallet.balance }}</p>
                                 <h5 class="font-weight-medium font-18">Hex ChainId: </h5>
-                                <p class="my-3 text-muted pr-sm-10">{{ wallet.chainId }}</p>
+                                <p class="my-3 text-muted">{{ wallet.chainId }}</p>
                                 <h5 class="font-weight-medium font-18">Numeric ChainId: </h5>
-                                <p class="my-3 text-muted pr-sm-10">{{ formatChainAsNum(wallet.chainId) }}</p>
+                                <p class="my-3 text-muted">{{ formatChainAsNum(wallet.chainId) }}</p>
                             </div>
                         </v-card>
                     </v-col>

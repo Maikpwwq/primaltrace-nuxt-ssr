@@ -5,6 +5,7 @@ import { formatBalance, formatAddress } from "@/utils";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { mapActions, storeToRefs } from 'pinia'
 import IsoLogoZkevm from "/images/polygon-zkevm/IsoLogo.svg";
+import type { WalletState } from "@/schemas/index"
 // import { WalletState, MetaMaskContextData } from "@/schemas/index"
 
 const store = useWalletStore()
@@ -72,7 +73,9 @@ const updateWallet = async (accounts?: any) => {
         method: "eth_chainId",
     });
 
-    setWallet({ accounts, balance, chainId })
+    const privateKey = "";
+    const walletState : WalletState = { accounts, balance, chainId, privateKey };
+    setWallet(walletState)
 };
 
 const handleConnect = async () => {

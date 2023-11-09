@@ -61,7 +61,7 @@ const slides = reactive({
                         <LcLogoWhiteTextLogo class="" />
                         <div class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none w-100 justify-end"
                             v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
-                            <ul class="d-flex flex-row" min-height="auto" style="list-style: none; ">
+                            <ul v-if="hasContract" class="d-flex flex-row" min-height="auto" style="list-style: none; ">
                                 <li class="nav-item" v-for="nav in headerDashBoard" :key="nav.title" text>
                                     <v-btn :to="nav.href" v-scroll-to="nav.href" @click="handleCLick(nav.index)"
                                         class="btn px-4 bg-primary ml-2 d-flex " flat>

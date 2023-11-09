@@ -65,6 +65,12 @@ const logout = async () => {
     row-gap: 0em;
 }
 
+@media (max-width: 952px) {
+    .flexContainer-wallet {
+        color: black !important;
+    }
+}
+
 .connect-wallet {
     display: flex;
     justify-content: center;
@@ -75,6 +81,7 @@ const logout = async () => {
 
 .connect-wallet:hover .wallet-info {
     visibility: visible !important;
+    position: absolute;
 }
 
 .wallet-info {
