@@ -8,7 +8,7 @@ import { IconOutbound } from '@tabler/icons-vue';
 
 const store = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
-const { wallet, ethersProvider, web3uth, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
+const { wallet, ethersProvider, web3Auth, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
 // actions can just be destructured
 const { setWallet, setEthersProvider, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet } = store
 
@@ -20,7 +20,7 @@ const { clearContract } = storeContract
 
 const logout = async () => {
     try {
-        await web3auth.logout();
+        await web3Auth.value.logout();
         setIsConnecting(false);
         clearWallet()
         clearContract()

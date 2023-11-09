@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, reactive, watchEffect } from "vue";
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { getCatalog } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/store/smart-contract'

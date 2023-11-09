@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
+import { ref, reactive } from "vue";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
 import { PRODUCT } from '@/data/contractVariables';
 import type { Product } from "@/schemas/index"

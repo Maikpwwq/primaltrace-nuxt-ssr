@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watchEffect, markRaw } from "vue";
+import { watchEffect, markRaw, ref, reactive } from "vue";
 import { Web3Auth } from "@web3auth/modal";
 import { CHAIN_NAMESPACES } from "@web3auth/base";
 import type {

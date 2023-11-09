@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 // import WhiteTLogo from '/images/logos/white-text.png';
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
 import AddProduct from "@/components/section/add-product/AddProduct.vue";

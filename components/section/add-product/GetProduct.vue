@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
+import { ref, reactive } from "vue";
 import { getProduct } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'

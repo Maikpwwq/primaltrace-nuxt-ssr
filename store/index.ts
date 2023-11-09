@@ -49,6 +49,7 @@ export const useWalletStore = defineStore("wallet", {
       this.wallet = disconnectedState;
       this.ethersProvider = null;
       this.hasProvider = null;
+      this.web3Auth = null;
       this.error = false;
       this.errorMessage = "";
     },

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import WhiteTLogo from "/images/logos/white-text.png";
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
+import { reactive } from "vue";
 
 const config = useRuntimeConfig();
 const supabasePassword = config.public.supabasePassword;

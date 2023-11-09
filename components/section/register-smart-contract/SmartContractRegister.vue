@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { StreamBarcodeReader, ImageBarcodeReader } from "@teckel/vue-barcode-reader";
+import { reactive } from "vue";
 import { useWalletStore } from '@/store'
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'

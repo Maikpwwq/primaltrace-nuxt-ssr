@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
+import { ref, reactive } from "vue";
 import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
 import { useWalletStore } from '@/store'
 import { storeToRefs } from 'pinia'

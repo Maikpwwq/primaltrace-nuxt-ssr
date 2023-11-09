@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getContractCatalogs } from "@/services/thridWeb/contractReadInteract";
-import { ref } from "vue";
+import { ref, reactive, watchEffect } from "vue";
 
 
 const selected = reactive({
