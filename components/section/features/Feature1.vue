@@ -18,7 +18,7 @@ import { feature1 } from "@/data/CustomComponents";
               </v-chip>
               <h2 class="section-title font-weight-medium">TrackWise</h2>
               <p class="text-muted">
-                Descubre como usar TrackWise al registrar información confiable para la supervisión de tus productos.
+                Descubre como usar TrackWise al registrar información confiable para la supervisión durante la distribución de tus productos.
               </p>
             </div>
           </v-col>

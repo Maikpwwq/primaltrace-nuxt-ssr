@@ -30,7 +30,7 @@ import { Blog } from "@/data/CustomComponents";
         <v-row class="mt-9" justify="center">
           <v-col cols="12" md="4" sm="6" v-for="card in Blog" :key="card.title">
             <v-card elevation="0" class="blog-card overflow-hidden mb-8">
-              <a href="/blog" class="text-decoration-none">
+              <a :href="card.route" class="text-decoration-none">
                 <div class="position-relative mb-6">
                   <img
                     :src="`/images/blog/${card.img}`"
