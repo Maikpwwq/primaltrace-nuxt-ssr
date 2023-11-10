@@ -8,7 +8,7 @@ import type {
 } from "@web3auth/base";
 import { ethers } from "ethers";
 import { useWalletStore } from "@/store";
-import { useSmartContract } from "@/store/smart-contract";
+// import { useSmartContract } from "@/store/smart-contract";
 import { storeToRefs } from "pinia";
 import WalletError from "./WalletError.vue";
 import { formatBalance, formatAddress } from "@/utils";
@@ -33,11 +33,11 @@ const {
   clearWallet,
 } = store;
 
-const storeContract = useSmartContract();
+// const storeContract = useSmartContract();
 // but skip any action or non reactive (non ref/reactive) property
 // const { contract } = storeToRefs(storeContract) // Destructuring from a Store
 // actions can just be destructured
-const { clearContract } = storeContract;
+// const { clearContract } = storeContract;
 
 const userInfo = ref({});
 // const loggedIn = ref(false)
@@ -313,7 +313,7 @@ const disableConnect = wallet && isConnecting.value ? true : false;
             </div> -->
       </div>
     </div>
-    <WalletError />
+    <WalletError v-if="error && errorMessage"/>
   </div>
 </template>
 <style>

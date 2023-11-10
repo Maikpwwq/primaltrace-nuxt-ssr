@@ -48,8 +48,8 @@
             <a href="https://www.facebook.com/profile.php?id=100094131504495">
               <i class="mdi mdi-facebook"></i>
             </a>
-            <a href="https://www.twitter.com/">
-              <i class="mdi mdi-twitter"></i>
+            <a href="https://www.instagram.com/primaltrace_/">
+              <i class="mdi mdi-instagram"></i>
             </a>
             <!-- <a href="#">
               <i class="mdi mdi-google-plus"></i>

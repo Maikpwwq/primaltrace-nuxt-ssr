@@ -20,7 +20,7 @@ const handleCLick = () => {
         <v-toolbar>
           <!-- Logo -->
           <div class="logo">
-            <LcLogoWhiteLogo />
+            <LcLogoWhiteLogo /> 
           </div>
           <!-- Desktop view Navigation -->
           <div class="navigation ml-auto" v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">

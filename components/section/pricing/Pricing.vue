@@ -16,7 +16,7 @@ import { pricePlan } from "@/data/CustomComponents";
                 Precios justos, trabajo efectivo
               </h2>
               <p class="text-muted">
-                Ofrecemos satisfacción garantía o devolución de su dinero
+                Ofrecemos satisfacción garantizada o la devolución de su dinero
               </p>
             </div>
           </v-col>
@@ -61,7 +61,7 @@ import { pricePlan } from "@/data/CustomComponents";
                 class="text-uppercase rounded-t-0 py-4"
               >
                 <a
-                  href="#form-contacto"
+                  :href="card.route"
                   class="text-white linking text-decoration-none d-flex align-center"
                   >Elegir plan</a
                 >

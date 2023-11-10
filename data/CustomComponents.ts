@@ -120,24 +120,19 @@ const portfolio = [
 const pricePlan = [
   {
     title: "Plan Regular",
-    price: "3M",
-    plan: "ANUAL",
-    desc: "El Plan Regular le permite personalizar contratos inteligentes utilizando su cuenta.",
+    price: "Gratuito",
+    plan: "PERSONAL",
+    desc: "El Plan Regular permite interactuar con contratos inteligentes utilizando su cuenta.",
     buttoncolor: "primary",
+    route: "/dashboard",
   },
   {
     title: "Plan Master",
-    price: "7M",
-    plan: "ANUAL",
+    price: "Por alcance",
+    plan: "EMPRESARIAL",
     desc: "El Plan Master le permite personalizar contratos inteligentes utilizando su cuenta.",
     buttoncolor: "error",
-  },
-  {
-    title: "Plan Premium",
-    price: "15M",
-    plan: "YEARLY",
-    desc: "El Plan Premium le permite personalizar contratos inteligentes utilizando su cuenta.",
-    buttoncolor: "primary",
+    route: "#form-contacto",
   },
 ];
 
@@ -146,11 +141,15 @@ const team = [
   {
     img: "l3mik3l.png",
     title: "Michael Arias Fajardo",
-    subtitle: "Product Manager Specialist",
-    desc: "WEB & MOBILE APP DEVELOPER | PROJECT MANAGER | IT ENGINEER | GROWTH HACKER.",
+    subtitle: "Especialista en Gerencia de Producto",
+    desc: "WEB3/WEB2/MOBILE DEVELOPER | IT PRODUCT MANAGER | GROWTH HACKER.",
     socialicon: [
       {
-        url: "/",
+        url: "https://www.linkedin.com/in/nkiq%C3%AC/",
+        icon: "mdi mdi-linkedin",
+      },
+      {
+        url: "https://www.facebook.com/YoguiMind/",
         icon: "mdi mdi-facebook",
       },
       {
@@ -158,36 +157,8 @@ const team = [
         icon: "mdi mdi-twitter",
       },
       {
-        url: "/",
+        url: "https://www.instagram.com/nkiqi/",
         icon: "mdi mdi-instagram",
-      },
-      {
-        url: "/",
-        icon: "mdi mdi-youtube",
-      },
-    ],
-  },
-  {
-    img: "l3mik3l.png",
-    title: "Michael Arias Fajardo",
-    subtitle: "Product Manager Specialist",
-    desc: "WEB & MOBILE APP DEVELOPER | PROJECT MANAGER | IT ENGINEER | GROWTH HACKER.",
-    socialicon: [
-      {
-        url: "/",
-        icon: "mdi mdi-facebook",
-      },
-      {
-        url: "/",
-        icon: "mdi mdi-twitter",
-      },
-      {
-        url: "/",
-        icon: "mdi mdi-instagram",
-      },
-      {
-        url: "/",
-        icon: "mdi mdi-youtube",
       },
     ],
   },
