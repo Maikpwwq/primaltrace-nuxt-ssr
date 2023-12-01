@@ -10,7 +10,7 @@ import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
       <v-row justify="center" class="pt-6 mt-6">
         <v-col
           cols="12"
-          sm="10"
+          sm="10" 
           md="6"
           lg="5"
           class="d-flex align-center justify-center"

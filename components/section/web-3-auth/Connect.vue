@@ -43,6 +43,18 @@ const logout = async () => {
             </div>
         </li>
 
+        <li class="nav-item d-md-flex d-sm-none">
+            <NuxtLink to="/deployedContracts" class="flexContainer-wallet nav-link">
+                Contratos Desplegados
+            </NuxtLink>
+          </li>
+
+          <li class="nav-item d-md-flex d-sm-none">
+              <NuxtLink to="/blocktimeline" class="flexContainer-wallet nav-link">
+                  BlockTimeline
+              </NuxtLink>
+          </li>
+
         <li class="nav-item d-flex align-center">
             <v-btn class="btn v-btn--block text-decoration-none text-white p-3" @click="logout" size="large" style="background-color:#00B0FF"
                 flat>

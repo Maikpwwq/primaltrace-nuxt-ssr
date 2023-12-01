@@ -26,29 +26,58 @@ const headerMenu = [
 ];
 
 const headerDashBoard = [
+
   {
-    title: "Catálogos",
-    href: "#trackCatalog",
-    logo: IconArrowsTransferUp,
-    index: 1
-  },
-  {
-    title: "Productos",
-    href: "#trackProduct",
-    logo: IconArrowsTransferUp,
-    index: 2
-  },
-  {
-    title: "Rastros",
-    href: "#trackInfo",
-    logo: IconArrowsTransferUp,
-    index: 3
+    title: "Agregar a contrato",
+    href: "#updateContract",
+    logo: IconArrowsTransferDown,
+    action: 'update',
+    group: [
+      {
+        title: "Catálogos",
+        href: "#trackCatalog",
+        logo: IconArrowsTransferUp,
+        index: 1
+      },
+      {
+        title: "Productos",
+        href: "#trackProduct",
+        logo: IconArrowsTransferUp,
+        index: 2
+      },
+      {
+        title: "Rastros",
+        href: "#trackInfo",
+        logo: IconArrowsTransferUp,
+        index: 3
+      }
+    ]
   },
   {
     title: "Leer contrato",
     href: "#readContract",
     logo: IconArrowsTransferDown,
-    index: 4
+    action: 'read',
+    group: [
+      {
+        title: "Catálogos",
+        href: "#trackCatalog",
+        logo: IconArrowsTransferUp,
+        index: 4
+      },
+      {
+        title: "Productos",
+        href: "#trackProduct",
+        logo: IconArrowsTransferUp,
+        index: 5
+      },
+      {
+        title: "Rastros",
+        href: "#trackInfo",
+        logo: IconArrowsTransferUp,
+        index: 6
+      }
+    ]
   },
 ];
 

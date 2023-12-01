@@ -107,7 +107,7 @@ export { deployAddress }
     <div className="pa-5 mx-5">
         <!-- to="#conectar-wallet"    -->
         <div class="pb-4" style="height: max-content;" v-if="hasProvider && wallet.accounts.length > 0">
-            <div v-if="contract.contractAddress === ''">
+            <div v-if="contract.contractAddress === ''"> 
                 <h2 class="section-title font-weight-medium text-white">
                     Seleccionar Smart Contract
                 </h2>

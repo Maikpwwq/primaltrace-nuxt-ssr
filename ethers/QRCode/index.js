@@ -1,4 +1,5 @@
 import { MetaMaskSDK } from "@metamask/sdk";
+// https://docs.metamask.io/wallet/how-to/connect/set-up-sdk/javascript/other-web-frameworks/
 
 const sdk = new MetaMaskSDK({
   shouldShimWeb3: false,
