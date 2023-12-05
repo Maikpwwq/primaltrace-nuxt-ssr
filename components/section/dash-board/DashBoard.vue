@@ -12,6 +12,10 @@ import GetCatalog from "@/components/section/add-catalog/GetCatalog.vue";
 import GetProduct from "@/components/section/add-product/GetProduct.vue";
 import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
 
+import CatalogsResume from "@/components/section/tables/CatalogsResume.vue";
+import ProductsResume from "@/components/section/tables/ProductsResume.vue";
+import TrazabilitiesResume from "@/components/section/tables/TrazabilitiesResume.vue";
+
 import { IconTransfer } from "@tabler/icons-vue";
 
 import { headerDashBoard } from "@/data/CustomComponents";
@@ -237,6 +241,9 @@ const slides = reactive({
             <AddProduct v-if="slides.number === 2" />
             <AddTraceabilityInfo v-if="slides.number === 3" />
             <GetCatalog v-if="slides.number === 4 || slides.number === 0"  />
+            <CatalogsResume />
+            <ProductsResume />
+            <TrazabilitiesResume />
             <GetProduct v-if="slides.number === 5"  />
             <GetTraceabilityInfo v-if="slides.number === 6"  />
             <!-- <ReadSmartContract /> -->

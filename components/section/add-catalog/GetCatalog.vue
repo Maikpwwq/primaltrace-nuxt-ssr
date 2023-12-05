@@ -50,7 +50,7 @@ const handleChange = () => {
             <v-row justify="center">
                 <v-col class="pa-0" cols="10">
                     <div class="text-center mx-3">
-                        <h2 class="section-title font-weight-medium">
+                        <h2 class="section-title font-weight-medium"> 
                             <img :src="Polygon" class="logo-height" alt="logo smartChain polygon" />
                             Consulta detalles de un catálogo del contrato
                         </h2>
