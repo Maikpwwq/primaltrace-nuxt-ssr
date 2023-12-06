@@ -30,7 +30,7 @@
     "@tatumio/polygon": "^2.2.42",
     "@teckel/vue-barcode-reader": "^1.1.6",
     "@thirdweb-dev/chains": "^0.1.60",
-    "@thirdweb-dev/sdk": "^4.0.18",
+    "@thirdweb-dev/sdk": "^4.0.19",
     "@types/vue-barcode-reader": "^0.0.3",
     "@web3auth/base": "^7.2.0",
     "@web3auth/modal": "^7.2.0",
@@ -45,7 +45,7 @@
     "vue-router": "^4.2.5",
     "vue-tabler-icons": "2.21.0",
     "vue3-perfect-scrollbar": "1.6.1",
-    "vuetify": "^3.4.4"
+    "vuetify": "^3.4.5"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.62.0",

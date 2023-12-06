@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 // import WhiteTLogo from '/images/logos/white-text.png';
-import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
-import ReadSmartContract from "@/components/section/read-contract/ReadSmartContract.vue";
+// import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
+// import ReadSmartContract from "@/components/section/read-contract/ReadSmartContract.vue";
 import SmartContractRegister from "@/components/section/register-smart-contract/SmartContractRegister.vue";
+import SmartContractSubMenu from "@/components/section/register-smart-contract/SmartContractSubMenu.vue";
+import SmartContractNavItems from "@/components/section/register-smart-contract/SmartContractNavItems.vue";
 
 import AddCatalog from "@/components/section/add-catalog/AddCatalog.vue";
 import AddTraceabilityInfo from "@/components/section/add-traceability-info/AddTraceabilityInfo.vue";
@@ -11,14 +13,13 @@ import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import GetCatalog from "@/components/section/add-catalog/GetCatalog.vue";
 import GetProduct from "@/components/section/add-product/GetProduct.vue";
 import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
+import { LoadCatalogsInfo } from "@/components/section/dash-board/LoadCatalogsInfo.vue";
+import { LoadProductsInfo } from "@/components/section/dash-board/LoadProductsInfo.vue";
+import { LoadRastrosInfo } from "@/components/section/dash-board/LoadRastrosInfo.vue";
 
 import CatalogsResume from "@/components/section/tables/CatalogsResume.vue";
 import ProductsResume from "@/components/section/tables/ProductsResume.vue";
 import TrazabilitiesResume from "@/components/section/tables/TrazabilitiesResume.vue";
-
-import { IconTransfer } from "@tabler/icons-vue";
-
-import { headerDashBoard } from "@/data/CustomComponents";
 
 import { storeToRefs } from "pinia";
 import { useWalletStore } from "@/store";
@@ -30,7 +31,7 @@ const { wallet, hasProvider } = storeToRefs(storeWallet); // Destructuring from 
 
 const storeContract = useSmartContract();
 // but skip any action or non reactive (non ref/reactive) property
-const { contract, hasContract } = storeToRefs(storeContract); // Destructuring from a Store
+const { contract, contractInfo, hasContract } = storeToRefs(storeContract); // Destructuring from a Store
 
 // const THIRDWEB = process.env.NUXT_THIRDWEB_PRIVATE_KEY; // don't work
 // const config = useRuntimeConfig();
@@ -44,25 +45,26 @@ const { contract, hasContract } = storeToRefs(storeContract); // Destructuring f
 
 const drawer = ref(null);
 
-const cleanSelection = () => {
-  selection.string = "";
-};
+import { menuSlide } from "@/components/section/register-smart-contract/SmartContractNavItems.vue";
+const slides = menuSlide.value
 
-const handleCLick = (index: number) => {
-  slides.number = index;
-};
+let LOAD_CONTRACT = ref(true);
+watchEffect(async () => {
+  if (LOAD_CONTRACT.value && hasContract.value) {
+    try {
+      await LoadCatalogsInfo()
+      await LoadProductsInfo()
+      await LoadRastrosInfo()
+      LOAD_CONTRACT.value = false
+    } catch (err){
+      console.error(err)
+    }
+  }
+})
 
-const handleSelect = (action: string) => {
-  selection.string = action;
-};
-
-const selection = reactive({
-  string: "",
-});
-
-const slides = reactive({
-  number: 0,
-});
+// reactive({
+//   number: 0,
+// });
 </script>
 
 <template>
@@ -86,47 +88,7 @@ const slides = reactive({
             @click="isActive = !isActive"
           >
             <ul class="navbar-nav px-3 py-5 mt-5" min-height="auto">
-              <li
-                class="nav-item mb-3"
-                v-for="nav in headerDashBoard"
-                :key="nav.title"
-                text
-              >
-                <div
-                  v-if="
-                    selection.string !== '' && selection.string === nav.action
-                  "
-                >
-                  <v-btn
-                    @click="cleanSelection()"
-                    class="btn px-4 bg-primary ml-2 d-flex"
-                    flat
-                  >
-                    Atras
-                  </v-btn>
-                  <v-btn
-                    v-for="elm in nav.group"
-                    :to="elm.href"
-                    v-scroll-to="elm.href"
-                    @click="handleCLick(elm.index)"
-                    class="btn px-4 bg-primary ml-2 d-flex"
-                    flat
-                  >
-                    <!-- d-none -->
-                    {{ elm.title }}
-                  </v-btn>
-                </div>
-
-                <v-btn
-                  v-if="selection.string === ''"
-                  @click="handleSelect(nav.action)"
-                  class="btn px-4 bg-primary ml-2 d-flex"
-                  flat
-                >
-                  <!-- d-none -->
-                  {{ nav.title }}
-                </v-btn>
-              </li>
+              <SmartContractNavItems />
             </ul>
           </div>
         </v-navigation-drawer>
@@ -135,7 +97,7 @@ const slides = reactive({
       <v-row
         justify="center"
         class="flex-md-row-reverse flex-sm-column ma-0 w-auto position-relative"
-        style="top: 80px !important; padding-bottom: 80px !important;"
+        style="top: 80px !important; padding-bottom: 80px !important"
       >
         <v-col
           cols="12"
@@ -158,94 +120,19 @@ const slides = reactive({
           sm="12"
           class="pa-0"
         >
-          <!-- DashBoard basic view Navigation -->
-          <div class="pa-0">
-            <v-col
-              class="pe-5 bg-dark header2 d-flex flex-column w-auto"
-              style="min-width: 330px"
-            >
-              <!-- Logo -->
-              <LcLogoWhiteTextLogo class="" />
-              <div
-                class="navigation mx-auto mx-sm-0 d-md-flex d-sm-none flex-column w-100 justify-end"
-                v-bind:class="[isActive ? 'd-block' : '']"
-                @click="isActive = !isActive"
-              >
-                <ul
-                  v-if="hasContract"
-                  class="d-flex flex-row justify-space-between"
-                  min-height="auto"
-                  style="list-style: none"
-                >
-                  <li
-                    class="nav-item d-flex align-center"
-                    v-for="nav in headerDashBoard"
-                    :key="nav.title"
-                    text
-                  >
-                    <div
-                      v-if="
-                        selection.string !== '' &&
-                        selection.string === nav.action
-                      "
-                    >
-                      <v-btn
-                        @click="cleanSelection()"
-                        class="btn px-4 bg-primary ml-2 d-flex"
-                        flat
-                      >
-                        Atras
-                      </v-btn>
-                      <v-btn
-                        v-for="elm in nav.group"
-                        :to="elm.href"
-                        v-scroll-to="elm.href"
-                        @click="handleCLick(elm.index)"
-                        class="btn px-4 bg-primary ml-2 d-flex"
-                        flat
-                      >
-                        <!-- d-none -->
-                        {{ elm.title }}
-                      </v-btn>
-                    </div>
-
-                    <v-btn
-                      v-if="selection.string === ''"
-                      @click="handleSelect(nav.action)"
-                      class="btn px-4 bg-primary ml-2 d-flex"
-                      flat
-                    >
-                      <!-- d-none -->
-                      {{ nav.title }}
-                    </v-btn>
-                    <!-- <NuxtLink :to="nav.href" v-scroll-to="nav.href" class="nav-link"
-                                                            @click="handleCLick(nav.index)">
-                                                            {{ nav.title }}
-                                                        </NuxtLink> -->
-                  </li>
-                </ul>
-              </div>
-              <v-app-bar-nav-icon
-                width="30"
-                class="d-md-none d-sm-flex drawer-icon text-white ml-auto mr-0"
-                @click.stop="drawer = !drawer"
-              >
-                <IconTransfer color="white" :size="33" stroke-width="1" />
-              </v-app-bar-nav-icon>
-            </v-col>
-          </div>
+          <SmartContractSubMenu />
           <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
-
+          <!-- v-if="contractInfo.value-catalog"-->
           <v-col cols="12" class="pa-0">
             <AddCatalog v-if="slides.number === 1" />
             <AddProduct v-if="slides.number === 2" />
-            <AddTraceabilityInfo v-if="slides.number === 3" />
-            <GetCatalog v-if="slides.number === 4 || slides.number === 0"  />
-            <CatalogsResume />
-            <ProductsResume />
-            <TrazabilitiesResume />
-            <GetProduct v-if="slides.number === 5"  />
-            <GetTraceabilityInfo v-if="slides.number === 6"  />
+            <AddTraceabilityInfo v-if="slides.number === 3" />            
+            <CatalogsResume v-if="slides.number === 4 || slides.number === 0" />
+            <ProductsResume v-if="slides.number === 5" />
+            <TrazabilitiesResume v-if="slides.number === 6" />
+            <GetCatalog v-if="slides.number === 4 || slides.number === 0" />
+            <GetProduct v-if="slides.number === 5" />
+            <GetTraceabilityInfo v-if="slides.number === 6" />
             <!-- <ReadSmartContract /> -->
           </v-col>
         </v-col>

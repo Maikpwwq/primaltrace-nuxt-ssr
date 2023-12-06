@@ -14,10 +14,10 @@ import { deployAddress } from "@/components/section/register-smart-contract/Smar
 // const config = useRuntimeConfig();
 // let contract: any;
 
-console.log("contractReadInteract", deployAddress.value);
+console.log("contractReadInteract", deployAddress?.value);
 
 const contract = await sdk.getContract(
-  deployAddress.value, // IMPLEMENTATION_CONTRACT_ADDRESS,
+  deployAddress?.value, // IMPLEMENTATION_CONTRACT_ADDRESS,
   ABI_CATALOG // The ABI of your smart contract
 );
 

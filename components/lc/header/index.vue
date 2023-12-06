@@ -14,12 +14,12 @@ const drawer = ref(null);
           Start Header
     ----------------------------------------------- -->
     <v-app-bar class="app-header pt-lg-0 pt-3 overflow-visible" absolute flat elevate-on-scroll>
-      <v-container class="fill-height" style="padding: 0 !important;">
-        <v-toolbar class="py-2 pe-3 bg-transparent d-flex align-center overflow-visible" style="background: #00000057; backdrop-filter: blur(7px)">
+      <v-container class="fill-height px-5" style="padding: 0 !important; max-width: initial !important;">
+        <v-toolbar class="py-2 pe-5 bg-transparent d-flex align-center overflow-visible" style="background: #00000057; backdrop-filter: blur(7px)">
           <!-- Logo -->
           <LcLogoWhiteTextLogo />
           <!-- Desktop view Navigation -->
-          <div class="navigation ml-auto d-md-block d-sm-none" v-bind:class="[isActive ? 'd-block' : '']"
+          <div class="navigation ml-auto d-md-block d-sm-none d-xs-none" v-bind:class="[isActive ? 'd-block' : '']"
             @click="isActive = !isActive">
             <ul class="d-md-flex navbar-nav">
               <li class="nav-item">
@@ -32,7 +32,7 @@ const drawer = ref(null);
                   <IconArticle color="white" :size="33" stroke-width="1" /> Blog
                 </NuxtLink>
               </li>
-              <li class="nav-item d-md-flex d-sm-none">
+              <li class="nav-item d-md-flex d-sm-none d-xs-none">
                 <!-- DashBoard -->
                 <v-btn class="btn bg-white" flat>
                   <NuxtLink to="/dashboard" class="text-decoration-none text-dark d-md-flex align-center">

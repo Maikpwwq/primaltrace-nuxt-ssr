@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
-import { getProduct } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'
 import type { Product } from "@/schemas/index"
@@ -29,11 +28,9 @@ const data: Product = reactive({
 });
 
 watchEffect(async () => {
-  if (LOAD_PRODUCT.value && hasContract.value) {
-    await getProduct(PRODUCT_ID.value).then((resp) => {
-      // TODO: Puede obtener multiples registros de productos
-      setProductsInfo(resp)
-      console.log('getProduct', resp)
+  if (LOAD_PRODUCT.value && contractInfo.value.products?.length > 0) {    
+    try { 
+      console.log('getProducts', contractInfo.value.products)
       const trace = contractInfo.value.products;
       data.productId = trace[0]._hex;
       data.productName = trace[1];
@@ -43,8 +40,13 @@ watchEffect(async () => {
       data.batchNumber = trace[5];
       data.productionLocation = trace[6];
       data.metadataProducto = trace[7];
-      LOAD_PRODUCT.value = false
-    })
+      LOAD_PRODUCT.value = false   
+    } catch (err: any) {
+      // err.string === "Product does not exist"
+      console.log(err.reason);
+      alert("Este producto aun no existe");
+      PRODUCT_ID.value = 1;
+    }
   }
 });
 

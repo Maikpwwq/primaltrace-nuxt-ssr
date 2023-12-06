@@ -14,10 +14,10 @@ import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 
 import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
 
-console.log("contractReadInteract", deployAddress.value);
+console.log("contractReadInteract", deployAddress?.value);
 
 const readContract = await sdk.getContract(
-  deployAddress.value, // IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress,
+  deployAddress?.value, // IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress,
   ABI_CATALOG // The ABI of your smart contract
 );
 
@@ -48,8 +48,17 @@ const getCatalog = async (_catalogId: number) => {
   return readContract.call("getCatalog", [_catalogId]);
 };
 const getContractCatalogs = async () => {
-  return readContract.call("getContractCatalogs");
+  return readContract.call("getContractCatalogs"); 
 };
+const getProductCounter = async () => {
+  return readContract.call("productCounter");
+}
+const getCatalogCounter = async () => {
+  return readContract.call("catalogCounter");
+}
+const getAnomalyCounter = async () => {
+  return readContract.call("anomalyCounter");
+}
 
 // const getTraceabilityInfo = async (_productId: number) => { contract.call("getTraceabilityInfo", [_productId]) };
 // const actorTypes = async (args: any) => { contract.call("actorTypes", [{ args }])};
@@ -67,6 +76,9 @@ export {
   getProductTraceabilityInfo,
   getCatalog,
   getContractCatalogs,
+  getProductCounter, 
+  getCatalogCounter,
+  getAnomalyCounter
 };
 
 // use

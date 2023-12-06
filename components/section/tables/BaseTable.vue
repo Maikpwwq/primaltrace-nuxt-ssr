@@ -2,8 +2,8 @@
 // const props = defineProps(['headers']) and props.headers
 // or using pure type annotations
 defineProps<{
-    headers?: array
-    items?: array
+    headers?: Array<any>
+    items?: Array<any>
 }>()
 </script>
 
@@ -13,6 +13,7 @@ defineProps<{
     :headers="headers"
     item-key="name"
     items-per-page="5"
+    class="py-5"
   >
   </v-data-table>
 </template>

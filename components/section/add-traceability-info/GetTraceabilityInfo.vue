@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
-import { getProductTraceabilityInfo } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/store/smart-contract'
 import { storeToRefs } from 'pinia'
 import type { TraceabilityInfo } from "@/schemas/index"
@@ -27,12 +26,10 @@ const data: TraceabilityInfo = reactive({
 });
 
 watchEffect(async () => {
-  if (LOAD_TRACEABILITY.value && hasContract.value) {
-    await getProductTraceabilityInfo(PRODUCT_ID.value).then((resp) => {
-      // TODO: Puede obtener multiples registros de trazabilidad
-      setTraceabilityInfo(resp)
+  if (LOAD_TRACEABILITY.value && contractInfo.value.traceabilityInfo?.length > 0) {
+    try{
       const trace = contractInfo.value.traceabilityInfo[1];
-      console.log('getProductTraceabilityInfo', resp[1], trace)
+      console.log('getProductTraceabilityInfo', contractInfo.value.traceabilityInfo, trace)
       data.trazabilityId = trace.id;
       data.productId = trace.productId;
       data.action = trace.action;
@@ -42,7 +39,12 @@ watchEffect(async () => {
       data.actorId = trace.actorId;
       data.metadataAction = trace.metadataAction
       LOAD_TRACEABILITY.value = false
-    })
+    } catch (err: any) {
+      // err.string === "Product does not exist"
+      console.log(err.reason);
+      alert("Esta informción de trazabilidad aun no existe");
+      PRODUCT_ID.value = 1;
+    }
   }
 });
 
