@@ -44,6 +44,9 @@ const getProductStock = async (_productId: number) => {
 const getProductTraceabilityInfo = async (_productId: number) => {
   return readContract.call("getProductTraceabilityInfo", [_productId]);
 };
+const getAlert = async (_alertId: number) => {
+  return readContract.call("getAlert", [_alertId]);
+};
 const getCatalog = async (_catalogId: number) => {
   return readContract.call("getCatalog", [_catalogId]);
 };
@@ -74,6 +77,7 @@ export {
   getProduct,
   getProductStock,
   getProductTraceabilityInfo,
+  getAlert,
   getCatalog,
   getContractCatalogs,
   getProductCounter, 

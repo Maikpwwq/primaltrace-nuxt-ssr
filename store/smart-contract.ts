@@ -17,6 +17,7 @@ const emptyContractInfo: ContractInfo = {
   catalog: [],
   products: [],
   traceabilityInfo: [],
+  alerts: [],
 };
 
 export const useSmartContract = defineStore("contract", {
@@ -45,6 +46,9 @@ export const useSmartContract = defineStore("contract", {
     },
     setTraceabilityInfo(providedInfo: any[]) {
       this.contractInfo.traceabilityInfo = providedInfo;
+    },
+    setAlertsInfo(providedInfo: any[]) {
+      this.contractInfo.alerts = providedInfo;
     },
     setHasContract(hasContract: boolean | null) {
       this.hasContract = hasContract;

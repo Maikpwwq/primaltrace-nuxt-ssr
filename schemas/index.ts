@@ -17,6 +17,13 @@ export interface MetaMaskContextData {
   // clearError: () => void;
 }
 
+export enum AlertType {
+  Noticias,
+  Seguridad,
+  Eventos,
+  Producto,
+}
+
 // Read smart contract
 export interface SmartContract {
   contract: CatalogContract;
@@ -36,6 +43,7 @@ export interface ContractInfo {
   catalog: any[];
   products: any[];
   traceabilityInfo: any[];
+  alerts: any[];
 }
 
 export interface Catalog {
@@ -68,4 +76,19 @@ export interface TraceabilityInfo {
   actorType: number;
   actorId: string;
   metadataAction?: string;
+}
+
+export interface AlertInfo {
+  alertId: number;
+  productId: number;
+  traceabilityId: number;
+  alertType: AlertType;
+  alertTitle: string;
+  alertSubtitle: string;
+  alertDescription: string;
+  alertParam: string;
+  conditionalTrigguer: string;
+  reportedBy: string;
+  resolved: boolean;
+  timestamp: number;
 }

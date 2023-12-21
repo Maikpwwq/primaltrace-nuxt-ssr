@@ -82,6 +82,38 @@ const addTraceabilityInfo = async (traceabilityInfo: any) => {
   console.log("addTraceabilityInfo", traceabilityInfo, sendTraceabilityInfo);
   return await contract.call("addTraceabilityInfo", sendTraceabilityInfo);
 };
+
+const addAlerts = async (alert: any) => {
+  const {
+    alertId,
+    productId,
+    traceabilityId,
+    alertType,
+    alertTitle,
+    alertSubtitle,
+    alertDescription,
+    alertParam,
+    conditionalTrigguer,
+    reportedBy,
+    resolved,
+  } = alert;
+  const sendAlertInfo = [
+    alertId,
+    productId,
+    traceabilityId,
+    alertType,
+    alertTitle,
+    alertSubtitle,
+    alertDescription,
+    alertParam,
+    conditionalTrigguer,
+    reportedBy,
+    resolved,
+  ];
+  console.log("addAlerts", alert, sendAlertInfo);
+  return await contract.call("reportAlert", sendAlertInfo);
+};
+
 const createCatalog = async (catalogInfo: any) => {
   const { catalogName, catalogMetadata, catalogDescription } = catalogInfo;
   const sendCatalog = [catalogName, catalogMetadata, catalogDescription];
@@ -107,6 +139,7 @@ export {
   createCatalog,
   addProduct,
   addTraceabilityInfo,
+  addAlerts,
   setActorType,
   updateProductStock,
 };
