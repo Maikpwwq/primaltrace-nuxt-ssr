@@ -47,5 +47,5 @@ const LoadRastrosInfo = async () => {
   }
 };
 
-export { LoadRastrosInfo }
+export default LoadRastrosInfo
 </script>

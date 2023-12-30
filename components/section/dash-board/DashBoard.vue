@@ -13,9 +13,9 @@ import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import GetCatalog from "@/components/section/add-catalog/GetCatalog.vue";
 import GetProduct from "@/components/section/add-product/GetProduct.vue";
 import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
-import { LoadCatalogsInfo } from "@/components/section/dash-board/LoadCatalogsInfo.vue";
-import { LoadProductsInfo } from "@/components/section/dash-board/LoadProductsInfo.vue";
-import { LoadRastrosInfo } from "@/components/section/dash-board/LoadRastrosInfo.vue";
+import LoadCatalogsInfo from "@/components/section/dash-board/LoadCatalogsInfo.vue";
+import LoadProductsInfo from "@/components/section/dash-board/LoadProductsInfo.vue";
+import LoadRastrosInfo from "@/components/section/dash-board/LoadRastrosInfo.vue";
 
 import CatalogsResume from "@/components/section/tables/CatalogsResume.vue";
 import ProductsResume from "@/components/section/tables/ProductsResume.vue";

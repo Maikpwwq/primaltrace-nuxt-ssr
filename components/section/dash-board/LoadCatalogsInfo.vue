@@ -32,5 +32,5 @@ const LoadCatalogsInfo = async () => {
     }
 }
 
-export { LoadCatalogsInfo }
+export default LoadCatalogsInfo
 </script>
