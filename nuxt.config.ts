@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
   },
+  debug: true, 
   build: {
     //   extractCSS: false,
     transpile: ["vuetify"],
