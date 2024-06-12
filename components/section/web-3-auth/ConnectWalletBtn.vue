@@ -33,6 +33,7 @@ const {
 const config = useRuntimeConfig();
 // Get your Client ID from Web3Auth Dashboard
 const WEB3AUTH_CLIENT_ID = config.public.web3authClientID; // `${import.meta.env.NUXT_WEB3AUTH_CLIENT_ID}`;
+const PRIVATE_KEY = config.public.personalAccountPrivateKey;
 
 const polygonzkEVMConfig: CustomChainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155, // .OTHER - "eip155" Polygon ZkEvm Mainnet: eip155:1101
@@ -63,6 +64,7 @@ const polygonzkEVMConfig: CustomChainConfig = {
 
 // const web3auth = ref<Web3Auth>(new Web3Auth({
 const web3auth = new Web3Auth({
+  privateKeyProvider: PRIVATE_KEY,
   clientId: WEB3AUTH_CLIENT_ID,
   chainConfig: polygonzkEVMConfig,
 });
