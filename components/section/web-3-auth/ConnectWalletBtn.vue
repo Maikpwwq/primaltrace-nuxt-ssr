@@ -50,8 +50,8 @@ const polygonzkEVMConfig: CustomChainConfig = {
   displayName: "Polygon zkEVM Testnet",
   ticker: "ETH", // MATIC
   tickerName: "Ethereum",
-  blockExplorer: "https://testnet-zkevm.polygonscan.com",
-  // testnet: true,
+  blockExplorerUrl: "https://testnet-zkevm.polygonscan.com",
+  isTestnet: true,
 };
 
 // const openloginAdapter = new OpenloginAdapter({
@@ -65,6 +65,7 @@ const polygonzkEVMConfig: CustomChainConfig = {
 // const web3auth = ref<Web3Auth>(new Web3Auth({
 const web3auth = new Web3Auth({
   privateKeyProvider: PRIVATE_KEY,
+  web3AuthNetwork: "testnet",
   clientId: WEB3AUTH_CLIENT_ID,
   chainConfig: polygonzkEVMConfig,
 });

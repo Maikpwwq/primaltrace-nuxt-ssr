@@ -15,7 +15,7 @@ const drawer = ref(null);
     ----------------------------------------------- -->
     <v-app-bar class="app-header pt-lg-0 pt-3 overflow-visible" absolute flat elevate-on-scroll>
       <v-container class="fill-height px-5" style="padding: 0 !important; max-width: initial !important;">
-        <v-toolbar class="py-2 pe-5 bg-transparent d-flex align-center overflow-visible" style="background: #00000057; backdrop-filter: blur(7px)">
+        <v-toolbar class="pe-5 bg-transparent d-flex align-center overflow-visible" style="background: #00000057; backdrop-filter: blur(7px)">
           <!-- Logo -->
           <LcLogoWhiteTextLogo />
           <!-- Desktop view Navigation -->

@@ -123,7 +123,7 @@ const { wallet, hasProvider, error, errorMessage, isConnecting } =
       class="logo-height"
       alt="logo smartChain polygon Zkevm"
     />
-    <ConnectWalletBtn  />
+    <ConnectWalletBtn v-if="hasProvider"/>
     <div v-if="hasProvider && wallet.accounts.length > 0">
       <div>
         <p class="mt-3 text-white">¡Has iniciado sesión correctamente!</p>
