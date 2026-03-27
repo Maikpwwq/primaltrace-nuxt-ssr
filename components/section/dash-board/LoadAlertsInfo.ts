@@ -4,16 +4,14 @@ import { getAlert } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/stores/smart-contract'
 import { storeToRefs } from 'pinia'
 
-const store = useSmartContract()
-// but skip any action or non reactive (non ref/reactive) property
-const { hasContract } = storeToRefs(store) // Destructuring from a Store 
-// actions can just be destructured
-const { setAlertsInfo } = store
-
 const PRODUCT_ID = ref(1);
 let LOAD_ALERT = ref(true);
 
 const LoadAlerts = async () => {
+  const store = useSmartContract()
+  const { hasContract } = storeToRefs(store) 
+  const { setAlertsInfo } = store
+
   if (LOAD_ALERT.value && hasContract.value) {
     try { 
     await getAlert(PRODUCT_ID.value).then((resp: any) => {
