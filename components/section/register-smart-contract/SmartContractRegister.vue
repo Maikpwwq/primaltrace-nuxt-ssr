@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {
   StreamBarcodeReader,
-  ImageBarcodeReader,
+  // ImageBarcodeReader,
 } from "@teckel/vue-barcode-reader";
 import { reactive } from "vue";
-import { useWalletStore } from "@/store";
-import { useSmartContract } from "@/store/smart-contract";
+import { useWalletStore } from "@/stores";
+import { useSmartContract } from "@/stores/smart-contract";
 import { storeToRefs } from "pinia";
 import Polygonzkevm from "/images/polygon-zkevm/polygonzkevm.png";
 import { ethers } from "ethers";
@@ -19,7 +19,7 @@ import SmartContractDetails from "@/components/section/register-smart-contract/S
 // import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables";
 
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
-import { contractByteCode } from "@/services/thridWeb/implementationByteCode.ts";
+import { contractByteCode } from "@/services/thridWeb/implementationByteCode";
 
 const store = useWalletStore();
 // but skip any action or non reactive (non ref/reactive) property
@@ -169,7 +169,7 @@ const onError = (err: any) => {
 import { ref } from "vue";
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables"; 
 
-let deployAddress = ref(IMPLEMENTATION_CONTRACT_ADDRESS);
+let deployAddress = ref("");// ref(IMPLEMENTATION_CONTRACT_ADDRESS);
 export { deployAddress };
 </script>
 
@@ -200,7 +200,7 @@ export { deployAddress };
           Leer código QR del SmartContract
         </v-btn>
         <div v-if="readQR" class="h-screen" id="decode-qr">
-          <StreamBarcodeReader
+          <StreamBarcodeReader            
             no-front-cameras
             @decode="onDecode"
             @loaded="onLoaded"
@@ -235,3 +235,4 @@ export { deployAddress };
   height: 33px;
 }
 </style>
+~/stores~/stores/smart-contract

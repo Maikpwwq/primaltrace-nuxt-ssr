@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import BaseTable from "./BaseTable.vue";
-import { useSmartContract } from "@/store/smart-contract";
+import { useSmartContract } from "@/stores/smart-contract";
 import { storeToRefs } from "pinia";
 
 const headers = [
@@ -61,3 +61,4 @@ const items: Array<object> = reactive([
     </v-row>
   </div>
 </template>
+~/stores/smart-contract

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, watchEffect } from "vue";
 import Polygon from "/images/polygon-zkevm/main.svg";
-import { useSmartContract } from "@/store/smart-contract";
+import { useSmartContract } from "@/stores/smart-contract";
 import { storeToRefs } from "pinia";
 import type { Catalog } from "@/schemas/index";
 
@@ -127,3 +127,4 @@ const handleChange = () => {
   height: 33px;
 }
 </style>
+~/stores/smart-contract

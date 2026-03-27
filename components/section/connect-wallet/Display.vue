@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useWalletStore } from '@/store'
+import { useWalletStore } from "@/stores"
 import { storeToRefs } from 'pinia'
 import { formatChainAsNum } from "@/utils";
 
@@ -43,4 +43,4 @@ const { wallet } = storeToRefs(store) // Destructuring from a Store
     height: calc(100% - 136px);
     padding: 16px;
 }
-</style>
+</style>~/stores

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useWalletStore } from '@/store'
+import { useWalletStore } from "@/stores"
 import { storeToRefs } from 'pinia'
 
 const store = useWalletStore()
@@ -34,4 +34,4 @@ const { error, errorMessage } = storeToRefs(store) // Destructuring from a Store
     color: #EFEFEF;
     background-color: transparent;
 }
-</style>
+</style>~/stores

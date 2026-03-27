@@ -2,16 +2,16 @@
 import { watchEffect, markRaw, ref, reactive } from "vue";
 import { Web3Auth } from "@web3auth/modal";
 import { CHAIN_NAMESPACES } from "@web3auth/base";
-import { useWalletStore } from "@/store";
+import { useWalletStore } from "@/stores";
 import { ethers } from "ethers";
 import type {
   CustomChainConfig,
-  SafeEventEmitterProvider,
+  IProvider,
 } from "@web3auth/base";
 import { formatBalance, formatAddress } from "@/utils";
 import { IconWallet } from "@tabler/icons-vue";
 
-let sharedProvider: SafeEventEmitterProvider;
+let sharedProvider: IProvider;
 
 const store = useWalletStore();
 // but skip any action or non reactive (non ref/reactive) property
@@ -64,9 +64,8 @@ const polygonzkEVMConfig: CustomChainConfig = {
 
 // const web3auth = ref<Web3Auth>(new Web3Auth({
 const web3auth = new Web3Auth({
-  privateKeyProvider: PRIVATE_KEY,
-  web3AuthNetwork: "testnet",
   clientId: WEB3AUTH_CLIENT_ID,
+  web3AuthNetwork: "testnet",
   chainConfig: polygonzkEVMConfig,
 });
 
@@ -97,7 +96,7 @@ const web3AuthModal = async () => {
     setIsConnecting(true);
     clearError();
     // console.log("isConnecting", isConnecting)
-    const web3authProvider: SafeEventEmitterProvider = await web3auth.connect();
+    const web3authProvider: IProvider = await web3auth.connect();
     // console.log("WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID, web3authProvider);
     // Earlier in v5 provider = new ethers.providers.Web3Provider(window.ethereum)
     const ethersProvider = new ethers.providers.Web3Provider(web3authProvider); // web3auth.provider

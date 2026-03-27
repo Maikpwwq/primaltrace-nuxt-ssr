@@ -1,6 +1,6 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { PolygonZkevmTestnet } from "@thirdweb-dev/chains";
-// import { useWalletStore } from '@/store'
+// import { useWalletStore } from "@/stores"
 // import { storeToRefs } from 'pinia'
 
 // const storeWallet = useWalletStore()

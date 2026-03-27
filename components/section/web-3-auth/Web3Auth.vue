@@ -5,8 +5,8 @@
 //   SafeEventEmitterProvider,
 // } from "@web3auth/base";
 
-import { useWalletStore } from "@/store";
-// import { useSmartContract } from "@/store/smart-contract";
+import { useWalletStore } from "@/stores";
+// import { useSmartContract } from "@/stores/smart-contract";
 import { storeToRefs } from "pinia";
 import WalletError from "./WalletError.vue";
 import ConnectWalletBtn from "./ConnectWalletBtn.vue";

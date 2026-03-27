@@ -1,4 +1,4 @@
-// import { MetaMaskSDK } from '@metamask/sdk';
+// import { MetaMaskSDK } from '@metamask/connect-evm';
 // const MMSDK = new MetaMaskSDK(options);
 
 // const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum

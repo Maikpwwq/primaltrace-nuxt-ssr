@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
-import { useSmartContract } from '@/store/smart-contract'
+import { useSmartContract } from '@/stores/smart-contract'
 import { storeToRefs } from 'pinia'
 import type { AlertInfo } from "@/schemas/index"
 
@@ -107,3 +107,4 @@ const handleChange = () => {
     height: 33px;
 }
 </style>
+~/stores/smart-contract

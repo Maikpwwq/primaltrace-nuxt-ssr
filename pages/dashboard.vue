@@ -2,12 +2,18 @@
 import { ref } from "vue";
 import DashBoard from "@/components/section/dash-board/DashBoard.vue";
 import BannerConnectWallet from "@/components/shared/lp-banner/BannerConnectWallet.vue";
-import { useSmartContract } from '@/store/smart-contract'
+import { useSmartContract } from '@/stores/smart-contract'
+import { useWalletStore } from "@/stores";
 import { storeToRefs } from 'pinia'
 
 const storeContract = useSmartContract()
 // but skip any action or non reactive (non ref/reactive) property
 const { contract, contractInfo, hasContract, error, errorMessage, isConnecting } = storeToRefs(storeContract) // Destructuring from a Store 
+
+const storeWallet = useWalletStore();
+// but skip any action or non reactive (non ref/reactive) property
+const { wallet, hasProvider } = storeToRefs(storeWallet); // Destructuring from a Store
+
 </script>
 
 <template>
@@ -16,7 +22,8 @@ const { contract, contractInfo, hasContract, error, errorMessage, isConnecting }
         <BannerConnectWallet v-if="contract.contractAddress === ''"/>
         <!--------------------->
         <!-------DashBoard-------->
-        <DashBoard />
+        <DashBoard  v-if="hasProvider && wallet.accounts.length > 0"/>
         <!--------------------->
     </div>
 </template>
+~/stores/smart-contract~/stores

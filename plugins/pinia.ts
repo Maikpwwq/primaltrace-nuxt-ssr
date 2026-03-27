@@ -1,9 +1,11 @@
-import { useWalletStore } from '@/store'
+import { useWalletStore } from '~/stores'
+import { useSmartContract } from '~/stores/smart-contract'
 
 export default defineNuxtPlugin(({ $pinia }) => {
   return {
     provide: {
-      store: useWalletStore($pinia)
+      wallet: useWalletStore($pinia),
+      contract: useSmartContract($pinia)
     }
   }
 })

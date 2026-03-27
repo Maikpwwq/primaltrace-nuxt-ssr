@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Display from "./Display.vue";
 import { storeToRefs } from "pinia";
-import { useWalletStore } from "@/store";
-import { useSmartContract } from "@/store/smart-contract";
+import { useWalletStore } from "@/stores";
+import { useSmartContract } from "@/stores/smart-contract";
 import { IconCurrencyEthereum } from "@tabler/icons-vue";
 import { IconOutbound } from "@tabler/icons-vue";
 
@@ -139,3 +139,4 @@ const logout = async () => {
 }
 
 </style>
+~/stores~/stores/smart-contract

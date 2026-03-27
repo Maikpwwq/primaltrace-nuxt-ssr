@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import { getProduct } from "@/services/thridWeb/contractReadInteract";
-import { useSmartContract } from '@/store/smart-contract'
+import { useSmartContract } from '@/stores/smart-contract'
 import { storeToRefs } from 'pinia'
 
 const store = useSmartContract()
@@ -32,4 +32,4 @@ const LoadProductsInfo = async () => {
 }
 
 export default LoadProductsInfo
-</script>
+</script>~/stores/smart-contract

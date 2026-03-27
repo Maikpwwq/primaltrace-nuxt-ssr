@@ -2,7 +2,7 @@
 import SmartContractNavItems from "@/components/section/register-smart-contract/SmartContractNavItems.vue";
 import { IconTransfer } from "@tabler/icons-vue";
 import { storeToRefs } from "pinia";
-import { useSmartContract } from "@/store/smart-contract";
+import { useSmartContract } from "@/stores/smart-contract";
 
 const storeContract = useSmartContract();
 // but skip any action or non reactive (non ref/reactive) property
@@ -44,3 +44,4 @@ const drawer = ref(null);
     </v-col>
   </div>
 </template>
+~/stores/smart-contract

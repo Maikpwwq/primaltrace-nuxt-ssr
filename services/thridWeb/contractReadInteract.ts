@@ -6,7 +6,7 @@ import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 // let contract: any;
 
 // This has not access to Store
-// import { useSmartContract } from '@/store/smart-contract'
+// import { useSmartContract } from '@/stores/smart-contract'
 // import { storeToRefs } from 'pinia'
 // const storeContract = useSmartContract()
 // // but skip any action or non reactive (non ref/reactive) property
@@ -17,7 +17,7 @@ import { deployAddress } from "@/components/section/register-smart-contract/Smar
 console.log("contractReadInteract", deployAddress?.value);
 
 const readContract = await sdk.getContract(
-  deployAddress?.value, // IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress,
+  "0x337e858c4465dfef88af8d66baf95842b9b579df", // deployAddress?.value, // IMPLEMENTATION_CONTRACT_ADDRESS, // contract.value.contractAddress,
   ABI_CATALOG // The ABI of your smart contract
 );
 

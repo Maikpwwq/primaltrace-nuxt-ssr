@@ -2,7 +2,7 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
 import { addAlerts } from "@/services/thridWeb/contractWriteInteract";
-import { useWalletStore } from "@/store";
+import { useWalletStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { TRACEABILITY_INFO } from "@/data/contractVariables";
 import type { AlertInfo } from "@/schemas/index";
@@ -211,3 +211,4 @@ const handleClick = () => {
   height: 33px;
 }
 </style>
+~/stores

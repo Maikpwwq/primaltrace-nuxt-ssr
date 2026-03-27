@@ -22,8 +22,8 @@ import ProductsResume from "@/components/section/tables/ProductsResume.vue";
 import TrazabilitiesResume from "@/components/section/tables/TrazabilitiesResume.vue";
 
 import { storeToRefs } from "pinia";
-import { useWalletStore } from "@/store";
-import { useSmartContract } from "@/store/smart-contract";
+import { useWalletStore } from "@/stores";
+import { useSmartContract } from "@/stores/smart-contract";
 
 const storeWallet = useWalletStore();
 // but skip any action or non reactive (non ref/reactive) property
@@ -149,3 +149,4 @@ watchEffect(async () => {
   height: 133px;
 }
 </style>
+~/stores~/stores/smart-contract

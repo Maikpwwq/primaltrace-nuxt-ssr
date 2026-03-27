@@ -10,8 +10,20 @@ export default defineNuxtConfig({
     //   extractCSS: false,
     transpile: ["vuetify"],
   },
-  modules: ["@pinia/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+  ],
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
   vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          silenceDeprecations: ["import", "global-builtin"]
+        }
+      }
+    },
     define: {
       // "process.env.DEBUG": false,
       // global: { "window" },

@@ -56,7 +56,7 @@ export const useWalletStore = defineStore("wallet", {
   },
 });
 
-// import { useWalletStore } from '@/store'
+// import { useWalletStore } from "@/stores"
 // const store = useWalletStore()
 // but skip any action or non reactive (non ref/reactive) property
 // const { wallet, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 

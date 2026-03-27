@@ -17,7 +17,7 @@ import { deployAddress } from "@/components/section/register-smart-contract/Smar
 console.log("contractReadInteract", deployAddress?.value);
 
 const contract = await sdk.getContract(
-  deployAddress?.value, // IMPLEMENTATION_CONTRACT_ADDRESS,
+  "0x337e858c4465dfef88af8d66baf95842b9b579df", // IMPLEMENTATION_CONTRACT_ADDRESS, || deployAddress?.value
   ABI_CATALOG // The ABI of your smart contract
 );
 

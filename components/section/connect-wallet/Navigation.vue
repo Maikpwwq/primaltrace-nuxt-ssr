@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, watchEffect } from "vue";
-import { useWalletStore } from '@/store'
+import { useWalletStore } from "@/stores"
 import { formatBalance, formatAddress } from "@/utils";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { mapActions, storeToRefs } from 'pinia'
@@ -159,4 +159,4 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
   height: 33px;
 }
 
-</style>
+</style>~/stores

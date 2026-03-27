@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconReplaceFilled } from "@tabler/icons-vue";
 import QRCode from "@/components/section/qr-code/QRCode.vue";
-import { useSmartContract } from "@/store/smart-contract";
+import { useSmartContract } from "@/stores/smart-contract";
 import { storeToRefs } from "pinia";
 
 defineProps<{
@@ -60,3 +60,4 @@ const handleChangeQR = async () => {
     </v-btn>
   </div>
 </template>
+~/stores/smart-contract

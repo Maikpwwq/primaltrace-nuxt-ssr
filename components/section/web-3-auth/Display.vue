@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useWalletStore } from '@/store'
+import { useWalletStore } from "@/stores"
 import { storeToRefs } from 'pinia'
 import { formatChainAsNum, formatAddress } from "@/utils";
 
@@ -48,4 +48,4 @@ const etherScan = `https://etherscan.io/address/${wallet.value.accounts[0]}`;
     height: calc(100% - 136px);
     padding: 16px;
 }
-</style>
+</style>~/stores

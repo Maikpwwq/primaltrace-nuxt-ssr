@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import QrcodeVue from 'qrcode.vue'
 import type { Level, RenderAs } from 'qrcode.vue'
-import { useSmartContract } from '@/store/smart-contract'
+import { useSmartContract } from '@/stores/smart-contract'
 import { storeToRefs } from 'pinia'
 
 const storeContract = useSmartContract()
@@ -19,4 +19,4 @@ const renderAs = ref<RenderAs>('svg')
     <div class="d-flex align-center">
         <qrcode-vue :value="value" :margin="margin" :size="size" :level="level" :render-as="renderAs" />
     </div>
-</template>
+</template>~/stores/smart-contract
