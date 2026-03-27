@@ -1,4 +1,4 @@
-<script lang="ts">
+
 import { ref } from "vue";
 import { getProduct } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/stores/smart-contract'
@@ -31,4 +31,4 @@ const LoadProductsInfo = async () => {
   }
 }
 
-</script>
+export default LoadProductsInfo

@@ -1,4 +1,4 @@
-<script lang="ts">
+
 import { ref } from "vue";
 import { getProductTraceabilityInfo } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from "@/stores/smart-contract";
@@ -48,4 +48,4 @@ const LoadRastrosInfo = async () => {
 };
 
 export default LoadRastrosInfo
-</script>
+

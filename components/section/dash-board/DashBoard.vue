@@ -13,9 +13,9 @@ import AddProduct from "@/components/section/add-product/AddProduct.vue";
 import GetCatalog from "@/components/section/add-catalog/GetCatalog.vue";
 import GetProduct from "@/components/section/add-product/GetProduct.vue";
 import GetTraceabilityInfo from "@/components/section/add-traceability-info/GetTraceabilityInfo.vue";
-import LoadCatalogsInfo from "@/components/section/dash-board/LoadCatalogsInfo.vue";
-import LoadProductsInfo from "@/components/section/dash-board/LoadProductsInfo.vue";
-import LoadRastrosInfo from "@/components/section/dash-board/LoadRastrosInfo.vue";
+import LoadCatalogsInfo from "@/components/section/dash-board/LoadCatalogsInfo";
+import LoadProductsInfo from "@/components/section/dash-board/LoadProductsInfo";
+import LoadRastrosInfo from "@/components/section/dash-board/LoadRastrosInfo";
 
 import CatalogsResume from "@/components/section/tables/CatalogsResume.vue";
 import ProductsResume from "@/components/section/tables/ProductsResume.vue";
@@ -41,7 +41,7 @@ const { contract, contractInfo, hasContract } = storeToRefs(storeContract); // D
 // const THIRDWEB_PRIVATE_KEY_2 = `${import.meta.env.NUXT_THIRDWEB_PRIVATE_KEY}` ; //works
 // const THIRDWEB_CLIENT_ID_2 = `${import.meta.env.VITE_THIRDWEB_CLIENT_ID}`;
 // console.log("dev variables 2", THIRDWEB_PRIVATE_KEY_2, THIRDWEB_CLIENT_ID_2);
-// const isActive = true;
+const isActive = ref(true);
 
 const drawer = ref(null);
 
@@ -56,7 +56,7 @@ watchEffect(async () => {
       await LoadProductsInfo()
       await LoadRastrosInfo()
       LOAD_CONTRACT.value = false
-    } catch (err){
+    } catch (err) {
       console.error(err)
     }
   }
@@ -76,17 +76,8 @@ watchEffect(async () => {
 
       <!----sidebar menu drawer start----->
       <div class="nav2" v-if="hasContract && contract.contractAddress !== ''">
-        <v-navigation-drawer
-          style="top: 193px"
-          color="white"
-          v-model="drawer"
-          temporary
-        >
-          <div
-            class="navigation"
-            v-bind:class="[isActive ? 'd-block' : '']"
-            @click="isActive = !isActive"
-          >
+        <v-navigation-drawer style="top: 193px" color="white" v-model="drawer" temporary>
+          <div class="navigation" v-bind:class="[isActive ? 'd-block' : '']" @click="isActive = !isActive">
             <ul class="navbar-nav px-3 py-5 mt-5" min-height="auto">
               <SmartContractNavItems />
             </ul>
@@ -94,39 +85,22 @@ watchEffect(async () => {
         </v-navigation-drawer>
       </div>
 
-      <v-row
-        justify="center"
-        class="flex-md-row-reverse flex-sm-column ma-0 w-auto position-relative"
-        style="top: 80px !important; padding-bottom: 80px !important"
-      >
-        <v-col
-          cols="12"
-          lg="5"
-          md="5"
-          sm="12"
-          class="d-flex pa-0"
-          style="height: fit-content"
-        >
+      <v-row justify="center" class="flex-md-row-reverse flex-sm-column ma-0 w-auto position-relative"
+        style="top: 80px !important; padding-bottom: 80px !important">
+        <v-col cols="12" lg="5" md="5" sm="12" class="d-flex pa-0" style="height: fit-content">
           <div class="bg-primary w-100">
             <SmartContractRegister />
           </div>
         </v-col>
         <!-- style="width: min-content;" -->
-        <v-col
-          v-if="hasContract && contract.contractAddress !== ''"
-          cols="12"
-          lg="7"
-          md="7"
-          sm="12"
-          class="pa-0"
-        >
+        <v-col v-if="hasContract && contract.contractAddress !== ''" cols="12" lg="7" md="7" sm="12" class="pa-0">
           <SmartContractSubMenu />
           <!-- TODO: delimitar height: 100vp; overflow-y: auto; -->
           <!-- v-if="contractInfo.value-catalog"-->
           <v-col cols="12" class="pa-0">
             <AddCatalog v-if="slides.number === 1" />
             <AddProduct v-if="slides.number === 2" />
-            <AddTraceabilityInfo v-if="slides.number === 3" />            
+            <AddTraceabilityInfo v-if="slides.number === 3" />
             <CatalogsResume v-if="slides.number === 4 || slides.number === 0" />
             <ProductsResume v-if="slides.number === 5" />
             <TrazabilitiesResume v-if="slides.number === 6" />

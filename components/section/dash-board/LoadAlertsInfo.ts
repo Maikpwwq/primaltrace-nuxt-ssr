@@ -1,4 +1,4 @@
-<script lang="ts">
+
 import { ref } from "vue";
 import { getAlert } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/stores/smart-contract'
@@ -31,4 +31,3 @@ const LoadAlerts = async () => {
   }
 }
 
-</script>

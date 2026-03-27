@@ -1,4 +1,4 @@
-<script lang="ts">
+
 import { ref } from "vue";
 import { getCatalog } from "@/services/thridWeb/contractReadInteract";
 import { useSmartContract } from '@/stores/smart-contract'
@@ -32,4 +32,4 @@ const LoadCatalogsInfo = async () => {
     }
 }
 
-</script>
+export default LoadCatalogsInfo
