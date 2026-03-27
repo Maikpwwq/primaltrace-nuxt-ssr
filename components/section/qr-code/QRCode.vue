@@ -19,4 +19,4 @@ const renderAs = ref<RenderAs>('svg')
     <div class="d-flex align-center">
         <qrcode-vue :value="value" :margin="margin" :size="size" :level="level" :render-as="renderAs" />
     </div>
-</template>~/stores/smart-contract
+</template>

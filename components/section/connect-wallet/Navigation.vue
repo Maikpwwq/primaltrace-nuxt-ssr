@@ -159,4 +159,4 @@ const etherScan = `https://etherscan.io/address/${wallet}`;
   height: 33px;
 }
 
-</style>~/stores
+</style>

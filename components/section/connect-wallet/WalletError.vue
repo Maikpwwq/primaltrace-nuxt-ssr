@@ -34,4 +34,4 @@ const { error, errorMessage } = storeToRefs(store) // Destructuring from a Store
     color: #EFEFEF;
     background-color: transparent;
 }
-</style>~/stores
+</style>

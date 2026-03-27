@@ -43,4 +43,4 @@ const { wallet } = storeToRefs(store) // Destructuring from a Store
     height: calc(100% - 136px);
     padding: 16px;
 }
-</style>~/stores
+</style>

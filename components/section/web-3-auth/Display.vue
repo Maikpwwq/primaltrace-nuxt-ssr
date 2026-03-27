@@ -48,4 +48,4 @@ const etherScan = `https://etherscan.io/address/${wallet.value.accounts[0]}`;
     height: calc(100% - 136px);
     padding: 16px;
 }
-</style>~/stores
+</style>

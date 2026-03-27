@@ -95,4 +95,4 @@ const handleChange = () => {
 .logo-height {
   height: 33px;
 }
-</style>~/stores/smart-contract
+</style>
