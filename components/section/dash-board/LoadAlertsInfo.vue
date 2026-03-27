@@ -31,5 +31,4 @@ const LoadAlerts = async () => {
   }
 }
 
-export { LoadAlerts }
-</script>~/stores/smart-contract
+</script>

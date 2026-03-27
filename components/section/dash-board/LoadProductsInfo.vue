@@ -31,5 +31,4 @@ const LoadProductsInfo = async () => {
   }
 }
 
-export default LoadProductsInfo
-</script>~/stores/smart-contract
+</script>
