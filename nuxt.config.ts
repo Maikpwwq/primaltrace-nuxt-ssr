@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // require("dotenv").config();
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
 export default defineNuxtConfig({
   ssr: false,
   typescript: {
@@ -17,6 +19,12 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**'],
   },
   vite: {
+    plugins: [
+      nodePolyfills({
+        include: ['buffer', 'process', 'util', 'stream', 'events'],
+        globals: { Buffer: true, global: true, process: true },
+      }),
+    ],
     css: {
       preprocessorOptions: {
         scss: {

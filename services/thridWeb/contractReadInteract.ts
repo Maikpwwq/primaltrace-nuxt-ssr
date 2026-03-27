@@ -1,4 +1,4 @@
-import sdk from "@/services/thridWeb/sdkInstance.js";
+import getSdk from "@/services/thridWeb/sdkInstance.js";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
 
@@ -12,6 +12,7 @@ const getReadContract = async () => {
     const address = deployAddress?.value || DEFAULT_CONTRACT_ADDRESS;
     console.log("contractReadInteract: initializing with address", address);
     try {
+      const sdk = getSdk();
       readContract = await sdk.getContract(address, ABI_CATALOG);
     } catch (error) {
       console.error("contractReadInteract: failed to connect", error);
