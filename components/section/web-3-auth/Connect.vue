@@ -139,4 +139,3 @@ const logout = async () => {
 }
 
 </style>
-~/stores~/stores/smart-contract

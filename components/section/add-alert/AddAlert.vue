@@ -211,4 +211,3 @@ const handleClick = () => {
   height: 33px;
 }
 </style>
-~/stores

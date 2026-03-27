@@ -149,4 +149,3 @@ watchEffect(async () => {
   height: 133px;
 }
 </style>
-~/stores~/stores/smart-contract

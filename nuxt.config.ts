@@ -29,7 +29,14 @@ export default defineNuxtConfig({
       // global: { "window" },
     },
     build: {
-      target: "ESNext" // esnext
+      target: "ESNext", // esnext
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          // Suppress the nuxt:module-preload-polyfill sourcemap warning
+          if (warning.plugin === 'nuxt:module-preload-polyfill') return;
+          defaultHandler(warning);
+        },
+      },
     },
     // esbuild: {
     //   supported: {

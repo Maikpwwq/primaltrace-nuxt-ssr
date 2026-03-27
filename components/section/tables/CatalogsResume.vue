@@ -61,4 +61,3 @@ const items: Array<object> = reactive([
     </v-row>
   </div>
 </template>
-~/stores/smart-contract

@@ -127,4 +127,3 @@ const handleChange = () => {
   height: 33px;
 }
 </style>
-~/stores/smart-contract

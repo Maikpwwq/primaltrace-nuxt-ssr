@@ -110,4 +110,3 @@ const CATALOG_ID = ref(1);
     </v-row>
   </div>
 </template>
-~/stores/smart-contract

@@ -49,4 +49,3 @@ const LoadRastrosInfo = async () => {
 
 export default LoadRastrosInfo
 </script>
-~/stores/smart-contract

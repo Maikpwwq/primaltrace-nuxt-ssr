@@ -26,4 +26,3 @@ const { wallet, hasProvider } = storeToRefs(storeWallet); // Destructuring from 
         <!--------------------->
     </div>
 </template>
-~/stores/smart-contract~/stores

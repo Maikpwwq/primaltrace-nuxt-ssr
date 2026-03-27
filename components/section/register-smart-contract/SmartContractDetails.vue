@@ -60,4 +60,3 @@ const handleChangeQR = async () => {
     </v-btn>
   </div>
 </template>
-~/stores/smart-contract

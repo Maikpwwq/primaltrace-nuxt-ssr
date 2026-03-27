@@ -44,4 +44,3 @@ const drawer = ref(null);
     </v-col>
   </div>
 </template>
-~/stores/smart-contract

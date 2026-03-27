@@ -235,4 +235,3 @@ export { deployAddress };
   height: 33px;
 }
 </style>
-~/stores~/stores/smart-contract
