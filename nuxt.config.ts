@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // require("dotenv").config();
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import processNextTickShim from './vite-plugins/processNextTickShim.js';
 
 export default defineNuxtConfig({
   ssr: false,
@@ -20,6 +21,7 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
+      processNextTickShim(),
       nodePolyfills({
         include: ['buffer', 'process', 'string_decoder', 'events'],
         globals: { Buffer: true, global: true, process: true },
