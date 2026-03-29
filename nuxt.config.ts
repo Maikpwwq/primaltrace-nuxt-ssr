@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       nodePolyfills({
-        include: ['buffer', 'process', 'util', 'stream', 'events'],
+        include: ['buffer', 'process'],
         globals: { Buffer: true, global: true, process: true },
       }),
     ],
@@ -33,6 +33,7 @@ export default defineNuxtConfig({
       }
     },
     define: {
+      "process.nextTick": "queueMicrotask",
       // "process.env.DEBUG": false,
       // global: { "window" },
     },
