@@ -1,44 +1,36 @@
-import sdk from "@/services/thridWeb/sdkPrivateInstance.js";
-// import {
-//   IMPLEMENTATION_CONTRACT_ADDRESS,
-//   TRACEABILITY_INFO,
-//   PRODUCT,
-//   ACTOR_TYPE,
-//   PRODUCT_STOCK,
-// } from "@/data/contractVariables";
+import getPrivateSdk from "@/services/thridWeb/sdkPrivateInstance.js";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 
-import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
+// Lazy-initialized contract instance — only connects when first needed
+let writeContract: any = null;
 
-// import sdk from "./sdkInstance"
-// const config = useRuntimeConfig();
-// let contract: any;
+const DEFAULT_CONTRACT_ADDRESS = "0x337e858c4465dfef88af8d66baf95842b9b579df";
 
-console.log("contractReadInteract", deployAddress?.value);
+const getWriteContract = async () => {
+  if (!writeContract) {
+    console.log("contractWriteInteract: initializing with address", DEFAULT_CONTRACT_ADDRESS);
+    try {
+      const sdk = getPrivateSdk();
+      writeContract = await sdk.getContract(DEFAULT_CONTRACT_ADDRESS, ABI_CATALOG);
+    } catch (error) {
+      console.error("contractWriteInteract: failed to connect", error);
+      throw error;
+    }
+  }
+  return writeContract;
+};
 
-const contract = await sdk.getContract(
-  "0x337e858c4465dfef88af8d66baf95842b9b579df", // IMPLEMENTATION_CONTRACT_ADDRESS, || deployAddress?.value
-  ABI_CATALOG // The ABI of your smart contract
-);
-
-// const init = ( async () => {
-//     try {
-//         contract = await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS);
-//         console.log("contractWriteInteract", contract);
-//     } catch (error: any) {
-//         console.log("contractWriteInteract", error);
-//     }
-// })();
-
-// Connect to your smart contract using the contract address
-// const contract = async () => { await sdk.getContract(IMPLEMENTATION_CONTRACT_ADDRESS); }
-
-// Call a function on your smart contract using the function name
-// const name = async () => { contract.call("myFunctionName")};
+/**
+ * Resets the cached write contract instance.
+ * Call this when the user deploys or selects a new contract address.
+ */
+const resetWriteContract = () => {
+  writeContract = null;
+};
 
 const addProduct = async (product: any) => {
+  const contract = await getWriteContract();
   const {
-    // catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -48,7 +40,6 @@ const addProduct = async (product: any) => {
     metadataProducto,
   } = product;
   const sendProduct = [
-    // catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -60,7 +51,9 @@ const addProduct = async (product: any) => {
   console.log("addProduct", product, sendProduct);
   return await contract.call("addProduct", sendProduct);
 };
+
 const addTraceabilityInfo = async (traceabilityInfo: any) => {
+  const contract = await getWriteContract();
   const {
     productId,
     action,
@@ -84,6 +77,7 @@ const addTraceabilityInfo = async (traceabilityInfo: any) => {
 };
 
 const addAlerts = async (alert: any) => {
+  const contract = await getWriteContract();
   const {
     alertId,
     productId,
@@ -115,25 +109,22 @@ const addAlerts = async (alert: any) => {
 };
 
 const createCatalog = async (catalogInfo: any) => {
+  const contract = await getWriteContract();
   const { catalogName, catalogMetadata, catalogDescription } = catalogInfo;
   const sendCatalog = [catalogName, catalogMetadata, catalogDescription];
-  console.log("addTraceabilityInfo", catalogInfo, sendCatalog);
+  console.log("createCatalog", catalogInfo, sendCatalog);
   return await contract.call("createCatalog", sendCatalog);
 };
+
 const setActorType = async (actorType: any) => {
+  const contract = await getWriteContract();
   return await contract.call("setActorType", actorType);
 };
+
 const updateProductStock = async (productStock: any) => {
+  const contract = await getWriteContract();
   return await contract.call("updateProductStock", productStock);
 };
-// const product = [_productName, _productDescription, _manufacturer, _manufacturingDate, _batchNumber, _productionLocation, _metadataProducto]
-// const traceabilityInfo = [_productId, _action, _timestamp, _actor, _actorType, _actorId, _metadataAction]
-// const actorType = [_actorType]
-// const productStock = [_productId, _availableQuantity, _reservedQuantity, _totalQuantity]
-
-// Or Using the extensions API matching your contract extensions
-// const allNFTs = async () => { await contract.erc721.getAll()};
-// const tokenSupply = async () => { await contract.erc20.totalSupply()};
 
 export {
   createCatalog,
@@ -142,4 +133,5 @@ export {
   addAlerts,
   setActorType,
   updateProductStock,
+  resetWriteContract,
 };

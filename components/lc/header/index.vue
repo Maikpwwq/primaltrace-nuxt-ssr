@@ -7,6 +7,7 @@ import { IconHome } from '@tabler/icons-vue';
 import Connect from "@/components/section/web-3-auth/Connect.vue"
 
 const drawer = ref(null);
+const isActive = ref(true);
 </script>
 <template>
   <div>

@@ -1,4 +1,4 @@
-import sdk from "@/services/thridWeb/sdkPrivateInstance.js";
+import getPrivateSdk from "@/services/thridWeb/sdkPrivateInstance.js";
 import { IMPLEMENTATION_CONTRACT_ADDRESS } from "@/data/contractVariables"; // "{{implementation_contract_address}}"
 import implementationAbi from "@/services/thridWeb/implementationAbi.json";
 import type { Catalog } from "@/schemas/index";
@@ -21,6 +21,7 @@ const deployContract = async (initializerArgs: Catalog) => {
     const { catalogName, catalogDescription, catalogMetadata } =
       initializerArgs;
     const sendCatalog = [catalogName, catalogDescription, catalogMetadata];
+    const sdk = getPrivateSdk();
     txResult = await sdk.deployer.deployProxy(
       IMPLEMENTATION_CONTRACT_ADDRESS,
       implementationAbi,
