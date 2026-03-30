@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
 import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 </script>
 <template>
@@ -8,13 +9,7 @@ import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
             Start Banner
         ----------------------------------------------- -->
       <v-row justify="center" class="pt-6 mt-6">
-        <v-col
-          cols="12"
-          sm="10" 
-          md="6"
-          lg="5"
-          class="d-flex align-center justify-center"
-        >
+        <v-col cols="12" sm="10" md="6" lg="5" class="d-flex align-center justify-center">
           <div class="text-center">
             <h1 class="banner-title font-weight-bold text-white">DashBoard</h1>
             <h4 class="banner-subtitle mr-0 text-white font-weight-regular">
@@ -24,7 +19,7 @@ import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
               gratuitamente información de tus productos desde cualquier lugar.
             </h4>
             <div class="mt-8">
-              <!-- <ConnectWallet /> -->
+              <ConnectWallet />
               <Web3Auth />
             </div>
           </div>

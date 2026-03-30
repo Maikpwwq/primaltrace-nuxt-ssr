@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { headerMenu } from "@/data/CustomComponents";
-const drawer = ref(null);
+const drawer = ref(false);
 const isActive = ref(true);
 </script>
 <template>

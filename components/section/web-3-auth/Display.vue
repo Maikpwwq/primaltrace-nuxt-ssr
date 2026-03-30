@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useWalletStore } from "@/stores"
 import { storeToRefs } from 'pinia'
 import { formatChainAsNum, formatAddress } from "@/utils";
@@ -7,7 +7,10 @@ import { formatChainAsNum, formatAddress } from "@/utils";
 const store = useWalletStore()
 const { wallet } = storeToRefs(store) // Destructuring from a Store 
 
-const etherScan = `https://etherscan.io/address/${wallet.value.accounts[0]}`;
+const etherScan = computed(() => {
+    const account = wallet.value.accounts[0];
+    return account ? `https://etherscan.io/address/${account}` : '#';
+});
 </script>
 <template>
     <div id="display-wallet">

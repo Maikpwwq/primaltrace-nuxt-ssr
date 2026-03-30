@@ -8,7 +8,7 @@ const storeContract = useSmartContract();
 // but skip any action or non reactive (non ref/reactive) property
 const { hasContract } = storeToRefs(storeContract); // Destructuring from a Store
 
-const drawer = ref(null);
+const drawer = ref(false);
 const isActive = ref(true);
 </script>
 

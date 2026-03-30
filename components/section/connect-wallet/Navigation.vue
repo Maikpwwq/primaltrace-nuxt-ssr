@@ -1,81 +1,44 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, watchEffect } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useWalletStore } from "@/stores"
 import { formatBalance, formatAddress } from "@/utils";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { mapActions, storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia'
 import IsoLogoZkevm from "/images/polygon-zkevm/IsoLogo.svg";
 import type { WalletState } from "@/schemas/index"
-// import { WalletState, MetaMaskContextData } from "@/schemas/index"
 
 const store = useWalletStore()
-// but skip any action or non reactive (non ref/reactive) property
-const { wallet, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store) // Destructuring from a Store 
-// actions can just be destructured
+const { wallet, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store)
 const { setWallet, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet } = store
 
-let provider: any;
-// expose to template and other options API hooks
-watchEffect(() => {
-    const getProvider = async () => {
-        provider = await detectEthereumProvider({ silent: true });
-        setHasProvider(Boolean(provider))
-
-        if (provider) {
-            const chainId = await provider.request({
-                method: "eth_chainId",
-            });
-            console.log("Ethereum successfully detected!", chainId);
-            // From now on, this should always be true:
-            // provider === window.ethereum
-
-            // Access the decentralized web!
-
-            // Legacy providers may only have ethereum.sendAsync
-            const accounts = (await provider.request({ method: "eth_accounts" })) || (await window.ethereum?.request(
-                { method: 'eth_accounts' },
-            ));
-
-            updateWallet(accounts);
-
-            provider.on("accountsChanged", updateWallet);
-            provider.on("chainChanged", updateWallet);
-        } else {
-            // if the provider is not detected, detectEthereumProvider resolves to null
-            console.error("Please install MetaMask!", error);
-        }
-    };
-
-    getProvider();
-
-    return () => {
-        provider.removeListener("accountsChanged", updateWallet);
-        provider.removeListener("chainChanged", updateWallet);
-    };
-});
+let provider: any = null;
 
 const updateWallet = async (accounts?: any) => {
-
-    if (accounts.length === 0) {
-        // If there are no accounts, then the user is disconnected
+    if (!accounts || accounts.length === 0) {
         clearWallet()
         return
     }
 
-    const balance = formatBalance(
-        await provider.request({
-            method: "eth_getBalance",
-            params: [accounts[0], "latest"],
-        }),
-    );
+    try {
+        const balance = formatBalance(
+            await provider.request({
+                method: "eth_getBalance",
+                params: [accounts[0], "latest"],
+            }),
+        );
 
-    const chainId = await provider.request({
-        method: "eth_chainId",
-    });
+        const chainId = await provider.request({
+            method: "eth_chainId",
+        });
 
-    const privateKey = "";
-    const walletState : WalletState = { accounts, balance, chainId, privateKey };
-    setWallet(walletState)
+        const privateKey = "";
+        const walletState: WalletState = { accounts, balance, chainId, privateKey };
+        setWallet(walletState)
+    } catch (err: any) {
+        console.error("updateWallet failed:", err);
+        setError(true)
+        setErrorMessage(err.message || "Failed to update wallet")
+    }
 };
 
 const handleConnect = async () => {
@@ -93,11 +56,49 @@ const handleConnect = async () => {
     }
 
     setIsConnecting(false)
-
 };
 
-const disableConnect = wallet && isConnecting.value ? true : false;
-const etherScan = `https://etherscan.io/address/${wallet}`;
+// Reactive computed properties — re-evaluate when store state changes
+const disableConnect = computed(() => {
+    return Boolean(wallet.value.accounts.length > 0) || isConnecting.value;
+});
+
+const etherScan = computed(() => {
+    const account = wallet.value.accounts[0];
+    return account ? `https://etherscan.io/address/${account}` : '#';
+});
+
+onMounted(async () => {
+    try {
+        provider = await detectEthereumProvider({ silent: true });
+        setHasProvider(Boolean(provider))
+
+        if (provider) {
+            const chainId = await provider.request({
+                method: "eth_chainId",
+            });
+            console.log("Ethereum successfully detected!", chainId);
+
+            const accounts = (await provider.request({ method: "eth_accounts" })) || [];
+            updateWallet(accounts);
+
+            provider.on("accountsChanged", updateWallet);
+            provider.on("chainChanged", updateWallet);
+        } else {
+            console.error("Please install MetaMask!");
+        }
+    } catch (err: any) {
+        console.error("MetaMask provider detection failed:", err);
+        setHasProvider(false)
+    }
+});
+
+onBeforeUnmount(() => {
+    if (provider) {
+        provider.removeListener("accountsChanged", updateWallet);
+        provider.removeListener("chainChanged", updateWallet);
+    }
+});
 </script>
 <template>
     <div id="display-wallet">
