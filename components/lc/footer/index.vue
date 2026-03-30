@@ -17,8 +17,7 @@
       ----------------------------------------------- -->
         <v-col cols="12" md="3" sm="6" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Telefono</h4>
-          <p class="mt-5 text-muted">Celular : +57 319 613 8057</p>
-          <!-- <p class="text-muted">Celular : +57 3196138057</p> -->
+          <p class="mt-5 text-muted">Celular : <a class="dark-link" href="https://wa.me/573204842897?text=Estoy%20interesado%20en%20trazabilidad%20para%20un%20producto" target="_blank" rel="noreferrer">+57 320 484 2897</a></p>
         </v-col>
         <!-- -----------------------------------------------
         Third Column
@@ -26,14 +25,12 @@
         <v-col cols="12" md="3" sm="6" class="px-xs-0">
           <h4 class="font-weight-regular font-18">Email</h4>
           <p class="mt-5 text-muted">
-            Oficina : <a class="dark-link" href="/">primaltrace@outlook.com </a>
+            Oficina : <a class="dark-link" href="mailto:primaltrace@outlook.com">primaltrace@outlook.com</a>
           </p>
           <p>
             <span class="text-muted">Sitio web : </span>
             <!-- https://www.primaltrace.com/ -->
-            <a class="dark-link" href="https://primaltrace-nuxt-ssr.vercel.app/"
-              >primaltrace.com</a
-            >
+            <a class="dark-link" href="https://primaltrace-nuxt-ssr.vercel.app/">primaltrace.com</a>
           </p>
         </v-col>
         <!-- -----------------------------------------------
@@ -68,9 +65,7 @@
           <p class="text-muted mb-sm-0 mb-3">
             Todos los derechos reservados por
             <!-- https://www.primaltrace.com/ -->
-            <a href="https://primaltrace-nuxt-ssr.vercel.app/" class="link"
-              >primaltrace.com</a
-            >
+            <a href="https://primaltrace-nuxt-ssr.vercel.app/" class="link">primaltrace.com</a>
           </p>
           <div class="ml-auto">
             <div class="d-sm-flex align-center">

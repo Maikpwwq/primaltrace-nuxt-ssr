@@ -25,9 +25,9 @@ const handleClick = async () => {
     .insert([{ name, email, message }]) // alreay auth loads id: 1, created_at: new Date(),
     .select('*')
   console.log("supabase contact form", contact_form, error)
-  if (contact_form){
+  if (contact_form) {
     console.log("Success supabase contact form", contact_form[contact_form.length - 1].id)
-  } else if (error){
+  } else if (error) {
     console.log("Error supabase contact form", error)
   }
 }
@@ -75,8 +75,8 @@ const handleClick = async () => {
                 Sede
                 <img :src="WhiteTLogo" class="logo-white-text" alt="logo PrimalTrace" />
               </h2>
-              <p class="mt-7 op-8 mb-0 text-white">+57 3196138057</p>
-              <p class="op-8 mb-8 text-white">primaltrace@outlook.com</p>
+              <p class="mt-7 op-8 mb-0"><a href="https://wa.me/573204842897?text=Estoy%20interesado%20en%20trazabilidad%20para%20un%20producto" target="_blank" rel="noreferrer" class="text-white text-decoration-underline">+57 320 484 2897</a></p>
+              <p class="op-8 mb-8"><a href="mailto:primaltrace@outlook.com" class="text-white text-decoration-underline">primaltrace@outlook.com</a></p>
               <p class="mt-7 op-8 mb-0 text-white">Bogotá,</p>
               <p class="op-8 mb-0 text-white">Colombia</p>
             </div>

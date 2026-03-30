@@ -16,7 +16,7 @@ const handleCLick = () => {
     <!-- -----------------------------------------------
           Start Header
     ----------------------------------------------- -->
-    <v-app-bar app class="app-header position-relative bg-dark header2" flat>
+    <v-app-bar app class="app-header position-relative header2 smoke-bar" flat>
       <v-container class="py-0 fill-height">
         <v-toolbar>
           <!-- Logo -->
@@ -66,10 +66,17 @@ const handleCLick = () => {
     </v-navigation-drawer>
   </div>
 </template>
-<style>
+<style scoped>
 .navigation-sticky {
   position: sticky;
   top: 0;
   z-index: 13;
+}
+
+.smoke-bar {
+  background: rgba(20, 18, 35, 0.72) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 </style>

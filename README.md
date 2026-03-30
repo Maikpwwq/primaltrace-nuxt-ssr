@@ -15,7 +15,7 @@ PrimalTrace enables businesses to register, track, and verify product authentici
 - **Traceability Tracking** — Record and query product traceability information
 - **Anomaly Alerts** — Register and monitor supply chain anomalies
 - **QR Code Integration** — Scan QR codes to interact with deployed contracts
-- **Web3 Authentication** — Wallet-based login via Web3Auth and MetaMask
+- **Dual Web3 Authentication** — Wallet-based login via Web3Auth Modal v10 and MetaMask
 - **Block Timeline** — Visualize blockchain transaction history
 
 ## Tech Stack
@@ -28,10 +28,11 @@ PrimalTrace enables businesses to register, track, and verify product authentici
 | Routing | [Vue Router 5](https://router.vuejs.org) |
 | Blockchain | [ethers.js v5](https://docs.ethers.org/v5/) / [ThirdWeb SDK](https://thirdweb.com) / [viem](https://viem.sh) |
 | Authentication | [Web3Auth Modal v10](https://web3auth.io) + [MetaMask Connect](https://docs.metamask.io/metamask-connect) |
-| Network | Polygon zkEVM |
+| Network | Polygon zkEVM Testnet (chain ID `0x5A2` / 1442) |
 | Backend Services | [Supabase](https://supabase.com), [Tatum API](https://tatum.io) |
-| Deployment | [Vercel](https://vercel.com) |
-| Package Manager | **pnpm** (required) |
+| Node Polyfills | `vite-plugin-node-polyfills` (Buffer, process, stream, etc.) |
+| Deployment | [Vercel](https://vercel.com) (Nitro node-server preset) |
+| Package Manager | **pnpm** (required — never use npm/npx) |
 
 ## Getting Started
 
@@ -58,49 +59,130 @@ pnpm preview
 
 ### Environment Variables
 
-Copy `.env.example` (or use the existing `.env`) and configure your keys. Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`.
+Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys include:
+
+| Variable | Purpose |
+|---|---|
+| `apiKeyTatum` | Tatum API key for blockchain queries |
+| `thirdwebPrivateKey` | ThirdWeb SDK authentication |
+| `thirdwebClientId` | ThirdWeb project client ID |
+| `web3authClientID` | Web3Auth Modal client ID |
+| `web3authClientSecret` | Web3Auth application password |
+| `personalAccountPrivateKey` | Private key for SDK-based contract interactions |
+| `supabaseKey` | Supabase anon key |
+
+> **Security Note**: These are currently hardcoded in `nuxt.config.ts`. For production, migrate to `.env` variables.
 
 ## Project Structure
 
 ```
-├── assets/scss/          # Global SCSS styles and Vuetify overrides
+├── assets/scss/              # Global SCSS styles and Vuetify overrides
+│   ├── style.scss            # Main stylesheet
+│   ├── variables.scss        # SCSS variables
+│   └── components/           # Vuetify component overrides
 ├── components/
+│   ├── lc/header/            # Landing page header with Web3Auth Connect
 │   ├── section/
-│   │   ├── web-3-auth/   # Web3Auth + MetaMask wallet connection
-│   │   ├── dash-board/   # Dashboard data loaders and layout
+│   │   ├── web-3-auth/       # Web3Auth wallet connection
+│   │   │   ├── Web3Auth.vue          # Container: logo + ConnectWalletBtn + WalletError
+│   │   │   ├── ConnectWalletBtn.vue  # Web3Auth Modal v10 init/connect flow
+│   │   │   ├── Connect.vue           # Post-login navigation (logout, links)
+│   │   │   ├── Display.vue           # Wallet info card (balance, chainId)
+│   │   │   └── WalletError.vue       # Error display component
+│   │   ├── connect-wallet/   # MetaMask direct wallet connection
+│   │   │   ├── ConnectWallet.vue     # Container: Navigation + Display + WalletError
+│   │   │   ├── Navigation.vue        # MetaMask detect/connect/display with SVG icons
+│   │   │   └── Display.vue           # MetaMask wallet info card
+│   │   ├── dash-board/       # Dashboard data loaders and layout
 │   │   ├── register-smart-contract/  # Contract deployment & QR scanning
-│   │   ├── add-catalog/  # On-chain catalog management
-│   │   ├── add-product/  # On-chain product registration
+│   │   ├── add-catalog/      # On-chain catalog CRUD
+│   │   ├── add-product/      # On-chain product registration
 │   │   ├── add-traceability-info/    # Traceability event recording
-│   │   ├── add-alert/    # Anomaly alert management
-│   │   ├── tables/       # Data resume tables (catalogs, products, etc.)
-│   │   ├── connect-wallet/  # Wallet display and navigation
-│   │   └── qr-code/      # QR code generation
-│   └── shared/           # Shared/reusable components
-├── data/                 # Static data and contract variables
-├── entities/             # TypeScript entity definitions
-├── ethers/               # Raw ethers.js utilities and MetaMask SDK setup
-├── hooks/                # Custom Vue composables
-├── layouts/              # Nuxt layouts
-├── pages/                # File-based routing
-│   ├── index.vue         # Landing page
-│   ├── dashboard.vue     # Main dApp dashboard
-│   ├── blocktimeline.vue # Block timeline viewer
-│   └── deployedContracts.vue  # Deployed contracts list
-├── plugins/              # Nuxt plugins (Vuetify, etc.)
-├── services/thridWeb/    # ThirdWeb SDK service layer
-│   ├── sdkInstance.js     # ThirdWeb SDK singleton
+│   │   ├── add-alert/        # Anomaly alert management
+│   │   ├── tables/           # Data resume tables
+│   │   ├── header/           # Header1, Header2 navigation bars
+│   │   └── qr-code/          # QR code generation
+│   └── shared/
+│       └── lp-banner/        # BannerConnectWallet (dashboard entry point)
+├── data/                     # Static data and contract variables
+├── entities/                 # TypeScript entity definitions
+├── ethers/                   # Raw ethers.js utilities
+├── hooks/                    # Custom Vue composables
+├── layouts/                  # Nuxt layouts (default.vue)
+├── pages/
+│   ├── index.vue             # Landing page (AllCustomComponents)
+│   ├── dashboard.vue         # Main dApp dashboard
+│   ├── blocktimeline.vue     # Block timeline viewer
+│   └── deployedContracts.vue # Deployed contracts list
+├── plugins/
+│   ├── 00.process-shim.client.ts  # Browser process.nextTick polyfill
+│   ├── pinia.ts              # Pinia store initialization
+│   └── vuetify.ts            # Vuetify 4 plugin configuration
+├── schemas/                  # TypeScript interfaces (WalletState, SmartContract, etc.)
+├── services/thridWeb/        # ThirdWeb SDK service layer
+│   ├── sdkInstance.js        # Public ThirdWeb SDK singleton (read-only)
+│   ├── sdkPrivateInstance.js # Private SDK singleton (lazy init, write ops)
 │   ├── contractReadInteract.ts   # Read-only contract calls
-│   ├── contractWriteInteract.ts  # Write contract transactions
-│   └── implementationAbi.json   # Smart contract ABI
-├── stores/               # Pinia stores
-│   ├── index.ts          # Wallet store (accounts, provider, Web3Auth)
-│   └── smart-contract.ts # Smart contract state (address, catalogs, products)
-├── utils/                # Utility functions
-├── nuxt.config.ts        # Nuxt configuration
+│   ├── contractWriteInteract.ts  # Write contract transactions (lazy init)
+│   ├── deployContract.ts         # Contract deployment
+│   ├── implementationAbi.json   # Smart contract ABI
+│   └── implementationByteCode.ts # Contract bytecode for deployment
+├── stores/
+│   ├── index.ts              # Wallet store (accounts, provider, Web3Auth)
+│   └── smart-contract.ts     # Contract store (address, catalogs, products)
+├── tatum/                    # Tatum API integration
+├── types/
+│   └── ethereum.d.ts         # Window.ethereum type augmentation
+├── utils/                    # Utility functions (formatBalance, formatAddress, etc.)
+├── vite-plugins/
+│   └── end-of-stream-stub.js # Browser-safe stub for end-of-stream module
+├── nuxt.config.ts            # Nuxt + Vite configuration
 ├── package.json
 └── tsconfig.json
 ```
+
+## Wallet Connection Architecture
+
+PrimalTrace supports two parallel wallet connection flows:
+
+### Flow 1: Web3Auth Modal (Social + Wallet Login)
+```
+BannerConnectWallet → Web3Auth.vue → ConnectWalletBtn.vue
+                                       ├── new Web3Auth({ chains: [...], ... })
+                                       ├── web3auth.init()
+                                       ├── web3auth.connect() → IProvider
+                                       └── ethers.providers.Web3Provider(provider)
+```
+
+### Flow 2: MetaMask Direct (Browser Extension)
+```
+BannerConnectWallet → ConnectWallet.vue → Navigation.vue
+                                            ├── detectEthereumProvider()
+                                            ├── provider.request({ method: 'eth_requestAccounts' })
+                                            └── Updates Pinia wallet store
+```
+
+Both flows write to the same Pinia `useWalletStore`, so the rest of the app is agnostic to which method was used.
+
+## Smart Contract Architecture
+
+PrimalTrace uses a factory pattern where users deploy their own implementation contracts on Polygon zkEVM. Each contract supports:
+
+- **Catalogs** — Grouping of products
+- **Products** — Individual tracked items with stock
+- **Traceability Info** — Supply chain events linked to products
+- **Anomaly Alerts** — Exception tracking for quality assurance
+
+## Polyfill & Build Infrastructure
+
+The app requires browser polyfills for Node.js APIs used by Web3 dependencies:
+
+| Component | Purpose |
+|---|---|
+| `vite-plugin-node-polyfills` | Polyfills Buffer, process, stream, util, etc. |
+| `plugins/00.process-shim.client.ts` | Ensures `process.nextTick` exists before modules load |
+| `vite-plugins/end-of-stream-stub.js` | Stubs `end-of-stream` (calls `process.nextTick.bind` at module scope) |
+| `optimizeDeps.include` | Pre-bundles heavy Web3 deps to prevent runtime 504 errors |
 
 ## Deployment
 
@@ -112,18 +194,11 @@ The application is deployed to **Vercel** and available at:
 # Production build
 pnpm build
 
-# Preview locally before deploying
+# Preview locally
 node .output/server/index.mjs
 ```
 
-## Smart Contract Architecture
-
-PrimalTrace uses a factory pattern where users deploy their own implementation contracts on Polygon zkEVM. Each contract supports:
-
-- **Catalogs** — Grouping of products
-- **Products** — Individual tracked items with stock
-- **Traceability Info** — Supply chain events linked to products
-- **Anomaly Alerts** — Exception tracking for quality assurance
+Push to the `main` branch to trigger automatic deployment.
 
 ## License
 
