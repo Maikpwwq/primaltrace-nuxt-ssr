@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { watchEffect, markRaw, ref, reactive } from "vue";
-import { Web3Auth } from "@web3auth/modal";
-import { CHAIN_NAMESPACES } from "@web3auth/base";
+import { computed, markRaw } from "vue";
+import { Web3Auth, CHAIN_NAMESPACES } from "@web3auth/modal";
+import type { CustomChainConfig } from "@web3auth/modal";
 import { useWalletStore } from "@/stores";
 import { ethers } from "ethers";
-import type {
-  CustomChainConfig,
-  IProvider,
-} from "@web3auth/base";
+import type { IProvider } from "@web3auth/base";
 import { formatBalance, formatAddress } from "@/utils";
 import { IconWallet } from "@tabler/icons-vue";
 
-let sharedProvider: IProvider;
+let sharedProvider: IProvider | null = null;
 
 const store = useWalletStore();
 // but skip any action or non reactive (non ref/reactive) property
@@ -51,6 +48,7 @@ const polygonzkEVMConfig: CustomChainConfig = {
   ticker: "ETH", // MATIC
   tickerName: "Ethereum",
   blockExplorerUrl: "https://testnet-zkevm.polygonscan.com",
+  logo: "https://images.toruswallet.io/polygon.svg",
   isTestnet: true,
 };
 
@@ -66,29 +64,25 @@ const polygonzkEVMConfig: CustomChainConfig = {
 const web3auth = new Web3Auth({
   clientId: WEB3AUTH_CLIENT_ID,
   web3AuthNetwork: "testnet",
-  chainConfig: polygonzkEVMConfig,
+  chains: [polygonzkEVMConfig],
+  defaultChainId: polygonzkEVMConfig.chainId,
 });
 
 const init = async () => {
-    try {
-      // Initialize within your constructor
-      // const web3Auth = new Web3Auth({
-      //     clientId: WEB3AUTH_CLIENT_ID,
-      //     chainConfig: polygonzkEVMConfig,
-      // });
-      await web3auth.initModal();
-      // console.log("VITE_WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID);
-      sharedProvider = web3auth.provider;
-      setHasProvider(Boolean(sharedProvider));
-      if (web3auth.connected) {
-        setIsConnecting(true);
-      }
-    } catch (error: any) {
-      console.log("web3authConnect", error);
-      setError(true);
-      setErrorMessage(error.message);
+  try {
+    await web3auth.init();
+    // console.log("VITE_WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID);
+    sharedProvider = web3auth.provider ?? null;
+    setHasProvider(Boolean(sharedProvider));
+    if (web3auth.connected) {
+      setIsConnecting(true);
     }
-  };
+  } catch (error: any) {
+    console.log("web3authConnect", error);
+    setError(true);
+    setErrorMessage(error.message);
+  }
+};
 
 const web3AuthModal = async () => {
   try {
@@ -96,7 +90,10 @@ const web3AuthModal = async () => {
     setIsConnecting(true);
     clearError();
     // console.log("isConnecting", isConnecting)
-    const web3authProvider: IProvider = await web3auth.connect();
+    const web3authProvider = await web3auth.connect();
+    if (!web3authProvider) {
+      throw new Error("Web3Auth connection returned no provider");
+    }
     // console.log("WEB3AUTH_CLIENT_ID", WEB3AUTH_CLIENT_ID, web3authProvider);
     // Earlier in v5 provider = new ethers.providers.Web3Provider(window.ethereum)
     const ethersProvider = new ethers.providers.Web3Provider(web3authProvider); // web3auth.provider
@@ -105,7 +102,7 @@ const web3AuthModal = async () => {
     setEthersProvider(markRaw(ethersProvider));
     setWeb3Auth(web3auth);
     sharedProvider = web3authProvider;
-    setHasProvider(Boolean(sharedProvider));
+    setHasProvider(true);
     const accounts = await sharedProvider.request({
       method: "eth_accounts",
     });
@@ -120,46 +117,26 @@ const web3AuthModal = async () => {
 };
 
 const updateWallet = async (accounts?: any) => {
-  if (accounts.length === 0) {
-    // If there are no accounts, then the user is disconnected
+  if (!accounts || accounts.length === 0) {
     clearWallet();
     return;
   }
 
-  // const signer = await sharedProvider.getSigner();
-  // console.log("WEB3AUTH", signer)
-  // const address = signer.getAddress();
-  // const signer: string = await sharedProvider.request({
-  //     method: "eth_getSigner",
-  //     params: [accounts[0], "latest"],
-  // });
+  if (!sharedProvider) {
+    console.error("updateWallet: provider not initialized");
+    return;
+  }
 
-  // // In v5: const balance = ethers.utils.formatEther(
-  // const balance = ethers.formatEther(
-  //     await sharedProvider.getBalance(address) // Balance is in wei
-  // );
-
-  const getBalance: string = await sharedProvider.request({
+  const getBalance = (await sharedProvider.request({
     method: "eth_getBalance",
     params: [accounts[0], "latest"],
-  });
+  })) as string;
 
   const balance: string = formatBalance(getBalance);
 
-  const chainId: string = await sharedProvider.request({
+  const chainId = (await sharedProvider.request({
     method: "eth_chainId",
-  });
-  // const chainId: string = async () => {
-  //     let requestChain : string = ""
-  //     try {
-  //         requestChain = await sharedProvider.request({
-  //             method: "eth_chainId",
-  //         });
-  //         return ( requestChain )
-  //     } catch (err){
-  //         console.error(err)
-  //     }
-  // }
+  })) as string;
 
   const privateKey = "";
   // const privateKey = await sharedProvider.request({
@@ -170,20 +147,15 @@ const updateWallet = async (accounts?: any) => {
   setWallet({ accounts, balance, chainId, privateKey });
 };
 
-const disableConnect = wallet && isConnecting.value ? true : false;
+const disableConnect = computed(() => {
+  return Boolean(wallet.value.accounts.length > 0) || isConnecting.value;
+});
 </script>
 
 
 <template>
-    <v-btn
-      v-if="wallet.accounts.length < 1"
-      size="large"
-      style="background-color: #00b0ff"
-      flat
-      class="btn text-decoration-none text-white mt-3"
-      @click="web3AuthModal"
-      @disabled="disableConnect"
-    >
-      <IconWallet color="white" :size="48" stroke-width="1" /> Conectar Wallet
-    </v-btn>
+  <v-btn v-if="wallet.accounts.length < 1" size="large" style="background-color: #00b0ff" flat
+    class="btn text-decoration-none text-white mt-3" @click="web3AuthModal" @disabled="disableConnect">
+    <IconWallet color="white" :size="48" stroke-width="1" /> Conectar Wallet
+  </v-btn>
 </template>
