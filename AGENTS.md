@@ -6,6 +6,47 @@ This file provides context for AI coding agents working on this project.
 
 PrimalTrace is a Web3 dApp on **Polygon zkEVM** for supply chain traceability. Built with **Nuxt 4 + Vue 3.5 + Vuetify 4 + Pinia 3**, it uses ethers.js v5 for blockchain interactions and Web3Auth v10 for wallet authentication.
 
+### Business Model & Brand Context
+
+**Tagline**: "La esencia auténtica de tus productos, trazada con seguridad en la blockchain."
+**Subtitle**: "Sistemas de administración y seguimiento inteligente de primera calidad"
+**Company**: NexaSoft SAS — Based in Bogotá, Colombia
+**Contact**: +57 320 484 2897 (WhatsApp), primaltrace@outlook.com
+
+**Target Industries**: HealthTech (medication/medical device tracking), FoodTech (origin & ingredient traceability), Supply Chain (distribution monitoring), Sustainability (carbon footprint), Anti-Counterfeiting.
+
+**Products**:
+- **TrackWise** — Distribution supervision & reliable tracking (reduce waste, critical process data, carbon footprint, medication tracking)
+- **TrustBlock** — Origin authenticity verification (fraud identification, consumer transparency, prescription verification, smart contract logistics)
+- **Custom Blockchain Solutions** — Tailored smart contract deployments
+
+**Pricing**: Free personal plan (interact with existing contracts) + Enterprise plan (custom contract deployment, priced by scope). Satisfaction guarantee offered.
+
+**Team Lead**: Michael Arias Fajardo — Product Management Specialist, Web3/Web2/Mobile Developer, IT Product Manager, Growth Hacker.
+
+### Homepage Content Architecture (Landing Page)
+
+The landing page (`pages/index.vue`) renders `MainBanner` + `AllCustomComponents`. The brand content flows in this order:
+
+| Section | Component | Content Source |
+|---|---|---|
+| Hero Banner | `banner/MainBanner.vue` | Tagline + subtitle + TrackWise/TrustBlock CTAs |
+| Navigation | `header/Header2.vue` | Nosotros, Productos, Soluciones, Precios, Contacto |
+| Brand Banner | `banner/BrandBanner.vue` | "Seguimiento Seguro y Verificación" |
+| About | `banner/BannerWork.vue` | Subtitle restatement + Portfolio CTA |
+| Email Capture | `form-banner/FormBannerInput.vue` | Newsletter subscription form |
+| TrackWise | `features/Feature1.vue` | 4 feature cards from `data/CustomComponents.ts → feature1` |
+| TrustBlock | `features/Feature2.vue` | 4 feature cards from `data/CustomComponents.ts → feature2` |
+| Solutions | `features/Feature3.vue` | "Soluciones Blockchain a medida" overlay card |
+| Portfolio | `portfolio/Portfolio.vue` | 3 cards from `data/CustomComponents.ts → portfolio` |
+| Pricing | `pricing/Pricing.vue` | 2 plans from `data/CustomComponents.ts → pricePlan` |
+| Team | `team/Team.vue` | Team cards from `data/CustomComponents.ts → team` |
+| Blog | `blogs/Blog.vue` | 3 articles from `data/CustomComponents.ts → Blog` |
+| CTA | `c2a/C2a1.vue` | "Pregunta por una demostración gratuita" |
+| Contact | `contact/Contact.vue` | Contact form + WhatsApp + email |
+
+**Static brand data** is centralized in `data/CustomComponents.ts` — feature cards, pricing plans, portfolio items, team members, blog articles, and navigation menus are all defined there.
+
 ## Package Manager
 
 > **IMPORTANT: Always use `pnpm`, never `npm` or `npx`.**

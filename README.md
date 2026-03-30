@@ -4,9 +4,55 @@
 
 **PrimalTrace** is a decentralized application (dApp) built on the **Polygon zkEVM** network, focused on high-security smart contract interactions for supply chain traceability and product tracking solutions.
 
+
 ## Overview
 
 PrimalTrace enables businesses to register, track, and verify product authenticity through blockchain-powered smart contracts. Users can deploy their own smart contracts, manage product catalogs, register traceability events, and monitor anomalies — all through a secure Web3-authenticated interface.
+
+### Value Proposition
+
+> *"La esencia auténtica de tus productos, trazada con seguridad en la blockchain."*
+> — The authentic essence of your products, traced with security on the blockchain.
+
+PrimalTrace provides **premium intelligent administration and tracking systems** ("Sistemas de administración y seguimiento inteligente de primera calidad") that deliver blockchain-backed product lifecycle experience and customer service.
+
+### Market Fit & Target Industries
+
+| Industry | Use Case |
+|---|---|
+| **HealthTech** | Secure tracking of medications and medical devices; prescription verification |
+| **FoodTech** | Product origin verification, ingredient traceability, quality assurance |
+| **Supply Chain** | End-to-end distribution monitoring, reducing product waste |
+| **Sustainability** | Carbon footprint measurement and environmental impact assessment |
+| **Anti-Counterfeiting** | Identifying fraudulent products across supply chains |
+
+### Products
+
+#### TrackWise
+Blockchain-backed reliable tracking for distribution supervision. Core capabilities:
+- **Reduce product waste** — Optimize the supply chain to reduce waste, increasing efficiency and sustainability
+- **Truthful information for critical processes** — Real-time reliable data for efficient and transparent production chains
+- **Carbon footprint impact** — Measure and evaluate the carbon footprint of products for environmental sustainability
+- **Secure medication tracking** — Reliable tracking of medications and medical devices throughout the supply chain
+
+#### TrustBlock
+Blockchain-backed origin authenticity verification. Core capabilities:
+- **Identify fraudulent products** — Detect counterfeits through immutable chain-of-custody records
+- **Deliver truthful information** — Provide verified product data to end consumers
+- **Medical prescription verification** — Authenticate and verify medical prescriptions
+- **Expedite deliveries with smart contracts** — Automate and speed up logistics with on-chain agreements
+
+#### Custom Blockchain Solutions
+Tailored smart contract deployments for businesses with specific traceability needs. Available through direct consultation.
+
+### Pricing Model
+
+| Plan | Tier | Description |
+|---|---|---|
+| **Regular** | Personal (Free) | Interact with smart contracts using your own wallet |
+| **Master** | Enterprise (Custom) | Custom smart contract design and deployment |
+
+Both plans include a satisfaction guarantee.
 
 ### Key Features
 
@@ -17,6 +63,7 @@ PrimalTrace enables businesses to register, track, and verify product authentici
 - **QR Code Integration** — Scan QR codes to interact with deployed contracts
 - **Dual Web3 Authentication** — Wallet-based login via Web3Auth Modal v10 and MetaMask
 - **Block Timeline** — Visualize blockchain transaction history
+- **Free Demo** — Available on request via contact form or WhatsApp
 
 ## Tech Stack
 
