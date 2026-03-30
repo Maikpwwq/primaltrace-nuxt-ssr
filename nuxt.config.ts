@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // require("dotenv").config();
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import processNextTickShim from './vite-plugins/processNextTickShim.js';
 
 export default defineNuxtConfig({
   ssr: false,
@@ -21,9 +20,8 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      processNextTickShim(),
       nodePolyfills({
-        include: ['buffer', 'process', 'string_decoder', 'events'],
+        include: ['buffer', 'process', 'util', 'string_decoder', 'events', 'stream'],
         globals: { Buffer: true, global: true, process: true },
         overrides: {
           fs: 'memfs',
@@ -31,6 +29,13 @@ export default defineNuxtConfig({
         protocolImports: true,
       }),
     ],
+    resolve: {
+      alias: {
+        // end-of-stream calls process.nextTick.bind(process) at module scope.
+        // The browser process polyfill doesn't include nextTick, so we stub it.
+        'end-of-stream': new URL('./vite-plugins/end-of-stream-stub.js', import.meta.url).pathname,
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -49,6 +54,27 @@ export default defineNuxtConfig({
           // Suppress the nuxt:module-preload-polyfill sourcemap warning
           if (warning.plugin === 'nuxt:module-preload-polyfill') return;
           defaultHandler(warning);
+        },
+      },
+    },
+    optimizeDeps: {
+      include: [
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
+        'vue-tabler-icons',
+        '@supabase/supabase-js',
+        '@tabler/icons-vue',
+        '@teckel/vue-barcode-reader',
+        '@web3auth/modal',
+        '@web3auth/base',
+        '@thirdweb-dev/sdk',
+        '@thirdweb-dev/chains',
+        'qrcode.vue',
+      ],
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
         },
       },
     },

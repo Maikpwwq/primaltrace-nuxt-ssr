@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { headerMenu } from "@/data/CustomComponents";
 const drawer = ref(null);
+const isActive = ref(true);
 </script>
 <template>
   <div>

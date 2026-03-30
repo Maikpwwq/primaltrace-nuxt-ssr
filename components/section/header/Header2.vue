@@ -5,6 +5,7 @@ import { headerMenu } from "@/data/CustomComponents";
 import { IconLayoutDashboard } from '@tabler/icons-vue';
 
 const drawer = ref(null);
+const isActive = ref(true);
 const handleCLick = () => {
   // start();
 

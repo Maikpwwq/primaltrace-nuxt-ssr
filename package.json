@@ -7,7 +7,7 @@
     "url": "git+https://github.com/PrimalTrace/web3-nuxt-ssr.git"
   },
   "author": "NexaSoft SAS",
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.33.0",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -23,13 +23,13 @@
   },
   "dependencies": {
     "@arcblock/forge-sdk": "^1.8.0",
-    "@graphprotocol/graph-ts": "^0.35.1",
+    "@graphprotocol/graph-ts": "^0.38.2",
     "@mdi/font": "^7.4.47",
     "@metamask/connect-evm": "^0.9.0",
     "@metamask/detect-provider": "^2.0.0",
     "@pinia/nuxt": "0.11.3",
     "@supabase/supabase-js": "^2.100.1",
-    "@tabler/icons-vue": "^3.41.0",
+    "@tabler/icons-vue": "^3.41.1",
     "@tatumio/polygon": "^2.2.102",
     "@teckel/vue-barcode-reader": "^1.1.8",
     "@thirdweb-dev/chains": "^0.1.120",
@@ -43,20 +43,20 @@
     "pinia": "^3.0.4",
     "qrcode.vue": "^3.8.0",
     "sass": "^1.98.0",
-    "sass-loader": "^14.2.1",
+    "sass-loader": "^16.0.7",
     "viem": "^2.47.6",
-    "vue": "^3.5.11",
+    "vue": "^3.5.31",
     "vue-router": "^5.0.4",
     "vue-tabler-icons": "2.21.0",
     "vue3-perfect-scrollbar": "2.0.0",
     "vuetify": "^4.0.4"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.73.0",
+    "@graphprotocol/graph-cli": "^0.98.1",
     "buffer": "^6.0.3",
     "nuxt": "4.4.2",
     "prettier": "^3.8.1",
     "process": "^0.11.10",
-    "vite-plugin-node-polyfills": "^0.25.0"
+    "vite-plugin-node-polyfills": "^0.26.0"
   }
 }

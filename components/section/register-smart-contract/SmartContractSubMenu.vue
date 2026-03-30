@@ -9,6 +9,7 @@ const storeContract = useSmartContract();
 const { hasContract } = storeToRefs(storeContract); // Destructuring from a Store
 
 const drawer = ref(null);
+const isActive = ref(true);
 </script>
 
 <template>
