@@ -32,40 +32,45 @@ const config = useRuntimeConfig();
 const WEB3AUTH_CLIENT_ID = config.public.web3authClientID; // `${import.meta.env.NUXT_WEB3AUTH_CLIENT_ID}`;
 const PRIVATE_KEY = config.public.personalAccountPrivateKey;
 
-const polygonzkEVMConfig: CustomChainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155, // .OTHER - "eip155" Polygon ZkEvm Mainnet: eip155:1101
-  chainId: "0x5A2", // 0x89 hex of 137, polygon mainnet.
-  // 044D hex of 1101 Polygon zkEVM Network.
-  // 0x13881 hex of 80001 for Mumbai Testnet.
-  // 05A2 hex of 1442 for zkEVM Testnet
+// ── Chain Configs ───────────────────────────────────────────────────
+// Toggle this flag (or use an env variable) when the platform goes live.
+const IS_PRODUCTION = false;
+
+// Polygon zkEVM Mainnet — activate when platform is fully operative
+const polygonzkEVMMainnet: CustomChainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0x44D", // 1101
+  rpcTarget: "https://zkevm-rpc.com",
+  displayName: "Polygon zkEVM",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  blockExplorerUrl: "https://zkevm.polygonscan.com",
+  logo: "https://images.toruswallet.io/polygon.svg",
+};
+
+// Polygon zkEVM Cardona Testnet — current development
+const polygonzkEVMTestnet: CustomChainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0x5A2", // 1442
   rpcTarget: "https://polygon-zkevm-testnet.rpc.thirdweb.com",
-  // zkEVM testnet "https://rpc.public.zkevm-test.net",
-  // zkEVM https://zkevm-rpc.com or https://polygon-zkevm.rpc.thirdweb.com
-  // Polygon https://rpc.ankr.com/eth
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura, Quicknode etc
   displayName: "Polygon zkEVM Testnet",
-  ticker: "ETH", // MATIC
+  ticker: "ETH",
   tickerName: "Ethereum",
   blockExplorerUrl: "https://testnet-zkevm.polygonscan.com",
   logo: "https://images.toruswallet.io/polygon.svg",
   isTestnet: true,
 };
 
-// const openloginAdapter = new OpenloginAdapter({
-//     adapterSettings: {
-//         WEB3AUTH_CLIENT_ID,
-//         network: "testnet",
-//         uxMode: "redirect",
-//     },
-// });
+const activeChainConfig = IS_PRODUCTION ? polygonzkEVMMainnet : polygonzkEVMTestnet;
 
-// const web3auth = ref<Web3Auth>(new Web3Auth({
+// ── Web3Auth Instance ──────────────────────────────────────────────
+// web3AuthNetwork must match the project network in your Web3Auth Dashboard.
+// When moving to production, create a new project on "sapphire_mainnet".
 const web3auth = new Web3Auth({
   clientId: WEB3AUTH_CLIENT_ID,
-  web3AuthNetwork: "testnet",
-  chains: [polygonzkEVMConfig],
-  defaultChainId: polygonzkEVMConfig.chainId,
+  web3AuthNetwork: IS_PRODUCTION ? "sapphire_mainnet" : "sapphire_devnet",
+  chains: [activeChainConfig],
+  defaultChainId: activeChainConfig.chainId,
 });
 
 const init = async () => {

@@ -28,7 +28,7 @@
     "@metamask/connect-evm": "^0.9.0",
     "@metamask/detect-provider": "^2.0.0",
     "@pinia/nuxt": "0.11.3",
-    "@supabase/supabase-js": "^2.100.1",
+    "@supabase/supabase-js": "^2.101.0",
     "@tabler/icons-vue": "^3.41.1",
     "@tatumio/polygon": "^2.2.102",
     "@teckel/vue-barcode-reader": "^1.1.8",

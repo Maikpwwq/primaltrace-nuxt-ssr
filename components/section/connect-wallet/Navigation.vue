@@ -119,11 +119,11 @@ onBeforeUnmount(() => {
                     >
                         <!-- MetaMask Fox SVG -->
                         <svg class="wallet-icon" viewBox="0 0 35 33" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32.96 1l-13.14 9.72 2.45-5.73L32.96 1z" fill="#E2761B" stroke="#E2761B" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2.66 1l13.02 9.82L13.35 4.99 2.66 1z" fill="#E4761B" stroke="#E4761B" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M28.23 23.53l-3.5 5.34 7.49 2.06 2.14-7.28-6.13-.12zM.51 23.65l2.13 7.28 7.47-2.06-3.48-5.34-6.12.12z" fill="#E4761B" stroke="#E4761B" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9.72 14.51l-2.09 3.17 7.44.34-.26-8-5.09 4.49zM25.9 14.51l-5.17-4.58-.17 8.09 7.44-.34-2.1-3.17z" fill="#E4761B" stroke="#E4761B" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.11 28.87l4.49-2.16-3.88-3.03-.61 5.19zM21.02 26.71l4.49 2.16-.6-5.19-3.89 3.03z" fill="#E4761B" stroke="#E4761B" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32.96 1l-13.14 9.72 2.45-5.73L32.96 1z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.66 1l13.02 9.82L13.35 4.99 2.66 1z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M28.23 23.53l-3.5 5.34 7.49 2.06 2.14-7.28-6.13-.12zM.51 23.65l2.13 7.28 7.47-2.06-3.48-5.34-6.12.12z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.72 14.51l-2.09 3.17 7.44.34-.26-8-5.09 4.49zM25.9 14.51l-5.17-4.58-.17 8.09 7.44-.34-2.1-3.17z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.11 28.87l4.49-2.16-3.88-3.03-.61 5.19zM21.02 26.71l4.49 2.16-.6-5.19-3.89 3.03z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         Instalar MetaMask
                     </v-btn>
@@ -220,8 +220,9 @@ onBeforeUnmount(() => {
     font-weight: 600;
     letter-spacing: 0.01em;
     border-radius: 12px !important;
-    padding: 0 24px !important;
+    padding: 12px 24px !important;
     min-width: 200px;
+    height: auto !important;
     transition: all 0.2s ease;
 }
 
@@ -251,8 +252,9 @@ onBeforeUnmount(() => {
     font-weight: 600;
     letter-spacing: 0.01em;
     border-radius: 12px !important;
-    padding: 0 32px !important;
+    padding: 12px 32px !important;
     min-width: 220px;
+    height: auto !important;
     background-color: white !important;
     color: #1a1a2e !important;
     transition: all 0.2s ease;
