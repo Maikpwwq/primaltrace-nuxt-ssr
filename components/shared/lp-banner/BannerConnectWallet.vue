@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue";
-import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
 </script>
 <template>
-  <div class="banner-wrapper" style="min-height: auto; background-color: #5c3bbf">
+  <div class="banner-wrapper" style="min-height: auto; background-color: #607DF9">
     <v-container>
       <!-- -----------------------------------------------
             Start Banner
@@ -20,7 +19,6 @@ import Web3Auth from "@/components/section/web-3-auth/Web3Auth.vue";
             </h4>
             <div class="mt-8">
               <ConnectWallet />
-              <Web3Auth />
             </div>
           </div>
         </v-col>

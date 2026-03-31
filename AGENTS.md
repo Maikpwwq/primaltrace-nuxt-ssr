@@ -198,28 +198,33 @@ Heavy Web3 dependencies MUST be listed in `vite.optimizeDeps.include` in `nuxt.c
 
 ## Wallet Connection Flows
 
-### Web3Auth (ConnectWalletBtn.vue)
+### Unified Flow (ConnectWalletBtn.vue inside Navigation.vue)
+
+The dashboard uses a **single connect entry point** — the Web3Auth modal, which includes MetaMask and 400+ wallets. There is no separate MetaMask-only connect button.
+
 ```
-User clicks "Conectar Wallet" →
-  web3auth.init() →
-  web3auth.connect() → IProvider | null →
-  null check →
-  ethers.providers.Web3Provider(provider) →
-  provider.request({ method: 'eth_accounts' }) →
-  updateWallet(accounts) →
-  Pinia store updated
+BannerConnectWallet.vue
+└── ConnectWallet.vue
+    └── Navigation.vue
+        ├── detectEthereumProvider() on mount → sets hasProvider
+        ├── Install MetaMask/SafePal buttons (when !hasProvider)
+        ├── ConnectWalletBtn.vue (when wallet not connected)
+        │   └── web3auth.init() → web3auth.connect() → IProvider → Pinia store
+        └── Address display button (when connected)
 ```
 
-### MetaMask (Navigation.vue)
+### Provider Event Listeners (Navigation.vue)
+Navigation.vue subscribes to MetaMask provider events on mount:
 ```
-Component mounts →
-  detectEthereumProvider() →
-  provider.request({ method: 'eth_chainId' }) →
-  provider.request({ method: 'eth_accounts' }) →
-  updateWallet(accounts) →
-  provider.on('accountsChanged', updateWallet) →
-  Pinia store updated
+provider.on('accountsChanged', updateWallet)
+provider.on('chainChanged', updateWallet)
 ```
+These keep the Pinia store in sync if the user switches accounts/chains directly in MetaMask.
+
+### Network Configuration (ConnectWalletBtn.vue)
+Uses an `IS_PRODUCTION` flag to toggle between:
+- **Development**: `sapphire_devnet` + Polygon zkEVM Testnet (chain `0x5A2` / 1442)
+- **Production**: `sapphire_mainnet` + Polygon zkEVM Mainnet (chain `0x44D` / 1101)
 
 ## Testing
 

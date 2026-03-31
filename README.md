@@ -190,26 +190,39 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 
 ## Wallet Connection Architecture
 
-PrimalTrace supports two parallel wallet connection flows:
+PrimalTrace uses a **unified wallet connection flow** through the Web3Auth Modal, which supports social logins (Google, X, Facebook) and 400+ wallets including MetaMask, Trust Wallet, and SafePal.
 
-### Flow 1: Web3Auth Modal (Social + Wallet Login)
+### Dashboard Component Tree
 ```
-BannerConnectWallet → Web3Auth.vue → ConnectWalletBtn.vue
-                                       ├── new Web3Auth({ chains: [...], ... })
-                                       ├── web3auth.init()
-                                       ├── web3auth.connect() → IProvider
-                                       └── ethers.providers.Web3Provider(provider)
-```
-
-### Flow 2: MetaMask Direct (Browser Extension)
-```
-BannerConnectWallet → ConnectWallet.vue → Navigation.vue
-                                            ├── detectEthereumProvider()
-                                            ├── provider.request({ method: 'eth_requestAccounts' })
-                                            └── Updates Pinia wallet store
+pages/dashboard.vue
+└── BannerConnectWallet.vue (purple banner with instructions)
+    └── ConnectWallet.vue
+        ├── Navigation.vue
+        │   ├── Install MetaMask/SafePal buttons  (when no wallet detected)
+        │   ├── ConnectWalletBtn.vue               (Web3Auth modal — single entry point)
+        │   └── Connected address display          (when wallet connected)
+        ├── Display.vue (wallet info card, shown on hover)
+        └── WalletError.vue
 ```
 
-Both flows write to the same Pinia `useWalletStore`, so the rest of the app is agnostic to which method was used.
+### Connection Flow
+```
+User clicks "Conectar Wallet" →
+  Navigation.vue detects provider via detectEthereumProvider() →
+  ConnectWalletBtn.vue opens Web3Auth Modal →
+  User picks login method (Google, MetaMask, etc.) →
+  web3auth.init() → web3auth.connect() → IProvider →
+  ethers.providers.Web3Provider(provider) →
+  provider.request({ method: 'eth_accounts' }) →
+  updateWallet(accounts) → Pinia useWalletStore updated
+```
+
+### Provider Event Listeners (Navigation.vue)
+Navigation.vue also subscribes to MetaMask provider events on mount:
+- `accountsChanged` → re-syncs wallet state if user switches accounts in MetaMask
+- `chainChanged` → re-syncs if user switches networks
+
+Both the Web3Auth flow and provider events write to the same Pinia `useWalletStore`, so the rest of the app is agnostic to the auth method.
 
 ## Smart Contract Architecture
 
