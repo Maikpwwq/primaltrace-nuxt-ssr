@@ -108,52 +108,42 @@ onBeforeUnmount(() => {
                 <!-- Logo -->
                 <img :src="IsoLogoZkevm" class="zkevm-logo mb-4" alt="Polygon zkEVM" />
 
-                <!-- State: No Provider — Install wallet buttons -->
-                <div v-if="!hasProvider" class="wallet-actions">
-                    <v-btn
-                        href="https://metamask.io"
-                        target="_blank"
-                        rel="noreferrer"
-                        size="large"
-                        class="wallet-install-btn metamask-btn"
-                        flat
-                    >
-                        <!-- MetaMask Fox SVG -->
-                        <svg class="wallet-icon" viewBox="0 0 35 33" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32.96 1l-13.14 9.72 2.45-5.73L32.96 1z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2.66 1l13.02 9.82L13.35 4.99 2.66 1z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M28.23 23.53l-3.5 5.34 7.49 2.06 2.14-7.28-6.13-.12zM.51 23.65l2.13 7.28 7.47-2.06-3.48-5.34-6.12.12z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9.72 14.51l-2.09 3.17 7.44.34-.26-8-5.09 4.49zM25.9 14.51l-5.17-4.58-.17 8.09 7.44-.34-2.1-3.17z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.11 28.87l4.49-2.16-3.88-3.03-.61 5.19zM21.02 26.71l4.49 2.16-.6-5.19-3.89 3.03z" fill="white" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Instalar MetaMask
-                    </v-btn>
-
-                    <v-btn
-                        href="https://safepal.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        size="large"
-                        class="wallet-install-btn safepal-btn"
-                        flat
-                    >
-                        <!-- SafePal Shield SVG -->
-                        <svg class="wallet-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 2L4 7v9c0 8.28 5.12 16.02 12 18 6.88-1.98 12-9.72 12-18V7L16 2z" fill="#4A56E2"/>
-                            <path d="M16 6l-8 3.5v6.5c0 5.8 3.58 11.2 8 12.6V6z" fill="#6C78FF"/>
-                            <text x="16" y="22" text-anchor="middle" fill="white" font-size="12" font-weight="bold">S</text>
-                        </svg>
-                        Instalar SafePal
-                    </v-btn>
-                </div>
-
-                <!-- State: Provider detected, not connected — show Web3Auth modal -->
-                <div v-else-if="wallet.accounts.length < 1" class="wallet-actions">
+                <!-- State: Not connected — always show Web3Auth connect button -->
+                <div v-if="wallet.accounts.length < 1" class="wallet-actions">
                     <ConnectWalletBtn />
+
+                    <!-- Optional: suggest installing a wallet if none detected -->
+                    <div v-if="!hasProvider" class="install-suggestions mt-4">
+                        <p class="text-white op-7 text-caption mb-2">¿No tienes una billetera?</p>
+                        <div class="d-flex flex-wrap justify-center ga-2">
+                            <v-btn
+                                href="https://metamask.io"
+                                target="_blank"
+                                rel="noreferrer"
+                                size="small"
+                                class="wallet-install-btn metamask-btn"
+                                flat
+                            >
+                                <img src="/images/logos/wallets/icon-32-metamask.png" alt="MetaMask" class="wallet-icon" />
+                                MetaMask
+                            </v-btn>
+                            <v-btn
+                                href="https://safepal.com"
+                                target="_blank"
+                                rel="noreferrer"
+                                size="small"
+                                class="wallet-install-btn safepal-btn"
+                                flat
+                            >
+                                <img src="/images/logos/wallets/sfp4.png" alt="SafePal" class="wallet-icon" />
+                                SafePal
+                            </v-btn>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- State: Connected — Show address -->
-                <div v-if="hasProvider && wallet.accounts.length > 0" class="wallet-actions">
+                <div v-else class="wallet-actions">
                     <v-btn
                         :href="etherScan"
                         target="_blank"

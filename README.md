@@ -193,14 +193,14 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 PrimalTrace uses a **unified wallet connection flow** through the Web3Auth Modal, which supports social logins (Google, X, Facebook) and 400+ wallets including MetaMask, Trust Wallet, and SafePal.
 
 ### Dashboard Component Tree
-```
+```text
 pages/dashboard.vue
 └── BannerConnectWallet.vue (purple banner with instructions)
     └── ConnectWallet.vue
         ├── Navigation.vue
-        │   ├── Install MetaMask/SafePal buttons  (when no wallet detected)
-        │   ├── ConnectWalletBtn.vue               (Web3Auth modal — single entry point)
-        │   └── Connected address display          (when wallet connected)
+        │   ├── ConnectWalletBtn.vue (Web3Auth modal — ALWAYS shown when not connected)
+        │   ├── Install MetaMask/SafePal suggestions (below Connect btn, only if no provider)
+        │   └── Connected address display (when wallet connected)
         ├── Display.vue (wallet info card, shown on hover)
         └── WalletError.vue
 ```

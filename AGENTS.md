@@ -202,14 +202,14 @@ Heavy Web3 dependencies MUST be listed in `vite.optimizeDeps.include` in `nuxt.c
 
 The dashboard uses a **single connect entry point** — the Web3Auth modal, which includes MetaMask and 400+ wallets. There is no separate MetaMask-only connect button.
 
-```
+```text
 BannerConnectWallet.vue
 └── ConnectWallet.vue
     └── Navigation.vue
         ├── detectEthereumProvider() on mount → sets hasProvider
-        ├── Install MetaMask/SafePal buttons (when !hasProvider)
-        ├── ConnectWalletBtn.vue (when wallet not connected)
+        ├── ConnectWalletBtn.vue (always shown when wallet not connected)
         │   └── web3auth.init() → web3auth.connect() → IProvider → Pinia store
+        ├── Install MetaMask/SafePal buttons (rendered below ConnectBtn only when !hasProvider)
         └── Address display button (when connected)
 ```
 
