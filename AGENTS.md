@@ -223,7 +223,7 @@ These keep the Pinia store in sync if the user switches accounts/chains directly
 
 ### Network Configuration (ConnectWalletBtn.vue)
 Uses an `IS_PRODUCTION` flag to toggle between:
-- **Development**: `sapphire_devnet` + Polygon zkEVM Testnet (chain `0x5A2` / 1442)
+- **Development**: `sapphire_devnet` + Polygon zkEVM Cardona Testnet (chain `0x98A` / 2442)
 - **Production**: `sapphire_mainnet` + Polygon zkEVM Mainnet (chain `0x44D` / 1101)
 
 ## Testing

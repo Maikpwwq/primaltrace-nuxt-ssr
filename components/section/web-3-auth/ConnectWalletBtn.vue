@@ -51,12 +51,12 @@ const polygonzkEVMMainnet: CustomChainConfig = {
 // Polygon zkEVM Cardona Testnet — current development
 const polygonzkEVMTestnet: CustomChainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0x5A2", // 1442
-  rpcTarget: "https://polygon-zkevm-testnet.rpc.thirdweb.com",
-  displayName: "Polygon zkEVM Testnet",
+  chainId: "0x98A", // 2442 (Cardona Testnet)
+  rpcTarget: "https://rpc.cardona.zkevm-rpc.com",
+  displayName: "Polygon zkEVM Cardona Testnet",
   ticker: "ETH",
   tickerName: "Ethereum",
-  blockExplorerUrl: "https://testnet-zkevm.polygonscan.com",
+  blockExplorerUrl: "https://cardona-zkevm.polygonscan.com",
   logo: "https://images.toruswallet.io/polygon.svg",
   isTestnet: true,
 };

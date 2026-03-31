@@ -12,13 +12,13 @@ import ConnectWallet from "@/components/section/connect-wallet/ConnectWallet.vue
           <div class="text-center">
             <h1 class="banner-title font-weight-bold text-white">DashBoard</h1>
             <h4 class="banner-subtitle text-white font-weight-regular">
-              Debes conectar una Wallet para seleccionar o registrar un nuevo
+              Conecta una Wallet y selecciona o registra un nuevo
               contrato inteligente.
             </h4>
             <p class="banner-message text-white font-weight-regular">
-              Contrato en donde se almacenan tus catálogos de productos. Con ellos podrás agregar trazabilidad y
-              consultar
-              gratuitamente información de tus productos desde cualquier lugar.
+              Contrato donde almacenar tus catálogos de productos, agrega
+              trazabilidad y consulta información de tus productos desde
+              cualquier lugar.
             </p>
             <div class="mt-8">
               <ConnectWallet />
