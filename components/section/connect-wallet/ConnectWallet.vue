@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useWalletStore } from "@/stores";
+
 import Display from "./Display.vue"
 import Navigation from "./Navigation.vue"
 import WalletError from "./WalletError.vue"
+
+const store = useWalletStore()
+const { error } = storeToRefs(store)
 </script>
 
 <template>
@@ -10,7 +16,7 @@ import WalletError from "./WalletError.vue"
     <div class="wallet-info">
       <Display />
     </div>
-    <WalletError />
+    <WalletError v-if="error" />
   </div>
 </template>
 

@@ -43,6 +43,7 @@ export const useWalletStore = defineStore("wallet", {
       this.isConnecting = isConnecting;
     },
     clearError() {
+      this.error = false;
       this.errorMessage = "";
     },
     clearWallet() {
