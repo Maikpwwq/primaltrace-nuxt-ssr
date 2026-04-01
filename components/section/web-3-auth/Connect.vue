@@ -53,89 +53,77 @@ const logout = async () => {
 
 <template>
   <div
-    class="connect-wallet mx-3 flex-md-row flex-sm-column-reverse flex-xs-column-reverse"
+    class="connect-wallet d-flex flex-column flex-md-row align-center mx-md-3"
     v-if="hasProvider && wallet.accounts.length > 0"
   >
     <li class="nav-item">
-      <div class="flexContainer-wallet nav-link">
-        <IconCurrencyEthereum />
+      <div class="nav-link d-md-flex align-center pb-0 pt-3 pt-md-0">
+        <IconCurrencyEthereum class="mr-1 text-white" />
       </div>
     </li>
 
-    <li class="nav-item d-md-flex">
-      <NuxtLink to="/deployedContracts" class="flexContainer-wallet nav-link">
+    <li class="nav-item">
+      <NuxtLink to="/deployedContracts" class="nav-link d-md-flex align-center">
         Contratos Desplegados
       </NuxtLink>
     </li>
 
-    <li class="nav-item d-md-flex">
-      <NuxtLink to="/blocktimeline" class="flexContainer-wallet nav-link">
+    <li class="nav-item">
+      <NuxtLink to="/blocktimeline" class="nav-link d-md-flex align-center">
         BlockTimeline
       </NuxtLink>
     </li>
 
-    <li class="nav-item d-flex align-center">
+    <li class="nav-item d-flex align-center ml-md-3 mt-3 mt-md-0">
       <v-btn
-        class="btn v-btn--block text-decoration-none text-white p-3"
+        class="text-decoration-none text-white"
         @click="logout"
-        size="large"
-        style="background-color: #00b0ff"
+        size="small"
+        style="background-color: #00b0ff; border-radius: 8px;"
         flat
       >
-        <IconOutbound /> Cerrar sesión
+        <IconOutbound class="mr-1" size="20" /> Cerrar sesión
       </v-btn>
     </li>
+
     <span class="wallet-info">
       <Display />
     </span>
   </div>
 </template>
-<style>
-.flexContainer-wallet {
-  display: flex;
-  align-self: center;
-  flex-direction: row;
-  justify-content: center;
-  min-width: calc(100vw -2em);
-  gap: 0em;
-  row-gap: 0em;
-}
 
-@media (max-width: 952px) {
-  .flexContainer-wallet {
-    color: black !important;
-  }
-
-  .wallet-info {
-    top: 148px !important;
-  }
-
-  .connect-wallet {
-    flex-direction: column-reverse !important;
-  }
-}
-
+<style scoped>
 .connect-wallet {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  min-height: fit-content;
   position: relative;
+  min-height: fit-content;
 }
 
 .connect-wallet:hover .wallet-info {
   visibility: visible !important;
-  position: absolute;
+  opacity: 1;
 }
 
 .wallet-info {
   visibility: hidden;
+  opacity: 0;
   display: flex;
   flex-direction: column;
   position: absolute;
-  min-height: fit-content;
-  top: 48px;
-  right: 15px;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  z-index: 99;
+  transition: all 0.2s ease-in-out;
 }
 
+@media (max-width: 952px) {
+  .wallet-info {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 16px;
+    visibility: visible;
+    opacity: 1;
+  }
+}
 </style>
