@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, markRaw } from "vue";
 import { useWalletStore } from "@/stores"
 import { formatBalance, formatAddress } from "@/utils";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -8,10 +8,11 @@ import IsoLogoZkevm from "/images/polygon-zkevm/IsoLogo.svg";
 import ConnectWalletBtn from "@/components/section/web-3-auth/ConnectWalletBtn.vue";
 import InstallWalletOptions from "./InstallWalletOptions.vue";
 import type { WalletState } from "@/schemas/index"
+import { ethers } from "ethers";
 
 const store = useWalletStore()
 const { wallet, hasProvider, error, errorMessage, isConnecting } = storeToRefs(store)
-const { setWallet, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet } = store
+const { setWallet, setHasProvider, setError, setErrorMessage, setIsConnecting, clearError, clearWallet, setEthersProvider } = store
 
 let provider: any = null;
 
@@ -36,6 +37,10 @@ const updateWallet = async (accounts?: any) => {
         const privateKey = "";
         const walletState: WalletState = { accounts, balance, chainId, privateKey };
         setWallet(walletState)
+        
+        // Ensure ethersProvider is hydrated if connected via MetaMask directly
+        const ethersWeb3Provider = new ethers.providers.Web3Provider(provider);
+        setEthersProvider(markRaw(ethersWeb3Provider));
     } catch (err: any) {
         console.error("updateWallet failed:", err);
         setError(true)
