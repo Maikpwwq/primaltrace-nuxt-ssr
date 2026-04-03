@@ -3,8 +3,7 @@ import Display from "./Display.vue";
 import { storeToRefs } from "pinia";
 import { useWalletStore } from "@/stores";
 import { useSmartContract } from "@/stores/smart-contract";
-import { IconCurrencyEthereum } from "@tabler/icons-vue";
-import { IconOutbound } from "@tabler/icons-vue";
+import { IconCurrencyEthereum, IconOutbound, IconFileAnalytics, IconHistory } from "@tabler/icons-vue";
 
 const store = useWalletStore();
 // but skip any action or non reactive (non ref/reactive) property
@@ -30,9 +29,6 @@ const {
 } = store;
 
 const storeContract = useSmartContract();
-// but skip any action or non reactive (non ref/reactive) property
-// const { contract } = storeToRefs(storeContract) // Destructuring from a Store
-// actions can just be destructured
 const { clearContract } = storeContract;
 
 const logout = async () => {
@@ -52,31 +48,33 @@ const logout = async () => {
 </script>
 
 <template>
-  <div
-    class="connect-wallet d-flex flex-column flex-md-row align-center mx-md-3"
-    v-if="hasProvider && wallet.accounts.length > 0"
-  >
-    <li class="nav-item">
-      <div class="nav-link d-md-flex align-center pb-0 pt-3 pt-md-0">
-        <IconCurrencyEthereum class="mr-1 text-white" />
+  <template v-if="hasProvider && wallet.accounts.length > 0">
+    <li class="nav-item connect-wallet-item">
+      <div class="nav-link d-md-flex align-center pb-0 pt-2 pt-md-0 cursor-pointer">
+        <IconCurrencyEthereum color="white" :size="33" stroke-width="1" class="mr-1" />
       </div>
+      <span class="wallet-info">
+        <Display />
+      </span>
     </li>
 
     <li class="nav-item">
-      <NuxtLink to="/deployedContracts" class="nav-link d-md-flex align-center">
+      <NuxtLink to="/deployedContracts" class="nav-link d-md-flex align-center text-white">
+        <IconFileAnalytics color="white" :size="33" stroke-width="1" class="mr-2" />
         Contratos Desplegados
       </NuxtLink>
     </li>
 
     <li class="nav-item">
-      <NuxtLink to="/blocktimeline" class="nav-link d-md-flex align-center">
+      <NuxtLink to="/blocktimeline" class="nav-link d-md-flex align-center text-white">
+        <IconHistory color="white" :size="33" stroke-width="1" class="mr-2" />
         BlockTimeline
       </NuxtLink>
     </li>
 
-    <li class="nav-item d-flex align-center ml-md-3 mt-3 mt-md-0">
+    <li class="nav-item d-flex align-center ml-md-3 mt-3 mt-md-0 pb-3 pb-md-0">
       <v-btn
-        class="text-decoration-none text-white"
+        class="text-decoration-none text-white px-4"
         @click="logout"
         size="small"
         style="background-color: #00b0ff; border-radius: 8px;"
@@ -85,20 +83,17 @@ const logout = async () => {
         <IconOutbound class="mr-1" size="20" /> Cerrar sesión
       </v-btn>
     </li>
-
-    <span class="wallet-info">
-      <Display />
-    </span>
-  </div>
+  </template>
 </template>
 
 <style scoped>
-.connect-wallet {
+.connect-wallet-item {
   position: relative;
-  min-height: fit-content;
+  display: flex;
+  align-items: center;
 }
 
-.connect-wallet:hover .wallet-info {
+.connect-wallet-item:hover .wallet-info {
   visibility: visible !important;
   opacity: 1;
 }
@@ -110,7 +105,8 @@ const logout = async () => {
   flex-direction: column;
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 10px;
   z-index: 99;
   transition: all 0.2s ease-in-out;
@@ -120,7 +116,8 @@ const logout = async () => {
   .wallet-info {
     position: relative;
     top: auto;
-    right: auto;
+    left: auto;
+    transform: none;
     margin-top: 16px;
     visibility: visible;
     opacity: 1;

@@ -91,7 +91,17 @@ const handleClick = async () => {
       contractByteCode,
       ethersProvider.value.getSigner()
     ); // signer
-    const deployContract = await contract.deploy();
+    const initialCatalogName = "Catálogo Principal";
+    const initialCatalogDescription = "Catálogo inicial auto-generado";
+    const initialCatalogMetadata = "{}";
+    const initialCatalogQrCode = "initial-qr";
+
+    const deployContract = await contract.deploy(
+      initialCatalogName,
+      initialCatalogDescription,
+      initialCatalogMetadata,
+      initialCatalogQrCode
+    );
     console.log("deployment contract", contract);
     // Wait for deployment to finish
     const receipt = await deployContract.deployed();
@@ -128,25 +138,30 @@ const updateContractAddress = async (address:any) => {
 }
 
 
-const handleReadQR = async () => {
+const handleReadQR = () => {
+  readQR.value = !readQR.value;
+};
+
+const manualAddress = ref("");
+const submitManualAddress = () => {
+  if (manualAddress.value && manualAddress.value.trim() !== "") {
+    onDecode(manualAddress.value.trim());
+  }
+};
+
+const loadTestContract = async () => {
   try {
-    //  TODO: abrir camara con permisos y leer QR
-    readQR.value = true;
     const address = IMPLEMENTATION_CONTRACT_ADDRESS;
     updateContractAddress(address);
     setContractAddress(address);
     setHasContract(true);
   } catch (err) {
     console.error(err);
-    alert("No fue posible leer el contrato intente de nuevo con un QR valido");
+    alert("No fue posible cargar el contrato de prueba.");
   }
-  // TODO: Read contract Info and store to be reused
-  // setCatalogsInfo([counters.value.catalogs]);
-  // setProductsInfo();
-  // setTraceabilityInfo();
 };
 
-let readQR = ref(false);
+const readQR = ref(false);
 
 const onDecode = (result: any) => {
   console.log("onDecode", result);
@@ -189,26 +204,57 @@ export { deployAddress };
           Ingresa con el código QR de un contrato inteligente registrado o bien
           registra un contrato nuevo.
         </p>
-        <v-btn
-          @click="handleReadQR"
-          size="large"
-          style="background-color: #00b0ff"
-          class="text-white"
-          flat
-        >
-          <IconQrcode :size="39" />
-          Leer código QR del SmartContract
-        </v-btn>
-        <div v-if="readQR" class="h-screen" id="decode-qr">
+        <div class="d-flex flex-wrap align-center">
+          <v-btn
+            @click="handleReadQR"
+            size="large"
+            style="background-color: #00b0ff"
+            class="text-white mb-2 mr-2"
+            flat
+          >
+            <IconQrcode :size="39" />
+            Leer código QR del SmartContract
+          </v-btn>
+
+          <!-- Botón temporal solo para la wallet específica -->
+          <v-btn
+            v-if="wallet.accounts[0]?.toLowerCase() === '0x2a34f68c873a41963f9a9a995120ae444bb2a488'"
+            @click="loadTestContract"
+            size="large"
+            color="warning"
+            class="mb-2"
+            flat
+          >
+            Cargar Contrato de prueba
+          </v-btn>
+        </div>
+
+        <div v-if="readQR" class="mt-4" id="decode-qr">
           <StreamBarcodeReader            
             no-front-cameras
             @decode="onDecode"
             @loaded="onLoaded"
           />
+          <div class="mt-4 d-flex align-center">
+            <v-text-field
+              v-model="manualAddress"
+              label="O pega la dirección del contrato como texto aquí"
+              hide-details
+              density="compact"
+              variant="outlined"
+              class="mr-3"
+              style="background: white; border-radius: 4px;"
+            ></v-text-field>
+            <v-btn @click="submitManualAddress" color="success" size="large">Cargar</v-btn>
+          </div>
         </div>
         <!-- torch -->
         <!-- <ImageBarcodeReader @decode="onDecode" @error="onError" /> -->
-        <p class="pt-2 pb-2 text-white">o intenta</p>
+        <div class="d-flex align-center my-7" style="max-width: 400px;">
+          <v-divider color="white" class="border-opacity-25" :thickness="2"></v-divider>
+          <span class="mx-4 text-white text-caption text-uppercase font-weight-bold" style="letter-spacing: 2px; opacity: 0.6;">O REGISTRA</span>
+          <v-divider color="white" class="border-opacity-25" :thickness="2"></v-divider>
+        </div>
         <v-btn
           @click="handleClick"
           size="large"
