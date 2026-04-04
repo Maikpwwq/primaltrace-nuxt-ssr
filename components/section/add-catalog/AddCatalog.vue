@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import Polygon from "/images/polygon-zkevm/main.svg";
-// import { deployContract } from "@/services/thridWeb/deployContract";
 import { createCatalog } from "@/services/thridWeb/contractWriteInteract";
-import { IconWriting } from "@tabler/icons-vue";
 import { IconFilePlus } from "@tabler/icons-vue";
+import { useNotificationStore } from "@/stores/notification";
+import { ref, reactive } from "vue";
+
+const notifyStore = useNotificationStore();
+const isSubmitting = ref(false);
 
 const handleNewCatalog = async () => {
-  console.log("handleCatalog", obj);
-  await createCatalog(obj).then((data) => {
-    console.log("handleProduct", data);
-  });
-  // deployContract(obj).then((data) => {
-  //     console.log('handleCatalog', data)
-  // })
+  if (obj.catalogName === "") {
+    notifyStore.notify("El nombre del catálogo es requerido", "warning");
+    return;
+  }
+  isSubmitting.value = true;
+  try {
+    const data = await createCatalog(obj);
+    notifyStore.notify("Catálogo creado exitosamente en la Blockchain", "success");
+    // Clear form optionally
+    obj.catalogName = "";
+    obj.catalogDescription = "";
+    obj.catalogMetadata = "";
+  } catch (err: any) {
+    notifyStore.notify("Error al crear catálogo: " + (err.reason || err.message), "error");
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const obj = reactive({
@@ -21,10 +34,6 @@ const obj = reactive({
   catalogMetadata: "",
   catalogDescription: "",
 });
-
-const handleClick = (e: any) => {
-  console.log(e);
-};
 </script>
 <template>
   <div id="trackCatalog" class="blog-component mini-spacer">
@@ -81,6 +90,7 @@ const handleClick = (e: any) => {
                 <v-btn
                   class="bg-success mr-3 text-white"
                   elevation="0"
+                  :loading="isSubmitting"
                   @click="handleNewCatalog"
                 >
                   <IconFilePlus color="white" :size="33" stroke-width="1" />
@@ -95,14 +105,8 @@ const handleClick = (e: any) => {
                 <li>Nombre: {{ obj.catalogName }}</li>
                 <!-- <li>Catálogo ID: {{ obj.catalogId }}</li> -->
                 <li>Descripción: {{ obj.catalogDescription }}</li>
-                <li>
-                  Catálogo metadata URL *opcional: {{ obj.catalogMetadata }}
-                </li>
+                <li>Catálogo metadata URL: {{ obj.catalogMetadata }}</li>
               </ul>
-              <v-btn @click="handleClick" class="mb-3">
-                <IconWriting color="black" :size="33" stroke-width="1" /> Firmar
-                catálogo
-              </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

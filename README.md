@@ -176,7 +176,8 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 │   └── implementationByteCode.ts # Contract bytecode for deployment
 ├── stores/
 │   ├── index.ts              # Wallet store (accounts, provider, Web3Auth)
-│   └── smart-contract.ts     # Contract store (address, catalogs, products)
+│   ├── smart-contract.ts     # Contract store (address, catalogs, products)
+│   └── notification.ts       # Global UI notification state
 ├── tatum/                    # Tatum API integration
 ├── types/
 │   └── ethereum.d.ts         # Window.ethereum type augmentation

@@ -89,14 +89,16 @@ The app runs in **SPA mode** (`ssr: false` in `nuxt.config.ts`). This is intenti
 ### Store Path Convention
 Pinia stores live in `stores/` (plural). All imports must use `@/stores` or `@/stores/smart-contract`. **Never** use `@/store` (singular) — this path does not exist and will cause build failures.
 
-### Two Pinia Stores
+### Three Pinia Stores
 - **`stores/index.ts`** — Wallet state: accounts, balances, provider, Web3Auth instance, connection status
 - **`stores/smart-contract.ts`** — Contract state: address, catalogs, products, traceability info, alerts
+- **`stores/notification.ts`** — Global UI notification state: snackbar visibility, text, color/severity (success, error, warning, info)
 
 Both wallet connection methods (Web3Auth and MetaMask) write to the same `useWalletStore`, so downstream components are agnostic to the auth method.
 
 ### Service Layer — Lazy Initialization Pattern
 - `services/thridWeb/` — ThirdWeb SDK integration for smart contract read/write operations
+- **`contractReadInteract.ts`** dynamically resolves the active contract address from the `smart-contract` store. It uses cache invalidation to reset the contract instance when a user loads a new smart contract via QR or text input.
 - **`sdkPrivateInstance.js`** uses a lazy singleton pattern via `getPrivateSdk()`. This is critical — do NOT use top-level `await` or eager instantiation, as it blocks the module graph and causes white-screen crashes.
 - **`contractWriteInteract.ts`** uses `getWriteContract()` lazy singleton for the same reason.
 - Contract ABI is stored as JSON in `implementationAbi.json`
@@ -195,6 +197,10 @@ Heavy Web3 dependencies MUST be listed in `vite.optimizeDeps.include` in `nuxt.c
 11. **Cache invalidation**: If polyfill or dependency changes don't take effect, clear caches: `rm -rf node_modules/.cache .nuxt .output`
 
 12. **`provider.request()` returns `Maybe<string>`** — Cast with `as string` when you know the RPC method returns a string (e.g., `eth_getBalance`, `eth_chainId`).
+
+13. **Dynamic Relational Form Binding** — Forms (AddAlert, AddTraceabilityInfo) no longer rely on manually typed UI IDs. They map relational object choices directly from Pinia state via `<v-autocomplete>`.
+
+14. **Global Snackbar Error Bridging** — Transaction faults (e.g., contract execution reverts) are caught gracefully using `try/catch` and passed directly into `useNotificationStore().notify()`, instead of failing silently.
 
 ## Wallet Connection Flows
 

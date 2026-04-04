@@ -3,37 +3,49 @@ import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
 import { addTraceabilityInfo } from "@/services/thridWeb/contractWriteInteract";
 import { useWalletStore } from "@/stores";
+import { useSmartContract } from "@/stores/smart-contract";
+import { useNotificationStore } from "@/stores/notification";
 import { storeToRefs } from "pinia";
 import { TRACEABILITY_INFO } from "@/data/contractVariables";
 import type { TraceabilityInfo } from "@/schemas/index";
 import { formatAddress } from "@/utils";
-import { IconWriting } from "@tabler/icons-vue";
 import { IconFilePlus } from "@tabler/icons-vue";
 
 const storeWallet = useWalletStore();
-// but skip any action or non reactive (non ref/reactive) property
-const { wallet } = storeToRefs(storeWallet); // Destructuring from a Store
-const walletActor =
-  "0x0281be870046d1180b8071c75856f17cd15ccafc" ||
-  formatAddress(wallet.value.accounts[0]);
+const { wallet } = storeToRefs(storeWallet);
 
-const PRODUCT_ID = ref(1);
+const storeContract = useSmartContract();
+const { contractInfo } = storeToRefs(storeContract);
+
+const notifyStore = useNotificationStore();
+const isSubmitting = ref(false);
+const walletActor = wallet.value?.accounts?.[0]
+  ? formatAddress(wallet.value.accounts[0])
+  : "";
 var currentDate = new Date();
 const TIMESTAMP = ref(currentDate.getTime());
 
-const selectProduct = () => {};
-
 const traceabilityInfo = async () => {
-  console.log("traceabilityInfo", obj, TRACEABILITY_INFO);
-  await addTraceabilityInfo(obj).then((data) => {
-    console.log("traceabilityInfo", data);
-    // const { to, from, blockHash, blockNumber, confirmations, contractAddress, status, transactionHash } = data.receipt;
-  });
+  if (obj.productId === undefined || obj.action === "") {
+    notifyStore.notify("Debes seleccionar un producto y registrar una acción.", "warning");
+    return;
+  }
+  
+  isSubmitting.value = true;
+  try {
+    const data = await addTraceabilityInfo(obj);
+    notifyStore.notify("Información de trazabilidad agregada exitosamente", "success");
+    // Optionally clear form
+  } catch (err: any) {
+    notifyStore.notify("Error al agregar trazabilidad: " + (err.reason || err.message), "error");
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const obj: TraceabilityInfo = reactive({
   // trazabilityId: "",
-  productId: PRODUCT_ID.value,
+  productId: undefined as unknown as number,
   action: "",
   timestamp: TIMESTAMP.value,
   actor: walletActor,
@@ -41,10 +53,6 @@ const obj: TraceabilityInfo = reactive({
   actorId: "",
   metadataAction: "",
 });
-
-const handleClick = () => {
-  console.log("get");
-};
 </script>
 <template>
   <div id="trackInfo" class="blog-component mini-spacer">
@@ -68,20 +76,18 @@ const handleClick = () => {
               específico de la lista desplegable.
             </p>
             <v-row class="mt-7">
-              <v-text-field
-                v-model="PRODUCT_ID"
-                label="Product"
+              <v-autocomplete
+                v-model="obj.productId"
+                :items="contractInfo.products"
+                item-title="productName"
+                item-value="productId"
+                label="Selecciona un Producto"
                 variant="outlined"
                 color="primary"
-                placeholder="Elige un producto"
-                :disabled="true"
-              ></v-text-field>
-              <v-btn
-                class="ms-4"
-                style="max-height: 56px"
-                @click="selectProduct"
-                >Seleccionar producto</v-btn
-              >
+                persistent-hint
+                hint="Debes crear un producto primero si la lista está vacía"
+                class="mb-3"
+              ></v-autocomplete>
             </v-row>
           </div>
         </v-col>
@@ -148,6 +154,7 @@ const handleClick = () => {
                 <v-btn
                   class="bg-success mr-3 text-white"
                   elevation="0"
+                  :loading="isSubmitting"
                   @click="traceabilityInfo"
                 >
                   <IconFilePlus color="white" :size="33" stroke-width="1" />
@@ -168,12 +175,8 @@ const handleClick = () => {
                 <li>Actor address: {{ obj.actor }}</li>
                 <li>Tipo de Actor: {{ obj.actorType }}</li>
                 <li>Actor ID: {{ obj.actorId }}</li>
-                <li>Acción Metadata URL *opcional: {{ obj.metadataAction }}</li>
+                <li>Acción Metadata URL: {{ obj.metadataAction }}</li>
               </ul>
-              <v-btn @click="handleClick" class="mb-3">
-                <IconWriting color="black" :size="33" stroke-width="1" /> Firmar
-                trazabilidad
-              </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

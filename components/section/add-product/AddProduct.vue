@@ -4,16 +4,24 @@ import { ref, reactive } from "vue";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
 import { PRODUCT } from "@/data/contractVariables";
 import type { Product } from "@/schemas/index";
+import { useSmartContract } from "@/stores/smart-contract";
+import { useNotificationStore } from "@/stores/notification";
+import { storeToRefs } from "pinia";
 
-import { IconWriting } from "@tabler/icons-vue";
 import { IconFilePlus } from "@tabler/icons-vue";
 
-const CATALOG_ID = ref(1);
+const store = useSmartContract();
+const { contractInfo } = storeToRefs(store);
+const notifyStore = useNotificationStore();
+
+const isSubmitting = ref(false);
+
+const CATALOG_ID = ref<number | undefined>(undefined);
 var currentDate = new Date();
 const TIMESTAMP = ref(currentDate.getTime());
 
 const obj: Product = reactive({
-  catalogId: CATALOG_ID.value,
+  catalogId: CATALOG_ID,
   productName: "",
   productDescription: "",
   manufacturer: "",
@@ -24,18 +32,22 @@ const obj: Product = reactive({
   // traceabilityInfo: []
 });
 
-const selectCatalog = () => {};
-
 const handleProduct = async () => {
-  console.log("handleProduct", obj, PRODUCT);
-  await addProduct(obj).then((data) => {
-    console.log("handleProduct", data);
-    // const { to, from, blockHash, blockNumber, confirmations, contractAddress, status, transactionHash } = data.receipt;
-  });
-};
-
-const handleClick = () => {
-  console.log("get");
+  if (obj.catalogId === undefined || obj.productName === "") {
+    notifyStore.notify("Debes seleccionar un catálogo y proporcionar un nombre de producto.", "warning");
+    return;
+  }
+  
+  isSubmitting.value = true;
+  try {
+    const data = await addProduct(obj);
+    notifyStore.notify("Producto agregado exitosamente a la Blockchain", "success");
+    // Optionally reset fields here
+  } catch (err: any) {
+    notifyStore.notify("Error al agregar producto: " + (err.reason || err.message), "error");
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 </script>
 <template>
@@ -58,20 +70,18 @@ const handleClick = () => {
               específico de la lista desplegable.
             </p>
             <v-row class="mt-7">
-              <v-text-field
-                v-model="CATALOG_ID"
-                label="Catalogo"
+              <v-autocomplete
+                v-model="obj.catalogId"
+                :items="contractInfo.catalog"
+                item-title="catalogName"
+                item-value="catalogId"
+                label="Selecciona un Catálogo"
                 variant="outlined"
                 color="primary"
-                placeholder="Elige un catalogo"
-                :disabled="true"
-              ></v-text-field>
-              <v-btn
-                class="ms-4"
-                style="max-height: 56px"
-                @click="selectCatalog"
-                >Seleccionar catálogo</v-btn
-              >
+                persistent-hint
+                hint="Debes crear un catálogo primero si la lista está vacía"
+                class="mb-3"
+              ></v-autocomplete>
             </v-row>
           </div>
         </v-col>
@@ -142,6 +152,7 @@ const handleClick = () => {
                 <v-btn
                   class="bg-success mr-3 text-white"
                   elevation="0"
+                  :loading="isSubmitting"
                   @click="handleProduct"
                 >
                   <IconFilePlus color="white" :size="33" stroke-width="1" />
@@ -152,7 +163,6 @@ const handleClick = () => {
             <v-card-text>
               <p>Confirma para agregar este producto al contrato</p>
               <ul class="pa-4">
-                <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
                 <li>Catálogo ID: {{ obj.catalogId }}</li>
                 <li>Nombre: {{ obj.productName }}</li>
                 <li>Lote: {{ obj.batchNumber }}</li>
@@ -160,14 +170,8 @@ const handleClick = () => {
                 <li>Fecha fabricación: {{ obj.manufacturingDate }}</li>
                 <li>Descripcion: {{ obj.productDescription }}</li>
                 <li>Ubicación: {{ obj.productionLocation }}</li>
-                <li>
-                  Producto metadata URL *opcional: {{ obj.metadataProducto }}
-                </li>
+                <li>Producto metadata URL: {{ obj.metadataProducto }}</li>
               </ul>
-              <v-btn @click="handleClick" class="mb-3">
-                <IconWriting color="black" :size="33" stroke-width="1" /> Firmar
-                producto
-              </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

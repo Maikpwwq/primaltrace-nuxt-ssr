@@ -1,17 +1,31 @@
 import getPrivateSdk from "@/services/thridWeb/sdkPrivateInstance.js";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
 
+import { useSmartContract } from "@/stores/smart-contract";
+
 // Lazy-initialized contract instance — only connects when first needed
 let writeContract: any = null;
-
-const DEFAULT_CONTRACT_ADDRESS = "0x337e858c4465dfef88af8d66baf95842b9b579df";
+let cachedAddress: string | null = null;
 
 const getWriteContract = async () => {
+  const store = useSmartContract();
+  const activeAddress = store.contract.contractAddress;
+
+  if (!activeAddress || activeAddress === "") {
+    throw new Error("contractWriteInteract: No active smart contract address selected.");
+  }
+
+  // Invalidate cache if the user switched contracts
+  if (writeContract && cachedAddress !== activeAddress) {
+    resetWriteContract();
+  }
+
   if (!writeContract) {
-    console.log("contractWriteInteract: initializing with address", DEFAULT_CONTRACT_ADDRESS);
+    console.log("contractWriteInteract: initializing with address", activeAddress);
     try {
       const sdk = getPrivateSdk();
-      writeContract = await sdk.getContract(DEFAULT_CONTRACT_ADDRESS, ABI_CATALOG);
+      writeContract = await sdk.getContract(activeAddress, ABI_CATALOG);
+      cachedAddress = activeAddress;
     } catch (error) {
       console.error("contractWriteInteract: failed to connect", error);
       throw error;
@@ -20,12 +34,9 @@ const getWriteContract = async () => {
   return writeContract;
 };
 
-/**
- * Resets the cached write contract instance.
- * Call this when the user deploys or selects a new contract address.
- */
 const resetWriteContract = () => {
   writeContract = null;
+  cachedAddress = null;
 };
 
 const addProduct = async (product: any) => {

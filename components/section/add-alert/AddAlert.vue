@@ -3,37 +3,50 @@ import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
 import { addAlerts } from "@/services/thridWeb/contractWriteInteract";
 import { useWalletStore } from "@/stores";
+import { useSmartContract } from "@/stores/smart-contract";
+import { useNotificationStore } from "@/stores/notification";
 import { storeToRefs } from "pinia";
 import { TRACEABILITY_INFO } from "@/data/contractVariables";
 import type { AlertInfo } from "@/schemas/index";
 import { formatAddress } from "@/utils";
-import { IconWriting } from "@tabler/icons-vue";
 import { IconFilePlus } from "@tabler/icons-vue";
 
 const storeWallet = useWalletStore();
-// but skip any action or non reactive (non ref/reactive) property
-const { wallet } = storeToRefs(storeWallet); // Destructuring from a Store
-const walletActor =
-  "0x0281be870046d1180b8071c75856f17cd15ccafc" ||
-  formatAddress(wallet.value.accounts[0]);
+const { wallet } = storeToRefs(storeWallet);
 
-const PRODUCT_ID = ref(1);
+const storeContract = useSmartContract();
+const { contractInfo } = storeToRefs(storeContract);
+
+const notifyStore = useNotificationStore();
+const isSubmitting = ref(false);
+const walletActor = wallet.value?.accounts?.[0]
+  ? formatAddress(wallet.value.accounts[0])
+  : "";
+
 var currentDate = new Date();
 const TIMESTAMP = ref(currentDate.getTime());
 
-const selectProduct = () => {};
-
 const setNewAlert = async () => {
-  console.log("alertsInfo", obj, TRACEABILITY_INFO);
-  await addAlerts(obj).then((data: any) => {
-    console.log("alerts", data);
-    // const { to, from, blockHash, blockNumber, confirmations, contractAddress, status, transactionHash } = data.receipt;
-  });
+  if (obj.productId === undefined || obj.alertTitle === "") {
+    notifyStore.notify("Debes seleccionar un producto y proporcionar un título de alerta.", "warning");
+    return;
+  }
+  
+  isSubmitting.value = true;
+  try {
+    const data = await addAlerts(obj);
+    notifyStore.notify("Alerta agregada exitosamente a la Blockchain", "success");
+    // clear fields optionally
+  } catch (err: any) {
+    notifyStore.notify("Error al agregar alerta: " + (err.reason || err.message), "error");
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const obj: AlertInfo = reactive({
   alertId: 0,
-  productId: PRODUCT_ID.value,
+  productId: undefined as unknown as number,
   traceabilityId: 0,
   alertType: 3,
   alertTitle: "",
@@ -45,10 +58,6 @@ const obj: AlertInfo = reactive({
   resolved: false,
   timestamp: TIMESTAMP.value,
 });
-
-const handleClick = () => {
-  console.log("get");
-};
 </script>
 <template>
   <div id="addAlertInfo" class="blog-component mini-spacer">
@@ -70,20 +79,18 @@ const handleClick = () => {
               selecciona un producto específico de la lista desplegable.
             </p>
             <v-row class="mt-7">
-              <v-text-field
-                v-model="PRODUCT_ID"
-                label="Product"
+              <v-autocomplete
+                v-model="obj.productId"
+                :items="contractInfo.products"
+                item-title="productName"
+                item-value="productId"
+                label="Selecciona un Producto"
                 variant="outlined"
                 color="primary"
-                placeholder="Elige un producto"
-                :disabled="true"
-              ></v-text-field>
-              <v-btn
-                class="ms-4"
-                style="max-height: 56px"
-                @click="selectProduct"
-                >Seleccionar producto</v-btn
-              >
+                persistent-hint
+                hint="Debes crear un producto primero si la lista está vacía"
+                class="mb-3"
+              ></v-autocomplete>
             </v-row>
           </div>
         </v-col>
@@ -173,6 +180,7 @@ const handleClick = () => {
                 <v-btn
                   class="bg-success mr-3 text-white"
                   elevation="0"
+                  :loading="isSubmitting"
                   @click="setNewAlert"
                 >
                   <IconFilePlus color="white" :size="33" stroke-width="1" />
@@ -195,10 +203,6 @@ const handleClick = () => {
                 <li>Alerta resuelta: {{ obj.resolved }}</li>
                 <li>Fecha de alerta: {{ obj.timestamp }}</li>
               </ul>
-              <v-btn @click="handleClick" class="mb-3">
-                <IconWriting color="black" :size="33" stroke-width="1" /> Firmar
-                alerta
-              </v-btn>
             </v-card-text>
           </v-card>
         </v-col>

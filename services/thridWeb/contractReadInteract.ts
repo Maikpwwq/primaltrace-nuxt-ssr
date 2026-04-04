@@ -1,19 +1,30 @@
 import getSdk from "@/services/thridWeb/sdkInstance.js";
 import ABI_CATALOG from "@/services/thridWeb/implementationAbi.json";
-import { deployAddress } from "@/components/section/register-smart-contract/SmartContractRegister.vue";
+import { useSmartContract } from "@/stores/smart-contract";
 
 // Lazy-initialized contract instance — only connects when first needed
 let readContract: any = null;
-
-const DEFAULT_CONTRACT_ADDRESS = "0x337e858c4465dfef88af8d66baf95842b9b579df";
+let cachedAddress: string | null = null;
 
 const getReadContract = async () => {
+  const store = useSmartContract();
+  const activeAddress = store.contract.contractAddress;
+
+  if (!activeAddress || activeAddress === "") {
+    throw new Error("contractReadInteract: No active smart contract address selected.");
+  }
+
+  // Invalidate cache if the user switched contracts
+  if (readContract && cachedAddress !== activeAddress) {
+    resetReadContract();
+  }
+
   if (!readContract) {
-    const address = deployAddress?.value || DEFAULT_CONTRACT_ADDRESS;
-    console.log("contractReadInteract: initializing with address", address);
+    console.log("contractReadInteract: initializing with address", activeAddress);
     try {
       const sdk = getSdk();
-      readContract = await sdk.getContract(address, ABI_CATALOG);
+      readContract = await sdk.getContract(activeAddress, ABI_CATALOG);
+      cachedAddress = activeAddress;
     } catch (error) {
       console.error("contractReadInteract: failed to connect", error);
       throw error;
@@ -22,12 +33,9 @@ const getReadContract = async () => {
   return readContract;
 };
 
-/**
- * Resets the cached contract instance.
- * Call this when the user deploys or selects a new contract address.
- */
 const resetReadContract = () => {
   readContract = null;
+  cachedAddress = null;
 };
 
 // Smart contract read functions — each lazily initializes the contract on first call
