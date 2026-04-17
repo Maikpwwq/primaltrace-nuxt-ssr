@@ -2,6 +2,7 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
+import { uploadProductMetadata } from "@/services/ipfs/ipfsUpload";
 import type { Product } from "@/schemas/index";
 import { useSmartContract } from "@/stores/smart-contract";
 import { useNotificationStore } from "@/stores/notification";
@@ -14,6 +15,8 @@ const { contractInfo } = storeToRefs(store);
 const notifyStore = useNotificationStore();
 
 const isSubmitting = ref(false);
+const enableIpfs = ref(true); // Auto-upload metadata to IPFS
+const ipfsStatus = ref("");
 
 const CATALOG_ID = ref<number | undefined>(undefined);
 var currentDate = new Date();
@@ -39,9 +42,23 @@ const handleProduct = async () => {
   
   isSubmitting.value = true;
   try {
+    // Auto-upload metadata to IPFS if enabled
+    if (enableIpfs.value) {
+      ipfsStatus.value = "Subiendo metadata a IPFS...";
+      try {
+        const cid = await uploadProductMetadata(obj);
+        obj.metadataProducto = cid;
+        ipfsStatus.value = `✅ CID: ${cid}`;
+        notifyStore.notify("Metadata subida a IPFS exitosamente", "info");
+      } catch (ipfsErr: any) {
+        ipfsStatus.value = "⚠️ IPFS falló, continuando sin metadata";
+        notifyStore.notify("IPFS upload falló: " + ipfsErr.message + " — continuando sin metadata", "warning");
+      }
+    }
+
     const data = await addProduct(obj);
     notifyStore.notify("Producto agregado exitosamente a la Blockchain", "success");
-    // Optionally reset fields here
+    ipfsStatus.value = "";
   } catch (err: any) {
     notifyStore.notify("Error al agregar producto: " + (err.reason || err.message), "error");
   } finally {
@@ -138,18 +155,39 @@ const handleProduct = async () => {
                 variant="underlined"
               ></v-text-field>
               <v-text-field
-                v-model="obj.metadataProducto"
-                color="primary"
-                label="Metadata URL (opcional):"
-                variant="underlined"
-              ></v-text-field>
-              <v-text-field
                 v-model="obj.productQrCode"
                 color="primary"
                 label="Código QR del producto (opcional):"
                 variant="underlined"
                 placeholder="URL o contenido del código QR"
               ></v-text-field>
+              <v-divider class="my-3" />
+              <v-switch
+                v-model="enableIpfs"
+                color="primary"
+                label="📌 Auto-subir metadata a IPFS (Pinata)"
+                density="comfortable"
+                hide-details
+                class="mb-2"
+              />
+              <v-text-field
+                v-model="obj.metadataProducto"
+                color="primary"
+                :label="enableIpfs ? 'IPFS CID (se completa automáticamente):' : 'Metadata URL (manual):'"
+                variant="underlined"
+                :readonly="enableIpfs"
+                :hint="enableIpfs ? 'Se generará al enviar el formulario' : ''"
+                persistent-hint
+              ></v-text-field>
+              <v-alert
+                v-if="ipfsStatus"
+                :type="ipfsStatus.startsWith('✅') ? 'success' : ipfsStatus.startsWith('⚠') ? 'warning' : 'info'"
+                variant="tonal"
+                density="compact"
+                class="mb-3"
+              >
+                {{ ipfsStatus }}
+              </v-alert>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0">
                   <IconFilePlus color="white" :size="33" stroke-width="1" />

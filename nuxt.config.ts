@@ -103,7 +103,10 @@ export default defineNuxtConfig({
       // web3authClientID: "BPeTrfVgPsmhRzxk4Js7mMwdQuCm2nrpu0It9HoZ5-f8e-6Y6Nx6qBINcN45q8lzrvTVt2vIKpclcE8OFld8BWU", // `${import.meta.env..VITE_WEB3AUTH_CLIENT_ID}` process.env.NUXT_WEB3AUTH_CLIENT_ID ||
       personalAccountPrivateKey: "46db0fa3c77085d184e9bbb285fb061864774a61574e5b2c19a26d328b3c4e16", // Wallet process.env.NUXT_PERSONAL_ACCOUNT_PRIVATE_KEY || 
       supabasePassword: "b02fcqZLPF88qTfa",
-      supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZ2ZxbHNiaWh5bnhxam1zZ3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI4Mjg0NjUsImV4cCI6MjAwODQwNDQ2NX0.1FyRfjbBMDZiSOtK46ljDSfswar99uQkB9x5-8wrU9M"
+      supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZ2ZxbHNiaWh5bnhxam1zZ3RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI4Mjg0NjUsImV4cCI6MjAwODQwNDQ2NX0.1FyRfjbBMDZiSOtK46ljDSfswar99uQkB9x5-8wrU9M",
+      // Pinata IPFS — Sprint 5 (SC-05)
+      pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJjZDU4ZDAwZS1iYjRkLTQ3MTYtODliYi05YWMzZmZjZTUwY2YiLCJlbWFpbCI6Im1hcmlhc2ZAdWRpc3RyaXRhbC5lZHUuY28iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MSwiaWQiOiJGUkExIn0seyJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MSwiaWQiOiJOWUMxIn1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMWVlMWI2ZTI5Nzc3NWJlMDYzNGUiLCJzY29wZWRLZXlTZWNyZXQiOiJkMmVmNmQ4Y2U3NDA4M2UzOTEzY2FkYTFhMTE4ZWI0YjQyNjI2ZDYxNTMzOTQ1ZTdlNDI4MGI3ZjU5MGMwOTMzIiwiZXhwIjoxODA4MDAxMzYyfQ.5BuFddU-QhnPJmWMqKTdujQOVK37X02sgwplkIOddOY", // process.env.NUXT_PINATA_JWT — Generate from https://app.pinata.cloud/developers/api-keys
+      pinataGateway: "scarlet-ready-possum-b1b.mypinata.cloud", // Your dedicated Pinata gateway
     },
   },
   // Nuxt has built-in support for loading .env files. Avoid directly importing it from nuxt.config.

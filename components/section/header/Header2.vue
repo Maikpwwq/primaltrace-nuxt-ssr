@@ -2,7 +2,7 @@
 import { ref } from "vue";
 // import { start } from "@/ethers/QRCode/index";
 import { headerMenu } from "@/data/CustomComponents";
-import { IconLayoutDashboard } from '@tabler/icons-vue';
+import { IconLayoutDashboard, IconSettings } from '@tabler/icons-vue';
 
 const drawer = ref(false);
 const isActive = ref(true);
@@ -35,6 +35,9 @@ const handleCLick = () => {
           <v-btn to="/dashboard" @click="handleCLick" class="btn px-6 bg-primary ml-2 d-md-flex d-none" flat>
             <IconLayoutDashboard color="black" :size="33" stroke-width="1" /> Web3 DashBoard
           </v-btn>
+          <v-btn to="/admin" @click="handleCLick" class="btn px-4 bg-secondary ml-1 d-md-flex d-none" flat>
+            <IconSettings color="white" :size="22" stroke-width="1.5" /> Admin
+          </v-btn>
           <!-- Todo: Metamask btn connect -->
           <!-- Display a connect button and the current account -->
           <!-- <button class="enableEthereumButton"> Conecta MetaMask</button> -->
@@ -59,6 +62,11 @@ const handleCLick = () => {
           <li class="nav-item mx-3 mt-4">
             <v-btn to="/dashboard" @click="handleCLick" class="btn bg-primary-light" flat block variant="outlined" color="primary">
               <IconLayoutDashboard color="black" :size="33" stroke-width="1" /> Web3 DashBoard
+            </v-btn>
+          </li>
+          <li class="nav-item mx-3 mt-2">
+            <v-btn to="/admin" @click="handleCLick" class="btn" flat block variant="outlined" color="secondary">
+              <IconSettings :size="22" stroke-width="1.5" /> Admin
             </v-btn>
           </li>
         </ul>

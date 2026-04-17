@@ -43,6 +43,7 @@
     "eth-rpc-errors": "^4.0.3",
     "ethers": "^5.8.0",
     "nuxi": "^3.34.0",
+    "pinata": "^2.5.5",
     "pinia": "^3.0.4",
     "qrcode.vue": "^3.8.1",
     "sass": "^1.99.0",
