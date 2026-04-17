@@ -1,36 +1,78 @@
 <script setup lang="ts">
+import { ref, computed, onMounted } from "vue";
 import Polygon from "/images/polygon-zkevm/main.svg";
 import BaseTable from "./BaseTable.vue";
-import { useSmartContract } from "@/stores/smart-contract";
-import { storeToRefs } from "pinia";
+import PaginationControls from "@/components/shared/PaginationControls.vue";
+import {
+  getCatalogsPaginated,
+  getCatalogCounter,
+} from "@/services/thridWeb/contractReadInteract";
+import { useNotificationStore } from "@/stores/notification";
+
+const PAGE_SIZE = 10;
 
 const headers = [
-  { title: "Nombre", value: "name" },
+  { title: "ID", value: "catalogId" },
+  { title: "Nombre", value: "catalogName" },
   { title: "Descripción", value: "catalogDescription" },
-  { title: "#Productos", value: "catalog#Products" },
+  { title: "#Productos", value: "productCount" },
   { title: "Metadata", value: "catalogMetadata" },
-  //   {
-  //     title: 'Full Name',
-  //     key: 'fullName',
-  //     value: item => `${item.name.first} ${item.name.last}`,
-  //   },
+  { title: "Código QR", value: "catalogQrCode" },
+  { title: "Creado", value: "creationDate" },
 ];
 
-const storeContract = useSmartContract();
-// but skip any action or non reactive (non ref/reactive) property
-const { contractInfo } = storeToRefs(storeContract); // Destructuring from a Store
+const items = ref<Array<Record<string, any>>>([]);
+const totalItems = ref(0);
+const currentPage = ref(1);
+const loading = ref(false);
+const notify = useNotificationStore();
 
-// TODO: map all catalogInfo registers
-console.log("catalogInfo", contractInfo.value.catalog);
-const catalogs = contractInfo.value?.catalog;
-const items: Array<object> = reactive([
-  {
-    name: catalogs[1],
-    catalogDescription: catalogs[2],
-    catalogProducts: catalogs[4]?.length,
-    catalogMetadata: catalogs[5],
-  },
-]);
+/**
+ * Maps raw V0.5 Catalog struct (returned by getCatalogsPaginated) to a flat object.
+ * ThirdWeb SDK returns structs as objects with named properties.
+ */
+const mapCatalog = (raw: any): Record<string, any> => ({
+  catalogId: Number(raw.catalogId ?? raw[0]),
+  catalogName: raw.catalogName ?? raw[1] ?? "",
+  catalogDescription: raw.catalogDescription ?? raw[2] ?? "",
+  productCount: raw.products?.length ?? raw[5]?.length ?? 0,
+  catalogMetadata: raw.catalogMetadata ?? raw[6] ?? "",
+  catalogQrCode: raw.catalogQrCode ?? raw[7] ?? "",
+  creationDate: raw.createdAt ?? raw[3]
+    ? new Date(Number(raw.createdAt ?? raw[3]) * 1000).toLocaleDateString("es-CO")
+    : "—",
+});
+
+const fetchPage = async (offset: number, limit: number) => {
+  loading.value = true;
+  try {
+    const data = await getCatalogsPaginated(offset, limit);
+    items.value = (data ?? []).map(mapCatalog);
+  } catch (err: any) {
+    console.error("CatalogsResume: fetch failed", err);
+    notify.notify(err.message || "Error al cargar catálogos", "error");
+    items.value = [];
+  } finally {
+    loading.value = false;
+  }
+};
+
+const onPageChange = (payload: { page: number; offset: number; limit: number }) => {
+  currentPage.value = payload.page;
+  fetchPage(payload.offset, payload.limit);
+};
+
+onMounted(async () => {
+  try {
+    const count = await getCatalogCounter();
+    totalItems.value = Number(count);
+  } catch {
+    totalItems.value = 0;
+  }
+  if (totalItems.value > 0) {
+    fetchPage(1, PAGE_SIZE);
+  }
+});
 </script>
 
 <template>
@@ -51,12 +93,31 @@ const items: Array<object> = reactive([
     </v-row>
     <v-row class="mt-9" justify="center">
       <v-col cols="10">
-        <div v-if="contractInfo.catalog?.length > 0">
+        <v-progress-linear
+          v-if="loading"
+          indeterminate
+          color="primary"
+          class="mb-4"
+        />
+
+        <div v-if="items.length > 0">
           <BaseTable :headers="headers" :items="items" />
+          <PaginationControls
+            v-model="currentPage"
+            :total-items="totalItems"
+            :page-size="PAGE_SIZE"
+            @page-change="onPageChange"
+          />
         </div>
-        <div v-if="contractInfo.catalog?.length === 0">
-          Aun no hay registrado ningun catalogo en este contrato inteligente
-        </div>
+
+        <v-alert
+          v-else-if="!loading && totalItems === 0"
+          type="info"
+          variant="tonal"
+          class="mt-4"
+        >
+          Aún no hay registrado ningún catálogo en este contrato inteligente.
+        </v-alert>
       </v-col>
     </v-row>
   </div>

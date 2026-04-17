@@ -13,6 +13,9 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "nuxi": "nuxi upgrade --force",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:read": "vitest run tests/contract/read.test.ts tests/contract/rbac.test.ts tests/contract/validation.test.ts",
     "prettier": "npx prettier . --write",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -57,6 +60,7 @@
     "nuxt": "4.4.2",
     "prettier": "^3.8.3",
     "process": "^0.11.10",
-    "vite-plugin-node-polyfills": "^0.26.0"
+    "vite-plugin-node-polyfills": "^0.26.0",
+    "vitest": "^4.1.4"
   }
 }

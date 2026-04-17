@@ -1,67 +1,138 @@
 <script setup lang="ts">
+import { ref, watch, onMounted } from "vue";
 import Polygon from "/images/polygon-zkevm/main.svg";
 import BaseTable from "./BaseTable.vue";
-import { useSmartContract } from "@/stores/smart-contract";
-import { storeToRefs } from "pinia";
+import PaginationControls from "@/components/shared/PaginationControls.vue";
+import {
+  getCatalogsPaginated,
+  getCatalogCounter,
+  getCatalog,
+} from "@/services/thridWeb/contractReadInteract";
+import { useNotificationStore } from "@/stores/notification";
+
+const PAGE_SIZE = 10;
 
 const headers = [
-  { title: "Id", value: "productId" },
-  { title: "Nombre", value: "name" },
+  { title: "ID", value: "productId" },
+  { title: "Nombre", value: "productName" },
   { title: "Descripción", value: "productDescription" },
-  { title: "#Rastros", value: "traceabilityInfo" },
   { title: "Fabricante", value: "manufacturer" },
-  { title: "Fecha de fabricación", value: "manufacturingDate" },
-  { title: "Número de lote", value: "batchNumber" },
-  { title: "Ubicación de producción", value: "productionLocation" },
+  { title: "Lote", value: "batchNumber" },
+  { title: "Ubicación", value: "productionLocation" },
   { title: "Metadata", value: "metadataProducto" },
+  { title: "QR", value: "productQrCode" },
+  { title: "#Trazabilidad", value: "traceabilityCount" },
 ];
 
-const storeContract = useSmartContract();
-// but skip any action or non reactive (non ref/reactive) property
-const { contractInfo } = storeToRefs(storeContract); // Destructuring from a Store
+// Catalog selection
+const catalogs = ref<Array<{ title: string; value: number }>>([]);
+const selectedCatalogId = ref<number | null>(null);
+const loadingCatalogs = ref(false);
 
-// TODO: map all productsInfo registers
-console.log("productsInfo", contractInfo.value.products);
-const products = contractInfo.value.products;
-const items: Array<object> = reactive([
-  {
-    productId: products[0],
-    name: products[1],
-    productDescription: products[2],
-    traceabilityInfo: products[8]?.length,
-    manufacturer: products[3],
-    manufacturingDate: products[4],
-    batchNumber: products[5],
-    productionLocation: products[6],
-    metadataProducto: products[7],
-  },
-]);
+// Products for selected catalog
+const items = ref<Array<Record<string, any>>>([]);
+const totalItems = ref(0);
+const currentPage = ref(1);
+const loading = ref(false);
+const notify = useNotificationStore();
 
-// [
-//   {
-//     name: "TrackWise",
-//     productId: "TW01",
-//     productDescription: "Trazabilidad confiable apalancada por Blockchain.",
-//     manufacturer: "PrimalTrace",
-//     manufacturingDate: "140823",
-//     batchNumber: "148",
-//     productionLocation: "Bogotá, Colombia",
-//     metadataProducto: "https://primaltrace-nuxt-ssr.vercel.app/#trackwise",
-//   },
-//   {
-//     name: "TrustBlock",
-//     productId: "TB02",
-//     productDescription: "Autenticidad de origen respaldado por Blockchain. ",
-//     manufacturer: "PrimalTrace",
-//     manufacturingDate: "140823",
-//     batchNumber: "148",
-//     productionLocation: "Bogotá, Colombia",
-//     metadataProducto: "https://primaltrace-nuxt-ssr.vercel.app/#trustblock",
-//   },
-// ];
+/**
+ * Maps raw V0.5 Product struct to a flat table-friendly object.
+ * Contract struct: (productId, catalogId, productName, productDescription,
+ * manufacturer, manufacturingDate, batchNumber, productionLocation,
+ * metadataProducto, productQrCode, lastModifiedAt, traceabilityInfo[])
+ */
+const mapProduct = (raw: any): Record<string, any> => ({
+  productId: Number(raw.productId ?? raw[0]),
+  productName: raw.productName ?? raw[2] ?? "",
+  productDescription: raw.productDescription ?? raw[3] ?? "",
+  manufacturer: raw.manufacturer ?? raw[4] ?? "",
+  batchNumber: raw.batchNumber ?? raw[6] ?? "",
+  productionLocation: raw.productionLocation ?? raw[7] ?? "",
+  metadataProducto: raw.metadataProducto ?? raw[8] ?? "",
+  productQrCode: raw.productQrCode ?? raw[9] ?? "",
+  traceabilityCount: raw.traceabilityInfo?.length ?? raw[11]?.length ?? 0,
+});
 
-const selectCatalog = () => {};
-const CATALOG_ID = ref(1);
+/**
+ * Load catalog dropdown options on mount.
+ * Uses getCatalogsPaginated to get up to 50 catalogs for the selector.
+ */
+const loadCatalogs = async () => {
+  loadingCatalogs.value = true;
+  try {
+    const count = await getCatalogCounter();
+    const total = Number(count);
+    if (total === 0) return;
+    const data = await getCatalogsPaginated(1, Math.min(total, 50));
+    catalogs.value = (data ?? []).map((c: any) => ({
+      title: `#${Number(c.catalogId ?? c[0])} — ${c.catalogName ?? c[1] ?? "Sin nombre"}`,
+      value: Number(c.catalogId ?? c[0]),
+    }));
+  } catch (err: any) {
+    console.error("ProductsResume: failed to load catalogs", err);
+  } finally {
+    loadingCatalogs.value = false;
+  }
+};
+
+/**
+ * Fetch products for the selected catalog.
+ * Products are embedded in the Catalog struct (products[] field / field index 5),
+ * so we use getCatalog(catalogId) and extract the products array.
+ * Client-side pagination is applied since products are per-catalog.
+ */
+const fetchProducts = async () => {
+  if (!selectedCatalogId.value) return;
+  loading.value = true;
+  items.value = [];
+
+  try {
+    const catalog = await getCatalog(selectedCatalogId.value);
+    // catalog.products is an array of product IDs — but we need the full Product structs
+    // The V0.5 contract's getProduct(productId) returns the full struct
+    // For efficiency, we'll display what the catalog provides and map product IDs
+    const productIds: number[] = (catalog.products ?? catalog[5] ?? []).map(Number);
+    totalItems.value = productIds.length;
+
+    // Client-side pagination
+    const start = (currentPage.value - 1) * PAGE_SIZE;
+    const pageIds = productIds.slice(start, start + PAGE_SIZE);
+
+    // Fetch each product's full data
+    const { getProduct } = await import("@/services/thridWeb/contractReadInteract");
+    const products = await Promise.all(
+      pageIds.map(async (id) => {
+        try {
+          return await getProduct(id);
+        } catch {
+          return null;
+        }
+      })
+    );
+
+    items.value = products.filter(Boolean).map(mapProduct);
+  } catch (err: any) {
+    console.error("ProductsResume: fetch failed", err);
+    notify.notify(err.message || "Error al cargar productos", "error");
+    items.value = [];
+    totalItems.value = 0;
+  } finally {
+    loading.value = false;
+  }
+};
+
+const onPageChange = (payload: { page: number; offset: number; limit: number }) => {
+  currentPage.value = payload.page;
+  fetchProducts();
+};
+
+watch(selectedCatalogId, () => {
+  currentPage.value = 1;
+  fetchProducts();
+});
+
+onMounted(loadCatalogs);
 </script>
 
 <template>
@@ -82,30 +153,54 @@ const CATALOG_ID = ref(1);
     </v-row>
     <v-row class="mt-9" justify="center">
       <v-col cols="10">
-        <p class="text-muted">
-          Para comenzar elige un catálogo específico de la lista desplegable y
-          revisa las características más sorprendentes de tu producto en la
-          blockchain al instante.
-        </p>
-        <v-row class="mt-7">
-          <v-text-field
-            v-model="CATALOG_ID"
-            label="Catalogo"
-            variant="outlined"
-            color="primary"
-            placeholder="Elige un catalogo"
-            :disabled="true"
-          ></v-text-field>
-          <v-btn class="ms-4" style="max-height: 56px" @click="selectCatalog"
-            >Seleccionar catálogo</v-btn
-          >
-        </v-row>
-        <div v-if="contractInfo.products?.length > 0">
+        <v-autocomplete
+          v-model="selectedCatalogId"
+          :items="catalogs"
+          :loading="loadingCatalogs"
+          label="Selecciona un catálogo"
+          placeholder="Busca o elige un catálogo"
+          variant="outlined"
+          color="primary"
+          density="comfortable"
+          clearable
+          no-data-text="No hay catálogos disponibles"
+          class="mb-4"
+        />
+
+        <v-progress-linear
+          v-if="loading"
+          indeterminate
+          color="primary"
+          class="mb-4"
+        />
+
+        <div v-if="items.length > 0">
           <BaseTable :headers="headers" :items="items" />
+          <PaginationControls
+            v-model="currentPage"
+            :total-items="totalItems"
+            :page-size="PAGE_SIZE"
+            @page-change="onPageChange"
+          />
         </div>
-        <div v-if="contractInfo.products?.length === 0">
-          Aun no hay registrado ningun producto para este catalogo
-        </div>
+
+        <v-alert
+          v-else-if="!loading && selectedCatalogId && totalItems === 0"
+          type="info"
+          variant="tonal"
+          class="mt-4"
+        >
+          Aún no hay productos registrados en este catálogo.
+        </v-alert>
+
+        <v-alert
+          v-else-if="!loading && !selectedCatalogId"
+          type="info"
+          variant="tonal"
+          class="mt-4"
+        >
+          Selecciona un catálogo para ver sus productos.
+        </v-alert>
       </v-col>
     </v-row>
   </div>
