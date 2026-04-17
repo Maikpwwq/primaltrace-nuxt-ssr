@@ -122,20 +122,21 @@ Both wallet connection methods (Web3Auth and MetaMask) write to the same `useWal
 ### Component Organization
 Components follow a section-based structure under `components/section/`:
 - `web-3-auth/` — Web3Auth Modal v10 wallet connection
-  - `ConnectWalletBtn.vue` — Main Web3Auth init/connect flow
-  - `Connect.vue` — Post-login nav (logout, deployed contracts, block timeline)
-  - `Display.vue` — Wallet info card; uses `computed()` for etherscan URL
-  - `WalletError.vue` — Error display
 - `connect-wallet/` — MetaMask direct wallet connection
-  - `Navigation.vue` — Provider detection via `@metamask/detect-provider`, uses `onMounted`/`onBeforeUnmount` lifecycle
-  - `Display.vue` — MetaMask wallet info card
 - `dash-board/` — Dashboard data loading
+- `admin/` — Admin Control Center (KPIs, Tier limits, Factory deploy)
 - `register-smart-contract/` — Contract deployment and QR scanning
 - `add-catalog/`, `add-product/`, `add-traceability-info/`, `add-alert/` — CRUD operations
-- `role-management/` — V0.5 RBAC role grant/revoke UI (uses `ethers.utils.keccak256` for role hashes)
-- `verify-product/` — V0.5 Product integrity verification (compares client-side `solidityKeccak256` vs on-chain hash)
+- `role-management/` — V0.5 RBAC role grant/revoke UI
+- `verify-product/` — V0.5 Product integrity verification
 - `tables/` — Data display tables
-- `header/` — Header1, Header2 navigation bars (use `ref(false)` for drawer toggle)
+- `header/` — Header1, Header2 navigation bars
+
+### IPFS Integration (Pinata)
+The project uses the official `pinata` SDK for hybrid on-chain/off-chain storage.
+- `services/ipfs/ipfsUpload.ts` — Uploads Product, Traceability, and Alert JSON metadata to IPFS. Returns the CID.
+- `services/ipfs/ipfsRetrieve.ts` — Fetches metadata using the dedicated gateway with a fallback to the public gateway.
+- AddProduct form includes a toggle to auto-upload to IPFS before submitting the contract transaction.
 
 ### Shared Components
 - `shared/PaginationControls.vue` — Reusable pagination component with `totalItems`, `pageSize`, `v-model` props. Emits `page-change` with `{ page, offset, limit }` payload matching V0.5 paginated read functions.
@@ -208,7 +209,7 @@ Heavy Web3 dependencies MUST be listed in `vite.optimizeDeps.include` in `nuxt.c
 
 7. **`@nuxtjs/vuetify`** is a Nuxt 2 module. Do NOT add it — Vuetify 4 is loaded directly via the Vite plugin and `build.transpile` in `nuxt.config.ts`.
 
-8. **Runtime config secrets** are currently hardcoded in `nuxt.config.ts` under `runtimeConfig.public`. These should eventually be moved to `.env` variables.
+8. **Runtime config secrets** are hardcoded in `nuxt.config.ts` under `runtimeConfig.public` (including `pinataJwt` and `pinataGateway`). These should eventually move to `.env`.
 
 9. **ethers.js v5** is used (not v6). Function signatures differ between versions — check the ethers v5 docs when making changes. Key difference: v5 uses `ethers.providers.Web3Provider`, v6 uses `ethers.BrowserProvider`.
 

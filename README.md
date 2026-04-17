@@ -60,8 +60,10 @@ Both plans include a satisfaction guarantee.
 - **Product Catalog Management** — Create catalogs and register products on-chain
 - **Traceability Tracking** — Record and query product traceability information with certification support
 - **Alerts & Resolution** — Register, monitor, and resolve supply chain alerts with on-chain timestamps
+- **Admin Control Center** — Manage KPIs, RBAC roles, Free/Enterprise tier limits, and Factory deployments
 - **Role-Based Access Control** — Manage Operator and Auditor roles via AccessControl (RBAC)
 - **Product Integrity Verification** — Verify product data authenticity via on-chain keccak256 hashing
+- **IPFS Integration** — Store large metadata off-chain using Pinata, keeping on-chain gas costs low
 - **Paginated Reads** — Scalable data retrieval with paginated contract queries (max 50 per page)
 - **QR Code Integration** — Scan QR codes to interact with deployed contracts
 - **Dual Web3 Authentication** — Wallet-based login via Web3Auth Modal v10 and MetaMask
@@ -122,6 +124,8 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 | `web3authClientSecret` | Web3Auth application password |
 | `personalAccountPrivateKey` | Private key for SDK-based contract interactions |
 | `supabaseKey` | Supabase anon key |
+| `pinataJwt` | Pinata API JWT for IPFS uploads (`NUXT_PINATA_JWT`) |
+| `pinataGateway` | Pinata dedicated gateway domain (`NUXT_PINATA_GATEWAY`) |
 
 > **Security Note**: These are currently hardcoded in `nuxt.config.ts`. For production, migrate to `.env` variables.
 
@@ -142,10 +146,8 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 │   │   │   ├── Display.vue           # Wallet info card (balance, chainId)
 │   │   │   └── WalletError.vue       # Error display component
 │   │   ├── connect-wallet/   # MetaMask direct wallet connection
-│   │   │   ├── ConnectWallet.vue     # Container: Navigation + Display + WalletError
-│   │   │   ├── Navigation.vue        # MetaMask detect/connect/display with SVG icons
-│   │   │   └── Display.vue           # MetaMask wallet info card
 │   │   ├── dash-board/       # Dashboard data loaders and layout
+│   │   ├── admin/            # Admin Control Center (KPIs, Factory, Tiers)
 │   │   ├── register-smart-contract/  # Contract deployment & QR scanning
 │   │   ├── add-catalog/      # On-chain catalog CRUD
 │   │   ├── add-product/      # On-chain product registration
@@ -176,14 +178,18 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 │   ├── pinia.ts              # Pinia store initialization
 │   └── vuetify.ts            # Vuetify 4 plugin configuration
 ├── schemas/                  # TypeScript interfaces (WalletState, SmartContract, etc.)
-├── services/thridWeb/        # ThirdWeb SDK service layer
-│   ├── sdkInstance.js        # Public ThirdWeb SDK singleton (read-only)
-│   ├── sdkPrivateInstance.js # Private SDK singleton (lazy init, write ops)
-│   ├── contractReadInteract.ts   # Read-only contract calls
-│   ├── contractWriteInteract.ts  # Write contract transactions (lazy init)
-│   ├── deployContract.ts         # Contract deployment
-│   ├── implementationAbi.json   # Smart contract ABI
-│   └── implementationByteCode.ts # Contract bytecode for deployment
+├── services/
+│   ├── thridWeb/             # ThirdWeb SDK service layer
+│   │   ├── sdkInstance.js        # Public ThirdWeb SDK singleton (read-only)
+│   │   ├── sdkPrivateInstance.js # Private SDK singleton (lazy init, write ops)
+│   │   ├── contractReadInteract.ts   # Read-only contract calls
+│   │   ├── contractWriteInteract.ts  # Write contract transactions (lazy init)
+│   │   ├── deployContract.ts         # Contract deployment
+│   │   ├── implementationAbi.json   # Smart contract ABI
+│   │   └── implementationByteCode.ts # Contract bytecode for deployment
+│   └── ipfs/                 # Pinata IPFS integration
+│       ├── ipfsUpload.ts         # Upload JSON metadata to IPFS
+│       └── ipfsRetrieve.ts       # Retrieve from IPFS gateway
 ├── stores/
 │   ├── index.ts              # Wallet store (accounts, provider, Web3Auth)
 │   ├── smart-contract.ts     # Contract store (address, catalogs, products)
