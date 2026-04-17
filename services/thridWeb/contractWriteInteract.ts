@@ -42,6 +42,7 @@ const resetWriteContract = () => {
 const addProduct = async (product: any) => {
   const contract = await getWriteContract();
   const {
+    catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -49,8 +50,11 @@ const addProduct = async (product: any) => {
     batchNumber,
     productionLocation,
     metadataProducto,
+    productQrCode,
   } = product;
+  // V0.5 signature: addProduct(catalogId, name, desc, manufacturer, date, batch, location, metadata, qr)
   const sendProduct = [
+    catalogId,
     productName,
     productDescription,
     manufacturer,
@@ -58,6 +62,7 @@ const addProduct = async (product: any) => {
     batchNumber,
     productionLocation,
     metadataProducto,
+    productQrCode || "",
   ];
   console.log("addProduct", product, sendProduct);
   return await contract.call("addProduct", sendProduct);
@@ -68,20 +73,25 @@ const addTraceabilityInfo = async (traceabilityInfo: any) => {
   const {
     productId,
     action,
-    timestamp,
     actor,
     actorType,
     actorId,
     metadataAction,
+    certificationType,
+    certificationDate,
+    certificationResult,
   } = traceabilityInfo;
+  // V0.5 signature: addTraceabilityInfo(productId, action, actor, actorType, actorId, metadataAction, certType, certDate, certResult)
   const sendTraceabilityInfo = [
     productId,
-    action,
-    timestamp,
+    action || "",
     actor,
     actorType,
-    actorId,
-    metadataAction,
+    actorId || "",
+    metadataAction || "",
+    certificationType || "",
+    certificationDate || 0,
+    certificationResult || "",
   ];
   console.log("addTraceabilityInfo", traceabilityInfo, sendTraceabilityInfo);
   return await contract.call("addTraceabilityInfo", sendTraceabilityInfo);
@@ -90,7 +100,6 @@ const addTraceabilityInfo = async (traceabilityInfo: any) => {
 const addAlerts = async (alert: any) => {
   const contract = await getWriteContract();
   const {
-    alertId,
     productId,
     traceabilityId,
     alertType,
@@ -99,21 +108,18 @@ const addAlerts = async (alert: any) => {
     alertDescription,
     alertParam,
     conditionalTrigguer,
-    reportedBy,
-    resolved,
   } = alert;
+  // V0.5 signature: reportAlert(productId, traceabilityId, alertType, title, subtitle, desc, param, trigger)
+  // Note: reportedBy is msg.sender on-chain; resolved defaults to false; createdAt is block.timestamp
   const sendAlertInfo = [
-    alertId,
     productId,
-    traceabilityId,
+    traceabilityId || 0,
     alertType,
-    alertTitle,
-    alertSubtitle,
-    alertDescription,
-    alertParam,
-    conditionalTrigguer,
-    reportedBy,
-    resolved,
+    alertTitle || "",
+    alertSubtitle || "",
+    alertDescription || "",
+    alertParam || "",
+    conditionalTrigguer || "",
   ];
   console.log("addAlerts", alert, sendAlertInfo);
   return await contract.call("reportAlert", sendAlertInfo);
@@ -121,20 +127,44 @@ const addAlerts = async (alert: any) => {
 
 const createCatalog = async (catalogInfo: any) => {
   const contract = await getWriteContract();
-  const { catalogName, catalogMetadata, catalogDescription } = catalogInfo;
-  const sendCatalog = [catalogName, catalogMetadata, catalogDescription];
+  const { catalogName, catalogDescription, catalogMetadata, catalogQrCode } = catalogInfo;
+  // V0.5 signature: createCatalog(name, desc, meta, qr)
+  const sendCatalog = [
+    catalogName,
+    catalogDescription || "",
+    catalogMetadata || "",
+    catalogQrCode || "",
+  ];
   console.log("createCatalog", catalogInfo, sendCatalog);
   return await contract.call("createCatalog", sendCatalog);
 };
 
-const setActorType = async (actorType: any) => {
-  const contract = await getWriteContract();
-  return await contract.call("setActorType", actorType);
-};
-
 const updateProductStock = async (productStock: any) => {
   const contract = await getWriteContract();
-  return await contract.call("updateProductStock", productStock);
+  const { productId, availableQuantity, reservedQuantity, totalQuantity } = productStock;
+  return await contract.call("updateProductStock", [
+    productId,
+    availableQuantity,
+    reservedQuantity,
+    totalQuantity,
+  ]);
+};
+
+const resolveAlert = async (alertId: number) => {
+  const contract = await getWriteContract();
+  return await contract.call("resolveAlert", [alertId]);
+};
+
+// ── V0.5 Role management (SC-01) ──────────────────────
+
+const grantRole = async (roleHash: string, account: string) => {
+  const contract = await getWriteContract();
+  return await contract.call("grantRole", [roleHash, account]);
+};
+
+const revokeRole = async (roleHash: string, account: string) => {
+  const contract = await getWriteContract();
+  return await contract.call("revokeRole", [roleHash, account]);
 };
 
 export {
@@ -142,7 +172,9 @@ export {
   addProduct,
   addTraceabilityInfo,
   addAlerts,
-  setActorType,
   updateProductStock,
+  resolveAlert,
+  grantRole,
+  revokeRole,
   resetWriteContract,
 };

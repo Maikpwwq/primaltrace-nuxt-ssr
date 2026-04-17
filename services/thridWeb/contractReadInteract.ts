@@ -79,9 +79,45 @@ const getCatalogCounter = async () => {
   return contract.call("catalogCounter");
 };
 
-const getAnomalyCounter = async () => {
+const getAlertCounter = async () => {
   const contract = await getReadContract();
-  return contract.call("anomalyCounter");
+  return contract.call("alertCounter");
+};
+
+// ── V0.5 Paginated reads (SC-06) ──────────────────────
+
+const getCatalogsPaginated = async (offset: number, limit: number) => {
+  const contract = await getReadContract();
+  return contract.call("getCatalogsPaginated", [offset, limit]);
+};
+
+const getAllAlerts = async () => {
+  const contract = await getReadContract();
+  return contract.call("getAllAlerts");
+};
+
+const getAlertsPaginated = async (offset: number, limit: number) => {
+  const contract = await getReadContract();
+  return contract.call("getAlertsPaginated", [offset, limit]);
+};
+
+// ── V0.5 Integrity verification (SC-19) ───────────────
+
+const getProductIntegrityHash = async (productId: number) => {
+  const contract = await getReadContract();
+  return contract.call("getProductIntegrityHash", [productId]);
+};
+
+const verifyProductIntegrity = async (productId: number, expectedHash: string) => {
+  const contract = await getReadContract();
+  return contract.call("verifyProductIntegrity", [productId, expectedHash]);
+};
+
+// ── V0.5 Role queries (SC-01) ─────────────────────────
+
+const hasRole = async (role: string, account: string) => {
+  const contract = await getReadContract();
+  return contract.call("hasRole", [role, account]);
 };
 
 export {
@@ -93,10 +129,18 @@ export {
   getContractCatalogs,
   getProductCounter,
   getCatalogCounter,
-  getAnomalyCounter,
+  getAlertCounter,
+  getCatalogsPaginated,
+  getAllAlerts,
+  getAlertsPaginated,
+  getProductIntegrityHash,
+  verifyProductIntegrity,
+  hasRole,
   resetReadContract,
 };
 
 // usage:
-// import { getProduct, getProductStock, getProductTraceabilityInfo } from "@/services/thridWeb/contractReadInteract"
+// import { getProduct, getProductIntegrityHash, verifyProductIntegrity } from "@/services/thridWeb/contractReadInteract"
 // await getProduct(PRODUCT_ID)
+// const hash = await getProductIntegrityHash(PRODUCT_ID)
+// const isValid = await verifyProductIntegrity(PRODUCT_ID, hash)

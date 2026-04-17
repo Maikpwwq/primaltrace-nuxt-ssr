@@ -6,7 +6,6 @@ import { useWalletStore } from "@/stores";
 import { useSmartContract } from "@/stores/smart-contract";
 import { useNotificationStore } from "@/stores/notification";
 import { storeToRefs } from "pinia";
-import { TRACEABILITY_INFO } from "@/data/contractVariables";
 import type { TraceabilityInfo } from "@/schemas/index";
 import { formatAddress } from "@/utils";
 import { IconFilePlus } from "@tabler/icons-vue";
@@ -22,8 +21,23 @@ const isSubmitting = ref(false);
 const walletActor = wallet.value?.accounts?.[0]
   ? formatAddress(wallet.value.accounts[0])
   : "";
-var currentDate = new Date();
-const TIMESTAMP = ref(currentDate.getTime());
+
+const actorTypeOptions = [
+  { title: "Fabricante", value: 0 },
+  { title: "Distribuidor", value: 1 },
+  { title: "Proveedor", value: 2 },
+];
+
+const certificationTypeOptions = [
+  { title: "Ninguna", value: "" },
+  { title: "ISO 9001", value: "ISO 9001" },
+  { title: "ISO 22000", value: "ISO 22000" },
+  { title: "HACCP", value: "HACCP" },
+  { title: "FDA", value: "FDA" },
+  { title: "INVIMA", value: "INVIMA" },
+  { title: "BPM", value: "BPM" },
+  { title: "Otra", value: "Otra" },
+];
 
 const traceabilityInfo = async () => {
   if (obj.productId === undefined || obj.action === "") {
@@ -44,14 +58,15 @@ const traceabilityInfo = async () => {
 };
 
 const obj: TraceabilityInfo = reactive({
-  // trazabilityId: "",
   productId: undefined as unknown as number,
   action: "",
-  timestamp: TIMESTAMP.value,
   actor: walletActor,
   actorType: 0,
   actorId: "",
   metadataAction: "",
+  certificationType: "",
+  certificationDate: 0,
+  certificationResult: "",
 });
 </script>
 <template>
@@ -109,13 +124,6 @@ const obj: TraceabilityInfo = reactive({
                 :disabled="true"
               ></v-text-field>
               <v-text-field
-                v-model="obj.timestamp"
-                color="primary"
-                label="Timestamp:"
-                variant="underlined"
-                :disabled="true"
-              ></v-text-field>
-              <v-text-field
                 v-model="obj.actor"
                 color="primary"
                 label="Actor address:"
@@ -127,13 +135,17 @@ const obj: TraceabilityInfo = reactive({
                 color="primary"
                 label="Acción:"
                 variant="underlined"
+                placeholder="Ej: Manufacturado, Almacenado, Enviado a distribuidor"
               ></v-text-field>
-              <v-text-field
+              <v-select
                 v-model="obj.actorType"
-                color="primary"
-                label="Actor Type:"
+                :items="actorTypeOptions"
+                item-title="title"
+                item-value="value"
+                label="Tipo de Actor:"
                 variant="underlined"
-              ></v-text-field>
+                color="primary"
+              ></v-select>
               <v-text-field
                 v-model="obj.actorId"
                 color="primary"
@@ -146,6 +158,34 @@ const obj: TraceabilityInfo = reactive({
                 label="Metadata URL *opcional:"
                 variant="underlined"
               ></v-text-field>
+
+              <v-divider class="my-4"></v-divider>
+              <p class="text-subtitle-2 mb-2">Certificación (opcional)</p>
+
+              <v-select
+                v-model="obj.certificationType"
+                :items="certificationTypeOptions"
+                item-title="title"
+                item-value="value"
+                label="Tipo de Certificación:"
+                variant="underlined"
+                color="primary"
+              ></v-select>
+              <v-text-field
+                v-model="obj.certificationDate"
+                color="primary"
+                label="Fecha de Certificación (timestamp):"
+                variant="underlined"
+                type="number"
+              ></v-text-field>
+              <v-text-field
+                v-model="obj.certificationResult"
+                color="primary"
+                label="Resultado de Certificación:"
+                variant="underlined"
+                placeholder="Ej: Aprobado, Rechazado, En revisión"
+              ></v-text-field>
+
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0">
                   <IconFilePlus color="white" :size="33" stroke-width="1" />
@@ -168,14 +208,16 @@ const obj: TraceabilityInfo = reactive({
                 producto al contrato
               </p>
               <ul class="pa-4">
-                <!-- "Manufacturado" "Almacenado" "Enviado a distribuidor" -->
                 <li>Product ID: {{ obj.productId }}</li>
                 <li>Acción: {{ obj.action }}</li>
-                <li>Fecha Registro: {{ obj.timestamp }}</li>
+                <li>Fecha Registro: <em>auto (block.timestamp)</em></li>
                 <li>Actor address: {{ obj.actor }}</li>
-                <li>Tipo de Actor: {{ obj.actorType }}</li>
+                <li>Tipo de Actor: {{ actorTypeOptions[obj.actorType]?.title || obj.actorType }}</li>
                 <li>Actor ID: {{ obj.actorId }}</li>
                 <li>Acción Metadata URL: {{ obj.metadataAction }}</li>
+                <li v-if="obj.certificationType">Certificación: {{ obj.certificationType }}</li>
+                <li v-if="obj.certificationDate">Fecha Certificación: {{ obj.certificationDate }}</li>
+                <li v-if="obj.certificationResult">Resultado: {{ obj.certificationResult }}</li>
               </ul>
             </v-card-text>
           </v-card>

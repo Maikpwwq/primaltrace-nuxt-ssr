@@ -51,6 +51,9 @@ export interface Catalog {
   catalogName: string;
   catalogDescription: string;
   catalogMetadata: string;
+  catalogQrCode?: string;
+  creationDate?: number;
+  lastModifiedAt?: number;
   products?: any[];
 }
 
@@ -61,21 +64,26 @@ export interface Product {
   productDescription: string;
   manufacturer: string;
   manufacturingDate: number;
-  batchNumber: number;
+  batchNumber: string;
   productionLocation: string;
   metadataProducto: string;
-  traceabilityInfo?: any[];
+  productQrCode?: string;
+  lastModifiedAt?: number;
+  traceabilityInfo?: TraceabilityInfo[];
 }
 
 export interface TraceabilityInfo {
-  trazabilityId?: string;
+  trazabilityId?: number;
   productId: number;
   action: string;
-  timestamp: number;
+  timestamp?: number; // auto-set by contract via block.timestamp
   actor: string;
   actorType: number;
   actorId: string;
   metadataAction?: string;
+  certificationType?: string;
+  certificationDate?: number;
+  certificationResult?: string;
 }
 
 export interface AlertInfo {
@@ -90,5 +98,5 @@ export interface AlertInfo {
   conditionalTrigguer: string;
   reportedBy: string;
   resolved: boolean;
-  timestamp: number;
+  createdAt?: number; // auto-set by contract via block.timestamp
 }

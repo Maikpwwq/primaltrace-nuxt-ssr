@@ -6,6 +6,21 @@ This file provides context for AI coding agents working on this project.
 
 PrimalTrace is a Web3 dApp on **Polygon zkEVM** for supply chain traceability. Built with **Nuxt 4 + Vue 3.5 + Vuetify 4 + Pinia 3**, it uses ethers.js v5 for blockchain interactions and Web3Auth v10 for wallet authentication.
 
+### Smart Contract Version
+
+**Current contract:** `CatalogsV0.5.sol` — deployed on Polygon zkEVM Cardona Testnet.
+
+| Property | Value |
+|---|---|
+| Testnet Address | `0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8` |
+| Solidity Version | `^0.8.22` |
+| Optimizer | Enabled (`runs: 200`) |
+| Dependencies | OpenZeppelin v5.x (`AccessControl`, `ReentrancyGuard`) |
+| Error Handling | Custom `error` types (no `require` strings) |
+| Roles | `DEFAULT_ADMIN_ROLE`, `OPERATOR_ROLE`, `AUDITOR_ROLE` |
+
+The ABI lives at `services/thridWeb/implementationAbi.json` and the bytecode at `services/thridWeb/implementationByteCode.ts`. The testnet address is configured in `data/contractVariables.ts` → `IMPLEMENTATION_CONTRACT_ADDRESS`.
+
 ### Business Model & Brand Context
 
 **Tagline**: "La esencia auténtica de tus productos, trazada con seguridad en la blockchain."
@@ -98,11 +113,11 @@ Both wallet connection methods (Web3Auth and MetaMask) write to the same `useWal
 
 ### Service Layer — Lazy Initialization Pattern
 - `services/thridWeb/` — ThirdWeb SDK integration for smart contract read/write operations
-- **`contractReadInteract.ts`** dynamically resolves the active contract address from the `smart-contract` store. It uses cache invalidation to reset the contract instance when a user loads a new smart contract via QR or text input.
+- **`contractReadInteract.ts`** dynamically resolves the active contract address from the `smart-contract` store. It uses cache invalidation to reset the contract instance when a user loads a new smart contract via QR or text input. V0.5 additions: `getCatalogsPaginated`, `getAlertsPaginated`, `getAllAlerts`, `getAlertCounter`, `getProductIntegrityHash`, `verifyProductIntegrity`, `hasRole`.
 - **`sdkPrivateInstance.js`** uses a lazy singleton pattern via `getPrivateSdk()`. This is critical — do NOT use top-level `await` or eager instantiation, as it blocks the module graph and causes white-screen crashes.
-- **`contractWriteInteract.ts`** uses `getWriteContract()` lazy singleton for the same reason.
-- Contract ABI is stored as JSON in `implementationAbi.json`
-- Contract bytecode for deployment is in `implementationByteCode.ts`
+- **`contractWriteInteract.ts`** uses `getWriteContract()` lazy singleton for the same reason. V0.5 additions: `grantRole`, `revokeRole`, `resolveAlert`. Fixed: `createCatalog` param order (name, desc, meta, qr).
+- Contract ABI is stored as JSON in `implementationAbi.json` (V0.5 with custom errors)
+- Contract bytecode for deployment is in `implementationByteCode.ts` (V0.5 optimized)
 
 ### Component Organization
 Components follow a section-based structure under `components/section/`:
@@ -117,8 +132,13 @@ Components follow a section-based structure under `components/section/`:
 - `dash-board/` — Dashboard data loading
 - `register-smart-contract/` — Contract deployment and QR scanning
 - `add-catalog/`, `add-product/`, `add-traceability-info/`, `add-alert/` — CRUD operations
+- `role-management/` — V0.5 RBAC role grant/revoke UI (uses `ethers.utils.keccak256` for role hashes)
+- `verify-product/` — V0.5 Product integrity verification (compares client-side `solidityKeccak256` vs on-chain hash)
 - `tables/` — Data display tables
 - `header/` — Header1, Header2 navigation bars (use `ref(false)` for drawer toggle)
+
+### Shared Components
+- `shared/PaginationControls.vue` — Reusable pagination component with `totalItems`, `pageSize`, `v-model` props. Emits `page-change` with `{ page, offset, limit }` payload matching V0.5 paginated read functions.
 
 ### Polyfill Infrastructure
 The app requires browser polyfills for Node.js APIs used by Web3 dependencies. This is managed by three components:
@@ -202,6 +222,18 @@ Heavy Web3 dependencies MUST be listed in `vite.optimizeDeps.include` in `nuxt.c
 
 14. **Global Snackbar Error Bridging** — Transaction faults (e.g., contract execution reverts) are caught gracefully using `try/catch` and passed directly into `useNotificationStore().notify()`, instead of failing silently.
 
+15. **V0.5 Form Conventions** — Forms no longer send fields that are auto-set on-chain:
+    - `timestamp` — removed from AddTraceabilityInfo and AddAlert (uses `block.timestamp`)
+    - `reportedBy` — removed from AddAlert (uses `msg.sender`)
+    - `resolved`, `alertId`, `createdAt` — removed from AddAlert (auto-set on-chain)
+    - `actorType` and `alertType` use `<v-select>` with enum-matching options, not free text
+    - `batchNumber` is `string` (not `number`) to match V0.5 Solidity type
+    - `productQrCode` field added to AddProduct form
+
+16. **V0.5 Custom Errors** — The contract uses custom `error` types instead of `require` strings. When catching contract reverts on the frontend, use `err.reason` or decode the error selector from `err.data` rather than parsing string messages.
+
+17. **Role Hash Computation** — To call `grantRole`/`revokeRole`, compute the role hash client-side: `ethers.utils.keccak256(ethers.utils.toUtf8Bytes("OPERATOR_ROLE"))`. This matches the Solidity `keccak256("OPERATOR_ROLE")` constant.
+
 ## Wallet Connection Flows
 
 ### Unified Flow (ConnectWalletBtn.vue inside Navigation.vue)
@@ -239,6 +271,11 @@ No automated test suite is currently configured. Verify changes by:
 2. Running `pnpm dev` — check routes `/`, `/dashboard`, `/blocktimeline`
 3. Testing wallet connection flow manually (both Web3Auth and MetaMask)
 4. Check browser console for `TypeError` or `undefined` errors on mount
+5. Testing V0.5 contract interactions:
+   - Create Catalog → Add Product → Add Traceability → Report Alert → Verify Integrity
+   - Grant/Revoke roles via RoleManager component
+   - Verify product integrity hash matches client-side computation
+   - Test paginated reads with >50 items
 
 ## Deployment
 

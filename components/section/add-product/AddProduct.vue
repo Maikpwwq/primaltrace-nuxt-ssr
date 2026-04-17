@@ -2,7 +2,6 @@
 import Polygon from "/images/polygon-zkevm/main.svg";
 import { ref, reactive } from "vue";
 import { addProduct } from "@/services/thridWeb/contractWriteInteract";
-import { PRODUCT } from "@/data/contractVariables";
 import type { Product } from "@/schemas/index";
 import { useSmartContract } from "@/stores/smart-contract";
 import { useNotificationStore } from "@/stores/notification";
@@ -26,10 +25,10 @@ const obj: Product = reactive({
   productDescription: "",
   manufacturer: "",
   manufacturingDate: TIMESTAMP.value,
-  batchNumber: 0,
+  batchNumber: "",
   productionLocation: "",
   metadataProducto: "",
-  // traceabilityInfo: []
+  productQrCode: "",
 });
 
 const handleProduct = async () => {
@@ -141,8 +140,15 @@ const handleProduct = async () => {
               <v-text-field
                 v-model="obj.metadataProducto"
                 color="primary"
-                label="metadataProducto:"
+                label="Metadata URL (opcional):"
                 variant="underlined"
+              ></v-text-field>
+              <v-text-field
+                v-model="obj.productQrCode"
+                color="primary"
+                label="Código QR del producto (opcional):"
+                variant="underlined"
+                placeholder="URL o contenido del código QR"
               ></v-text-field>
               <div class="mt-1">
                 <v-btn class="bg-success mr-3 text-white" elevation="0">
@@ -171,6 +177,7 @@ const handleProduct = async () => {
                 <li>Descripcion: {{ obj.productDescription }}</li>
                 <li>Ubicación: {{ obj.productionLocation }}</li>
                 <li>Producto metadata URL: {{ obj.metadataProducto }}</li>
+                <li v-if="obj.productQrCode">Código QR: {{ obj.productQrCode }}</li>
               </ul>
             </v-card-text>
           </v-card>

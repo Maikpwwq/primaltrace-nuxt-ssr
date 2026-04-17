@@ -58,8 +58,11 @@ Both plans include a satisfaction guarantee.
 
 - **Smart Contract Deployment** — Deploy and manage custom traceability contracts on Polygon zkEVM
 - **Product Catalog Management** — Create catalogs and register products on-chain
-- **Traceability Tracking** — Record and query product traceability information
-- **Anomaly Alerts** — Register and monitor supply chain anomalies
+- **Traceability Tracking** — Record and query product traceability information with certification support
+- **Alerts & Resolution** — Register, monitor, and resolve supply chain alerts with on-chain timestamps
+- **Role-Based Access Control** — Manage Operator and Auditor roles via AccessControl (RBAC)
+- **Product Integrity Verification** — Verify product data authenticity via on-chain keccak256 hashing
+- **Paginated Reads** — Scalable data retrieval with paginated contract queries (max 50 per page)
 - **QR Code Integration** — Scan QR codes to interact with deployed contracts
 - **Dual Web3 Authentication** — Wallet-based login via Web3Auth Modal v10 and MetaMask
 - **Block Timeline** — Visualize blockchain transaction history
@@ -75,7 +78,9 @@ Both plans include a satisfaction guarantee.
 | Routing | [Vue Router 5](https://router.vuejs.org) |
 | Blockchain | [ethers.js v5](https://docs.ethers.org/v5/) / [ThirdWeb SDK](https://thirdweb.com) / [viem](https://viem.sh) |
 | Authentication | [Web3Auth Modal v10](https://web3auth.io) + [MetaMask Connect](https://docs.metamask.io/metamask-connect) |
-| Network | Polygon zkEVM Testnet (chain ID `0x5A2` / 1442) |
+| Smart Contract | CatalogsV0.5.sol — OpenZeppelin AccessControl + ReentrancyGuard, custom errors, Solidity ^0.8.22 |
+| Network | Polygon zkEVM Cardona Testnet (chain ID `0x98A` / 2442) |
+| Testnet Contract | [`0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8`](https://cardona-zkevm.polygonscan.com/address/0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8) |
 | Backend Services | [Supabase](https://supabase.com), [Tatum API](https://tatum.io) |
 | Node Polyfills | `vite-plugin-node-polyfills` (Buffer, process, stream, etc.) |
 | Deployment | [Vercel](https://vercel.com) (Nitro node-server preset) |
@@ -145,14 +150,19 @@ Runtime config is managed via `nuxt.config.ts` → `runtimeConfig.public`. Keys 
 │   │   ├── add-catalog/      # On-chain catalog CRUD
 │   │   ├── add-product/      # On-chain product registration
 │   │   ├── add-traceability-info/    # Traceability event recording
-│   │   ├── add-alert/        # Anomaly alert management
+│   │   ├── add-alert/        # Alert management (V0.5: v-select for AlertType, auto on-chain fields)
+│   │   ├── role-management/  # RBAC role grant/revoke UI (V0.5)
+│   │   ├── verify-product/   # Product integrity verification UI (V0.5)
 │   │   ├── tables/           # Data resume tables
 │   │   ├── header/           # Header1, Header2 navigation bars
 │   │   └── qr-code/          # QR code generation
 │   └── shared/
+│       ├── PaginationControls.vue  # Reusable pagination (V0.5, offset/limit for paginated reads)
 │       └── lp-banner/        # BannerConnectWallet (dashboard entry point)
 ├── data/                     # Static data and contract variables
 ├── entities/                 # TypeScript entity definitions
+│   └── smart-contracts/      # Solidity contracts (V0.1–V0.5)
+│       └── CatalogsV0.5.sol  # Current production contract (AccessControl, custom errors, integrity hashing)
 ├── ethers/                   # Raw ethers.js utilities
 ├── hooks/                    # Custom Vue composables
 ├── layouts/                  # Nuxt layouts (default.vue)
@@ -225,14 +235,28 @@ Navigation.vue also subscribes to MetaMask provider events on mount:
 
 Both the Web3Auth flow and provider events write to the same Pinia `useWalletStore`, so the rest of the app is agnostic to the auth method.
 
-## Smart Contract Architecture
+## Smart Contract Architecture (CatalogsV0.5)
 
-PrimalTrace uses a factory pattern where users deploy their own implementation contracts on Polygon zkEVM. Each contract supports:
+PrimalTrace uses a factory pattern where users deploy their own implementation contracts on Polygon zkEVM. The current contract version is **CatalogsV0.5** (`0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8` on Cardona testnet).
 
-- **Catalogs** — Grouping of products
-- **Products** — Individual tracked items with stock
-- **Traceability Info** — Supply chain events linked to products
-- **Anomaly Alerts** — Exception tracking for quality assurance
+### Data Model
+- **Catalogs** — Grouping of products with QR codes and metadata
+- **Products** — Individual tracked items with stock, manufacturing details, and integrity hashes
+- **Traceability Info** — Supply chain events linked to products with certification support
+- **Alerts** — Exception tracking with typed categories and resolution workflow
+
+### V0.5 Security & Features
+
+| Feature | Implementation |
+|---|---|
+| **RBAC** | OpenZeppelin `AccessControl` — `DEFAULT_ADMIN_ROLE`, `OPERATOR_ROLE`, `AUDITOR_ROLE` |
+| **Reentrancy Protection** | `ReentrancyGuard` on all write functions |
+| **Input Validation** | Custom errors + string length bounds (128/512/1024/2048 bytes) |
+| **Gas Optimization** | Custom `error` types replace `require` strings (~7KB bytecode savings) |
+| **Integrity Hashing** | `keccak256(name, manufacturer, batchNumber)` stored per product |
+| **Pagination** | `getCatalogsPaginated`/`getAlertsPaginated` with max 50 per page |
+| **Timestamps** | `block.timestamp` auto-set on TraceabilityInfo, Alert, Catalog |
+| **Events** | Full event emission for all write operations |
 
 ## Polyfill & Build Infrastructure
 

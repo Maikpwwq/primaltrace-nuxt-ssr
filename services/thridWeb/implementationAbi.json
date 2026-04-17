@@ -26,6 +26,32 @@
 		"type": "constructor"
 	},
 	{
+		"inputs": [],
+		"name": "AccessControlBadConfirmation",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "neededRole",
+				"type": "bytes32"
+			}
+		],
+		"name": "AccessControlUnauthorizedAccount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ReentrancyGuardReentrantCall",
+		"type": "error"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -111,6 +137,31 @@
 			{
 				"indexed": true,
 				"internalType": "uint256",
+				"name": "catalogId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "catalogName",
+				"type": "string"
+			}
+		],
+		"name": "CatalogCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
 				"name": "productId",
 				"type": "uint256"
 			},
@@ -123,6 +174,244 @@
 		],
 		"name": "NotificationGenerated",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "productId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "catalogId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "productName",
+				"type": "string"
+			}
+		],
+		"name": "ProductAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "entityId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "entityType",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "updatedBy",
+				"type": "address"
+			}
+		],
+		"name": "QrCodeAssociated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "previousAdminRole",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "newAdminRole",
+				"type": "bytes32"
+			}
+		],
+		"name": "RoleAdminChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "RoleGranted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "RoleRevoked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "productId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "available",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "reserved",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "total",
+				"type": "uint256"
+			}
+		],
+		"name": "StockUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "productId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "traceabilityId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "actor",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum Catalogs.ActorType",
+				"name": "actorType",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "action",
+				"type": "string"
+			}
+		],
+		"name": "TraceabilityRecorded",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "AUDITOR_ROLE",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "DEFAULT_ADMIN_ROLE",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "OPERATOR_ROLE",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -192,7 +481,13 @@
 			}
 		],
 		"name": "addProduct",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -220,6 +515,11 @@
 				"internalType": "uint256",
 				"name": "_productId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_action",
+				"type": "string"
 			},
 			{
 				"internalType": "address",
@@ -258,7 +558,13 @@
 			}
 		],
 		"name": "addTraceabilityInfo",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -358,6 +664,11 @@
 				"internalType": "bool",
 				"name": "resolved",
 				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "createdAt",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -443,6 +754,11 @@
 				"type": "uint256"
 			},
 			{
+				"internalType": "uint256",
+				"name": "lastModifiedAt",
+				"type": "uint256"
+			},
+			{
 				"internalType": "string",
 				"name": "catalogMetadata",
 				"type": "string"
@@ -480,7 +796,13 @@
 			}
 		],
 		"name": "createCatalog",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -513,59 +835,232 @@
 		"name": "getAlert",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "traceabilityId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum Catalogs.AlertType",
+						"name": "alertType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "alertTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertSubtitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertParam",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "conditionalTrigguer",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "reportedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "resolved",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Catalogs.Alert",
 				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "offset",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "limit",
 				"type": "uint256"
-			},
+			}
+		],
+		"name": "getAlertsPaginated",
+		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "traceabilityId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum Catalogs.AlertType",
+						"name": "alertType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "alertTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertSubtitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertParam",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "conditionalTrigguer",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "reportedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "resolved",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Catalogs.Alert[]",
 				"name": "",
-				"type": "uint256"
-			},
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllAlerts",
+		"outputs": [
 			{
-				"internalType": "enum Catalogs.AlertType",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "traceabilityId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum Catalogs.AlertType",
+						"name": "alertType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "alertTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertSubtitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alertParam",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "conditionalTrigguer",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "reportedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "resolved",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "createdAt",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Catalogs.Alert[]",
 				"name": "",
-				"type": "uint8"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -582,39 +1077,51 @@
 		"name": "getCatalog",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "catalogId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "creationDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastModifiedAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "productIds",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogMetadata",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "qrCode",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Catalogs.Catalog",
 				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -634,6 +1141,72 @@
 				"internalType": "uint256[]",
 				"name": "",
 				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "offset",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "limit",
+				"type": "uint256"
+			}
+		],
+		"name": "getCatalogsPaginated",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "catalogId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "creationDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastModifiedAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "productIds",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string",
+						"name": "catalogMetadata",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "qrCode",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Catalogs.Catalog[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -663,6 +1236,11 @@
 					{
 						"internalType": "uint256",
 						"name": "creationDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastModifiedAt",
 						"type": "uint256"
 					},
 					{
@@ -700,101 +1278,147 @@
 		"name": "getProduct",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
 				"components": [
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "actor",
-						"type": "address"
-					},
-					{
-						"internalType": "enum Catalogs.ActorType",
-						"name": "actorType",
-						"type": "uint8"
-					},
-					{
-						"internalType": "string",
-						"name": "actorId",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "metadataAction",
-						"type": "string"
-					},
 					{
 						"internalType": "uint256",
 						"name": "productId",
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "certificationType",
-						"type": "string"
-					},
-					{
 						"internalType": "uint256",
-						"name": "certificationDate",
+						"name": "catalogId",
 						"type": "uint256"
 					},
 					{
 						"internalType": "string",
-						"name": "certificationResult",
+						"name": "productName",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "productDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "manufacturer",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "manufacturingDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "batchNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "productionLocation",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "metadataProducto",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "qrCode",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastModifiedAt",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "action",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "actor",
+								"type": "address"
+							},
+							{
+								"internalType": "enum Catalogs.ActorType",
+								"name": "actorType",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string",
+								"name": "actorId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "metadataAction",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "productId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "certificationType",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "certificationDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "certificationResult",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Catalogs.TraceabilityInfo[]",
+						"name": "traceabilityInfo",
+						"type": "tuple[]"
 					}
 				],
-				"internalType": "struct Catalogs.TraceabilityInfo[]",
+				"internalType": "struct Catalogs.Product",
 				"name": "",
-				"type": "tuple[]"
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productId",
+				"type": "uint256"
+			}
+		],
+		"name": "getProductIntegrityHash",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
 			}
 		],
 		"stateMutability": "view",
@@ -811,19 +1435,26 @@
 		"name": "getProductStock",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "availableQuantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reservedQuantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalQuantity",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Catalogs.StockInfo",
 				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -847,6 +1478,16 @@
 						"type": "uint256"
 					},
 					{
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
 						"internalType": "address",
 						"name": "actor",
 						"type": "address"
@@ -896,6 +1537,67 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			}
+		],
+		"name": "getRoleAdmin",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "grantRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "hasRole",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "productCounter",
 		"outputs": [
@@ -903,6 +1605,25 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "productIntegrityHashes",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
 			}
 		],
 		"stateMutability": "view",
@@ -996,9 +1717,32 @@
 				"internalType": "string",
 				"name": "qrCode",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lastModifiedAt",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "callerConfirmation",
+				"type": "address"
+			}
+		],
+		"name": "renounceRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1045,7 +1789,13 @@
 			}
 		],
 		"name": "reportAlert",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -1060,6 +1810,43 @@
 		"name": "resolveAlert",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "revokeRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "interfaceId",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1088,6 +1875,30 @@
 		"name": "updateProductStock",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_expectedHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "verifyProductIntegrity",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]
